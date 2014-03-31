@@ -9,7 +9,6 @@
 	<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 	<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 	<script>
-	<? include_once('js_work_list.php'); echo_work_list_array(); ?>
 	$(function(){ 
 		$('#view-header').load('public_view/header.php #header');
 		$('#search-detail').hide();
@@ -28,29 +27,6 @@
 			</div>
 		*/
 
-		// put work in work-list-container's index
-		var list_container_index = 0;
-
-		for(var i=0;i<work_list_array.length;i++){
-
-			var a_link = $('<a>').attr({href:'work/'+work_list_array[i].wid}),
-				div_work = $('<div>').addClass('work'),
-				work_name = $('<h1>').text(work_list_array[i].wname),
-				work_zone = $('<p>').text(work_list_array[i].zname),
-				work_prop = $('<p>').text(((work_list_array[i].isout=='0')?'校內 ':'校外 ') + work_list_array[i].propname),
-				work_recr = $('<p>').text('需求 '+ work_list_array[i].rno +' 人'),
-				work_date = $('<p>').addClass('date').text(work_list_array[i].date.split(' ')[0]);
-			
-
-			div_work.append(work_name).append(work_zone).append(work_prop).append(work_recr).append(work_date);
-			a_link.append(div_work);
-
-			if(list_container_index==4)list_container_index=0;
-
-			$('.list:eq('+list_container_index+')').append(a_link);
-			list_container_index++;
-		}
-
 	});
 	</script>
 </head>
@@ -61,22 +37,35 @@
 
 	<div class="search-bar container">
 		<div class="set-center">
-			<input type="text">
-			<input type="button" value="搜尋">
+			<input type="text" id="normal-search">
+			<input type="button" id="search" value="搜尋">
 			<a href="#" id="btn_detail_search">進階搜尋</a>
 		</div>
 	</div>
 
+	<!--進階搜尋-->
 	<div class="tag-bar container" id="search-detail">
-		<div class="tag">台南市</div>
-		<div class="tag">台南市</div>
-		<div class="tag">台南市</div>
-		<div class="tag">台南市</div>
-		<div class="tag">台南市</div>
-		<div class="tag">台南市</div>
-		<div class="tag">台南市</div>
-		<div class="tag">台南市</div>
-		<div class="tag">台南市</div>
+    <input type="checkbox" id="search_type" value="type">
+    工作類型 : <select name="work_type" id="work_type"><option>請選擇</option></select> 
+		       <select name="work_type_list1" id="work_type_list1"><option>請選擇</option></select><!-- 要等 work_type 選完才載入 -->
+			   <select name="work_type_list2" id="work_type_list2"><option>請選擇</option></select><!-- 要等 work_type 選完才載入 -->
+			   <span id="work_type_hint"></span>
+			   <br>
+
+    <input type="checkbox" id="search_prop" value="prop">
+    工作性質 : <select name="work_prop" id="work_prop"></select> <br>
+
+    <input type="checkbox" id="search_io" value="io">
+    校內外工作：<select name="work_io" id="work_io">
+                <option value="0">校內</option>
+                <option value="1">校外</option>
+                </select> 
+			    <br>
+
+    <input type="checkbox" id="search_zone" value="zone">
+    工作地點 : <select name="zone" id="zone"></select> 
+			   <select name="zone_name" id="zone_name"></select>
+		       <br>
 	</div>
 </div>
 
@@ -88,7 +77,6 @@
 		</div>
 
 		<div class="title-right">
-		<!-- <span class="tag">台南市</span> -->
 		</div>
 	</div>
 
@@ -99,8 +87,28 @@
 		<div class="list"></div>
 	</div>
 
-
 </div>
-	
 </body>
+
+
+<script>
+	
+	<?
+	//後端傳來的工作資料
+	include_once('js_work_list.php');
+	echo_work_list_array(); 
+	
+	// php load some help data for js array
+	// 後端傳來"進階搜尋項目"的資料
+	include("js_add_work.php");
+	
+	//如果目前是搜尋狀態
+    if(isset($_GET['search']))
+       echo '$(".title-right").append($("<a></a>").attr("href", "home.php").text("取消搜尋"));';
+    ?>
+
+</script>
+
+<!--搜尋功能的API-->
+<script src="js/home_search_lib.js"></script>
 </html>
