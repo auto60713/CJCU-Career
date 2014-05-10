@@ -16,6 +16,23 @@ include("sqlsrv_connect.php");
 }
 
 
+function echo_company_type_and_zone($work_id){
+include("sqlsrv_connect.php");
+
+// 取出公司類型編號 (因為detail_array是直接取得typename)
+    $sql = "select type,zone_id "
+	      ."from company "
+	      ."where id= ?";
+
+	$stmt = sqlsrv_query($conn, $sql, array($work_id));
+	if($stmt) $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC); 
+
+	else die(print_r( sqlsrv_errors(), true));
+
+    echo "var company_type = ".$row[type].";";
+    echo "var company_zone = ".$row[zone_id].";";
+}
+
 /*
 var company_detail_array = {
 "ch_name":"\u9577\u69ae\u516c\u53f8",

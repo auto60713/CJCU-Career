@@ -22,7 +22,7 @@ $userlevel = $_SESSION['level'];
 
 	    case 4: //公司
 	        $params = array($_POST['ch_name'],$_POST['en_name'],$_POST['phone'],$_POST['fax'],$_POST['uni_num'],$_POST['name'],$_POST['pic'],$_POST['email']);
-	        array_push($params,$_POST['address'],$_POST['budget'],$_POST['introduction'],$_POST['doc'],$_POST['staff_num'],$_POST['url']);
+	        array_push($params,$_POST['typename'],$_POST['zonename'],$_POST['address'],$_POST['budget'],$_POST['introduction'],$_POST['doc'],$_POST['staff_num'],$_POST['url']);
 	        company_updata($userid,$params);
 	    break;
 
@@ -65,7 +65,7 @@ function company_updata($userid,$params)
 	{
 		include_once("sqlsrv_connect.php");
 		
-		$sql  = "update company set ch_name=(?), en_name=(?), phone=(?), fax=(?), uni_num=(?), name=(?), pic=(?), email=(?), address=(?), budget=(?), introduction=(?), doc=(?), staff_num=(?), url=(?) where id ='".$userid."'"; 
+		$sql  = "update company set ch_name=(?), en_name=(?), phone=(?), fax=(?), uni_num=(?), name=(?), pic=(?), email=(?), type=(?), zone_id=(?), address=(?), budget=(?), introduction=(?), doc=(?), staff_num=(?), url=(?) where id ='".$userid."'"; 
         
         if( sqlsrv_query($conn, $sql, $params) )
         {

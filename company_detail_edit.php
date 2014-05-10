@@ -50,13 +50,14 @@ if(isset($_GET['companyid'])) $_SESSION['userid']=$_GET['companyid']; else{heade
 			//else if(idx == 99){
 			//html_detail+=column_name[idx]+"&emsp;&emsp;&emsp;"+company_detail_array[key]+"<br>";
 	     	//}
+
             //普通欄位
 	     	else{
             html_detail+=column_name[idx]+"&emsp;&emsp;&emsp;<input type='text' name ='"+key+"' value='"+company_detail_array[key]+"'><br>";
 		    }
 			idx++;
 		}	
-		    html_detail+="<br><input type='submit' value='submit'/>";
+		    html_detail+="<br><input type='submit' value='修改資料'/>";
 		$('#detail').html(html_detail);
 	
 
@@ -157,15 +158,19 @@ if(isset($_GET['companyid'])) $_SESSION['userid']=$_GET['companyid']; else{heade
 
 	});
 
-    //從後端得到公司類型
+    //從後端得到公司所有類型
     <?php include("js_company_type.php"); ?> 
     for(var i=0;i<company_type_array.length;i++)
     $("#company_type").append($("<option></option>").attr("value", company_type_array_id[i]).text(company_type_array[i]));
-
+ 
     //從後端得到公司地點
     for(var i=0;i<company_zone_array.length;i++)
     $("#company_zone").append($("<option></option>").attr("value", company_zone_array_id[i]).text(company_zone_array[i]));
-	
+
+    //js_company_detail.php取得公司類型與位置
+    <? echo_company_type_and_zone($_SESSION['userid']); ?>
+    $("#company_type").val(company_type);
+	$("#company_zone").val(company_zone);
 
 </script>
 
