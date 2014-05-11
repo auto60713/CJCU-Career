@@ -1,29 +1,3 @@
-// put work in work-list-container's index
-//秀出工作==================
-
-	var list_container_index = 0;
-
-	for(var i=0;i<work_list_array.length;i++){
-
-		var a_link = $('<a>').attr({href:'work/'+work_list_array[i].wid}),
-			div_work = $('<div>').addClass('work'),
-			work_name = $('<h1>').text(work_list_array[i].wname),
-			work_zone = $('<p>').text(work_list_array[i].zname),
-			work_propn = $('<p>').text(((work_list_array[i].isout=='0')?'校內 ':'校外 ') + work_list_array[i].propname),
-			work_recr = $('<p>').text('需求 '+ work_list_array[i].rno +' 人'),
-			work_date = $('<p>').addClass('date').text(work_list_array[i].date.split(' ')[0]);
-			
-
-		div_work.append(work_name).append(work_zone).append(work_propn).append(work_recr).append(work_date);
-		a_link.append(div_work);
-
-		if(list_container_index==4)list_container_index=0;
-
-		$('.list:eq('+list_container_index+')').append(a_link);
-		list_container_index++;
-	}
-
-
 //填入進階搜尋項目==================
 
         // 生成工作位置基本資料
@@ -97,7 +71,7 @@
 
 		
 //搜尋啟用==================
-	var url = $(location).attr('pathname')+"?";
+	var url = $(location).attr('pathname')+"?mode=search";
 
 	$( "#search" ).click(function() {
     //搜尋的條件用php get

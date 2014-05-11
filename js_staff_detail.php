@@ -4,7 +4,7 @@ function echo_staff_detail_array($user_id){
 
 include_once("sqlsrv_connect.php");
 
-
+//select了兩次t.pic 確認後刪除
 $sql = "select u.user_no,u.user_name,u.dep_no,u.dep_name,u.role,t.pic,t.phone,t.email,t.pic
 		from cjcu_user u, cjcu_staff t
 		where u.user_no =? and t.user_no=u.user_no";

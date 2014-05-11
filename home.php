@@ -83,6 +83,10 @@
 			   <select name="zone_name" id="zone_name"></select>
 		       <br>
 	</div>
+	<?
+	//後端傳來"進階搜尋項目"的資料
+	include_once("js_search_work_data.php");
+	?>
 </div>
 
 <div class="center">
@@ -106,25 +110,41 @@
 </div>
 </body>
 
+<!--搜尋功能的API-->
+<script src="js/home_search_lib.js"></script>
 
+<!--秀出工作-->
 <script>
+    <? 
+    //後端傳來的工作資料
+    include_once('js_work_list.php'); echo_work_list_array(); 
 	
-	<?
-	//後端傳來的工作資料
-	include_once('js_work_list.php');
-	echo_work_list_array(); 
-	
-	// php load some help data for js array
-	// 後端傳來"進階搜尋項目"的資料
-	include("js_add_work.php");
-	
-	//如果目前是搜尋狀態
-    if(isset($_GET['search']))
+    //如果目前是搜尋狀態
+    if(isset($_GET['mode']))
        echo '$(".title-right").append($("<a></a>").attr("href", "home.php").text("取消搜尋"));';
     ?>
 
-</script>
+	var list_container_index = 0;
 
-<!--搜尋功能的API-->
-<script src="js/home_search_lib.js"></script>
+	for(var i=0;i<work_list_array.length;i++){
+
+		var a_link = $('<a>').attr({href:'work/'+work_list_array[i].wid}),
+			div_work = $('<div>').addClass('work'),
+			work_name = $('<h1>').text(work_list_array[i].wname),
+			work_zone = $('<p>').text(work_list_array[i].zname),
+			work_propn = $('<p>').text(((work_list_array[i].isout=='0')?'校內 ':'校外 ') + work_list_array[i].propname),
+			work_recr = $('<p>').text('需求 '+ work_list_array[i].rno +' 人'),
+			work_date = $('<p>').addClass('date').text(work_list_array[i].date.split(' ')[0]);
+			
+
+		div_work.append(work_name).append(work_zone).append(work_propn).append(work_recr).append(work_date);
+		a_link.append(div_work);
+
+		if(list_container_index==4)list_container_index=0;
+
+		$('.list:eq('+list_container_index+')').prepend(a_link); //最新工作應該在最前面
+		list_container_index++;
+	}
+</script>
+    
 </html>
