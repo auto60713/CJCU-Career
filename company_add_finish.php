@@ -46,7 +46,7 @@ else{
     }
     else{
 
-        $_SESSION['username'] = $userid;
+        $_SESSION['username'] = $id;
         $_SESSION['level'] = 4;
 
         echo '註冊成功! 登入中...';

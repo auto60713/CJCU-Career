@@ -4,6 +4,7 @@ function echo_company_detail_array($work_id){
 include("sqlsrv_connect.php");
 
 // 取出公司資料 (如果 column 一樣,一定要設定不同的column 否則傳回 php arry 會吃掉 column name 相同的資料，包含所有關連到的column name)
+// 目前censored值並無用到因為審核系統已經獨立出js_audit_detail.php 資料修改頁面並不印出censored值
     $sql = "select c.ch_name,c.en_name,c.phone,c.fax,c.uni_num,c.name,c.pic,c.email,t.name typename,z.name zonename,c.address,c.budget,c.introduction,c.doc,c.staff_num,c.url,c.censored "
 	      ."from company c,zone z,company_type t "
 	      ."where c.id= ? and c.type=t.id and c.zone_id=z.id";

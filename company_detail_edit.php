@@ -20,36 +20,28 @@ if(isset($_GET['companyid'])) $_SESSION['userid']=$_GET['companyid']; else{heade
 	$(function(){
 
 		var html_detail = "",idx = 0;
-		var column_name = ["中文名稱","英文名稱","連絡電話","傳真號碼","統一編號","負責人　","照片網址","電子信箱","公司類別","公司位置","公司地址","資本額　","關於公司","相關文件","員工數量","相關連結","審核狀況"];
+		//column_name array必須優化成json格式 不然目前依賴index順序
+		var column_name = ["中文名稱","英文名稱","連絡電話","傳真號碼","統一編號","負責人　","照片網址","電子信箱","公司類別","公司位置","公司地址","資本額　","關於公司","相關文件","員工數量","相關連結"];
 		for(var key in company_detail_array){
 	     	//特殊處理欄位
-	     	if(idx == 16||idx == 8||idx == 9){
+	     	if(key == "typename"||key == "zonename"||key == "censored"){
 
                 //公司類型
-			    if(idx == 8){
+			    if(key == "typename"){
 	     			html_detail+=column_name[idx]+"&emsp;&emsp;&emsp;<select name='"+key+"' id='company_type'></select> <br>";
 	     		}
 
 	     		//公司地點
-			    if(idx == 9){
+			    if(key == "zonename"){
 	     			html_detail+=column_name[idx]+"&emsp;&emsp;&emsp;<select name='"+key+"' id='company_zone'></select> <br>";
 	     		}
 
-	     		//審核的顯示處理
-                if(idx == 16){
-				    if(company_detail_array[key] == 0){
-                    html_detail+="<br>"+column_name[idx]+"&emsp;&emsp;&emsp;未通過<br>";
-			        }else 
-			        if(company_detail_array[key] == 1){
-                    html_detail+="<br>"+column_name[idx]+"&emsp;&emsp;&emsp;通過<br>";
-			        }
-			    }
+	     		if(key == "censored"){
+	     		//審核狀況不印出
+	     		}
+
 
 	     	}
-	     	//不能修改的欄位
-			//else if(idx == 99){
-			//html_detail+=column_name[idx]+"&emsp;&emsp;&emsp;"+company_detail_array[key]+"<br>";
-	     	//}
 
             //普通欄位
 	     	else{
