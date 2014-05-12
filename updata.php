@@ -22,12 +22,14 @@ $userlevel = $_SESSION['level'];
 
 	    case 4: //公司
 	        $params = array($_POST['ch_name'],$_POST['en_name'],$_POST['phone'],$_POST['fax'],$_POST['uni_num'],$_POST['name'],$_POST['pic'],$_POST['email']);
-	        array_push($params,$_POST['address'],$_POST['budget'],$_POST['introduction'],$_POST['doc'],$_POST['staff_num'],$_POST['url']);
+	        array_push($params,$_POST['typename'],$_POST['zonename'],$_POST['address'],$_POST['budget'],$_POST['introduction'],$_POST['doc'],$_POST['staff_num'],$_POST['url']);
 	        company_updata($userid,$params);
 	    break;
 
-	    case 2: //老師
-	        staff_updata($userid,$params);
+	    case 1: //管理員
+	        $params  = array($_POST['st_name']);
+	        $params2 = array($_POST['st_pic'],$_POST['st_phone'],$_POST['st_mail']);
+	        staff_updata($userid,$params,$params2);
 	    break;
 
 
@@ -65,7 +67,7 @@ function company_updata($userid,$params)
 	{
 		include_once("sqlsrv_connect.php");
 		
-		$sql  = "update company set ch_name=(?), en_name=(?), phone=(?), fax=(?), uni_num=(?), name=(?), pic=(?), email=(?), address=(?), budget=(?), introduction=(?), doc=(?), staff_num=(?), url=(?) where id ='".$userid."'"; 
+		$sql  = "update company set ch_name=(?), en_name=(?), phone=(?), fax=(?), uni_num=(?), name=(?), pic=(?), email=(?), type=(?), zone_id=(?), address=(?), budget=(?), introduction=(?), doc=(?), staff_num=(?), url=(?) where id ='".$userid."'"; 
         
         if( sqlsrv_query($conn, $sql, $params) )
         {
@@ -81,6 +83,26 @@ function company_updata($userid,$params)
 	}
 
 
+//管理員的資料修改
+function staff_updata($userid,$params,$params2)
+	{
+		include_once("sqlsrv_connect.php");
+		
+		$sql   = "update cjcu_user set user_name=(?) where user_no ='".$userid."'"; 
+		$sql2  = "update cjcu_staff set pic=(?), phone=(?), email=(?) where user_no ='".$userid."'"; 
+        
+        if( sqlsrv_query($conn, $sql, $params) && sqlsrv_query($conn, $sql2, $params2) )
+        {
+                echo '修改成功!';
+                echo '<meta http-equiv=REFRESH CONTENT=2;url="staff_manage.php#staff-info">';
+        }
+        else
+        {
+                echo '修改失敗!';
+                die( print_r( sqlsrv_errors(), true));
+        }
+      
+	}
 
 
 ?>

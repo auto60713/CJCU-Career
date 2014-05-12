@@ -4,6 +4,7 @@ function echo_company_detail_array($work_id){
 include("sqlsrv_connect.php");
 
 // 取出公司資料 (如果 column 一樣,一定要設定不同的column 否則傳回 php arry 會吃掉 column name 相同的資料，包含所有關連到的column name)
+// 目前censored值並無用到因為審核系統已經獨立出js_audit_detail.php 資料修改頁面並不印出censored值
     $sql = "select c.ch_name,c.en_name,c.phone,c.fax,c.uni_num,c.name,c.pic,c.email,t.name typename,z.name zonename,c.address,c.budget,c.introduction,c.doc,c.staff_num,c.url,c.censored "
 	      ."from company c,zone z,company_type t "
 	      ."where c.id= ? and c.type=t.id and c.zone_id=z.id";
@@ -15,6 +16,23 @@ include("sqlsrv_connect.php");
     echo "var company_detail_array = ". json_encode($row) . ";";
 }
 
+
+function echo_company_type_and_zone($work_id){
+include("sqlsrv_connect.php");
+
+// 取出公司類型編號 (因為detail_array是直接取得typename)
+    $sql = "select type,zone_id "
+	      ."from company "
+	      ."where id= ?";
+
+	$stmt = sqlsrv_query($conn, $sql, array($work_id));
+	if($stmt) $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC); 
+
+	else die(print_r( sqlsrv_errors(), true));
+
+    echo "var company_type = ".$row[type].";";
+    echo "var company_zone = ".$row[zone_id].";";
+}
 
 /*
 var company_detail_array = {

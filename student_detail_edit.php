@@ -37,7 +37,7 @@ if(!isset($_SESSION['username']) || $_SESSION['level'] != $level_student) {
 			}
 			idx++;
 		}	
-		    html_detail+="<br><input type='submit' value='submit'/>";
+		    html_detail+="<br><input type='submit' value='資料修改'/>";
 		$('#detail').html(html_detail);
 
 	});
