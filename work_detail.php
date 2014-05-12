@@ -94,10 +94,11 @@ if(isset($_SESSION['username'])) $user_id = $_SESSION['username'];
 		$('#address').text(work_detail_array['address']);
 		$('#detail').text(work_detail_array['detail']);
 
+        //優化UI避免與應徵工作混淆
 		if(work_detail_array['check']=='0')
-			$('#ch').text('未審核').css('color', '#444');
+			$('#ch').text('此工作項目尚未獲得校方認可').css('color', '#444');
 		else if(work_detail_array['check']=='1')
-			$('#ch').text('審核通過').css('color', '#339933');
+			$('#ch').text('應徵中').css('color', '#339933');
 		else
 			$('#ch').text('審核不通過').css('color', '#CC3333');
 		// in this way, check = 2 or 3 is not pass

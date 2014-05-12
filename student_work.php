@@ -57,7 +57,7 @@ else{echo "您無權訪問該頁面!"; exit;}
 		    		case 2: check_status='不錄取'; hint2.addClass('nocheck').text(check_status); break;
 		    		}
 
-		    		body.append(mainbox);
+		    		body.prepend(mainbox);
 		    }
 
 
