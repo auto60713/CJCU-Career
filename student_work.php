@@ -10,6 +10,7 @@ else{echo "您無權訪問該頁面!"; exit;}
 <head>
 	<meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="css/work.css">
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
     <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 	<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
     <script><? include_once('js_work_list.php'); echo_student_apply_list_array($userid);  ?>
@@ -37,28 +38,32 @@ else{echo "您無權訪問該頁面!"; exit;}
 		    	//work_list_array[i][apply_count]
 		    	var check_status='';
 
-		    	var img = $('<img>').attr('src', 'https://cdn2.iconfinder.com/data/icons/picol-vector/32/book_text-128.png').addClass('work-img'),
+		    	var icon = $('<i>').addClass('fa fa-book icon'),
 		    		
 		    		tita = $('<a>').attr('href', 'work/'+work_list_array[i]['wid']).text(work_list_array[i]['wname']),
 		    		tit = $('<h1>').addClass('work-tit').append(tita),
 		    		hint = $('<p>').addClass('work-hint')
 		    		.append(work_list_array[i]['name']+'<br>'+ (work_list_array[i]['isout']=='0'?'校內 ':'校外 ')+ work_list_array[i]['propname'] +'<br>'+ work_list_array[i]['date']),
 		    		hint2 = $('<p>'),
+		    		pass = $('<div>').attr('id', work_list_array[i]['wid']).addClass('pass-req').text("再次應徵"),
 		    		
-		    		subbox1 = $('<div>').addClass('sub-box').append(img),
+		    		subbox1 = $('<div>').addClass('sub-box').append(icon),
 		    		subbox2 = $('<div>').addClass('sub-box').append(tit).append(hint),
 		    		subbox3 = $('<div>').addClass('sub-box2').append(hint2),
 
 		    		mainbox = $('<div>').addClass('work-list-box').append(subbox1).append(subbox2).append(subbox3);
 		    		
 		    		switch(work_list_array[i]['ch']) {
-		    		case 0: check_status='未審核'; hint2.addClass('nonecheck').text(check_status); break;
+		    		case 0:case 3: check_status='未審核'; hint2.addClass('nonecheck').text(check_status); break;
 		    		case 1: check_status='已錄取'; hint2.addClass('yescheck').text(check_status); break;
-		    		case 2: check_status='不錄取'; hint2.addClass('nocheck').text(check_status); break;
+		    		case 2: check_status='不錄取'; hint2.addClass('nocheck').text(check_status); subbox3.append(pass);
+		    		break;
 		    		}
 
 		    		body.prepend(mainbox);
 		    }
+
+
 
 
 		  $('#search-btn').click(function(event) { 
@@ -82,12 +87,56 @@ else{echo "您無權訪問該頁面!"; exit;}
 		  		}
 		  }
 
+          //注入條件
+          var pass_search = ["全部", "已錄取", "不錄取"];
+		  for(var i=0;i<pass_search.length;i++)
+          $("#search-sel").append($("<option>").attr("value", i).text(pass_search[i]));
+
+          //用錄取篩選
+          $("#search-sel").change(function(event) {
+          	sel_val = $('#search-sel').val();
+          	sel_txt = $('#search-sel option:selected').text();
+
+          	$('.work-list-box').each(function(index, el) {
+          	if(sel_val==0){
+                $('.work-list-box').removeClass('hide-work');
+          	}
+          	else{ //因為class"錄取"跟"不錄取"不同 所以用p
+          		var pass_txt = $(this).find('p').text().toLowerCase();
+          		if(pass_txt.match(sel_txt)){ $(this).removeClass('hide-work'); }
+          		else{ $(this).addClass('hide-work'); }
+		    }
+	      });
+	      });
+
+          //再次應徵
+	        $('.pass-req').click(function() {
+               var work_id = $(this).attr('id');
+
+                $.ajax({
+				url: 'ajax_line_up.php',
+				type: 'post',
+				data: {check:3, work_id:work_id},
+				complete:function(){
+					$(this).addClass('hide-work');
+					alert("已送出請求");
+				}
+
+		    	});
+	     
+          });
+
+
+	    
+		 
+
 
     });
 </script>
 </head>
 <body>
 <div id='search-box'>
+<select id='search-sel'></select> 
 <input type='text' placeholder='搜尋工作名稱' id='search-txt'>
 <input type="button" value="搜尋" id='search-btn'>
 </div>

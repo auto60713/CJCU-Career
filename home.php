@@ -142,7 +142,7 @@
 
 		if(list_container_index==4)list_container_index=0;
 
-		$('.list:eq('+list_container_index+')').prepend(a_link); //最新工作應該在最前面
+		$('.list:eq('+list_container_index+')').append(a_link);
 		list_container_index++;
 	}
 </script>

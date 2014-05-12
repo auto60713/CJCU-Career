@@ -67,3 +67,18 @@
 	color: #CC3333;
 	font-size: 16px;
 }
+
+.pass-req{
+	background-color: #970000;
+	color: #FFFFFF;
+	font-size: 16px;
+	line-height:16px;
+	padding: 5px;
+	cursor:pointer;
+}
+
+.icon{
+	 color: #444;
+	 font-size: 30px;
+	 margin : 10px;
+}

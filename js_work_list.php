@@ -9,8 +9,8 @@ $para = array();
 
 $sql = "select w.id wid,w.name wname,z.name zname,w.is_outside isout,p.name propname,[recruitment _no] rno,w.date date
  from work w,zone z,work_prop p
- where w.zone_id = z.id and work_prop_id = p.id";
-
+ where w.zone_id = z.id and work_prop_id = p.id and w.[check] = 1";
+//check=1 只秀出通過審核的工作
 
 //搜尋功能開啟======================
 if(isset($_GET['search'])) $sql.= " and w.name like '%".$_GET['search']."%'";
@@ -19,6 +19,8 @@ if(isset($_GET['prop'])) $sql.= " and w.work_prop_id = ".$_GET['prop'];
 if(isset($_GET['io'])) $sql.= " and w.is_outside = ".$_GET['io'];
 if(isset($_GET['zone'])) $sql.= " and w.zone_id = ".$_GET['zone'];
 //==================================
+$sql.= " ORDER BY w.id DESC";
+//最新的在前面
 
 $stmt = sqlsrv_query($conn, $sql, $para);
 
