@@ -53,8 +53,6 @@ function isCompanyWork($conn,$companyid,$workid){
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 <style type="text/css">span{color: #f00;}</style>
 </head>
 <body>

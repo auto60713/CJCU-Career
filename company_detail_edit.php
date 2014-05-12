@@ -5,14 +5,8 @@ if(isset($_GET['companyid'])) $_SESSION['userid']=$_GET['companyid']; else{heade
 <!doctype html>
 <html>
 <head>
-	<!-- 取得公司資訊 -->
 	<script><? include_once("js_company_detail.php"); echo_company_detail_array($_SESSION['userid']); ?></script>
 	<script><? include_once("js_audit_detail.php"); echo_audit_detail_array($_SESSION['userid'],0); ?></script>
-	<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
-	<link rel="stylesheet" type="text/css" href="css/work_detail_edit.css?v=3">
-    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-    <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-	
 </head>
 
 <body>
@@ -117,25 +111,29 @@ if(isset($_GET['companyid'])) $_SESSION['userid']=$_GET['companyid']; else{heade
 
 		}		
 			var icon = icon = $('<i>').addClass(icontxt),
+			again_txt = $('<span>').addClass('company-audit-again-txt').text('已要求再次審核！'),
 			again_btn = $('<input>').addClass('company-audit-again').attr({
 				value: '請求再次審核',
 				type: 'button'
 			}).on('click', function(event) {
-
+				
 				$.ajax({
 					url: 'ajax_audit_again.php',
 					type: 'post',
 					data: {},
 				})
 				.done(function(data) {
-					if(data!='0') {$(this).remove();
-					$('.company-audit-status').append('已送出請求！');}
+					if(data!='0') {
+					$('.company-audit-status').append(again_txt);
+					again_btn.remove();
+					}
 				});
+
 			});
 
 		$('.company-audit-status').append(icon).append(statustxt).css('color', color);
 		if(company_detail_array.censored==2) $('.company-audit-status').append(again_btn);
-		if(company_detail_array.censored==3) $('.company-audit-status').append('已送出請求！');
+		if(company_detail_array.censored==3) $('.company-audit-status').append(again_txt);
 
 		// TAB control
 		var tabgroup = $('div[tabtoggle="workedit1"]');

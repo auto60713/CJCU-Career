@@ -47,9 +47,8 @@
 	height: 25px;
 	width: 40%;
 }
-#search-box input[type='button']{
+#search-box select{
 	height: 29px;
-	width: 10%;
 }
 .hide-work{
 	display: none;
@@ -68,6 +67,7 @@
 	font-size: 16px;
 }
 
+
 .pass-req{
 	background-color: #970000;
 	color: #FFFFFF;
@@ -81,4 +81,20 @@
 	 color: #444;
 	 font-size: 30px;
 	 margin : 10px;
+}
+
+.work-ch-unaudit{
+	font-size: 16px;
+	color: #555;
+	font-weight: bold;
+}
+.work-ch-pass{
+	font-size: 16px;
+	color:#339933;
+	font-weight: bold;
+}
+.work-ch-unpass{
+	font-size: 16px;
+	color: #CC3333;
+	font-weight: bold;
 }
