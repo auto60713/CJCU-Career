@@ -243,6 +243,7 @@
 }
 .company-audit-censored{
 	width:70px;
+	color: #333;
 }
 .company-audit-msg{
 	color: #333;
@@ -265,4 +266,10 @@
 	cursor: pointer;
 	background-color: #EEE;
 
+}
+
+.company-audit-again-txt{
+	display: inline-block;
+	float: right;
+	font-size: 16px;
 }

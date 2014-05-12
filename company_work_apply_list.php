@@ -34,78 +34,75 @@ function isCompanyWork($conn,$companyid,$workid){
 <html>
 <head>
 	<meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="css/company_worK_apply_list.css">
-    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-	<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-
     <script><? include_once('js_company_work_detai_list.php'); echo_company_work_apply_list_array($_GET['workid']);  ?>
     /*
     <div class="work-list-box">
 	<div class="sub-box"><img src="" class="work-img"></div>
 	<div class="sub-box">
 		<h1 class="work-tit"><a href="#">Chou Gun Gun</a></h1>
-		<p class="work-hint"><a href="#">下載履歷</a></p>
+		**<p class="work-hint"><a href="#">下載履歷</a></p>
+		  <p class="work-hint"><a href="#"><i class="fa fa-eye"></i> Overview</a></p>
 	</div>
 	<div class="sub-box2">
-		<input type="button" value="錄取" class="passing-btn">
-		<input type="button" value="不錄取" class="notpassing-btn" >
+		**<input type="button" value="錄取" class="passing-btn">
+		**<input type="button" value="不錄取" class="notpassing-btn" >
+		<button class="staff-audit-btn"><i class="fa fa-cog"></i> 審核</button>
 	</div>
 	</div>*/
+
     $(function(){
     	var body = $('#company-work-list-container');
     	for(var i=0;i<company_work_apply_list_array.length;i++){
 
     		var wimg = $('<img>').attr('src', 'http://akademik.unissula.ac.id/themes/sia/images/user.png').addClass('work-img'),
     			tita = $('<a>').attr('href', 'student/'+company_work_apply_list_array[i]['user_id']).text(company_work_apply_list_array[i]['user_id']),
-    			doca = $('<a>').attr('href', 'doc/'+company_work_apply_list_array[i]['doc']).text('下載履歷'),
-    			passbtn = $('<input>').attr({type: 'button', value: '錄取'}).addClass('passing-btn'),
-    			notpassbtn = $('<input>').attr({type: 'button', value: '不錄取'}).addClass('notpassing-btn'),
+    			
+    			
+    			overview = $('<i>').addClass('fa fa-eye'),
+    			doca = $('<a>').attr('href', '').append(overview).append(' Overview'),
+
+    			gear = $('<i>').addClass('fa fa-cog'),
+    			auditbtn = $('<button>').addClass('staff-audit-btn').append(gear).append(' 審核'),
 
     			subbox1 = $('<div>').addClass('sub-box').append(wimg),
     			subbox2 = $('<div>').addClass('sub-box').append($('<h1>').addClass('work-tit').append(tita))
     			.append($('<p>').addClass('work-hint').append(doca)),
     			subbox3 = $('<div>').addClass('sub-box2');
 
-    			
+    			subbox3.on('click', {arr:company_work_apply_list_array[i]} ,function(event) {
+					//event.data.arr['user_id']
 
-    			passbtn.on('click',{arr:company_work_apply_list_array[i]},function(event) {
-    				var t = $(this);
-					$.ajax({
-					  type: 'post',
-					  url: 'company_work_apply_user.php',
-					  data: {check:1,user: event.data.arr['user_id'] ,workid:<? echo $_GET['workid']; ?>},
-					  success: function (data) {
+						$('.staff-apply-form').remove();
 
-						console.log(data); 
+						var hidden1 = $('<input>').attr({value: event.data.arr['user_id'], type:'hidden', id:'hidden_id'}),
+							icon = $('<i>').addClass('fa fa-user'),
+							tbox = $('<h1>').append(icon).append(' '+event.data.arr['user_id']).css('font-size', '28px'),
+							close = $('<i>').addClass('fa fa-times').addClass('staff-apply-box-close'),
+							span = $('<span>').text('審核說明：').css('color', '#444'),
+							t = $('<textarea>').attr({id: 'staff-audit-apply-msg',placeholder:'選填'}),
+							ok = $('<input>').attr({id: 'staff-audit-apply-ok', type: 'button',value :'通過'}).on('click', function(event) {
+								submit_audit(true);
+							}),
+							no = $('<input>').attr({id: 'staff-audit-apply-no', type: 'button',value :'不通過'}).on('click', function(event) {
+								submit_audit(false);
+							}),
+							errtext= $('<span>').attr('id', 'staff-audit-error'),
+							gbtn = $('<div>').addClass('staff-apply-gbtn').append(errtext).append(ok).append(no),
+							box = $('<div>').addClass('staff-apply-box').append(close).append(tbox).append("<hr><br>")
+							.append(span).append("<br>").append(t).append("<br>").append(gbtn).append(hidden1),
 
-					  	var result = (data=='0')? "更新失敗" : "已錄取";
-					  	var target = t.parent(".sub-box2");
-					  	target.empty();
-					  	target.append($('<div>').addClass('isapply').text(result));  
-					  }
-					});
-    			});
+							bg = $('<div>').addClass('staff-apply-form').append(box);
 
-    			notpassbtn.on('click',{arr:company_work_apply_list_array[i]},function(event) {
-    				var t = $(this);
-    				$.ajax({
-					  type: 'post',
-					  url: 'company_work_apply_user.php',
-					  data: {check:2, user: event.data.arr['user_id'] ,workid:<? echo $_GET['workid']; ?>} ,
-					  success: function (data) { 
-					  	console.log(data); 
-					  	var result = (data=='0')? "更新失敗" : "不錄取";
-					  	var target = t.parent(".sub-box2");
-					  	target.empty();
-					  	target.append($('<div>').addClass('isnotapply').text(result));  
-					  }
-					});
-    			});
+							close.click(function(event) {$('.staff-apply-form').remove();});
+
+						$('body').append(bg);
+
+				});
 
 
 				switch(company_work_apply_list_array[i]['check']) {
-					case 0:
-						subbox3.append(passbtn).append(notpassbtn);break;
+					case 0:case 3:
+						subbox3.append(auditbtn);break;
 					case 1:
 						subbox3.append($('<div>').addClass('isapply').text('已錄取'));break;
 					case 2:
@@ -115,6 +112,35 @@ function isCompanyWork($conn,$companyid,$workid){
 				body.append(mainbox);
     	}
 
+
+    	function submit_audit(boo){
+
+    		if(boo) txt = $('<div>').addClass('isapply').text('已錄取');
+    		else txt = $('<div>').addClass('isnotapply').text('不錄取');
+
+    		var userid= $('#hidden_id').val(), chk = boo? 1:2;
+    		var msg = $('#staff-audit-apply-msg').val();
+    		$.ajax({
+					  type: 'post',
+					  url: 'company_work_apply_user.php',
+					  data: {check:chk, user: userid ,workid:<? echo $_GET['workid']; ?>,msg:msg} ,
+					  befoerSend:function(){
+					  	$('#staff-audit-apply-ok, #staff-audit-apply-no ,#staff-audit-apply-msg').attr('disabled', '');
+					  },
+					  
+			}).done(function(data){
+				console.log(data);
+				if(data.split('-')[0]=='0'){
+					alert('fail');
+					$('#staff-audit-apply-ok, #staff-audit-apply-no ,#staff-audit-apply-msg').removeAttr('disabled');
+				}
+				else{
+					subbox3.empty().append(txt);
+					$('.staff-apply-form').fadeOut('fast', function() {	$(this).remove();});
+				}
+			});
+
+    	}
 
 
     	

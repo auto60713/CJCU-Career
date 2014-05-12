@@ -63,11 +63,11 @@ form[id='detail'] input[type='text']{
 }
 #gobackbtn{
 	font-size: 16px;
-	border: solid 1px #AAA;
-	padding: 2.5px;
-	padding-left: 10px;
-	padding-right: 10px;
-	margin-right: 5px;
+	border: solid 1px #BBB;
+	padding-left: 8px;
+	padding-right: 8px;
+	margin-right: 6px;
+	margin-top: 3px;
 	display: inline-block;
 	vertical-align: top;
 	color: #666;

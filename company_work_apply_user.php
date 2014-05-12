@@ -7,7 +7,6 @@ if(isset ($_SESSION['username']) && $_SESSION['level']==$level_company){
 }
 else{ 
 echo "您無權限訪問該頁面!";
-echo '<meta http-equiv=REFRESH CONTENT=1;url="login.php">';
 exit;
 }
 
@@ -18,6 +17,7 @@ include("sqlsrv_connect.php");
 $workid = (trim($_POST['workid']));
 $userid = (trim($_POST['user']));
 $check = (trim($_POST['check']));
+$msg = (trim($_POST['msg']));
 
 if(!isCompanyWork($conn,$_SESSION['username'],$workid)){echo '0'; exit();}
 function isCompanyWork($conn,$companyid,$workid){
@@ -41,12 +41,8 @@ $params = array($check,$userid,$workid);
 $result = sqlsrv_query($conn, $sql, $params);
 
 
-
-
-
-
 if(!$result){
-	echo "0";
+	echo "0-1";exit;
 }
 
 
@@ -64,13 +60,21 @@ if($result){
 	$params = array($_SESSION['username'],1,$userid,0,'您的工作已被審核','');
 	$result = sqlsrv_query($conn, $sql, $params);
 
-	if($result){
-		echo "1";
+	if(!$result){
+		echo "0-2"; exit;
 	}
-	else
-		echo "0";
+	
 }
 
+
+
+
+$sql2 = "insert into apply_audit(company_id,work_id,censored,msg)"
+		." values(?,?,?,?)";
+$params2 = array($_SESSION['username'],$workid,$check,$msg);
+$result2 = sqlsrv_query($conn, $sql2, $params2);
+
+if(!$result2){echo "0-3"; exit;}
 
 
 
