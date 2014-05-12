@@ -123,8 +123,7 @@ function isCompanyWork($conn,$companyid,$workid){
 	
 	<? 
 	// php load some help data for js array
-	include_once("js_add_work.php"); 
-
+	include_once("js_search_work_data.php"); echo_work_sub_data();
 	// if it's edit mode and load init data to js array
 	if($_GET['mode']=='edit'){
 	include_once('js_work_detail.php');
