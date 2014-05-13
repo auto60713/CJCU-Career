@@ -51,3 +51,12 @@ body{
 	margin-left: 10px;
 	margin-right: 10px;
 }
+
+.header-notice-num{
+	display: inline-block;
+	padding: 2px;
+	font-size: 13px;
+	font-weight: bold;
+	color: #FFF;
+	background-color: #CC0033;
+}

@@ -15,7 +15,7 @@
 	<script>
 	$(function(){
 
-		$('#view-header').load('public_view/header.php #header');
+		$('#view-header').load('public_view/header.php');
 
 		$(window).hashchange( function(){
 

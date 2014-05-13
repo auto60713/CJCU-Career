@@ -69,11 +69,15 @@
 
 
 .pass-req{
-	background-color: #970000;
-	color: #FFFFFF;
-	font-size: 16px;
-	line-height:16px;
+	background-color: #CCC;
+	color: #222;
+	font-size: 13px;
 	padding: 5px;
+	text-align: center;
+	margin-top: 5px;
+}
+.pass-req:hover{
+	background-color: #DDD;
 	cursor:pointer;
 }
 
