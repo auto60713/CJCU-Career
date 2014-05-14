@@ -7,9 +7,9 @@
 		// 生成工作位置細目
 		change_zone_list();
 		
-		// 生成工作類型
-		for(var i=0;i<work_type.length;i++)
-		$("#work_type").append($("<option></option>").attr("value", work_type_id[i]).text(work_type[i]));
+		// 生成工作類型              /////////////////5/13 BUG
+		//for(var i=0;i<work_type.length;i++)
+		//$("#work_type").append($("<option></option>").attr("value", work_type_id[i]).text(work_type[i]));
 
 		// 工作類型第一層 改變時，用ajax列出 第二層 工作類型細目
 		$('#work_type').change(function() {

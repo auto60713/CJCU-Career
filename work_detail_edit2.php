@@ -109,9 +109,6 @@ function isCompanyWork($conn,$companyid,$workid){
 
 
 
-
-
-
 		// TAB Control
 		var tabgroup = $('div[tabtoggle="workedit1"]');
 		tabgroup.click(function(event) {

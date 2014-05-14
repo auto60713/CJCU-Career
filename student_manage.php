@@ -6,13 +6,14 @@
 	<title>帳戶管理</title>
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 	<link rel="stylesheet" type="text/css" href="css/company_manage.css">
+	<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
 	<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 	<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 	<script src="js/jquery.hashchange.min.js"></script>
 	<script>
 	$(function(){
 
-		$('#view-header').load('public_view/header.php #header');
+		$('#view-header').load('public_view/header.php');
 
 		$(window).hashchange( function(){
 

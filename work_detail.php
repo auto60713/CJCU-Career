@@ -6,10 +6,9 @@ if(isset($_SESSION['username'])) $user_id = $_SESSION['username'];
 ?>
 
 <!doctype html>
-<html lang="en">
+<html>
 <head>
 	<meta charset="UTF-8">
-	<title></title>
 	<link rel="stylesheet" type="text/css" href="../css/main.css">
 	<link rel="stylesheet" type="text/css" href="../css/company_manage.css">
 	<style type="text/css">

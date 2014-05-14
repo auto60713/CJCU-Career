@@ -110,8 +110,7 @@
 </div>
 </body>
 
-<!--搜尋功能的API-->
-<script src="js/home_search_lib.js"></script>
+
 
 <!--秀出工作-->
 <script>
@@ -146,5 +145,6 @@
 		list_container_index++;
 	}
 </script>
-    
+<!--搜尋功能的API-->
+<script src="js/home_search_lib.js"></script>
 </html>

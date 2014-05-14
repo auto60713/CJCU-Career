@@ -38,15 +38,15 @@ else{echo "您無權訪問該頁面!"; exit;}
 		    	//work_list_array[i][apply_count]
 		    	var check_status='';
 
-		    	var icon = $('<i>').addClass('fa fa-book icon'),
+		    	var icon = $('<i>').addClass('fa fa-book icon').addClass('work-img'),
 		    		
 		    		tita = $('<a>').attr('href', 'work/'+work_list_array[i]['wid']).text(work_list_array[i]['wname']),
 		    		tit = $('<h1>').addClass('work-tit').append(tita),
 		    		hint = $('<p>').addClass('work-hint')
 		    		.append(work_list_array[i]['name']+'<br>'+ (work_list_array[i]['isout']=='0'?'校內 ':'校外 ')+ work_list_array[i]['propname'] +'<br>'+ work_list_array[i]['date']),
 		    		hint2 = $('<p>'),
-		    		pass = $('<div>').attr('id', work_list_array[i]['wid']).addClass('pass-req').text("再次應徵"),
-		    		
+		    		pass = $('<div>').attr('id', work_list_array[i]['wid']).addClass('pass-req').text("要求再審核"),
+		    		statustxt = $('<span>').addClass('nocheck').text('已要求重新再審！'),
 		    		subbox1 = $('<div>').addClass('sub-box').append(icon),
 		    		subbox2 = $('<div>').addClass('sub-box').append(tit).append(hint),
 		    		subbox3 = $('<div>').addClass('sub-box2').append(hint2),
@@ -54,9 +54,13 @@ else{echo "您無權訪問該頁面!"; exit;}
 		    		mainbox = $('<div>').addClass('work-list-box').append(subbox1).append(subbox2).append(subbox3);
 		    		
 		    		switch(work_list_array[i]['ch']) {
-		    		case 0:case 3: check_status='未審核'; hint2.addClass('nonecheck').text(check_status); break;
-		    		case 1: check_status='已錄取'; hint2.addClass('yescheck').text(check_status); break;
-		    		case 2: check_status='不錄取'; hint2.addClass('nocheck').text(check_status); subbox3.append(pass);
+		    		case 0: check_status='未審核'; hint2.addClass('nonecheck').text(check_status); break;
+		    		case 1: check_status='通過審核'; hint2.addClass('yescheck').text(check_status); break;
+		    		case 2: check_status='不通過審核'; hint2.addClass('nocheck').text(check_status); subbox3.append(pass); break;
+		    		case 3: check_status='不通過審核'; hint2.addClass('nocheck').text(check_status); subbox3.append(statustxt); break;
+		    		case 4: check_status='已錄取'; hint2.addClass('yescheck').text(check_status); break;
+		    		case 5: check_status='不錄取'; hint2.addClass('nocheck').text(check_status); break;
+		    		case 6: check_status='完成工作'; hint2.addClass('yescheck').text(check_status); break;
 		    		break;
 		    		}
 
@@ -64,12 +68,7 @@ else{echo "您無權訪問該頁面!"; exit;}
 		    }
 
 
-
-
-		  $('#search-btn').click(function(event) { 
-		  	resort_work($('#search-txt').val());	
-		  });
-		  
+		
 		  $('#search-txt').on('input', function(event) {
 		  	console.log($('#search-txt').val());
 		  	resort_work($('#search-txt').val());
@@ -111,17 +110,18 @@ else{echo "您無權訪問該頁面!"; exit;}
 
           //再次應徵
 	        $('.pass-req').click(function() {
-               var work_id = $(this).attr('id');
+               work_id = $(this).attr('id');
+               btn = $(this);
+               statustxt = $('<span>').addClass('nocheck').text('已要求重新再審！'),
 
                 $.ajax({
 				url: 'ajax_line_up.php',
 				type: 'post',
 				data: {check:3, work_id:work_id},
-				complete:function(){
-					$(this).addClass('hide-work');
-					alert("已送出請求");
-				}
-
+		    	})
+		    	.done(function(data){
+		    		btn.parents('.sub-box2').append(statustxt);
+		    		btn.remove();
 		    	});
 	     
           });
@@ -138,7 +138,6 @@ else{echo "您無權訪問該頁面!"; exit;}
 <div id='search-box'>
 <select id='search-sel'></select> 
 <input type='text' placeholder='搜尋工作名稱' id='search-txt'>
-<input type="button" value="搜尋" id='search-btn'>
 </div>
 <div id='company-work-list-container'></div>
 </body>
