@@ -7,7 +7,7 @@
 <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 <link rel="stylesheet" type="text/css" href="css/main.css">
-<link rel="stylesheet" type="text/css" href="css/member.css">
+<link rel="stylesheet" type="text/css" href="css/login.css">
 <script>
 
 	function ajax_check(id,true_func,false_func){
@@ -196,7 +196,7 @@
 <input type="file" name="doc" />  <br><br>
 
 <input type="submit" name="button" value="確定" />　　
-<input type="button"  value="取消" onclick="location.href='login.php'"/>
+<input type="button"  value="取消" onclick="location.href='home.php'"/>
 </form>
 
 

@@ -6,10 +6,10 @@
 <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 <link rel="stylesheet" type="text/css" href="css/main.css">
-<link rel="stylesheet" type="text/css" href="css/member.css">
+<link rel="stylesheet" type="text/css" href="css/login.css">
 <script type="text/javascript">
 
-function check_data(){
+    function check_data(){
 
 	var boo = true;
 

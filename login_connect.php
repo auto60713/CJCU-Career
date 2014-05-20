@@ -107,7 +107,7 @@ function login_echo($os){
         echo '<meta http-equiv=REFRESH CONTENT=2;url=home.php>';
     }else{
         echo '帳號或密碼錯誤! 跳轉中...';
-        echo '<meta http-equiv=REFRESH CONTENT=2;url=login.php>';
+        echo '<meta http-equiv=REFRESH CONTENT=2;url=home.php>';
     }
 }
 

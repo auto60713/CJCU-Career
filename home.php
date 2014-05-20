@@ -6,32 +6,14 @@
 	<title>長榮大學 - 媒合系統</title>
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 	<link rel="stylesheet" type="text/css" href="css/home.css">
+	<link rel="stylesheet" type="text/css" href="css/login.css">
 	<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 	<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 	<script><? include_once('js_work_list.php'); echo_work_list_array(); ?></script>
 	<script>
 	$(function(){ 
 		
-		//$('#view-header').load(' #header');
-
-		var request = $.ajax({
-		url: "public_view/header.php",type: "POST",data: {},dataType: "html",
-		 beforeSend: function( xhr ) {
-		$('#view-header').html('<div id="header">loading</div>');
-		}
-		});
-
-		request.done(function( msg ) {
-		$('#view-header').html( $(msg).filter('#header'));
-		});
-
-		
-
-		$('#search-detail').hide();
-		$('#btn_detail_search').on('click', function(event) {
-			event.preventDefault();
-			$('#search-detail').slideToggle('fast');
-		});
+		$('#view-header').load('public_view/header.php');
 
 		/* modle of work 
 			<div class="work">
@@ -43,12 +25,45 @@
 			</div>
 		*/
 
+		$('#search-detail').hide();
+		$('#btn_detail_search').on('click', function(event) {
+			event.preventDefault();
+			$('#search-detail').slideToggle('fast');
+		});
+
+
 	});
 	</script>
+    
 </head>
 <body>
-<div id="view-header"></div>
+<!-- login lightbox -->
+<div id="login-lightbox">
+<div id="cont" class="login">
+<h1>帳號登入</h1><hr>
+<form class="form" name="login" method="post" action="login_connect.php" onsubmit="return check_data()">
+請選擇登入身分
+<select name ="sel" >
+  <option value=""></option>
+  <option value="student">學生</option>
+  <option value="company">廠商</option>
+  <option value="staff">老師</option>
+</select><span id="null-echo"></span> <br>
+帳號：<input type="text" name="id" /><br>
+密碼：<input type="password" name="pw" />
+<input type="submit" class="submit" name="button" value="登入" /><br><br>
+<a href="company_add.php">廠商註冊</a>　
+<a href="company_forgotpwd.php">忘記密碼</a> 　
+<a href="#" id="login-exit">取消</a><br>
+</form>
+</div>
+</div>
 
+<!-- 版頭 -->
+<div id="view-header"></div>
+<!-- 測試用 debug後將此條刪除 --><span><a href="#" id="login-btn">登入</a></span>
+
+<!-- 搜尋 -->
 <div class="top">
 
 	<div class="search-bar container">
@@ -83,17 +98,14 @@
 			   <select name="zone_name" id="zone_name"></select>
 		       <br>
 	</div>
-	<?
-	//後端傳來"進階搜尋項目"的資料
-	include_once("js_search_work_data.php");
-	?>
 </div>
 
+<!-- 工作列表 -->
 <div class="center">
 
 	<div class="title container">
 		<div class="title-left">
-		<h1>Work List</h1>
+		<h1>工作列表</h1>
 		</div>
 
 		<div class="title-right">
@@ -117,6 +129,9 @@
     <? 
     //後端傳來的工作資料
     include_once('js_work_list.php'); echo_work_list_array(); 
+
+	//後端傳來"進階搜尋項目"的資料
+	include_once("js_search_work_data.php"); echo_work_sub_data();
 	
     //如果目前是搜尋狀態
     if(isset($_GET['mode']))
@@ -144,6 +159,70 @@
 		$('.list:eq('+list_container_index+')').append(a_link);
 		list_container_index++;
 	}
+
+
+
+	// 生成工作類型
+		for(var i=0;i<work_type.length;i++)
+		$("#work_type").append($("<option></option>").attr("value", work_type_id[i]).text(work_type[i]));
+
+    // 工作類型第一層 改變時，用ajax列出 第二層 工作類型細目
+		$('#work_type').change(function() {
+			var id=$(this).val();
+			$("#work_type_list1 option").remove();
+			// 執行AJAX取得細目資料
+			$.ajax({
+			type:"POST",
+			async:false, 
+			url:"ajax_work_type_list.php",
+			data:"id="+id+"&list=1",
+			success:function(msg){ $('#work_type_list1').html(msg);	},
+			error: function(){alert("網路連線出現錯誤!");}
+			});
+		});
+
+    // 工作類型第二層 改變時，用ajax列出 第三層 工作類型細目
+		$('#work_type_list1').change(function() {
+			var id=$(this).val();
+			// 清空工作類別細目
+			$("#work_type_list2 option").remove();
+			// 執行AJAX取得細目資料
+			$.ajax({
+			type:"POST",
+			async:false, 
+			url:"ajax_work_type_list.php",
+			data:"id="+id+"&list=2",
+			success:function(msg){ $('#work_type_list2').html(msg);	},
+			error: function(){alert("網路連線出現錯誤!");}
+			});
+		});
+
+</script>
+<!-- login lightbox-->
+<script>
+    $( "#login-btn" ).click(function() {
+        $( "#login-lightbox" ).css( "display", "block" ); return false;
+    });
+    $( "#login-exit" ).click(function() {
+        $( "#login-lightbox" ).css( "display", "none" ); return false;
+    });
+
+
+    //判斷欄位是否為空
+    function check_data(){
+
+    $("#cont").find("span").text("");
+	var boo = true;
+	if(document.login.sel.value ==""){
+		  $('#null-echo').text("請選擇身分"); boo = false;
+	}else if(document.login.id.value ==""){
+		  $('#null-echo').text("請輸入帳號"); boo = false;
+	}else if(document.login.pw.value ==""){
+		  $('#null-echo').text("請輸入密碼"); boo = false;
+	}
+
+	return boo;
+    }
 </script>
 <!--搜尋功能的API-->
 <script src="js/home_search_lib.js"></script>

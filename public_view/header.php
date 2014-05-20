@@ -41,7 +41,7 @@ function echo_data($user,$lev){
 		echo '<span><a href="../../../cjcuweb/logout.php">登出</a></span>';
 
 	}	
-	else echo '<span><a href="../../../cjcuweb/login.php">登入</a></span>';
+	else echo '<span><a href="#" id="login-btn">登入</a></span>';
 
 	//echo $user." >".$lev." >".$level_student ." >" .$_SESSION['level2'];
 }
