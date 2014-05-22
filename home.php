@@ -13,7 +13,19 @@
 	<script>
 	$(function(){ 
 		
-		$('#view-header').load('public_view/header.php');
+		//$('#view-header').load('public_view/header.php');
+
+		$.ajax({
+					url:  'public_view/header.php',
+					type: 'POST',
+					data: {},
+					success: function(data) {
+                        $('#view-header').html(data);
+                    }
+		})
+		
+
+
 
 		/* modle of work 
 			<div class="work">
@@ -48,9 +60,9 @@
   <option value="student">學生</option>
   <option value="company">廠商</option>
   <option value="staff">老師</option>
-</select><span id="null-echo"></span> <br>
-帳號：<input type="text" name="id" /><br>
-密碼：<input type="password" name="pw" />
+</select><span class="null-echo" id="sel-null"></span><br>
+帳號：<input type="text" name="id" /><span class="null-echo" id="id-null"></span><br>
+密碼：<input type="password" name="pw" /><span class="null-echo" id="pw-null"></span>
 <input type="submit" class="submit" name="button" value="登入" /><br><br>
 <a href="company_add.php">廠商註冊</a>　
 <a href="company_forgotpwd.php">忘記密碼</a> 　
@@ -61,7 +73,6 @@
 
 <!-- 版頭 -->
 <div id="view-header"></div>
-<!-- 測試用 debug後將此條刪除 --><span><a href="#" id="login-btn">登入</a></span>
 
 <!-- 搜尋 -->
 <div class="top">
@@ -76,13 +87,15 @@
 
 	<!--進階搜尋-->
 	<div class="tag-bar container" id="search-detail">
+
+	<!-- 資料不完全
     <input type="checkbox" id="search_type" value="type">
     工作類型 : <select name="work_type" id="work_type"><option>請選擇</option></select> 
-		       <select name="work_type_list1" id="work_type_list1"><option>請選擇</option></select><!-- 要等 work_type 選完才載入 -->
-			   <select name="work_type_list2" id="work_type_list2"><option>請選擇</option></select><!-- 要等 work_type 選完才載入 -->
+		       <select name="work_type_list1" id="work_type_list1"><option>請選擇</option></select>
+			   <select name="work_type_list2" id="work_type_list2"><option>請選擇</option></select>
 			   <span id="work_type_hint"></span>
 			   <br>
-
+    -->
     <input type="checkbox" id="search_prop" value="prop">
     工作性質 : <select name="work_prop" id="work_prop"></select> <br>
 
@@ -200,7 +213,8 @@
 </script>
 <!-- login lightbox-->
 <script>
-    $( "#login-btn" ).click(function() {
+    //js 抓不到動態產生的物件 所以用 .on
+    $(document).on('click', '#login-btn', function(){
         $( "#login-lightbox" ).css( "display", "block" ); return false;
     });
     $( "#login-exit" ).click(function() {
@@ -214,11 +228,11 @@
     $("#cont").find("span").text("");
 	var boo = true;
 	if(document.login.sel.value ==""){
-		  $('#null-echo').text("請選擇身分"); boo = false;
+		  $('#sel-null').text("請選擇身分"); boo = false;
 	}else if(document.login.id.value ==""){
-		  $('#null-echo').text("請輸入帳號"); boo = false;
+		  $('#id-null').text("請輸入帳號"); boo = false;
 	}else if(document.login.pw.value ==""){
-		  $('#null-echo').text("請輸入密碼"); boo = false;
+		  $('#pw-null').text("請輸入密碼"); boo = false;
 	}
 
 	return boo;

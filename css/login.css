@@ -42,13 +42,14 @@ a{
 }
 
 .submit{
-	margin-left: 80px;
+	margin-left: 110px;
 }
 
-#null-echo{
+.null-echo{
+    position: absolute;
 	font-weight: bold;
 	color: #FF0000;
-	padding-left: 60px;
+	padding-left: 10px;
 }
 
 #login-lightbox{
