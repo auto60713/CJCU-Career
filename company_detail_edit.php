@@ -1,12 +1,12 @@
 <? session_start(); 
-if(isset($_GET['companyid'])) $_SESSION['userid']=$_GET['companyid']; else{header("Location: home.php"); exit;}
+if(isset($_GET['companyid'])) $_SESSION['username']=$_GET['companyid']; else{header("Location: home.php"); exit;}
 ?>
 
 <!doctype html>
 <html>
 <head>
-	<script><? include_once("js_company_detail.php"); echo_company_detail_array($_SESSION['userid']); ?></script>
-	<script><? include_once("js_audit_detail.php"); echo_audit_detail_array($_SESSION['userid'],0); ?></script>
+	<script><? include_once("js_company_detail.php"); echo_company_detail_array($_SESSION['username']); ?></script>
+	<script><? include_once("js_audit_detail.php"); echo_audit_detail_array($_SESSION['username'],0); ?></script>
 </head>
 
 <body>
@@ -159,7 +159,7 @@ if(isset($_GET['companyid'])) $_SESSION['userid']=$_GET['companyid']; else{heade
     $("#company_zone").append($("<option>").attr("value", company_zone_array_id[i]).text(company_zone_array[i]));
 
     //js_company_detail.php取得公司類型與位置
-    <? echo_company_type_and_zone($_SESSION['userid']); ?>
+    <? echo_company_type_and_zone($_SESSION['username']); ?>
     $("#company_type").val(company_type);
 	$("#company_zone").val(company_zone);
 	

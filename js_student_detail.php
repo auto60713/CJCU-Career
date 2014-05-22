@@ -4,6 +4,11 @@ function echo_student_detail_array($user_id){
 include_once("sqlsrv_connect.php");
 include_once("cjcuweb_lib.php");
 
+//設定前端要呈現的資料
+
+	$column_name = array("學號","姓名","系所","大頭貼照","生日","綽號","性別","連絡電話","詳細地址","電子信箱","履歷檔案");
+	$input_name = array("user_no" , "user_name" , "dep_name" , "pic" , "birthday" , "nickname" , "sex" , "phone" , "address" , "email" , "doc");
+
 // 取出學生資料 (如果 column 一樣,一定要設定不同的column 否則傳回 php arry 會吃掉 column name 相同的資料，包含所有關連到的column name)
 	$sql = "select r.user_no userno,r.user_name username,r.dep_name depname,s.pic pic,s.birthday birthday,s.nickname nickname,s.sex sex,s.phone phone,s.address address,s.email email,s.doc doc "
 		  ."from cjcu_user r,cjcu_student s where r.user_no=? and s.user_no=?";
@@ -13,6 +18,10 @@ include_once("cjcuweb_lib.php");
 	else die(print_r( sqlsrv_errors(), true));
 
     echo "var user_detail_array = ". json_encode($row) . ";\n";
+
+    echo "var column_name = ['".implode("','", $column_name)."'];\n";
+    echo "var input_name = ['".implode("','", $input_name)."'];\n";
+
 }
 
 ?>
