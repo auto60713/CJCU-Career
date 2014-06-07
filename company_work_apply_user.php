@@ -59,6 +59,7 @@ if($result){
 
 // 通知系統
 // 功能：公司審核學生應徵，通知學生的應徵結果
+include_once('msg_lib.php');
 $chtxt = ($check=='1')?'通過':'不通過';
 $icon =  ($check=='1')?'fa fa-check':'fa fa-times';
 $arr =
@@ -68,7 +69,7 @@ array(
       'sender_level'=>  $_SESSION['level'],
       'recv_id'=>       $userid,
       'recv_level'=>    0,
-      'msg'=>           '您應徵的工作「'.$work_name.'」審核'.$chtxt.'，請前往查看。',
+      'msg'=>           '您應徵的工作「<b>'.$work_name.'</b>」審核<b>'.$chtxt.'，</b>請前往查看。',
       'url'=>           '../../../cjcuweb/student_manage.php#student-applywork',
       'icon'=>          $icon
 );

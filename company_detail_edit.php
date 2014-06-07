@@ -145,7 +145,7 @@ if(isset($_GET['companyid'])) $_SESSION['userid']=$_GET['companyid']; else{heade
 			$('div[tabtoggle="workedit2"]:not(div[tabtoggle="workedit2"]:eq('+index+'))').addClass('workedit-content-hide');
 		});
 
-		tabgroup[<?  echo (int)$_POST['page']; ?>].click();
+		tabgroup[<?  echo (int)$_GET['page']; ?>].click();
 
 	});
 

@@ -18,10 +18,11 @@
 		$('#view-header').load('public_view/header.php');
 
 		$(window).hashchange( function(){
-
+			ctu=false;
 		  	var loc = location.hash.replace( /^#/, '' );
 		  	switch(loc) {
-			case 'company-info': case '':doajax(0);break;
+			case 'company-info-0':case '':doajax('0-0');break;
+			case 'company-info-1': doajax('0-1');break;
 			case 'company-addwork':doajax(1);break;
 			case 'company-work':doajax(2);break;
 			case 'company-notice':doajax(3);break;
@@ -38,12 +39,20 @@
 
 
 				switch(idx) {
-				// company info
-				case 0:
+				// company info page 0
+				case '0-0':
 				tpe = 'get';
-				para = { companyid: <? echo "\"".$_SESSION['username']."\"" ?> };
+				para = { companyid: <? echo "\"".$_SESSION['username']."\"" ?> ,page:0 };
 				url = "company_detail_edit.php";
 				break;
+
+				// company info page 1
+				case '0-1':
+				tpe = 'get';
+				para = { companyid: <? echo "\"".$_SESSION['username']."\"" ?> ,page:1 };
+				url = "company_detail_edit.php";
+				break;
+
 				// add work
 				case 1:
 				tpe = 'get';
@@ -80,6 +89,7 @@
 			  success: function (data) { $('#contailer-box').html(data) ;  }
 			});
 
+			if(idx=='0-0'||idx=='0-1') idx=0;
 			if(idx==4) idx=2;
 			
 			$('.list').removeClass('list-active');
@@ -106,7 +116,7 @@
 
 	<div id="" class="left-box" >
 		<h2><? echo $_SESSION['username'] ?></h2><br><hr>
-		<a href="#company-info"><div class="list">公司資訊</div></a><hr>
+		<a href="#company-info-0"><div class="list">公司資訊</div></a><hr>
 		<a href="#company-addwork"><div class="list">新增工作</div></a><hr>
 		<a href="#company-work"><div class="list">管理工作</div></a><hr>
 		<a href="#company-notice"><div class="list">通知</div></a><hr>

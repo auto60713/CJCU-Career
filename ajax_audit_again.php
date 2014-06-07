@@ -17,7 +17,7 @@ if($_SESSION['level']!=$level_company){
 include("sqlsrv_connect.php");
 
 if(isset($_POST['objid'])){
-	$sql = "update work set [check]=3 where id=?"
+	$sql = "update work set [check]=3 where id=?";
 	$params = array($_POST['objid']);
 }
 else{
