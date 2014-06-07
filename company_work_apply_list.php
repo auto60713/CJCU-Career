@@ -52,6 +52,10 @@ function isCompanyWork($conn,$companyid,$workid){
 
     $(function(){
     	var body = $('#company-work-list-container');
+
+    	// 如果有人應徵，清空列表區域，準備顯示
+    	if(company_work_apply_list_array.length>0) body.html('');
+
     	for(var i=0;i<company_work_apply_list_array.length;i++){
 
     		var wimg = $('<img>').attr('src', 'http://akademik.unissula.ac.id/themes/sia/images/user.png').addClass('work-img'),
@@ -154,6 +158,8 @@ function isCompanyWork($conn,$companyid,$workid){
 <input type="button" value="搜尋" id='search-btn'>
 </div>-->
 <h3>應徵者列表</h3>
-<div id='company-work-list-container'></div>
+<div id='company-work-list-container'>
+	目前尚無人應徵！
+</div>
 </body>
 </html>

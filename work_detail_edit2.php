@@ -29,6 +29,7 @@ function isCompanyWork($conn,$companyid,$workid){
 
 	$(function(){
 
+		// 該工作的詳細資料修改
 		$.ajax({
 		  type: 'get',
 		  url: 'add_work.php',
@@ -37,6 +38,7 @@ function isCompanyWork($conn,$companyid,$workid){
 		  success: function (data) { $('#workedit-content-edit').html(data) ;  }
 		});
 
+		// 該工作的應徵者列表
 		$.ajax({
 		  type: 'get',
 		  url: 'company_work_apply_list.php',
@@ -55,7 +57,7 @@ function isCompanyWork($conn,$companyid,$workid){
 				statustxt = ' 通過';
 				color = '#339933';
 				break;
-			case 2 :case 3:
+			case 2 : case 3:
 				icontxt ='fa fa-times';
 				statustxt = ' 不通過';
 				color = '#CC3333';
@@ -66,11 +68,11 @@ function isCompanyWork($conn,$companyid,$workid){
 		if(audit_array.length>0) audit_history_container.html('');
 		for(var i=0;i<audit_array.length;i++){
 
-			var icontxt = (audit_array[i].censored==1)? 'fa fa-check': 'fa fa-times',
-				statustxt = (audit_array[i].censored==1)? ' 通過': ' 不通過',
+			var icontxt2 = (audit_array[i].censored==1)? 'fa fa-check': 'fa fa-times',
+				statustxt2 = (audit_array[i].censored==1)? ' 通過': ' 不通過',
 				time = $('<span>').addClass('company-audit-time').text(audit_array[i].time.split(' ')[0]),
-				icon = $('<i>').addClass(icontxt),
-				censored = $('<span>').addClass('company-audit-censored').append(icon).append(statustxt),
+				icon = $('<i>').addClass(icontxt2),
+				censored = $('<span>').addClass('company-audit-censored').append(icon).append(statustxt2),
 				msg = $('<span>').addClass('company-audit-msg').text(audit_array[i].msg),
 				vialink = $('<a>').attr('href', 'staff/'+audit_array[i].staff_no).text(audit_array[i].staff_no),
 				via = $('<span>').addClass('company-audit-via').append('審核者：').append(vialink),
@@ -81,7 +83,6 @@ function isCompanyWork($conn,$companyid,$workid){
 
 		// this work's check
 		
-
 			var icon = icon = $('<i>').addClass(icontxt),
 			again_txt = $('<span>').addClass('company-audit-again-txt').text('已要求再次審核！'),
 			again_btn = $('<input>').addClass('company-audit-again').attr({
@@ -136,23 +137,23 @@ function isCompanyWork($conn,$companyid,$workid){
 </div>
 
 <div class="workedit-content" id='workedit-content'>
-	
-<div id='workedit-content-edit' class="" tabtoggle='workedit2'></div>
+	<!-- 該工作的資料編輯，AJAX別的畫面 -->
+	<div id='workedit-content-edit' class="" tabtoggle='workedit2'></div>
+	<!-- 該工作的應徵學生列表，AJAX別的畫面 -->
+	<div id='workedit-content-apply' class="workedit-content-hide" tabtoggle='workedit2'></div>
 
-<div id='workedit-content-apply' class="workedit-content-hide" tabtoggle='workedit2'></div>
 
+	<!-- 該工作的審核狀態 -->
+	<div id='workedit-content-audit' class="workedit-content-hide" tabtoggle='workedit2'>
+		<h1 class="company-audit-status">審核狀況：</h1>
+		<p>歷史紀錄：</p>
+		<div class="company-audit-history" id="company-audit-history">無歷史紀錄</div>
+	</div>
 
-<!-- 該工作的審核狀態 -->
-<div id='workedit-content-audit' class="workedit-content-hide" tabtoggle='workedit2'>
-	<h1 class="company-audit-status">審核狀況：</h1>
-	<p>歷史紀錄：</p>
-	<div class="company-audit-history" id="company-audit-history">無歷史紀錄</div>
-</div>
-
-<!-- 工作設定 -->
-<div id='workedit-content-set' class="workedit-content-hide" tabtoggle='workedit2'>	
-<h2>刪除工作</h2>
-</div>
+	<!-- 工作設定 -->
+	<div id='workedit-content-set' class="workedit-content-hide" tabtoggle='workedit2'>	
+	<h2>刪除工作</h2>
+	</div>
 
 
 

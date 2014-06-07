@@ -149,7 +149,7 @@ if($_SESSION['level']!=$level_staff){
 			var hidden1 = $('<input>').attr({value: hidden_id, type:'hidden', id:'hidden_id'}),
 				hidden2 = $('<input>').attr({value: hidden_t, type:'hidden',id:'hidden_t'}),
 				icon = $('<i>').addClass(icontype),
-				tbox = $('<h1>').append(icon).append(' '+tit).css('font-size', '28px'),
+				tbox = $('<h1>').append(icon).append(' '+tit).css('font-size', '28px').attr({id:'obj-tit'}),
 				close = $('<i>').addClass('fa fa-times').addClass('staff-apply-box-close'),
 				span = $('<span>').text('審核說明：'),
 				t = $('<textarea>').attr({id: 'staff-audit-apply-msg',placeholder:'選填'}),
@@ -191,11 +191,13 @@ if($_SESSION['level']!=$level_staff){
 			t = $('#hidden_t').val();
 			// m is supplement
 			m = $('#staff-audit-apply-msg').val();
+			// title text
+			obj_name = $('#obj-tit').text();
 
 			$.ajax({
 				url: 'ajax_audit.php',
 				type: 'post',
-				data: {censored:c, obj_id:obj_id, type:t, msg:m},
+				data: {censored:c, obj_id:obj_id, type:t, msg:m,obj_name:obj_name},
 				beforeSend:function(){
 					$('#staff-audit-apply-ok, #staff-audit-apply-no ,#staff-audit-apply-msg').attr('disabled', '');
 				}
@@ -268,7 +270,8 @@ if($_SESSION['level']!=$level_staff){
 
 		}
 
-	
+
+		//$('body').append($('<div>').addClass('staff-apply-form').append($('<div>').addClass('staff-apply-box').append('efwefwefwef')));
 
 	</script>
 
@@ -298,6 +301,10 @@ if($_SESSION['level']!=$level_staff){
 	<div id='staff-audit-again' class="workedit-content-hide" tabtoggle='workedit2'></div>
 
 </div>
+
+
+
+
 
 </body>
 </html>

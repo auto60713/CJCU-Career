@@ -36,20 +36,25 @@ $usr = $_SESSION['username'];
 		</div>
 		</a>
 		*/
+
+		// function appenData(array,n)
+		// 將訊息組成上面格式的呈現，並插入到頁面上
+		// 參數:array:為一個訊息組成的陣列(由後端組成)
+		// n: 為識別此陣列是否為新訊息 是傳1，否傳0
+		// 0 與 1 用來判斷是否要再該訊息加上背景顏色加強標註
 		function appenData(array,n){
 
 			var news_bg = (n==1)? '#efe' : ' ';
 			
 			for(var i=0;i<array.length;i++){
 				
-			   var msg = $('<p>').addClass('notice-msg').text(array[i].mcontent),
+			   var msg = $('<p>').addClass('notice-msg').html(array[i].mcontent),
 			   	   icon = $('<i>').addClass(array[i].icon),
 			   	   time = $('<p>').addClass('notice-time').append(icon).append(array[i].time.split(' ')[0]),
-			   	   content = $('<div>').addClass('notice-content').append(msg).append(time).css('background-color', news_bg),
+			   	   content = $('<div>').addClass('notice-content').append(msg).append(time),
 			   	   img = $('<img>').attr('src', 'http://akademik.unissula.ac.id/themes/sia/images/user.png').addClass('notice-sender-img'),
-			   	   box=$('<a>').attr('href', array[i].url).addClass('notice-list').append(img).append(content);
+			   	   box=$('<a>').attr('href', array[i].url).addClass('notice-list').append(img).append(content).css('background-color', news_bg);
 			   c.prepend(box);
-
 			}	
 		
 		}
@@ -83,19 +88,19 @@ $usr = $_SESSION['username'];
 			})
 			.fail(function() {ajax.abort(); })
 			.always(function() {
-				getMsg_longpolling();
+				if(ctu) getMsg_longpolling();
 			});
 		
 		}
 
 
 		
-
+		// 將LongPolling停止
 		$('.list').click(function(event) {
-			console.log(ctu,ajax);
+			//console.log(ctu,ajax);
 			ctu=false;
 			ajax.abort();
-			console.log(ctu,ajax);
+			//console.log(ctu,ajax);
 		});
 
 	});
