@@ -161,7 +161,7 @@
 			work_zone = $('<p>').text(work_list_array[i].zname),
 			work_propn = $('<p>').text(((work_list_array[i].isout=='0')?'校內 ':'校外 ') + work_list_array[i].propname),
 			work_recr = $('<p>').text('需求 '+ work_list_array[i].rno +' 人'),
-			work_date = $('<p>').addClass('date').text(work_list_array[i].date.split(' ')[0]);
+			work_date = $('<p>').addClass('date').text('開始招募'+work_list_array[i].date.split(' ')[0]);
 			
 
 		div_work.append(work_name).append(work_zone).append(work_propn).append(work_recr).append(work_date);
