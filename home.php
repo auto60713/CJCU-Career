@@ -4,6 +4,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>長榮大學 - 媒合系統</title>
+	<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 	<link rel="stylesheet" type="text/css" href="css/home.css">
 	<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
@@ -49,6 +50,8 @@
 <body>
 <div id="view-header"></div>
 
+
+
 <div class="top">
 
 	<div class="search-bar container">
@@ -60,28 +63,30 @@
 	</div>
 
 	<!--進階搜尋-->
-	<div class="tag-bar container" id="search-detail">
-    <input type="checkbox" id="search_type" value="type">
-    工作類型 : <select name="work_type" id="work_type"><option>請選擇</option></select> 
-		       <select name="work_type_list1" id="work_type_list1"><option>請選擇</option></select><!-- 要等 work_type 選完才載入 -->
-			   <select name="work_type_list2" id="work_type_list2"><option>請選擇</option></select><!-- 要等 work_type 選完才載入 -->
-			   <span id="work_type_hint"></span>
-			   <br>
+	<div class="container" id="search-detail">
+		<div class="tag-bar">
+	    <input type="checkbox" id="search_type" value="type">
+	    工作類型 : <select name="work_type" id="work_type"><option>請選擇</option></select> 
+			       <select name="work_type_list1" id="work_type_list1"><option>請選擇</option></select><!-- 要等 work_type 選完才載入 -->
+				   <select name="work_type_list2" id="work_type_list2"><option>請選擇</option></select><!-- 要等 work_type 選完才載入 -->
+				   <span id="work_type_hint"></span>
+				   <br>
 
-    <input type="checkbox" id="search_prop" value="prop">
-    工作性質 : <select name="work_prop" id="work_prop"></select> <br>
+	    <input type="checkbox" id="search_prop" value="prop">
+	    工作性質 : <select name="work_prop" id="work_prop"></select> <br>
 
-    <input type="checkbox" id="search_io" value="io">
-    校內外工作：<select name="work_io" id="work_io">
-                <option value="0">校內</option>
-                <option value="1">校外</option>
-                </select> 
-			    <br>
+	    <input type="checkbox" id="search_io" value="io">
+	    校內外工作：<select name="work_io" id="work_io">
+	                <option value="0">校內</option>
+	                <option value="1">校外</option>
+	                </select> 
+				    <br>
 
-    <input type="checkbox" id="search_zone" value="zone">
-    工作地點 : <select name="zone" id="zone"></select> 
-			   <select name="zone_name" id="zone_name"></select>
-		       <br>
+	    <input type="checkbox" id="search_zone" value="zone">
+	    工作地點 : <select name="zone" id="zone"></select> 
+				   <select name="zone_name" id="zone_name"></select>
+			       <br>
+		</div>
 	</div>
 	<?
 	//後端傳來"進階搜尋項目"的資料
@@ -89,25 +94,35 @@
 	?>
 </div>
 
+
+
 <div class="center">
-
-	<div class="title container">
-		<div class="title-left">
-		<h1>Work List</h1>
-		</div>
-
-		<div class="title-right">
-		</div>
-	</div>
-
-	<div class="work-list-bar container">
-		<div class="list"></div>
-		<div class="list"></div>
-		<div class="list"></div>
-		<div class="list"></div>
-	</div>
-
+	<!-- 取消進階搜尋 -->
+	<div class="title-right"></div>
+	<!-- 工作顯示 -->
+	<div class="work-list-bar container" id="home-work-list-box"></div>
 </div>
+
+
+<!-- 頁尾廣告 -->
+<div class="ad">
+	<div class="container ad-bar">
+		放個廣告 感覺很專業..................................
+	</div>
+</div>
+
+<!-- 頁尾訊息 -->
+<div class="footer">
+	<div class="container footer-bar">
+			
+    All Jobs | PostaJob | AboutUs | ContactUs
+	<br>
+	© 2014 長大職涯網 Inc. 長榮大學 職涯發展組
+
+	</div>
+</div>
+
+
 </body>
 
 
@@ -123,28 +138,57 @@
        echo '$(".title-right").append($("<a></a>").attr("href", "home.php").text("取消搜尋"));';
     ?>
 
-	var list_container_index = 0;
+    /*
+		<a href="work/4">
+			<div class="work">
+				<h1>電腦工程大師</h1>
+				<p>臺北市</p>
+				<p>校內 工讀</p>
+				<p>需求 10 人</p>
+				<p class="date">2014-03-09</p>
+			</div>
+		</a>
+
+
+
+
+    */
+
+	var box = $('#home-work-list-box');
 
 	for(var i=0;i<work_list_array.length;i++){
 
-		var a_link = $('<a>').attr({href:'work/'+work_list_array[i].wid}),
+		var box1 = $('<div>').addClass('work-box').addClass('box-img'),
+			box2 = $('<div>').addClass('work-box').addClass('box-name'),
+			box3 = $('<div>').addClass('work-box').addClass('box-loc'),
+			box4 = $('<div>').addClass('work-box').addClass('box-pop'),
+
+			img = $('<div>').addClass('work-img'),
+			a_link = $('<a>').attr({href:'work/'+work_list_array[i].wid}),
 			div_work = $('<div>').addClass('work'),
+
 			work_name = $('<h1>').text(work_list_array[i].wname),
-			work_zone = $('<p>').text(work_list_array[i].zname),
+			work_zone = $('<p>').text(work_list_array[i].zname).prepend($('<i>').addClass('fa fa-map-marker')),
 			work_propn = $('<p>').text(((work_list_array[i].isout=='0')?'校內 ':'校外 ') + work_list_array[i].propname),
 			work_recr = $('<p>').text('需求 '+ work_list_array[i].rno +' 人'),
 			work_date = $('<p>').addClass('date').text(work_list_array[i].date.split(' ')[0]);
 			
 
-		div_work.append(work_name).append(work_zone).append(work_propn).append(work_recr).append(work_date);
-		a_link.append(div_work);
+			box1.append(img);
+			box2.append(work_name).append(work_recr).append(work_date);
+			box3.append(work_zone);
+			box4.append(work_propn);
 
-		if(list_container_index==4)list_container_index=0;
 
-		$('.list:eq('+list_container_index+')').append(a_link);
-		list_container_index++;
+			div_work.append(box1).append(box2).append(box3).append(box4);
+			a_link.append(div_work);
+			box.append(a_link);
+
 	}
 </script>
+
+
+
 <!--搜尋功能的API-->
 <script src="js/home_search_lib.js"></script>
 </html>

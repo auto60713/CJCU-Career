@@ -4,25 +4,27 @@
 		padding: 0;
 	}
 	.container{
+		background-color: #FFF;
 		width: 900px;
 		margin-left: auto;
 		margin-right: auto;
 	}
 	.top{
-		padding-top:25px;
-		height: auto;
-		background-color: #987;
+			
+	}
+	.tag-bar{
+		margin-left: 135px;
+		padding-bottom: 20px;
 	}
 	.center{
 		height: auto;
-		background-color: #a98;
-		width: 100%;
-		min-height: 900px;
+		min-height: 600px;
+		
 	}
 	.search-bar{
-		
+		margin-top: 5px;
 		text-align: center;
-		padding-top: 10px;
+		padding-top: 30px;
 		padding-bottom: 35px;
 	}
 	.search-bar .set-center{
@@ -38,77 +40,62 @@
 		height: 100%;
 
 	}
-	.tag-bar{
-		
-		padding-bottom: 20px;
-		overflow: auto;
-	}
-	.tag-bar .tag{
-		width: 100px;
-		overflow: auto;
-		background-color: #644;
-		margin: 5px;
-		padding: 5px;
-		float: left;
-		color: #FFF;
 
-	}
-	.center .title{
-		padding-top: 20px;
-		padding-bottom: 20px;
-		overflow: auto;
-	}
-	.title-left{
-		float: left;
-		width: 28%;
-	 }
-	.title-right{
-		float: left;
-		width: 72%;
-		margin-top: 2.5%;
-	 }
-	.center .title h1{
-		font-size: 50px;
-		color: #FFF;
-		display: inline-block;
-	}
-	.center .title .tag{
-		background-color: #254;
-		color: #FFF;
-		margin: 5px;
-		padding: 5px;
-		font-size: 14px;
-	}
 
-	.center .work-list-bar{
+	.work-list-bar {
 		padding-top: 10px;
-		height: auto;
-		overflow: auto;
 	}
-	.center .work-list-bar .list{
-		width: 25%;
-		overflow: auto;
-		float: left;	
+	.work-list-bar a{
 		text-decoration: none;
 	}
-	.list a{
-		text-decoration: none;
-	}
+	
 
 	.work{
-		width: 89%;
-		padding: 2.5%;
-		margin-left: 3%;
-		margin-right: 3%;
-		margin-bottom: 6%;
-		height: auto;
-		background-color: #cae;
+		border-bottom: solid 1px #ddd;
+		box-sizing:border-box;
+		-moz-box-sizing:border-box; 
+		-webkit-box-sizing:border-box; 
+		padding: 5px;
 	}
+
 	.work:hover{
-		background-color: #dbf;
+		background-color: #FED;
+	}
+
+	.work-box{
+		display: inline-block;
+		vertical-align: middle;
+	}
+
+	.box-img{
+		margin-right: 5px;
+		height: 60px;
+	}
+	.box-name{
+		height: 60px;
+		width: 550px;
+	}
+	.box-loc{
+		width: 180px;
+	}
+	.box-pop{
+		width: 80px;
+	}
+
+	.work-img{
+		width: 50px;
+		height: 50px;
+		background-color: #587;
+	}
+	
+
+	
+	
+	.work p{
+		display: inline-block;
 	}
 	.work h1{
-		margin-bottom: 11px;
+		margin-bottom: 5px;
 		color: #333;
 		font-size: 28px;
 		word-break: break-word; /* 文本行的任意字内断开 */ 
@@ -127,10 +114,31 @@
 		padding-left: 5px;
 		
 	}
-	.work .date{
-		padding-top: 30px;
-		text-align: right;
-		font-size: 14px;
-		
 
+	.footer{
+		text-align: right;
+		background-color: #333;
+		color: #efefef;
+		font-size: 12px;
+	}
+	.footer-bar{
+		padding-top: 30px;
+		padding-bottom: 30px;
+		background-color: #333;
+
+	}
+
+	/* 廣告 */
+
+	.ad{
+		margin-top: 10px;
+		margin-bottom: 10px;
+		
+	}
+	.ad-bar{
+		background-image: url("http://static.104.com.tw/aidma/material/51/435/13_529.gif");
+		background-color: #987;
+		color: #000;
+		font-size: 40px;
+		height: 200px;
 	}

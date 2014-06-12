@@ -215,6 +215,44 @@ form[id='detail'] input[type='text']{
 	margin-right: 1%;
 }
 
+.btn-copy-work{
+	background-color: #DDD;
+	padding-left: 10px;
+	padding-right: 10px;
+	height: 30px;
+	margin-bottom: 10px;
+	border:none;
+}
+.btn-copy-work:hover{
+	cursor: pointer;
+	background-color: #EEE;
+}
+
+.listbox-copy-work{
+	height: 200px;
+	border:solid 1px #CCC;
+	overflow: auto;
+	padding: 3px;
+	margin-top: 5px;
+	
+}
+.listbox-copy-work-title{
+	display: inline-block;
+}
+.listbox-copy-work-hint{
+	font-size: 14px;
+	color: #888;
+}
+
+.list-copy-work{
+	padding: 5px;
+}
+.list-copy-work:hover{
+	background-color: #def;
+	cursor: pointer;
+	color: #222;
+}
+
 
 
 
