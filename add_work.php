@@ -24,6 +24,7 @@ if(isset ($_SESSION['username']) && $_SESSION['level'] == $level_company){
 			echo '你沒有權限訪問改頁面!!';
 			exit();
 		}
+
 	}
 
 
@@ -57,6 +58,7 @@ function isCompanyWork($conn,$companyid,$workid){
 </head>
 <body>
 
+<button id="btn-copy-work" class="btn-copy-work"><i class="fa fa-files-o"></i> 從現有工作複製</button>
 
 <form name="work" id="work_edit_form" method="post" action="register_work.php" onsubmit="return check_data();" >
 
@@ -124,6 +126,7 @@ function isCompanyWork($conn,$companyid,$workid){
 	<? 
 	// php load some help data for js array
 	include_once("js_search_work_data.php"); echo_work_sub_data();
+	include_once('js_work_list.php'); echo_work_manage_list_array($_SESSION['username']);
 	// if it's edit mode and load init data to js array
 	if($_GET['mode']=='edit'){
 	include_once('js_work_detail.php');
@@ -250,11 +253,23 @@ function isCompanyWork($conn,$companyid,$workid){
 		}
 
 
-		// 編輯模式就設定初始值
-		<?  if($_GET['mode']=='edit') echo 'setInit(work_detail_array);' ?>
+
+		// 新增工作，從現有工作中複製資料
+		$("#btn-copy-work").click(function(event) {
+			
+		});
+
+
+		/* .............................................................................
+		   編輯模模式...................................................................
+		// .............................................................................*/
+
+		<?  if($_GET['mode']=='edit') 
+		echo 'setInit(work_detail_array); $("#btn-copy-work").remove();' ?>
 
 		function setInit(work_detail_array){
 
+			// 編輯模式，要把複製工作的按鈕移除掉
 			$('#work_edit_form').attr('action', 'work_update.php');
 
 			$('#name').val(work_detail_array['name']);
@@ -374,6 +389,29 @@ function isCompanyWork($conn,$companyid,$workid){
 		}
 
 </script>
+
+<!--
+<div class="staff-apply-form"> 
+	<div class="staff-apply-box"> 
+	
+		<h2 class="listbox-copy-work-title"><i class="fa fa-files-o"></i> 複製工作</h2>
+		<p class="listbox-copy-work-hint">請選擇欲複製的工作，系統會將該工作資料為您填入</p>
+
+		<div class="listbox-copy-work">
+
+			<div class="list-copy-work">
+				<i class="fa fa-book"> </i>資深洗碗工助理操作員
+			</div>
+
+			<div class="list-copy-work">
+				<i class="fa fa-book"> </i>資深洗碗工助理操作員
+			</div>
+		
+		</div>
+	
+	</div> 
+</div>
+-->
 </body>
 
 

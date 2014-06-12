@@ -43,8 +43,8 @@ while( $row = sqlsrv_fetch_array($result, SQLSRV_FETCH_NUMERIC) ){
 	$work_prop_id[] = $row[0];
 	$work_prop[] = $row[1];
 }
-echo "var work_prop_id = ". json_encode($work_prop_id) . ";\n";
-echo "var work_prop = ". json_encode($work_prop) . ";\n";
+echo "var work_prop_id = ". json_encode($work_prop_id) . ";";
+echo "var work_prop = ". json_encode($work_prop) . ";";
 
 
 //因配合搜尋功能 將所有的ARRAY改為全域宣告
