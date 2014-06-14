@@ -100,10 +100,12 @@
 			}
 
 
-		
+            //依照公司審核通過與否 後端傳來的資料不同
+            <? include_once("company_manage_apply.php"); censored_check(); ?>
 
 
 	});
+
 	</script>
 </head>
 
@@ -116,10 +118,13 @@
 
 	<div id="" class="left-box" >
 		<h2><? echo $_SESSION['username'] ?></h2><br><hr>
+
 		<a href="#company-info-0"><div class="list">公司資訊</div></a><hr>
+    <!--由後端傳來
 		<a href="#company-addwork"><div class="list">新增工作</div></a><hr>
 		<a href="#company-work"><div class="list">管理工作</div></a><hr>
 		<a href="#company-notice"><div class="list">通知</div></a><hr>
+    -->
 	</div>
 
 

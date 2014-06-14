@@ -44,7 +44,7 @@ else{echo "您無權訪問該頁面!"; exit;}
 		    		tit = $('<h1>').addClass('work-tit').append(tita),
 		    		hint = $('<p>').addClass('work-hint')
 		    		.append(work_list_array[i]['name']+'<br>'+ (work_list_array[i]['isout']=='0'?'校內 ':'校外 ')+ work_list_array[i]['propname'] +'<br>'+ work_list_array[i]['date']),
-		    		hint2 = $('<p>'),
+		    		hint2 = $('<p>').attr('id', work_list_array[i]['wid']).addClass('check-lightbox'),
 		    		pass = $('<div>').attr('id', work_list_array[i]['wid']).addClass('pass-req').text("要求再審核"),
 		    		statustxt = $('<span>').addClass('nocheck').text('已要求重新再審！'),
 		    		subbox1 = $('<div>').addClass('sub-box').append(icon),
@@ -54,10 +54,11 @@ else{echo "您無權訪問該頁面!"; exit;}
 		    		mainbox = $('<div>').addClass('work-list-box').append(subbox1).append(subbox2).append(subbox3);
 		    		
 		    		switch(work_list_array[i]['ch']) {
-		    		case 0: check_status='未審核'; hint2.addClass('nonecheck').text(check_status); break;
-		    		case 1: check_status='通過審核'; hint2.addClass('yescheck').text(check_status); break;
-		    		case 2: check_status='不通過審核'; hint2.addClass('nocheck').text(check_status); subbox3.append(pass); break;
-		    		case 3: check_status='不通過審核'; hint2.addClass('nocheck').text(check_status); subbox3.append(statustxt); break;
+		    			//老師說要正名
+		    		case 0: check_status='尚未被公司審核'; hint2.addClass('nonecheck').text(check_status); break;
+		    		case 1: check_status='應徵成功!'; hint2.addClass('yescheck').text(check_status); break;
+		    		case 2: check_status='應徵失敗!'; hint2.addClass('nocheck').text(check_status); subbox3.append(pass); break;
+		    		case 3: check_status='應徵失敗!'; hint2.addClass('nocheck').text(check_status); subbox3.append(statustxt); break;
 		    		case 4: check_status='已錄取'; hint2.addClass('yescheck').text(check_status); break;
 		    		case 5: check_status='不錄取'; hint2.addClass('nocheck').text(check_status); break;
 		    		case 6: check_status='完成工作'; hint2.addClass('yescheck').text(check_status); break;
@@ -126,15 +127,48 @@ else{echo "您無權訪問該頁面!"; exit;}
 	     
           });
 
+        //lightbox api
+	    $( ".check-lightbox" ).click(function() {
+        //$('body').append($('<div>').addClass('staff-apply-form').append($('<div>').addClass('staff-apply-box').append('efwefwefwef')));
+        var workid = $(this).attr('id');
+        
+        });
+		$( "#lightbox-exit" ).click(function() {
+        $( ".staff-apply-form" ).remove();
+        });
 
-	    
-		 
-
+        switch(work_detail_array.check) {
+			case 0:
+				icontxt ='fa fa-minus-square-o';
+				statustxt = ' 未審核';
+				color = '#555';
+				break;
+			case 1:
+				icontxt ='fa fa-check';
+				statustxt = ' 通過';
+				color = '#339933';
+				break;
+			case 2 : case 3:
+				icontxt ='fa fa-times';
+				statustxt = ' 不通過';
+				color = '#CC3333';
+				break;
+		}
+        
 
     });
 </script>
 </head>
 <body>
+	<!-- 該工作的審核狀態 
+	<div class="staff-apply-form"> <div id='workedit-content-audit' class="staff-apply-box"> 
+
+		<h1 class="company-audit-status">審核狀況：</h1>
+		<p>歷史紀錄：</p>
+		<div class="company-audit-history" id="company-audit-history">無歷史紀錄</div>
+	</div>
+	</div> </div>
+	-->
 <div id='search-box'>
 <select id='search-sel'></select> 
 <input type='text' placeholder='搜尋工作名稱' id='search-txt'>
