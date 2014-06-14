@@ -89,7 +89,6 @@
 		<h2><? echo $_SESSION['username'] ?></h2><br><hr>
 		<a href="#student-info"><div class="list">個人資訊</div></a><hr>
 		<a href="#student-applywork"><div class="list">我的應徵</div></a><hr>
-		<a href="#student-note"><div class="list">工作日誌(暫時)</div></a><hr>
 		<a href="#student-notice"><div class="list">通知</div></a><hr>
 	</div>
 

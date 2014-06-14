@@ -1,6 +1,8 @@
 <?
 
 /* 工作列表轉成JS Array */
+
+//首頁顯示的工作
 function echo_work_list_array(){
 
 include("sqlsrv_connect.php");
@@ -30,15 +32,24 @@ $work_list_array = array();
 if($stmt) {
 
 	while( $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC) ) 
-	{
+    {
 		$work_list_array[] = $row;
 		//echo $row; 
 	}
-	
-	echo "var work_list_array = ". json_encode($work_list_array) . ";";	
 
+	echo "var work_list_array = ". json_encode($work_list_array) . ";";	
 }
 else die(print_r( sqlsrv_errors(), true));
+
+
+//回傳搜尋後的訊息
+if(isset($_GET['mode'])){
+	$work_length = count($work_list_array);
+    if($work_length != 0) {echo "var search_log_cont = '共有 '+".$work_length."+' 項工作符合條件';";}
+    else {echo "var search_log_cont = '沒有工作符合搜尋條件!';";}
+}
+
+
 
 }
 
