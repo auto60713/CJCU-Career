@@ -22,6 +22,7 @@ if(!isset( $_SESSION['username'])  ) {
 
 		$('#view-header').load('public_view/header.php');
 
+
 		$(window).hashchange( function(){
 
 		  	var loc = location.hash.replace( /^#/, '' );
@@ -37,8 +38,6 @@ if(!isset( $_SESSION['username'])  ) {
 			}
 
 		});
-
-		$(window).hashchange();
 
 
 		function doajax(idx){

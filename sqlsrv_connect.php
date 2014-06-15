@@ -4,8 +4,9 @@
 
    $serverName = "localhost"; 
    $database   = 'cjcuweb';
-   $uid = NULL;
-   $pwd = NULL;
+
+   $uid = null;
+   $pwd = null;
    
 
    // ReturnDatesAsStrings 設定為true，使DateTime返回字串型態資料
