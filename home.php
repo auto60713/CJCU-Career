@@ -11,9 +11,7 @@
 	<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 	<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 	<script>
-	$(function(){ 
-		
-		//$('#view-header').load('public_view/header.php');
+	$(function(){ 	
 
 		$.ajax({
 					url:  'public_view/header.php',
@@ -23,17 +21,6 @@
                         $('#view-header').html(data);
                     }
 		})
-		
-
-		/* modle of work 
-			<div class="work">
-				<h1>wefewfwefwefwefewfwefwefwefwefewf</h1>
-				<p>台南市</p>
-				<p>校外 工讀</p>
-				<p>需求 8人</p>
-				<p class="date">2013/01/10</p>
-			</div>
-		*/
 
 		$('#search-detail').hide();
 		$('#btn_detail_search').on('click', function(event) {
@@ -51,25 +38,28 @@
 <!-- login lightbox -->
 <div id="login-lightbox">
 <div id="cont" class="login">
-<h1>帳號登入</h1><hr>
+<h1>登入 <i class="fa fa-times" id="login-exit"></i><br></h1>
 <form class="form" name="login" method="post" action="login_connect.php" onsubmit="return check_data()">
-請選擇登入身分
-<select name ="sel" >
+選擇身分：<select name ="sel" class="login-select">
   <option value=""></option>
-  <option value="student">學生</option>
+  <option value="student" selected="true">學生</option>
   <option value="company">廠商</option>
   <option value="staff">老師</option>
-</select><span class="null-echo" id="sel-null"></span><br>
-帳號：<input type="text" name="id" /><span class="null-echo" id="id-null"></span><br>
-密碼：<input type="password" name="pw" /><span class="null-echo" id="pw-null"></span>
-<input type="submit" class="submit" name="button" value="登入" /><br><br>
-<a href="company_add.php">廠商註冊</a>
-<a href="#" id="login-exit">取消</a><br>
+</select><br>
+
+<span class="null-echo" id="sel-null"></span><br>
+<i class="fa fa-user login-icon"></i><input type="text" name="id" placeholder="輸入帳號" class="login-input"><span class="null-echo" id="id-null" ></span><br>
+<i class="fa fa-lock login-icon"></i><input type="password" name="pw" placeholder="輸入密碼" class="login-input"><span class="null-echo" id="pw-null" ></span>
+<br>
+<input type="submit" class="btn-submit" name="button" value="登入" />
+<a href="company_forgotpwd.php">忘記密碼</a> 
+
+<p class="login-hint">學生請使用校內帳號，廠商未註冊請先<a href="company_add.php" class="login-signup">註冊新帳號</a>。</p>
+
+
 </form>
 </div>
 </div>
-
-
 
 
 <!-- 版頭 -->
@@ -90,15 +80,9 @@
 
 	<div class=" container" id="search-detail">
 <div class="tag-bar">
-	<!-- 資料不完全
-    <input type="checkbox" id="search_type" value="type">
-    工作類型 : <select name="work_type" id="work_type"><option>請選擇</option></select> 
-		       <select name="work_type_list1" id="work_type_list1"><option>請選擇</option></select>
-			   <select name="work_type_list2" id="work_type_list2"><option>請選擇</option></select>
-			   <span id="work_type_hint"></span>
-			   <br>
-    -->
-    <input type="checkbox" id="search_prop" value="prop">
+	
+
+	 <input type="checkbox" id="search_prop" value="prop">
     工作性質 : <select name="work_prop" id="work_prop"></select> <br>
 
     <input type="checkbox" id="search_io" value="io">
@@ -222,10 +206,10 @@
 <script>
     //js 抓不到動態產生的物件 所以用 .on
     $(document).on('click', '#login-btn', function(){
-        $( "#login-lightbox" ).css( "display", "block" ); return false;
+        $( "#login-lightbox" ).css( "display", "block" ); 
     });
     $( "#login-exit" ).click(function() {
-        $( "#login-lightbox" ).css( "display", "none" ); return false;
+        $( "#login-lightbox" ).css( "display", "none" ); 
     });
 
 

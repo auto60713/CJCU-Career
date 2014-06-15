@@ -1,21 +1,13 @@
 /*登入*/
 
-#cont{
+.login{
+	width: 425px;
+	text-align: left;
   	background-color: #ffffff;
-	height: auto;
-	border-style:solid;
-    border-width:1px;
-	margin-left: auto;
-	margin-right: auto;
-	margin-bottom: 50px;
-
-}
-
-#cont.login{
-
-	width: 400px;
-    margin-top: 15%;
-
+	display: inline-block;
+	vertical-align: middle;
+	margin-top: 150px;
+	padding: 15px;
 }
 
 #cont.add{
@@ -25,6 +17,7 @@
 }
 
 a{
+	color: #728599;
 	text-decoration: none;
 }
 
@@ -41,10 +34,6 @@ a{
     padding-left: 40px;
 }
 
-.submit{
-	margin-left: 110px;
-}
-
 .null-echo{
     position: absolute;
 	font-weight: bold;
@@ -59,9 +48,45 @@ a{
 	width: 100%;
 	height: 100%;
 	background: rgba(54, 54, 54, 0.6) ;
-
+	text-align: center;
+}
+.login-hint{
+	font-size: 13.5px;
+	color: #555;
+	padding-top: 10px;
+}
+#login-exit{
+	float: right;
+}
+.btn-submit{
+	height: 30px;
+	width: 200px;
+	margin-bottom: 10px;
+	margin-top: 20px;
+}
+.login-icon{
+	font-size: 30px;
+	color: #555;
+	vertical-align: middle;
+	width: 30px;
+}
+.login-input{
+	width: 250px;
+	height: 28px;
+	margin-bottom: 5px;
+	margin-bottom: 5px;
+	font-size: 20px;
+}
+.login-signup{
+	font-weight: bold;
+}
+.login-select{
+	height: 24px;
+	width: 80px;
+	font-size: 14px;
 }
 
 #login-exit{
     margin-left: 20px;
+
 }
