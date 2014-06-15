@@ -106,7 +106,7 @@
 
 <div class="center">
 	<!-- 取消進階搜尋 -->
-	<div class="title-right"></div>
+	<div class="title-right">eeeee</div>
 	<!-- 工作顯示 -->
 	<div class="work-list-bar container" id="home-work-list-box"></div>
 </div>
@@ -158,6 +158,7 @@
 
     */
 
+
 	var box = $('#home-work-list-box');	    
 
 	for(var i=0;i<work_list_array.length;i++){
@@ -191,6 +192,8 @@
 	}
 	
 	//設定搜尋後的回應
+	if(typeof search_log_cont =="undefined") search_log_cont = '';
+
 	var search_log = $('<a>').addClass('search-log').text(search_log_cont);
     //搜尋結果的訊息 search_log_cont從php回傳
     box.prepend(search_log);

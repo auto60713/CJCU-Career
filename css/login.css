@@ -17,7 +17,7 @@
 }
 
 a{
-	color: #728599;
+	color: #7285dd;
 	text-decoration: none;
 }
 
@@ -71,7 +71,7 @@ a{
 	width: 30px;
 }
 .login-input{
-	width: 250px;
+	width: 270px;
 	height: 28px;
 	margin-bottom: 5px;
 	margin-bottom: 5px;
@@ -88,5 +88,9 @@ a{
 
 #login-exit{
     margin-left: 20px;
-
+    color: #888;
+}
+#login-exit:hover{
+	cursor: pointer;
+	color: #222;
 }
