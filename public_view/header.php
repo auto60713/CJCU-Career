@@ -69,7 +69,8 @@ function echo_data($user,$lev){
 		echo '<span><a href="../../../cjcuweb/logout.php">登出</a></span>';
 
 	}	
-	else echo '<span><a href="#" id="login-btn">登入</a></span>';
+	//else echo '<span><a href="#" id="login-btn">登入</a></span>';
+    //目前先設定只有首頁可以登入
 
 	//echo $user." >".$lev." >".$level_student ." >" .$_SESSION['level2'];
 }

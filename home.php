@@ -19,6 +19,7 @@
 					data: {},
 					success: function(data) {
                         $('#view-header').html(data);
+                        $('<span><a href="#" id="login-btn">登入</a></span>').appendTo('.sub2');
                     }
 		})
 
