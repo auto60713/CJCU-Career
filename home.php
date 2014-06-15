@@ -19,7 +19,6 @@
 					data: {},
 					success: function(data) {
                         $('#view-header').html(data);
-                        $('<span><a href="#" id="login-btn">登入</a></span>').appendTo('.sub2');
                     }
 		})
 
@@ -43,9 +42,8 @@
 <form class="form" name="login" method="post" action="login_connect.php" onsubmit="return check_data()">
 選擇身分：<select name ="sel" class="login-select">
   <option value=""></option>
-  <option value="student" selected="true">學生</option>
-  <option value="company">廠商</option>
-  <option value="staff">老師</option>
+  <option value="school" selected="selected">學校登入</option>
+  <option value="company">廠商登入</option>
 </select><br>
 
 <span class="null-echo" id="sel-null"></span><br>

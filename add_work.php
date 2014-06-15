@@ -3,7 +3,7 @@ session_start();
 include_once("cjcuweb_lib.php");
 
 // 防止駭客繞過登入
-if(isset ($_SESSION['username']) && $_SESSION['level'] == $level_company){
+if(isset ($_SESSION['username']) && $_SESSION['level'] == $level_company|$level_teacher){
 
 	// 取得公司電話與地址
 	include_once("sqlsrv_connect.php");
