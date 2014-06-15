@@ -55,13 +55,13 @@ else{echo "您無權訪問該頁面!"; exit;}
 		    		
 		    		switch(work_list_array[i]['ch']) {
 		    			//老師說要正名
-		    		case 0: check_status='尚未被公司審核'; hint2.addClass('nonecheck').text(check_status); break;
-		    		case 1: check_status='應徵成功!'; hint2.addClass('yescheck').text(check_status); break;
-		    		case 2: check_status='應徵失敗!'; hint2.addClass('nocheck').text(check_status); subbox3.append(pass); break;
-		    		case 3: check_status='應徵失敗!'; hint2.addClass('nocheck').text(check_status); subbox3.append(statustxt); break;
-		    		case 4: check_status='已錄取'; hint2.addClass('yescheck').text(check_status); break;
-		    		case 5: check_status='不錄取'; hint2.addClass('nocheck').text(check_status); break;
-		    		case 6: check_status='完成工作'; hint2.addClass('yescheck').text(check_status); break;
+		    		case 0: check_status='尚未被公司審核'; hint2.addClass('sta1 onecheck').text(check_status); break;
+		    		case 1: check_status='應徵成功!'; hint2.addClass('sta2 yescheck').text(check_status); break;
+		    		case 2: check_status='應徵失敗!'; hint2.addClass('sta3 nocheck').text(check_status); subbox3.append(pass); break;
+		    		case 3: check_status='應徵失敗!'; hint2.addClass('sta4 nocheck').text(check_status); subbox3.append(statustxt); break;
+		    		case 4: check_status='已錄取'; hint2.addClass('sta5 yescheck').text(check_status); break;
+		    		case 5: check_status='不錄取'; hint2.addClass('sta6 nocheck').text(check_status); break;
+		    		case 6: check_status='完成工作'; hint2.addClass('sta7 yescheck').text(check_status); break;
 		    		break;
 		    		}
 
@@ -88,7 +88,7 @@ else{echo "您無權訪問該頁面!"; exit;}
 		  }
 
           //注入條件
-          var pass_search = ["全部", "已錄取", "不錄取"];
+          var pass_search = ["全部", "尚未審核", "應徵成功", "應徵失敗", "已錄取", "不錄取", "完成工作"];
 		  for(var i=0;i<pass_search.length;i++)
           $("#search-sel").append($("<option>").attr("value", i).text(pass_search[i]));
 
@@ -101,9 +101,9 @@ else{echo "您無權訪問該頁面!"; exit;}
           	if(sel_val==0){
                 $('.work-list-box').removeClass('hide-work');
           	}
-          	else{ //因為class"錄取"跟"不錄取"不同 所以用p
-          		var pass_txt = $(this).find('p').text().toLowerCase();
-          		if(pass_txt.match(sel_txt)){ $(this).removeClass('hide-work'); }
+          	else{
+          		var match_check = $(this).find('.sub-box2 p').attr('class');
+          		if(match_check.indexOf('sta'+sel_val) >= 0){ $(this).removeClass('hide-work');}
           		else{ $(this).addClass('hide-work'); }
 		    }
 	      });

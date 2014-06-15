@@ -10,6 +10,15 @@
 <link rel="stylesheet" type="text/css" href="css/login.css">
 <script>
 
+    $.ajax({
+				url:  'public_view/header.php',
+				type: 'POST',
+				data: {},
+				success: function(data) {
+                    $('#view-header').html(data);
+                }
+	})
+
 	function ajax_check(id,true_func,false_func){
 	var boo = false;
 	$.ajax({
@@ -154,9 +163,7 @@
 </script>
 </head>
 <body>
-<div id="view-header"><div id="header" class="div-align">
-<div class="sub"><a href="../../../cjcuweb/home.php"><h1>長榮大學 媒合系統</h1></a></div>
-</div></div>
+<div id="view-header"></div>
 
 <div id="cont" class="add">
 

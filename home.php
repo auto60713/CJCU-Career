@@ -10,7 +10,6 @@
 	<link rel="stylesheet" type="text/css" href="css/login.css">
 	<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 	<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-	<script><? include_once('js_work_list.php'); echo_work_list_array(); ?></script>
 	<script>
 	$(function(){ 	
 
@@ -22,7 +21,7 @@
                         $('#view-header').html(data);
                     }
 		})
-		
+
 		$('#search-detail').hide();
 		$('#btn_detail_search').on('click', function(event) {
 			event.preventDefault();
@@ -35,9 +34,6 @@
     
 </head>
 <body>
-
-
-
 
 <!-- login lightbox -->
 <div id="login-lightbox">
@@ -60,11 +56,10 @@
 
 <p class="login-hint">學生請使用校內帳號，廠商未註冊請先<a href="company_add.php" class="login-signup">註冊新帳號</a>。</p>
 
+
 </form>
 </div>
 </div>
-
-
 
 
 <!-- 版頭 -->
@@ -85,15 +80,9 @@
 
 	<div class=" container" id="search-detail">
 <div class="tag-bar">
-	<!-- 資料不完全
-    <input type="checkbox" id="search_type" value="type">
-    工作類型 : <select name="work_type" id="work_type"><option>請選擇</option></select> 
-		       <select name="work_type_list1" id="work_type_list1"><option>請選擇</option></select>
-			   <select name="work_type_list2" id="work_type_list2"><option>請選擇</option></select>
-			   <span id="work_type_hint"></span>
-			   <br>
-    -->
-    <input type="checkbox" id="search_prop" value="prop">
+	
+
+	 <input type="checkbox" id="search_prop" value="prop">
     工作性質 : <select name="work_prop" id="work_prop"></select> <br>
 
     <input type="checkbox" id="search_io" value="io">
@@ -154,10 +143,6 @@
 
 	//後端傳來"進階搜尋項目"的資料
 	include_once("js_search_work_data.php"); echo_work_sub_data();
-	
-    //如果目前是搜尋狀態
-    if(isset($_GET['mode']))
-       //echo '$(".title-right").append($("<a></a>").attr("href", "home.php").text("取消搜尋"));';
     ?>
 
     /*
@@ -173,7 +158,7 @@
 
     */
 
-	var box = $('#home-work-list-box');
+	var box = $('#home-work-list-box');	    
 
 	for(var i=0;i<work_list_array.length;i++){
 
@@ -204,43 +189,17 @@
 			box.append(a_link);
 
 	}
-
+	
+	//設定搜尋後的回應
+	var search_log = $('<a>').addClass('search-log').text(search_log_cont);
+    //搜尋結果的訊息 search_log_cont從php回傳
+    box.prepend(search_log);
 
 
 	// 生成工作類型
 		for(var i=0;i<work_type.length;i++)
 		$("#work_type").append($("<option></option>").attr("value", work_type_id[i]).text(work_type[i]));
 
-    // 工作類型第一層 改變時，用ajax列出 第二層 工作類型細目
-		$('#work_type').change(function() {
-			var id=$(this).val();
-			$("#work_type_list1 option").remove();
-			// 執行AJAX取得細目資料
-			$.ajax({
-			type:"POST",
-			async:false, 
-			url:"ajax_work_type_list.php",
-			data:"id="+id+"&list=1",
-			success:function(msg){ $('#work_type_list1').html(msg);	},
-			error: function(){alert("網路連線出現錯誤!");}
-			});
-		});
-
-    // 工作類型第二層 改變時，用ajax列出 第三層 工作類型細目
-		$('#work_type_list1').change(function() {
-			var id=$(this).val();
-			// 清空工作類別細目
-			$("#work_type_list2 option").remove();
-			// 執行AJAX取得細目資料
-			$.ajax({
-			type:"POST",
-			async:false, 
-			url:"ajax_work_type_list.php",
-			data:"id="+id+"&list=2",
-			success:function(msg){ $('#work_type_list2').html(msg);	},
-			error: function(){alert("網路連線出現錯誤!");}
-			});
-		});
 
 </script>
 <!-- login lightbox-->

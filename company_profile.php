@@ -9,7 +9,7 @@
 	<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 	<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 	<script><? include_once("js_company_detail.php"); 	echo_company_detail_array($_GET['companyid']); 	?></script>
-	<script><? include_once('js_work_list.php'); echo_work_manage_list_array($_GET['companyid']);  ?></script>
+	<script><? include_once('js_work_list.php'); echo_pass_work_array($_GET['companyid']);  ?></script>
 	<script> 
 	$(function(){
 
@@ -34,10 +34,10 @@
 		$('#introduction').text(company_detail_array['introduction']);
 
 		var listbox = $('#profile-worklist');
-		for(var i=0;i<work_list_array.length;i++){
+		for(var i=0;i<pass_work_array.length;i++){
 			var container = $('<p>').addClass('profile-span-box'),
-			tita = $('<a>').attr('href', '../work/'+work_list_array[i]['wid']).addClass('profile-span-left').text(work_list_array[i]['wname']),
-			titloc = $('<span>').addClass('profile-span-right').text((work_list_array[i]['isout']=='0'?'校內 ':'校外 ')+ work_list_array[i]['propname']);
+			tita = $('<a>').attr('href', '../work/'+pass_work_array[i]['wid']).addClass('profile-span-left').text(pass_work_array[i]['wname']),
+			titloc = $('<span>').addClass('profile-span-right').text((pass_work_array[i]['isout']=='0'?'校內 ':'校外 ')+ pass_work_array[i]['propname']);
 			listbox.append(container.append(tita).append(titloc));
 		}
 

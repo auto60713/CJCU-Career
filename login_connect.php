@@ -31,11 +31,10 @@ switch ($sel) {
 function student_login($conn,$userid,$pw,$level_student){
 
     //include_once("cjcuweb_lib.php");
-    //因為學生的驗證要配合學校 顧目前先不做太完整的驗證
-    //配合模擬學號登入 不再綁定stud 帳號必須檢查資料表cjcu_student 密碼審核仍需設計
+    //日後學生帳號將是計中管理 本系統僅作帳號驗證
 
-    $sql = "select * from cjcu_student where user_no=?";
-    $params  = array($userid);
+    $sql = "select * from cjcu_user where user_no=? and role=?";
+    $params  = array($userid,3);
     $options = array("Scrollable" => SQLSRV_CURSOR_KEYSET);
 
     $result  = sqlsrv_query( $conn , $sql , $params , $options );
@@ -43,7 +42,7 @@ function student_login($conn,$userid,$pw,$level_student){
 
     $row = sqlsrv_fetch_array($result, SQLSRV_FETCH_NUMERIC);
     
-        // 資料表查無帳號 , 沒有輸入或密碼不符
+        // 資料表查無帳號 , 沒有輸入
         if(count($row) != 0 && $userid != null && $pw != null){
 
             $_SESSION['username'] = $userid;

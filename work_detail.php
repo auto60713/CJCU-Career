@@ -48,12 +48,12 @@ if(isset($_SESSION['username'])) $user_id = $_SESSION['username'];
 
 	<? 
 	include_once("js_work_detail.php"); 
-	echo_work_detail_array($_GET['workid']);  ?> 
+	echo_work_detail_array($_GET['workid']);
 
-	<? include_once('js_work_list.php'); 
-	echo_work_manage_list_array($GLOBALS['cust_company']);  ?> 
+	include_once('js_work_list.php'); 
+	echo_pass_work_array($GLOBALS['cust_company']);  
 
-	<? include_once("js_company_detail.php"); 
+	include_once("js_company_detail.php"); 
 	echo_company_detail_array($GLOBALS['cust_company']); 
 	?> 
 
@@ -76,7 +76,9 @@ if(isset($_SESSION['username'])) $user_id = $_SESSION['username'];
 
 		$('#view-header').load('../public_view/header.php #header');
 
-		$('#profile-btn-edit').hide();
+        //現在只有公司自己可以看到審核沒過的工作
+        //而審核通過的工作不鼓勵修改 (但仍然可以在工作管理修改)
+		//$('#profile-btn-edit').hide();
 
 
 
@@ -126,17 +128,17 @@ if(isset($_SESSION['username'])) $user_id = $_SESSION['username'];
 		}
 
 
-
+        /*
 		if(work_detail_array['company_id']==<? echo "'".$_SESSION['username']."'"; ?>){
 			$('#profile-btn-edit').show().attr('href', '../company_manage.php#work'+<? echo "'".$_GET['workid']."'"; ?>);
 		}
-
+        */
 
 		var listbox = $('#other_work');
-		for(var i=0;i<work_list_array.length;i++){
+		for(var i=0;i<pass_work_array.length;i++){
 			var container = $('<p>').addClass('profile-span-box'),
-			tita = $('<a>').attr('href', '../work/'+work_list_array[i]['wid']).addClass('profile-span-left').text(work_list_array[i]['wname']),
-			titloc = $('<span>').addClass('profile-span-right').text((work_list_array[i]['isout']=='0'?'校內 ':'校外 ')+ work_list_array[i]['propname']);
+			tita = $('<a>').attr('href', '../work/'+pass_work_array[i]['wid']).addClass('profile-span-left').text(pass_work_array[i]['wname']),
+			titloc = $('<span>').addClass('profile-span-right').text((pass_work_array[i]['isout']=='0'?'校內 ':'校外 ')+ pass_work_array[i]['propname']);
 			listbox.append(container.append(tita).append(titloc));
 		}
 
@@ -159,7 +161,7 @@ if(isset($_SESSION['username'])) $user_id = $_SESSION['username'];
 
 
 <div class="profile-boxleft">
-<h1><span id="name"></span><span id="ch"></span><a id="profile-btn-edit" href="">修改</a> </h1>
+<h1><span id="name"></span><span id="ch"></span><!-- <a id="profile-btn-edit" href="">修改</a> --></h1>
 <br>
 <span id="date"></span>
 <br>
