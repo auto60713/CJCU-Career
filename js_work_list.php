@@ -95,6 +95,24 @@ function echo_work_manage_list_array($companyid){
 	echo "var work_list_array = ". json_encode($work_list_array) . ";";	
 }	
 
+//僅列出通過審核的工作 (避免其他使用者看到以及應徵)
+function echo_pass_work_array($companyid){
+
+	include("sqlsrv_connect.php");
+	$para = array($companyid,1);
+
+	$sql = "select w.id wid,w.name wname,w.is_outside isout,p.name propname
+	 from work w,work_prop p
+	 where work_prop_id = p.id and w.company_id=? and w.[check]=?";
+
+	$stmt = sqlsrv_query($conn, $sql, $para);
+	$pass_work_array = array();
+
+	if($stmt) while( $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC) ) $pass_work_array[] = $row;
+	else die(print_r( sqlsrv_errors(), true));
+
+	echo "var pass_work_array = ". json_encode($pass_work_array) . ";";	
+}	
 
 
 function echo_student_apply_list_array($userid){

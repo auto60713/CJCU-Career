@@ -1,6 +1,6 @@
 <?php
 session_start();
-//echo session_destroy();
+session_destroy();
 echo '<meta http-equiv=REFRESH CONTENT=0;url=home.php>';
 echo '帳號登出中...';
 ?>
