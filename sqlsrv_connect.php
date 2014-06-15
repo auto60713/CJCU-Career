@@ -2,10 +2,10 @@
 
    // 基本連線資料
 
-   $serverName = "210.70.167.98"; 
+   $serverName = "localhost"; 
    $database   = 'cjcuweb';
-   $uid = "zap";
-   $pwd = "1234";
+   $uid = null;
+   $pwd = null;
    
 
    // ReturnDatesAsStrings 設定為true，使DateTime返回字串型態資料
