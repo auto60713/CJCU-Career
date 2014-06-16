@@ -1,6 +1,8 @@
 <?
+
 /* 公司詳細資料轉成JS Array */
 function echo_company_detail_array($work_id){
+
 include("sqlsrv_connect.php");
 
 // 取出公司資料 (如果 column 一樣,一定要設定不同的column 否則傳回 php arry 會吃掉 column name 相同的資料，包含所有關連到的column name)

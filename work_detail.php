@@ -5,12 +5,14 @@ if(isset($_GET['workid'])) $work_id=$_GET['workid']; else{header("Location: home
 if(isset($_SESSION['username'])) $user_id = $_SESSION['username'];
 ?>
 
-<!doctype html>
+<!DOCTYPE html>
 <html>
 <head>
 	<meta charset="UTF-8">
+	<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="../css/main.css">
 	<link rel="stylesheet" type="text/css" href="../css/company_manage.css">
+
 	<style type="text/css">
 	#ch{
 		font-size: 16px;
@@ -74,7 +76,14 @@ if(isset($_SESSION['username'])) $user_id = $_SESSION['username'];
 	*/
 	$(function(){	
 
-		$('#view-header').load('../public_view/header.php #header');
+		$.ajax({
+			url:  '../public_view/header.php',
+			type: 'POST',
+			data: {},
+			success: function(data) {
+                $('#view-header').html(data);
+            }
+		});
 
         //現在只有公司自己可以看到審核沒過的工作
         //而審核通過的工作不鼓勵修改 (但仍然可以在工作管理修改)

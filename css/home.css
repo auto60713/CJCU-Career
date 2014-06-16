@@ -24,34 +24,47 @@
 		min-height: 600px;
 	
 	}
+	.search-detail-sub{
+		font-size: 13.5px;
+		padding-bottom: 5px;
+	}
+
+	.search-detail{
+		text-decoration: none;
+		font-size: 14px;
+		vertical-align: middle;
+	}
+
 	.search-bar{
 		margin-top: 5px;
 		text-align: center;
 		padding-top: 30px;
-		padding-bottom: 35px;
+		padding-bottom: 15px;
 	}
 	.search-bar .set-center{
-		height: 30px;
 		display: inline-block;
 	}
 	.search-bar input[type='text']{
-		width: 500px;
-		height: 100%;
+		vertical-align: middle;
+		width: 480px;
+		height: 30px;
+		font-size: 20px;
 	}
 	.search-bar input[type='button']{
-		width: 50px;
-		height: 100%;
+		vertical-align: middle;
+		width: 80px;
+		height: 34px;
 
 	}
 	.search-log{
 		margin: 10px;
 		color: #408080;
+		font-size: 13.5px;
 	}
 
 
 	.work-list-bar {
 		padding: 3px;
-		padding-top: 10px;
 	}
 	.work-list-bar a{
 		text-decoration: none;
@@ -92,7 +105,7 @@
 	.work-img{
 		width: 50px;
 		height: 50px;
-		background-color: #587;
+		border: solid 1px #DDD;
 	}
 	
 
@@ -142,9 +155,41 @@
 		
 	}
 	.ad-bar{
-		background-image: url("http://static.104.com.tw/aidma/material/51/435/13_529.gif");
+		background-image: url();
 		background-color: #987;
 		color: #000;
 		font-size: 40px;
 		height: 200px;
 	}
+
+
+/*
+快速搜尋
+*/
+
+	.rush-search{
+		padding: 8px;
+		padding-bottom: 0;
+		border-bottom: solid 1px #CCC;
+	}
+
+
+	.rush-search a{
+		color:#555;
+		display: inline-block;
+		padding:10px;
+		text-decoration: none;
+		text-align: center;
+		margin-bottom: -1px;
+	}
+	.rush-search a:hover{
+		color: #222;
+		cursor: pointer;
+	}
+
+	.rush-searching{
+		color: #222;
+		border: solid 1px #CCC;
+		border-bottom: solid 1px #fff;
+	}
+	

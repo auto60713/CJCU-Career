@@ -137,6 +137,8 @@ function isCompanyWork($conn,$companyid,$workid){
 	
 	$(function(){
 
+		$('#lightbox-copy-work').hide();
+
 		// 生成年 
 		for(var i=0;i<year_array.length;i++)
 		$("#year1,#year2").append($("<option></option>").attr("value", year_array[i]).text(year_array[i]));
@@ -255,22 +257,70 @@ function isCompanyWork($conn,$companyid,$workid){
 
 
 		// 新增工作，從現有工作中複製資料
+		/*
+			<div class="list-copy-work">
+				<i class="fa fa-book"> </i>資深洗碗工助理操作員
+			</div>
+		*/
 		$("#btn-copy-work").click(function(event) {
 			
+				$('#lightbox-copy-work').fadeIn(100, function() {
+
+				var box = $('.listbox-copy-work');
+
+				if(work_list_array.length>0) box.html('');
+				else box.html('您目前沒有新增任何工作...');
+
+
+				for(var i=0;i<work_list_array.length;i++){
+
+					var icon = $('<i>').addClass('fa fa-book'),
+						sub = $('<div>').addClass('list-copy-work').attr('wid', work_list_array[i].wid);
+
+						sub.append(icon).append(' ' + work_list_array[i].wname );
+
+						sub.on('click',function(event) {
+
+							console.log('click');
+							var wid = $(this).attr('wid');
+
+							$.ajax({
+								url: 'js_work_detail.php',
+								type: 'post',
+								dataType: 'json',
+								data: {workid: wid},
+							})
+							.done(function (data) {
+								console.log(data);
+								setInit(data,true);
+								$('#lightbox-copy-work').fadeOut(100);
+
+							});
+
+
+						});
+
+						box.append(sub);
+				}
+
+			});
 		});
 
+		$('#lightbox-copy-exit').click(function(event) {
+			$('#lightbox-copy-work').fadeOut(100);
+		});
 
 		/* .............................................................................
 		   編輯模模式...................................................................
 		// .............................................................................*/
 
 		<?  if($_GET['mode']=='edit') 
-		echo 'setInit(work_detail_array); $("#btn-copy-work").remove();' ?>
+		echo 'setInit(work_detail_array,false); $("#btn-copy-work").remove();' ?>
 
-		function setInit(work_detail_array){
+		function setInit(work_detail_array,is_copy_mode){
 
-			// 編輯模式，要把複製工作的按鈕移除掉
-			$('#work_edit_form').attr('action', 'work_update.php');
+			if(!is_copy_mode) $('#work_edit_form').attr('action', 'work_update.php');
+
 
 			$('#name').val(work_detail_array['name']);
 			$('#work_type').val(work_detail_array['type1']);
@@ -356,6 +406,7 @@ function isCompanyWork($conn,$companyid,$workid){
 				case 1: check_status ='通過'; break;
 				case 2: check_status ='不通過'; break;
 			}
+			if(!is_copy_mode)
 			$('#work-check').append(check_status);
 		}
 
@@ -390,28 +441,20 @@ function isCompanyWork($conn,$companyid,$workid){
 
 </script>
 
-<!--
-<div class="staff-apply-form"> 
+
+
+<!-- 從現有的工作中複製 -->
+<div class="staff-apply-form" id="lightbox-copy-work"> 
 	<div class="staff-apply-box"> 
 	
-		<h2 class="listbox-copy-work-title"><i class="fa fa-files-o"></i> 複製工作</h2>
+		<h2 class="listbox-copy-work-title"><i class="fa fa-files-o"></i> 複製工作 <i class="fa fa-times login-exit" id="lightbox-copy-exit"></i></h2>  
 		<p class="listbox-copy-work-hint">請選擇欲複製的工作，系統會將該工作資料為您填入</p>
 
-		<div class="listbox-copy-work">
-
-			<div class="list-copy-work">
-				<i class="fa fa-book"> </i>資深洗碗工助理操作員
-			</div>
-
-			<div class="list-copy-work">
-				<i class="fa fa-book"> </i>資深洗碗工助理操作員
-			</div>
-		
-		</div>
+		<div class="listbox-copy-work"></div>
 	
 	</div> 
 </div>
--->
+
 </body>
 
 

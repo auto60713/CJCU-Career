@@ -15,8 +15,13 @@ hr{
 	width: 21%;
 }
 
-.left-box a{ text-decoration: none; }
-
+.left-box a{ 
+	text-decoration: none; 
+}
+.left-box h2{
+	display: inline-block;
+	vertical-align: middle;
+}
 .right-box{
 	padding: 1.5%;
 	margin-top: 2%;
@@ -79,6 +84,9 @@ form[id='detail'] input[type='text']{
 
 /* 以下為公司profile 的CSS部分 , 已用特殊名字定義區分 */
 
+.profile-box{
+	margin-bottom: 15px;
+}
 .profile-cover{
 	height: 220px;
 	overflow: hidden;
@@ -237,7 +245,7 @@ form[id='detail'] input[type='text']{
 	
 }
 .listbox-copy-work-title{
-	display: inline-block;
+	
 }
 .listbox-copy-work-hint{
 	font-size: 14px;
@@ -253,6 +261,28 @@ form[id='detail'] input[type='text']{
 	color: #222;
 }
 
+.profile-img{
+	width: 50px;
+	height: 50px;
+	border: solid 1px #CCC;
+	vertical-align: middle;
+}
+.upload-img-max{
+	width: 200px;
+	height: 200px;
+	border: solid 1px #CCC;
+	margin: 5px;
+}
 
+.upload-img-min{
+	width: 80px;
+	height: 80px;
+	border: solid 1px #CCC;
+	margin: 5px;
+}
 
+.upload-pross{
+	width:100%;
+	height: 5px;
 
+}

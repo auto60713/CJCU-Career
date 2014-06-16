@@ -11,6 +11,7 @@
 	<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 	<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 	<script src="js/jquery.hashchange.min.js"></script>
+	<script src="js/upload_img.js"></script>
 	<script>
 	$(function(){
 
@@ -86,7 +87,12 @@
 <div class="div-align overfix">
 
 	<div id="" class="left-box" >
-		<h2><? echo $_SESSION['username'] ?></h2><br><hr>
+
+		<div class="profile-box">
+			<img src="<? echo 'img_user/'.$_SESSION['username'].'.jpg' ?>" class="profile-img" id="profile-img">
+			<h2><? echo $_SESSION['username'] ?></h2>
+		</div>
+
 		<a href="#student-info"><div class="list">個人資訊</div></a><hr>
 		<a href="#student-applywork"><div class="list">我的應徵</div></a><hr>
 		<a href="#student-notice"><div class="list">通知</div></a><hr>
@@ -101,6 +107,33 @@
 
 	
 </div>
+
+
+
+<!-- upload image -->
+
+<div class="staff-apply-form" id="upload-profile-lightbox"> 
+	
+	<div class="staff-apply-box"> 
+		
+		<h1>上傳照片<i class="fa fa-times login-exit" id="upload-close"></i></h1>
+		<p class="login-hint">您可以更新一張代表您的照片</p>
+
+		<img src="" class="upload-img-max">
+		<img src="" class="upload-img-min">
+		<form id="upload_form" enctype="multipart/form-data" method="post">
+		 <input type="file" name="file1" id="file1"  class="btn-submit" accept="image/*">
+		
+		</form>
+		 <p id="status"></p>
+		 <button class=" btn-submit2" id="upload-btn-close">關閉</button>
+
+		<progress id="progressBar" value="0" max="100" class="upload-pross"></progress>
+
+	</div> 
+</div>
+
+
 
 </body>
 </html>
