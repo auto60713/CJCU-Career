@@ -7,9 +7,8 @@
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 	<link rel="stylesheet" type="text/css" href="css/company_manage.css">
 	<link rel="stylesheet" type="text/css" href="css/work_detail_edit.css">
-	<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
-	<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-	<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+	<link href="font-awesome/css/font-awesome.min.css" rel="stylesheet">
+	<script src="js/jquery.js"></script>
 	<script src="js/jquery.hashchange.min.js"></script>
 	<script src="js/upload_img.js"></script>
 	<script>
@@ -23,8 +22,8 @@
 		  	switch(loc) {
 			case 'student-info':doajax(0);break;
 			case 'student-applywork':doajax(1);break;
-			case 'student-note':doajax(2);break;
-			case 'student-notice':doajax(3);break;
+			//case 'student-note':doajax(2);break;
+			case 'student-notice':doajax(2);break;
 			default:doajax(0);
 			}
 
@@ -47,20 +46,20 @@
 				para = { userid: <? echo "\"".$_SESSION['username']."\"" ?> };
 				url = "student_detail_edit.php";
 				break;
-				// 
+				// 學生應徵的工作
 				case 1:
 				tpe = 'get';
 				para = {};
 				url = "student_work.php";
 				break;
-				// manage work
+				/* 移除工作日誌
 				case 2:
 				tpe = 'get';
 				para = {};
 				url = "student_note.php";
-				break;
+				break;*/
 				// notice
-				case 3:
+				case 2:
 				tpe = 'post';
 				para = {};
 				url = "notice.php";	
