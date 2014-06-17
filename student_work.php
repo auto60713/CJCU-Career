@@ -84,7 +84,7 @@ else{echo "您無權訪問該頁面!"; exit;}
 		    			var workid = $(this).attr('workid');
 		    			// 目前的審查狀態代碼
 		    			var audit = parseInt($(this).attr('audit'));
-		    			var check_status_box = $('#student-audit-current-status');
+		    			var check_status_box = $('#student-audit-current-status').removeClass('yescheck').removeClass('nocheck');
 		    			var c_status ='';
 
 		    			switch(audit) {
