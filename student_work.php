@@ -100,13 +100,14 @@ else{echo "您無權訪問該頁面!"; exit;}
 
 				    		pass.click(function(event) {
 				    		    btn = $(this);
-			    			    work_id = btn.attr('id');
+			    			    work_id = btn.attr('workid');
 				                $.ajax({
 								url: 'ajax_line_up.php',
 								type: 'post',
-								data: {check:3, work_id:work_id},
+								data: {work_id:work_id},
 						    	})
 						    	.done(function (data){
+						    		console.log(data);
 						    		if(data=='OK'){
 							    		$('#student-audit-again').text('已要求重新再審！');
 							    		btn.remove();
