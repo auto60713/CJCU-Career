@@ -165,7 +165,7 @@ function echo_data($user,$lev){
 <div id="login-lightbox">
 <div id="cont" class="login">
 <h1>登入 <i class="fa fa-times login-exit" id="login-exit"></i><br></h1>
-<form class="form" name="login" method="post" action="login_connect.php" onsubmit="return check_data()">
+<form class="form" name="login" method="post" action="../../../cjcuweb/login_connect.php" onsubmit="return check_data()">
 選擇身分：<select name ="sel" class="login-select">
   <option value=""></option>
   <option value="school" selected="selected">學校登入</option>

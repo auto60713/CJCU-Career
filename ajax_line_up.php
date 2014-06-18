@@ -18,11 +18,11 @@ $finish = 6;
 //變更工作的應徵狀況
 include_once("sqlsrv_connect.php");
 
-		$sql  = "update line_up set [check]=(?) where user_id =(?) and work_id=(?)"; 
-		sqlsrv_query($conn, $sql, array( $chick , $user_id , $work_id ));
+$sql  = "update line_up set [check]=(?) where user_id =(?) and work_id=(?)"; 
+$result = sqlsrv_query($conn, $sql, array( $chick , $user_id , $work_id ));
 
-
-
+if($result) echo "OK";
+else echo "NO";
 
 
 }?>
