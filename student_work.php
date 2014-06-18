@@ -79,11 +79,13 @@ else{echo "您無權訪問該頁面!"; exit;}
 
 		    		hint2.click(function(event) {
 
+		    			var th = $(this);
+
 		    			var historybox = $('#student-audit-history');
 		    			// 該工作ID
-		    			var workid = $(this).attr('workid');
+		    			var workid = th.attr('workid');
 		    			// 目前的審查狀態代碼
-		    			var audit = parseInt($(this).attr('audit'));
+		    			var audit = parseInt(th.attr('audit'));
 		    			var check_status_box = $('#student-audit-current-status').removeClass('yescheck').removeClass('nocheck');
 		    			var c_status ='';
 
@@ -105,12 +107,20 @@ else{echo "您無權訪問該頁面!"; exit;}
 								data: {check:3, work_id:work_id},
 						    	})
 						    	.done(function (data){
-						    		$('#student-audit-again').text('已要求重新再審！');
-						    		btn.remove();
+						    		if(data=='OK'){
+							    		$('#student-audit-again').text('已要求重新再審！');
+							    		btn.remove();
+							    		th.attr('audit', '3');
+						    		}
+						    		else{
+						    			$('#student-audit-again').text('失敗，請再試一次！');
+						    		}
+						    	
+
 						    	});
 				    		});
 			    			$('.student-audit-lightbox-status').append(pass); 
-
+ 
 			    			break;
 
 
