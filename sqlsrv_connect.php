@@ -4,6 +4,7 @@
 
    $serverName = "localhost"; 
    $database   = 'cjcuweb';
+
    $uid = null;
    $pwd = null;
    

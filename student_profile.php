@@ -64,7 +64,7 @@
 </div>
 
 <div class="profile-pic">
-	<img class="profile-pic-img" src="http://www.aspete.gr/site/Student.png">
+	<img class="profile-pic-img" src="<? echo '../img_company/'.$_GET['userid'].'.jpg' ; ?>">
 	<div class="profile-pic-change">更換照片</div>
 </div>
 

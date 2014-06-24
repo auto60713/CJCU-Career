@@ -9,7 +9,7 @@ include("sqlsrv_connect.php");
 
 $para = array();
 
-$sql = "select w.id wid,w.name wname,z.name zname,w.is_outside isout,p.name propname,[recruitment _no] rno,w.date date
+$sql = "select w.company_id cid, w.id wid,w.name wname,z.name zname,w.is_outside isout,p.name propname,[recruitment _no] rno,w.date date
  from work w,zone z,work_prop p
  where w.zone_id = z.id and work_prop_id = p.id and w.[check] = 1";
 //check=1 只秀出通過審核的工作

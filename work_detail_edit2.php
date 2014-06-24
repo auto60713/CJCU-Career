@@ -11,8 +11,7 @@ function isCompanyWork($conn,$companyid,$workid){
 
 	$sql = "select company_id from work where id=?";
 	$params = array($workid);
-	$options =  array( "Scrollable" => SQLSRV_CURSOR_KEYSET );
-	$result = sqlsrv_query($conn,$sql,$params,$options);
+	$result = sqlsrv_query($conn,$sql,$params);
 	$row = sqlsrv_fetch_array($result,SQLSRV_FETCH_NUMERIC);
 	if($row[0]==$companyid) return true;
 	else return false;

@@ -5,23 +5,17 @@
 }
 
 .workedit-tabbox{
-	
-	
 	overflow: auto;
 	font-size: 16px;
 }
 .workedit-tabbox .sub-tab{
 	float: left;
 	padding: 10px;
-	
-
 }
 .workedit-tabbox .sub-tab:hover{
 	color: #222;
 	cursor: pointer;
 }
-
-
 
 .tab-active{
 	border-top:solid #aaa 1px;
@@ -30,15 +24,11 @@
 	border-bottom:solid #FFF 1px;
 }
 
-
 .workedit-content{
-	
 	margin-top: -1px;
 	padding-top: 20px;
 	padding-left: 10px;
 	border-top:solid #aaa 1px;
-	
-
 }
 .tab-img{
 	font-size: 17px;
@@ -49,8 +39,152 @@
 }
 
 
+/* 以下為學生應徵工作列表頁面 CSS ----------------------------------------------------------------------------*/
+.work-list-box{
+	overflow: auto;
+	padding: 5px;
+	border-bottom: solid #ccc 1px;
+}
 
-/* 以下為工作人員審核樣式 */
+.sub-box{
+	float: left;
+	margin-right: 10px;
+}
+
+.sub-box2{
+	float: right;
+	padding-top: 20px;
+	color: #444;
+	font-size: 14px;
+	text-align: right;
+}
+.work-img{
+	margin:10px;
+	font-size: 30px;
+	color: #444;
+	
+}
+.work-tit a{
+	text-decoration: none;
+	font-size: 27px;
+}
+.work-hint{
+	color: #555;
+	font-size: 13px;
+	line-height: 18px;
+}
+#search-box{
+	margin-bottom: 15px;
+}
+#search-box input[type='text']{
+	height: 25px;
+	width: 40%;
+}
+#search-box select{
+	height: 29px;
+}
+.hide-work{
+	display: none;
+}
+.nonecheck{
+	color: #666;
+	font-size: 16px;
+}
+.yescheck{
+	color:#339933;
+	font-size: 16px;
+}
+.nocheck{
+	color: #CC3333;
+	font-size: 16px;
+}
+.pass-req{
+	background-color: #cdcdcd;
+	color: #222;
+	font-size: 13px;
+	padding: 8px;
+	text-align: center;
+	margin-left: 10px;
+	display: inline-block;
+
+}
+.pass-req:hover{
+	background-color: #DDD;
+	cursor:pointer;
+}
+.icon{
+	 color: #444;
+	 font-size: 30px;
+	 margin : 10px;
+}
+.work-ch-unaudit{
+	font-size: 16px;
+	color: #555;
+	font-weight: bold;
+}
+.work-ch-pass{
+	font-size: 16px;
+	color:#339933;
+	font-weight: bold;
+}
+.work-ch-unpass{
+	font-size: 16px;
+	color: #CC3333;
+	font-weight: bold;
+}
+.check-lightbox{
+	font-size: 14.5px;
+}
+.check-lightbox:hover{
+	cursor: pointer;
+	text-decoration: underline;
+}
+.student-audit-history{
+	border: solid 1px #CCC;
+	padding:3px;
+	height: 210px;
+	overflow: auto;
+}
+.student-audit-title{
+	color: #333;
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+.student-audit-lightbox-status{
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+#student-audit-current-status{
+	font-size: 20px;
+	vertical-align: middle;
+}
+.student-audit-list{
+	border-bottom: solid 1px #CCC;
+	padding: 4px;
+}
+.student-audit-htime{
+	font-weight: bold;
+	color: #888;
+	font-size: 15px;
+	display: inline-block;
+	margin-right: 10px;
+	vertical-align: top;
+}
+.student-audit-hstatus{
+	display: inline-block;
+	font-size: 15px;
+	vertical-align: top;
+	margin-right: 10px;
+}
+.student-audit-hmsg{
+	display: inline-block;
+	width:255px;
+	white-space: normal;
+	word-break: break-all;
+	vertical-align: top;
+	font-size: 14px;
+}
+/* 以下為工作人員審核樣式 -----------------------------------------------------------------------------------*/
 
 .staff-audit-filterbox{
 	height:27px;
@@ -72,25 +206,18 @@
 	left: 0;
 	height: 100%;
 	width: 100%;
-	z-index:2;
+	z-index:10;
 	background-color: rgba(0,0,0,0.5);
 	text-align: center;
 	overflow: hidden;
 	white-space: nowrap;
 	box-shadow: 0px 2px 3px #888;
 }
-.staff-apply-form:before{
-	content: '';
-	display: inline-block;
-	height: 100%;
-	width: 0;
-	vertical-align: middle;
-}
+
 
 .staff-apply-box{
-	padding: 2%;
-	margin-top: -5%;
-	vertical-align: middle;
+	padding: 20px;
+	margin-top: 130px;
 	text-align: left;
 	display: inline-block;
 	width: 30%;
@@ -151,10 +278,6 @@
 	background-color: #DD4444;
 	color: #fff;
 }
-
-
-
-
 .staff-audit-list{
 	margin-top: 15px;
 	margin-bottom: 15px;
@@ -209,11 +332,9 @@
 
 
 
-/* 以下為公司管理 專用 */
+/* 以下為公司管理 專用 ---------------------------------------------------------------------------------------*/
 
-.company-audit-history{
-	padding: 1%;
-}
+
 .company-audit-list{
 	margin-top: 5px;
 	margin-bottom: 5px;

@@ -1,6 +1,4 @@
-<?session_start();
-
-?>
+<?session_start();?>
 
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
@@ -47,7 +45,6 @@ function school_login($conn,$userid,$pw){
 
             $_SESSION['username'] = $row[user_no];
             $_SESSION['level']  = $row[role];
-            $_SESSION['level2'] = $row[role];
 
             login_echo(1);
         }
@@ -64,13 +61,11 @@ function staff_login($conn,$userid,$pw,$level_teacher,$level_staff){
     if($userid=='wu'){
         $_SESSION['username'] = $userid;
         $_SESSION['level'] = $level_staff;
-         $_SESSION['level2'] = $level_staff;
         login_echo(1);
     }
     else if($userid=='chou'){
         $_SESSION['username'] = $userid;
         $_SESSION['level'] = $level_teacher;
-        $_SESSION['level2'] = $level_teacher;
         login_echo(1);
     }
     else{
@@ -95,7 +90,6 @@ function company_login($conn,$userid,$pw,$level_company){
 
             $_SESSION['username'] = $userid;
             $_SESSION['level'] = $level_company;
-            $_SESSION['level2'] = $level_company;
 
             login_echo(1);
 	    }

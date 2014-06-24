@@ -7,7 +7,6 @@
 	<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 	<link rel="stylesheet" type="text/css" href="css/home.css">
-	<link rel="stylesheet" type="text/css" href="css/login.css">
 	<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 	<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 	<script>
@@ -20,7 +19,7 @@
 					success: function(data) {
                         $('#view-header').html(data);
                     }
-		})
+		});
 
 		$('#search-detail').hide();
 		$('#btn_detail_search').on('click', function(event) {
@@ -29,13 +28,13 @@
 		});
 
 
-	});
+	})
 	</script>
     
 </head>
 <body>
 
-<!-- login lightbox -->
+<!-- login lightbox 
 <div id="login-lightbox">
 <div id="cont" class="login">
 <h1>登入 <i class="fa fa-times" id="login-exit"></i><br></h1>
@@ -54,12 +53,10 @@
 <a href="company_forgotpwd.php">忘記密碼</a> 
 
 <p class="login-hint">學生請使用校內帳號，廠商未註冊請先<a href="company_add.php" class="login-signup">註冊新帳號</a>。</p>
-
-
 </form>
 </div>
 </div>
-
+-->
 
 <!-- 版頭 -->
 <div id="view-header"></div>
@@ -71,41 +68,54 @@
 		<div class="set-center">
 			<input type="text" id="normal-search">
 			<input type="button" id="search" value="搜尋">
-			<a href="#" id="btn_detail_search">進階搜尋</a>
+			<a href="#" id="btn_detail_search" class="search-detail"><i class="fa fa-cog"></i>進階搜尋</a>
 		</div>
 	</div>
 
 	<!--進階搜尋-->
 
 	<div class=" container" id="search-detail">
-<div class="tag-bar">
+	<div class="tag-bar">
 	
 
-	 <input type="checkbox" id="search_prop" value="prop">
-    工作性質 : <select name="work_prop" id="work_prop"></select> <br>
+	<div class="search-detail-sub">
+		 <input type="checkbox" id="search_prop" value="prop" class="search-detail-input">
+	     <label for="search_prop">工作性質 : </label><select name="work_prop" id="work_prop"></select>
+	</div>
+	
 
-    <input type="checkbox" id="search_io" value="io">
-    校內外工作：<select name="work_io" id="work_io">
-                <option value="0">校內</option>
-                <option value="1">校外</option>
-                </select> 
-			    <br>
+	<div class="search-detail-sub">
+	    <input type="checkbox" id="search_io" value="io">
+	     <label for="search_io">校內外工作：</label>
+	     <select name="work_io" id="work_io" class="search-detail-input">
+	          <option value="0">校內</option>
+	          <option value="1">校外</option>
+	     </select> 
+	</div>
 
-    <input type="checkbox" id="search_zone" value="zone">
-    工作地點 : <select name="zone" id="zone"></select> 
-			   <select name="zone_name" id="zone_name"></select>
-    <br></div>
+
+	<div class="search-detail-sub">
+	    <input type="checkbox" id="search_zone" value="zone" >
+	    <label for="search_zone">工作地點 : </label>
+	    <select name="zone" id="zone" class="search-detail-input"></select> 
+		<select name="zone_name" id="zone_name" class="search-detail-input"></select>
+	</div>
+
+
+    </div>
 </div>
 
 
 <!-- 工作列表 -->
-
-
-
-
 <div class="center">
 	<!-- 取消進階搜尋 -->
-	<div class="title-right"></div>
+	<div class="container rush-search">
+		<a href="home.php" class="<? if(count($_GET)==0) echo "rush-searching"; ?>">最新工作</a>
+		<a href="home.php?mode=search&prop=2&io=1" class="<? if($_GET['prop']=='2' && $_GET['io']=='1') echo "rush-searching"; ?>">正職</a>
+		<a href="home.php?mode=search&io=0" class="<? if($_GET['io']=='0') echo "rush-searching"; ?>">校內工作</a>
+		<a href="home.php?mode=search&prop=3" class="<? if($_GET['prop']=='3') echo "rush-searching"; ?>">實習</a>
+		<a href="home.php?mode=search&prop=1&io=1" class="<? if($_GET['prop']=='1' && $_GET['io']=='1') echo "rush-searching"; ?>">打工</a>			
+	</div>
 	<!-- 工作顯示 -->
 	<div class="work-list-bar container" id="home-work-list-box"></div>
 </div>
@@ -157,6 +167,7 @@
 
     */
 
+
 	var box = $('#home-work-list-box');	    
 
 	for(var i=0;i<work_list_array.length;i++){
@@ -166,7 +177,7 @@
 			box3 = $('<div>').addClass('work-box').addClass('box-loc'),
 			box4 = $('<div>').addClass('work-box').addClass('box-pop'),
 
-			img = $('<div>').addClass('work-img'),
+			img = $('<img>').addClass('work-img').attr('src', 'img_company/'+work_list_array[i].cid+'.jpg'),
 			a_link = $('<a>').attr({href:'work/'+work_list_array[i].wid}),
 			div_work = $('<div>').addClass('work'),
 
@@ -190,6 +201,8 @@
 	}
 	
 	//設定搜尋後的回應
+	if(typeof search_log_cont =="undefined") search_log_cont = '';
+
 	var search_log = $('<a>').addClass('search-log').text(search_log_cont);
     //搜尋結果的訊息 search_log_cont從php回傳
     box.prepend(search_log);
@@ -201,33 +214,7 @@
 
 
 </script>
-<!-- login lightbox-->
-<script>
-    //js 抓不到動態產生的物件 所以用 .on
-    $(document).on('click', '#login-btn', function(){
-        $( "#login-lightbox" ).css( "display", "block" ); 
-    });
-    $( "#login-exit" ).click(function() {
-        $( "#login-lightbox" ).css( "display", "none" ); 
-    });
 
-
-    //判斷欄位是否為空
-    function check_data(){
-
-    $("#cont").find("span").text("");
-	var boo = true;
-	if(document.login.sel.value ==""){
-		  $('#sel-null').text("請選擇身分"); boo = false;
-	}else if(document.login.id.value ==""){
-		  $('#id-null').text("請輸入帳號"); boo = false;
-	}else if(document.login.pw.value ==""){
-		  $('#pw-null').text("請輸入密碼"); boo = false;
-	}
-
-	return boo;
-    }
-</script>
 
 
 

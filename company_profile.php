@@ -4,16 +4,25 @@
 <head>
 	<meta charset="UTF-8">
 	<title></title>
+	<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="../css/main.css">
 	<link rel="stylesheet" type="text/css" href="../css/company_manage.css">
 	<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 	<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-	<script><? include_once("js_company_detail.php"); 	echo_company_detail_array($_GET['companyid']); 	?></script>
+	<script><? include_once("js_company_detail.php");	echo_company_detail_array($_GET['companyid']); 	?></script>
 	<script><? include_once('js_work_list.php'); echo_pass_work_array($_GET['companyid']);  ?></script>
 	<script> 
 	$(function(){
 
-		$('#view-header').load('../public_view/header.php #header');
+		$.ajax({
+			url:  '../public_view/header.php',
+			type: 'POST',
+			data: {},
+			success: function(data) {
+                $('#view-header').html(data);
+            }
+		});
+		
 		$('.profile-pic-change, #profile-btn-edit').hide();
 
 		// load into container company_detail_array
@@ -75,7 +84,7 @@
 </div>
 
 <div class="profile-pic">
-	<img class="profile-pic-img" src="http://img.dxycdn.com/trademd/upload/pic/2011/12/02/1322737843.jpg">
+	<img class="profile-pic-img" src="<? echo '../img_company/'.$_GET['companyid'].'.jpg' ; ?>">
 	<div class="profile-pic-change">更換照片</div>
 </div>
 

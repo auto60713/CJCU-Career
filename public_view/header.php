@@ -107,7 +107,7 @@ function echo_data($user,$lev){
 		polling();
 		function polling(){
 			$.ajax({
-			url: 'ajax_get_news_num.php',
+			url: '../../../cjcuweb/ajax_get_news_num.php',
 			type: 'get',
 			})
 			.done(function(d) {
@@ -127,14 +127,66 @@ function echo_data($user,$lev){
 		$('#header-notice').click(function(event) {
 			$('.header-notice-num').remove();
 		});
-		
+
+
+
+		$('#login-btn').on('click', function(){
+       		 $( "#login-lightbox" ).css( "display", "block" ); 
+    	});
+
+   		$( "#login-exit" ).click(function() {
+        	$( "#login-lightbox" ).css( "display", "none" ); 
+    	});
+
+    	//判斷欄位是否為空
+	    function check_data(){
+		    $("#cont").find("span").text("");
+			var boo = true;
+			if(document.login.sel.value ==""){$('#sel-null').text("請選擇身分"); boo = false;}
+			else if(document.login.id.value ==""){$('#id-null').text("請輸入帳號"); boo = false;}
+			else if(document.login.pw.value ==""){$('#pw-null').text("請輸入密碼"); boo = false;}
+			else $('#pw-null').text("");
+			return boo;
+	    }
+	
 	});
 </script>
+
+
+
 <!--<div id="header">-->
 	<div class="sub"><a href="../../../cjcuweb/home.php"><h1>長大職涯網</h1></a></div>
 	<div class="sub2"> 
 	<? echo_data($user,$lev)	 ?>  
 	</div>
+
+<!-- light box -->
+
+<div id="login-lightbox">
+<div id="cont" class="login">
+<h1>登入 <i class="fa fa-times login-exit" id="login-exit"></i><br></h1>
+<form class="form" name="login" method="post" action="../../../cjcuweb/login_connect.php" onsubmit="return check_data()">
+選擇身分：<select name ="sel" class="login-select">
+  <option value=""></option>
+  <option value="school" selected="selected">學校登入</option>
+  <option value="company">廠商登入</option>
+</select><br>
+
+<span class="null-echo" id="sel-null"></span><br>
+<i class="fa fa-user login-icon"></i><input type="text" name="id" placeholder="輸入帳號" class="login-input"><span class="null-echo" id="id-null" ></span><br>
+<i class="fa fa-lock login-icon"></i><input type="password" name="pw" placeholder="輸入密碼" class="login-input"><span class="null-echo" id="pw-null" ></span>
+<br>
+<input type="submit" class="btn-submit" name="button" value="登入" />
+<a href="company_forgotpwd.php">忘記密碼</a> 
+
+<p class="login-hint">學生請選擇學校登入，廠商未註冊請先<a href="company_add.php" class="login-signup">註冊新帳號</a>。</p>
+</form>
 </div>
+</div>
+
+</div>
+
+
+
 </body>
 </html>
