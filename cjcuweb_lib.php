@@ -1,6 +1,7 @@
 <?
 
 	// 各種身分的權限值
+    $level_department = 5;
 	$level_company = 4;
 	$level_student = 3;
 	$level_teacher = 2;

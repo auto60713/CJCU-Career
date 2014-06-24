@@ -2,7 +2,7 @@
 include_once('cjcuweb_lib.php');
 include_once('sqlsrv_connect.php');
 // 檢查該工作是否屬於該公司
-if(!isCompanyWork($conn,$_SESSION['username'],$_POST['workid']) || $_SESSION['level']!=$level_company){
+if(!isCompanyWork($conn,$_SESSION['username'],$_POST['workid'])){
 echo 'No permission!';
 exit();
 }

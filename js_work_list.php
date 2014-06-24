@@ -63,7 +63,7 @@ function echo_work_manage_list_array($companyid){
 
 	$sql = "select w.id wid,w.name wname,z.name zname,w.is_outside isout,p.name propname,[recruitment _no] rno,w.date date,t.name,w.[check] ch
 	 from work w,zone z,work_prop p,work_type t
-	 where w.zone_id = z.id and work_prop_id = p.id and w.company_id=? and w.work_type_id=t.id";
+	 where w.zone_id = z.id and work_prop_id = p.id and w.company_id=? and w.work_type_id=t.id ORDER BY w.id DESC;";
 
 	$stmt = sqlsrv_query($conn, $sql, $para);
 	$work_list_array = array();

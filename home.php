@@ -111,7 +111,7 @@
 	<!-- 取消進階搜尋 -->
 	<div class="container rush-search">
 		<a href="home.php" class="<? if(count($_GET)==0) echo "rush-searching"; ?>">最新工作</a>
-		<a href="home.php?mode=search&prop=2&io=1" class="<? if($_GET['prop']=='2' && $_GET['io']=='1') echo "rush-searching"; ?>">正職</a>
+		<a href="home.php?mode=search&prop=2" class="<? if($_GET['prop']=='2') echo "rush-searching"; ?>">正職</a>
 		<a href="home.php?mode=search&io=0" class="<? if($_GET['io']=='0') echo "rush-searching"; ?>">校內工作</a>
 		<a href="home.php?mode=search&prop=3" class="<? if($_GET['prop']=='3') echo "rush-searching"; ?>">實習</a>
 		<a href="home.php?mode=search&prop=1&io=1" class="<? if($_GET['prop']=='1' && $_GET['io']=='1') echo "rush-searching"; ?>">打工</a>			

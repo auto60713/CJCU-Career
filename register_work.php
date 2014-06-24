@@ -51,11 +51,11 @@ if( !isset($name) || !isset($work_type)  || !isset($year1) || !isset($month1) ||
 	//datetime format  1970-01-01 00:00:00
 	$start_date = $year1."-".$month1."-".$date1." ".$hour1.":".$minute1.":00";
 	$end_date = $year2."-".$month2."-".$date2." ".$hour2.":".$minute2.":00";
-	
+	if($_SESSION['level'] == $level_department){$check=1;}
+    else{$check=0;}
 
-
-	$sql = "INSERT INTO work(name,company_id,work_type_id,start_date,end_date,work_prop_id,is_outside,zone_id,address,phone,pay,[recruitment _no],detail) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
-    $params = array($name,$company_id,$work_type,$start_date,$end_date,$work_prop,$isoutside,$zone_id,$address,$phone,$pay,$recruitment_no,$detail);
+	$sql = "INSERT INTO work(name,company_id,work_type_id,start_date,end_date,work_prop_id,is_outside,zone_id,address,phone,pay,[recruitment _no],detail,[check]) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+    $params = array($name,$company_id,$work_type,$start_date,$end_date,$work_prop,$isoutside,$zone_id,$address,$phone,$pay,$recruitment_no,$detail,$check);
 	$result = sqlsrv_query($conn, $sql, $params);
 	if($result){
 		echo '新增成功! 跳轉中，請稍候...';

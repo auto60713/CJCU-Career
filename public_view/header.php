@@ -26,7 +26,7 @@ function echo_data($user,$lev){
 	if(isset ($user)){
 
          //抓取資料庫 此username的用戶名稱
-		 include("../sqlsrv_connect.php");
+		    include("../sqlsrv_connect.php");
             $sql = "SELECT * FROM cjcu_user WHERE user_no = '".$user."'";
             $stmt = sqlsrv_query( $conn, $sql );
 
@@ -51,19 +51,30 @@ function echo_data($user,$lev){
             sqlsrv_free_stmt($stmt);
             //釋放記憶體資源
 
-		/*
-			echo '<span><a href="../../../cjcuweb/company/'.$company_id.'">公司資訊</a></span>';
-			echo '<span><a href="../../../cjcuweb/company_work_list.php">管理工作</a></span>';
-			echo '<span><a href="../../../cjcuweb/add_work.php">新增工作</a></span>';
-			echo '<span><a href="../../../cjcuweb/company_manage_apply.php">管理應徵</a></span>';
-		*/
 			echo '<span><a href="../../../cjcuweb/company/'.$user.'">'.$username.'</a></span>';
 			echo '<span><a href="../../../cjcuweb/company_manage.php">管理</a></span>';
 			echo '<span id="header-notice"><a href="../../../cjcuweb/company_manage.php#company-notice">通知</a></span>';
 		}
+		else if( $lev == $level_department) {
+
+			//抓取資料庫 此username的用戶名稱
+		    include("../sqlsrv_connect.php");
+            $sql = "SELECT * FROM department WHERE no = '".$user."'";
+            $stmt = sqlsrv_query( $conn, $sql );
+
+            while( $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC) ) {
+            $username = $row[name];
+            }
+
+            sqlsrv_free_stmt($stmt);
+            //釋放記憶體資源
+            
+			echo '<span><a href="../../../cjcuweb/department/'.$user.'">'.$username.'</a></span>';
+			echo '<span><a href="../../../cjcuweb/department_manage.php">管理</a></span>';
+			echo '<span id="header-notice"><a href="../../../cjcuweb/department_manage.php#department-notice">通知</a></span>';
+		}
 		else if( $lev == $level_student){
 		
-			/*echo '<span><a href="../../../cjcuweb/student_work.php">我的應徵</a></span>';*/
 			echo '<span><a href="../../../cjcuweb/student/'.$user.'">'.$username.'</a></span>';
 			echo '<span><a href="../../../cjcuweb/student_manage.php">管理</a></span>';
 			echo '<span id="header-notice"><a href="../../../cjcuweb/student_manage.php#student-notice">通知</a></span>';
@@ -168,8 +179,9 @@ function echo_data($user,$lev){
 <form class="form" name="login" method="post" action="../../../cjcuweb/login_connect.php" onsubmit="return check_data()">
 選擇身分：<select name ="sel" class="login-select">
   <option value=""></option>
-  <option value="school" selected="selected">學校登入</option>
+  <option value="school" selected="selected">師生登入</option>
   <option value="company">廠商登入</option>
+  <option value="department">系所登入</option>
 </select><br>
 
 <span class="null-echo" id="sel-null"></span><br>

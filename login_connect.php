@@ -18,8 +18,8 @@ switch ($sel) {
     case "company":
         company_login($conn,$userid,$pw,$level_company);
     break;
-    case "staff":
-        staff_login($conn,$userid,$pw,$level_teacher,$level_staff);
+    case "department":
+        department_login($conn,$userid,$pw,$level_department);
     break;
     // 竄改資料,登入失敗
     default: login_echo(0);
@@ -55,25 +55,6 @@ function school_login($conn,$userid,$pw){
 }
 
 
-function staff_login($conn,$userid,$pw,$level_teacher,$level_staff){
-
-    // 未完成與學校方面連結驗證 測試版(尚未定案)
-    if($userid=='wu'){
-        $_SESSION['username'] = $userid;
-        $_SESSION['level'] = $level_staff;
-        login_echo(1);
-    }
-    else if($userid=='chou'){
-        $_SESSION['username'] = $userid;
-        $_SESSION['level'] = $level_teacher;
-        login_echo(1);
-    }
-    else{
-        login_echo(0);
-    }
-    
-}
-
 function company_login($conn,$userid,$pw,$level_company){
 
     $sql = "select * from company where id=?";
@@ -101,6 +82,37 @@ function company_login($conn,$userid,$pw,$level_company){
 	
     }
 }
+
+function department_login($conn,$userid,$pw,$level_department){
+
+    $sql = "select * from department where no=?";
+    $params  = array($userid);
+    $options = array("Scrollable" => SQLSRV_CURSOR_KEYSET);
+
+    $result  = sqlsrv_query( $conn , $sql , $params , $options );
+    if( $result ){
+
+    $row = sqlsrv_fetch_array($result, SQLSRV_FETCH_NUMERIC);
+    
+        // 資料表查無帳號 , 沒有輸入或密碼不符
+
+        if(count($row) != 0 && $userid != null && $pw != null && (trim($row[1])) == $pw){
+
+            $_SESSION['username'] = $userid;
+            $_SESSION['level'] = $level_department;
+
+            login_echo(1);
+        }
+        
+        else{
+
+            login_echo(0);
+        }
+    
+    }
+}
+
+
 
 
 function login_echo($os){

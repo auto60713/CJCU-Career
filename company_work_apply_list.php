@@ -10,8 +10,7 @@ else{
 	exit;
 } 
 
-if( !isCompanyWork($conn,$_SESSION['username'],$_GET['workid']) || 
-	$_SESSION['level']!=$level_company){
+if( !isCompanyWork($conn,$_SESSION['username'],$_GET['workid'])){
 	echo 'No permission!';
 	exit;
 }
