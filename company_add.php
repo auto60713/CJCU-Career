@@ -8,6 +8,7 @@
 <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 <link rel="stylesheet" type="text/css" href="css/main.css">
 <link rel="stylesheet" type="text/css" href="css/login.css">
+<link href="font-awesome/css/font-awesome.min.css" rel="stylesheet">
 <script>
 
     $.ajax({

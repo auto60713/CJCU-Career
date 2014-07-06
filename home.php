@@ -4,11 +4,12 @@
 <head>
 	<meta charset="UTF-8">
 	<title>長榮大學 - 媒合系統</title>
-	<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 	<link rel="stylesheet" type="text/css" href="css/home.css">
+	<link href="font-awesome/css/font-awesome.min.css" rel="stylesheet">
 	<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 	<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+	<script type="text/javascript" src="js/full_height.js"></script>
 	<script>
 	$(function(){ 	
 
@@ -34,35 +35,12 @@
 </head>
 <body>
 
-<!-- login lightbox 
-<div id="login-lightbox">
-<div id="cont" class="login">
-<h1>登入 <i class="fa fa-times" id="login-exit"></i><br></h1>
-<form class="form" name="login" method="post" action="login_connect.php" onsubmit="return check_data()">
-選擇身分：<select name ="sel" class="login-select">
-  <option value=""></option>
-  <option value="school" selected="selected">學校登入</option>
-  <option value="company">廠商登入</option>
-</select><br>
-
-<span class="null-echo" id="sel-null"></span><br>
-<i class="fa fa-user login-icon"></i><input type="text" name="id" placeholder="輸入帳號" class="login-input"><span class="null-echo" id="id-null" ></span><br>
-<i class="fa fa-lock login-icon"></i><input type="password" name="pw" placeholder="輸入密碼" class="login-input"><span class="null-echo" id="pw-null" ></span>
-<br>
-<input type="submit" class="btn-submit" name="button" value="登入" />
-<a href="company_forgotpwd.php">忘記密碼</a> 
-
-<p class="login-hint">學生請使用校內帳號，廠商未註冊請先<a href="company_add.php" class="login-signup">註冊新帳號</a>。</p>
-</form>
-</div>
-</div>
--->
-
+<div none="true">
 <!-- 版頭 -->
-<div id="view-header"></div>
+<div id="view-header" class="box-shadow1" _height="none"></div>
 
-
-<div class="top">
+<!-- 搜尋 -->
+<div class="div-search margin-top20" _height="none">
 
 	<div class="search-bar container">
 		<div class="set-center">
@@ -74,10 +52,9 @@
 
 	<!--進階搜尋-->
 
-	<div class=" container" id="search-detail">
+	<div class="container" id="search-detail">
 	<div class="tag-bar">
 	
-
 	<div class="search-detail-sub">
 		 <input type="checkbox" id="search_prop" value="prop" class="search-detail-input">
 	     <label for="search_prop">工作性質 : </label><select name="work_prop" id="work_prop"></select>
@@ -103,11 +80,12 @@
 
 
     </div>
+    </div>
 </div>
 
 
 <!-- 工作列表 -->
-<div class="center">
+<div class="center margin-bottom50" _height="auto">
 	<!-- 取消進階搜尋 -->
 	<div class="container rush-search">
 		<a href="home.php" class="<? if(count($_GET)==0) echo "rush-searching"; ?>">最新工作</a>
@@ -121,15 +99,8 @@
 </div>
 
 
-<!-- 頁尾廣告 -->
-<div class="ad">
-	<div class="container ad-bar">
-		放個廣告 感覺很專業..................................
-	</div>
-</div>
-
 <!-- 頁尾訊息 -->
-<div class="footer">
+<div class="footer box-shadow2" _height="none">
 	<div class="container footer-bar">
 			
     All Jobs | PostaJob | AboutUs | ContactUs
@@ -138,7 +109,7 @@
 
 	</div>
 </div>
-
+</div>
 
 </body>
 

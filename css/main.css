@@ -9,7 +9,7 @@ body{
 }
 
 #view-header{
-	background-color: #111;
+	background-color: #222;
 
 }
 .div-align{
@@ -19,7 +19,7 @@ body{
 }
 #header{
 	overflow: auto;
-	background-color: #111;
+	background-color: #222;
 	color: #EEE;
 	padding: 9px;	
 }
