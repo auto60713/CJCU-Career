@@ -98,7 +98,7 @@
 
 			$('#right-box-title').html('').append($('.list:eq('+idx+')').text());
 			if(goback) $('#right-box-title').prepend(goback);
-			}
+	}
 
 
             //依照公司審核通過與否 後端傳來的資料不同

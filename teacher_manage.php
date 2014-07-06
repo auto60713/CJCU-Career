@@ -23,15 +23,14 @@
 		  	var loc = location.hash.replace( /^#/, '' );
 		  	switch(loc) {
 			case 'teacher-info':doajax(0);break;
-			case 'teacher-addwork':doajax(1);break;
-			case 'teacher-work':doajax(2);break;
-			case 'teacher-sup':doajax(3);break;
-			case 'teacher-notice':doajax(4);break;
+			case 'teacher-sup':doajax(1);break;
+			case 'teacher-notice':doajax(2);break;
 			default:doajax(0);
 			}
 
 		});
 
+        $(window).hashchange();
 
 		function doajax(idx){
 
@@ -39,30 +38,17 @@
 
 				case 0:
 				tpe = 'get';
-				para = { userid: <? echo "\"".$_SESSION['username']."\"" ?> };
+				para = {};
 				url = "teacher_detail.php";
 				break;
-
-                // add work
-				case 1:
-				tpe = 'get';
-				para = {mode:'add'};
-				url = "add_work.php";
-				break;
-
-				case 2:
-				tpe = 'get';
-				para = {};
-				url = "company_work_list.php";
-				break;
 		
-	        	case 3:
+	        	case 1:
 				tpe = 'get';
 				para = {};
 				url = "teacher_sup.php";
 				break;
 
-				case 4:
+				case 2:
 				tpe = 'post';
 				para = {level: <? echo "'".$_SESSION['level']."'"; ?>,username: <? echo "'".$_SESSION['username']."'"; ?>};
 				url = "notice.php";	
@@ -82,6 +68,7 @@
 
 			$('#right-box-title').html('').append($('.list:eq('+idx+')').text());
 			if(goback) $('#right-box-title').prepend(goback);
+			
 		}
 
 	});
@@ -100,8 +87,6 @@
 		<h2><? echo $_SESSION['username'] ?></h2><br><hr>
 
 		<a href="#teacher-info"><div class="list">個人資訊</div></a><hr>
-		<a href="#teacher-addwork"><div class="list">新增工作</div></a><hr>
-		<a href="#teacher-work"><div class="list">管理工作</div></a><hr>
 	    <a href="#teacher-sup"><div class="list">實習監督</div></a><hr>
 		<a href="#teacher-notice"><div class="list">通知</div></a><hr>
 	</div>

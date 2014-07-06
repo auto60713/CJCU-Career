@@ -9,20 +9,13 @@ if(!isset($_SESSION['username']) || $_SESSION['level'] != $level_teacher) {
 
 <!doctype html>
 <html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-	<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-	
-</head>
-
 
 <body>
 <script>
 //後端傳來個人資料
 <? include_once("js_staff_detail.php"); echo_teacher_detail_array($_SESSION['username']); ?>
 
-	$(function(){
+
 	
 		var detail_column = "",detail_input = "",idx = 0;
 
@@ -42,7 +35,7 @@ if(!isset($_SESSION['username']) || $_SESSION['level'] != $level_teacher) {
 		$('#detail_column').html(detail_column);
 		$('#detail_input').html(detail_input);
 
-	});
+
 </script>
 <!-- 呈現欄位名稱 -->
 <div style="float:left; padding-right:50px;" id="detail_column"></div>
