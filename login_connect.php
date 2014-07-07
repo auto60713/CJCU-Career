@@ -28,7 +28,6 @@ switch ($sel) {
 
 function school_login($conn,$userid,$pw){
 
-    //日後帳號將是計中管理 本系統僅作帳號驗證
     //此登入包含 管理員.指導老師.學生 三種身分 均稱作學校登入
 
     $sql = "select * from cjcu_user where user_no=?";
@@ -43,10 +42,20 @@ function school_login($conn,$userid,$pw){
         // 資料表查無帳號 , 沒有輸入
         if(count($row) != 0 && $userid != null && $pw != null){
 
+            //管理員驗證
+            if($row[role] == 1){
             $_SESSION['username'] = $row[user_no];
             $_SESSION['level']  = $row[role];
 
-            login_echo(1);
+            login_echo(2);
+            }
+            //計中驗證
+            else{
+            $_SESSION['username'] = $row[user_no];
+            $_SESSION['level']  = $row[role];
+
+            login_echo(3);
+            }
         }
         else{
             login_echo(0);
@@ -115,15 +124,26 @@ function department_login($conn,$userid,$pw,$level_department){
 
 
 
-function login_echo($os){
+function login_echo($login_msg){
 
-    if($os == 1){
+    switch ($login_msg) {
+    case 1:
         echo '登入成功! 跳轉中，請稍後...';
         echo '<meta http-equiv=REFRESH CONTENT=2;url=home.php>';
-    }else{
+    break;
+    case 2:
+        echo '管理員驗證成功! 跳轉中，請稍後...';
+        echo '<meta http-equiv=REFRESH CONTENT=2;url=home.php>';
+    break;
+    case 3:
+        echo '計中驗證成功! 跳轉中，請稍後...';
+        echo '<meta http-equiv=REFRESH CONTENT=2;url=home.php>';
+    break;
+    default: 
         echo '帳號或密碼錯誤! 跳轉中...';
         echo '<meta http-equiv=REFRESH CONTENT=2;url=home.php>';
     }
+
 }
 
 session_write_close(); 

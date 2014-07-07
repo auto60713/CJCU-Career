@@ -141,8 +141,8 @@
 	
 	<div class="staff-apply-box"> 
 		
-		<h1>上傳公司圖片<i class="fa fa-times login-exit" id="upload-close"></i></h1>
-		<p class="login-hint">您可以更新一張代表公司行號的照片</p>
+		<h1>上傳圖片<i class="fa fa-times login-exit" id="upload-close"></i></h1>
+		<p class="login-hint">您可以更新一張代表系上的照片</p>
 
 		<img src="" class="upload-img-max">
 		<img src="" class="upload-img-min">

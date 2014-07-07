@@ -32,21 +32,13 @@ if(isset($_SESSION['username'])) 0; else{header("Location: home.php"); exit;}
 		$('#detail_column').html(detail_column);
 		$('#detail_input').html(detail_input);
 	
-
-
 </script>
 
 
-
-<div class="workedit-content" id='workedit-content'>
-	<div id='workedit-content-edit' class="" tabtoggle='workedit2'>
-		<form method="post" action="updata.php" id="detail">
-            <div id="detail_column" style="float:left; padding-right:50px;">321</div>
-            <div id="detail_input"></div>
-		</form>
-	</div>
-</div>
-
+<form method="post" action="updata.php" id="detail">
+    <div id="detail_column" style="float:left; padding-right:50px;"></div>
+    <div id="detail_input"></div>
+</form>
 
 </body>
 </html>

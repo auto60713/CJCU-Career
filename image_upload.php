@@ -4,7 +4,7 @@ session_start();
 include_once("cjcuweb_lib.php");
 
 
-if($_SESSION['level'] == $level_company)
+if($_SESSION['level'] == $level_company||$_SESSION['level'] == $level_department)
 	$dir = "img_company/";
 else
 	$dir = "img_user/";

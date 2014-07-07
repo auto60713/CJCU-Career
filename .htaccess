@@ -11,5 +11,7 @@ RewriteRule ^work/([0-9]+)/?$ work_detail.php?workid=$1
 # set ../student_detail?userid=0  --->  ../student/0/  
 RewriteRule ^student/(.*)/?$ student_profile.php?userid=$1
 
+# set ../department_detail?companyid=0  --->  ../department/0/  
+RewriteRule ^department/(.*)/?$ department_profile.php?companyid=$1
 
 </IfModule>
