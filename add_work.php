@@ -61,48 +61,93 @@ function isCompanyWork($conn,$companyid,$workid){
 <button id="btn-copy-work" class="btn-copy-work"><i class="fa fa-files-o"></i> 從現有工作複製</button>
 
 <form name="work" id="work_edit_form" method="post" action="register_work.php" onsubmit="return check_data();" >
+<table>
 
-工作名稱*：<input type="text" name="name" id="name"/><span id="name_hint"></span><br>
+<tr>
+	<td>工作名稱：</td>
+	<td><input type="text" name="name" id="name"/></td>
+	<td><span id="name_hint"></span></td>
+</tr>
 
-工作類型* : <select name="work_type" id="work_type"><option>請選擇</option></select> 
-			<select name="work_type_list1" id="work_type_list1"><option>請選擇</option></select><!-- 要等 work_type 選完才載入 -->
-			<select name="work_type_list2" id="work_type_list2"><option>請選擇</option></select><!-- 要等 work_type 選完才載入 -->
-			<span id="work_type_hint"></span>
-			<br>
+<tr>
+	<td>工作類型：</td>
+	<td><select name="work_type" id="work_type"><option>請選擇</option></select> 
+		<select name="work_type_list1" id="work_type_list1"><option>請選擇</option></select>
+		<select name="work_type_list2" id="work_type_list2"><option>請選擇</option></select>
+	</td>
+	<td><span id="work_type_hint"></span></td>
+</tr>
 
-開始日期* : <select name="year1" id="year1"></select>年
-			<select name="month1" id="month1"></select>月
-			<select name="date1" id="date1"></select>日&nbsp;
-			<select name="hour1" id="hour1"></select>時 
-			<select name="minute1" id="minute1"></select>分<br>
+<tr>
+	<td>開始日期：</td>
+	<td><select name="year1" id="year1"></select>年
+		<select name="month1" id="month1"></select>月
+		<select name="date1" id="date1"></select>日
+		<select name="hour1" id="hour1"></select>時 
+		<select name="minute1" id="minute1"></select>分
+	</td>
+</tr>
 
-截止日期* : <select name="year2" id="year2"></select>年
-			<select name="month2" id="month2"></select>月
-			<select name="date2" id="date2"></select>日&nbsp;
-			<select name="hour2" id="hour2"></select>時 
-			<select name="minute2" id="minute2"></select>分<br>
+<tr>
+	<td>截止日期：</td>
+	<td><select name="year2" id="year2"></select>年
+		<select name="month2" id="month2"></select>月
+		<select name="date2" id="date2"></select>日
+		<select name="hour2" id="hour2"></select>時
+		<select name="minute2" id="minute2"></select>分
+	</td>
+</tr>
 
-工作性質* : <select name="work_prop" id="work_prop"></select> <br>
+<tr>
+	<td>工作性質：</td>
+	<td><select name="work_prop" id="work_prop"></select></td>
+</tr>
 
-校內外工作*：<input type="radio" name="isoutside" value="0" checked="true">校外工作
-			 <input type="radio" name="isoutside" value="1">校內工作<br>
+<tr>
+	<td>工作類別：</td>
+	<td><input type="radio" name="isoutside" value="0" checked="true">校外工作
+	    <input type="radio" name="isoutside" value="1">校內工作
+	</td>
+</tr>
 
-工作地點* : <select name="zone" id="zone"></select> 
-			<select name="zone_name" id="zone_name"></select>
-			<span id="zone_name_hint"></span> <br>
+<tr>
+	<td>工作地點：</td>
+	<td><select name="zone" id="zone"></select> 
+		<select name="zone_name" id="zone_name"></select>
+	</td>
+	<td><span id="zone_name_hint"></span></td>
+</tr>
 
-招募人數*：<input type="number" name="recruitment_no" id="recruitment_no" value="1" /> <br>
+<tr>
+	<td>招募人數：</td>
+	<td><input type="number" name="recruitment_no" id="recruitment_no" value="1" /></td>
+</tr>
 
-聯絡地址*：<input type="text" name="address" id="address"/> 
-		   <label><input type="checkbox" id="address_same" >同公司地址</label> 
-		   <span id="address_hint"></span> <br> 
-  <? echo '<input type="hidden" name="hidden_address" id="hidden_address" value="'.$company_address.'"/>';?>
+<tr>
+	<td>聯絡地址：</td>
+	<td><input type="text" name="address" id="address"/> 
+		<label><input type="checkbox" id="address_same" >同公司地址</label> 
+		<? echo '<input type="hidden" name="hidden_address" id="hidden_address" value="'.$company_address.'"/>';?>
+	</td>
+	<td><span id="address_hint"></span></td>
+</tr>
 
-連絡電話 : <input type="text" name="phone" id="phone"/> 
-		   <label><input type="checkbox" id="phone_same" >同公司電話</label> <br>
-  <? echo '<input type="hidden" name="hidden_phone" id="hidden_phone" value="'.$company_phone.'"/>';?>
+<tr>
+	<td>連絡電話：</td>
+	<td><input type="text" name="phone" id="phone"/> 
+		<label><input type="checkbox" id="phone_same" >同公司電話</label>
+		<? echo '<input type="hidden" name="hidden_phone" id="hidden_phone" value="'.$company_phone.'"/>';?>
+	</td>
+	<td><span id="zone_name_hint"></span></td>
+</tr>
+  
+<tr>
+	<td>薪資待遇：</td>
+	<td><input type="pay" name="pay" id='pay'/>(可填 時薪,月薪 或 面議)</td>
+	<td><span id="zone_name_hint"></span></td>
+</tr>
 
-薪資待遇：<input type="pay" name="pay" id='pay'/> &nbsp; (可填 時薪,月薪 或 面議)<br>
+</table>
 
 工作內容：<br><textarea name="detail" cols="45" rows="5" id='detail'></textarea> <br>
 

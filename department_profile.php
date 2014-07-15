@@ -9,7 +9,7 @@
 	<link rel="stylesheet" type="text/css" href="../css/company_manage.css">
 	<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 	<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-	<script><? include_once("js_company_detail.php");	echo_company_detail_array($_GET['companyid']); 	?></script>
+	<script><? include_once("js_detail.php");	echo_department_profile($_GET['companyid']); ?></script>
 	<script><? include_once('js_work_list.php'); echo_pass_work_array($_GET['companyid']);  ?></script>
 	<script> 
 	$(function(){
@@ -26,21 +26,17 @@
 		$('.profile-pic-change, #profile-btn-edit').hide();
 
 		// load into container company_detail_array
-		$('title , #profile-name').text(company_detail_array['ch_name']);
-		$('#ch_name').text(company_detail_array['ch_name']);
-		$('#en_name').text(company_detail_array['en_name']);
-		$('#boss').text(company_detail_array['name']);
-		$('#unicode').text(company_detail_array['uni_num']);
+		$('title , #profile-name').text(department_profile_array['ch_name']);
+		$('#ch_name').text(department_profile_array['ch_name']);
+		$('#en_name').text(department_profile_array['en_name']);
+		$('#name').text(department_profile_array['name']);
 
-		$('#budget').text(company_detail_array['budget']);
-		$('#stuffnum').text(company_detail_array['staff_num']);
-		$('#phone').text(company_detail_array['phone']);
-		$('#email').text(company_detail_array['email']);
-		$('#fax').text(company_detail_array['uni_num']);
-		$('#address').text(company_detail_array['zonename']+" "+company_detail_array['address']);
-		$('#cptype').text(company_detail_array['typename']);
-		$('#cpurl').append($('<a>').attr('href',company_detail_array['url']).text(company_detail_array['url']));
-		$('#introduction').text(company_detail_array['introduction']);
+		$('#phone').text(department_profile_array['phone']);
+		$('#email').text(department_profile_array['email']);
+		$('#fax').text(department_profile_array['fax']);
+		$('#address').text(department_profile_array['address']);
+		$('#url').append($('<a>').attr('href',department_profile_array['url']).attr('target','_blank').text(department_profile_array['url']));
+		$('#introduction').text(department_profile_array['introduction']);
 
 		var listbox = $('#profile-worklist');
 		for(var i=0;i<pass_work_array.length;i++){
@@ -85,20 +81,18 @@
 
 <div class="profile-pic">
 	<img class="profile-pic-img" src="<? echo '../img_company/'.$_GET['companyid'].'.jpg' ; ?>">
-	<div class="profile-pic-change">更換照片</div>
 </div>
 
 <div class="profile-content overfix">
 	
+<!-- 主要資訊(左側) -->
 <div class="profile-boxleft">
 <h2>關於 <a id="profile-btn-edit" href="../company_manage.php">修改</a> </h2><br>
-<h3>公司資訊</h3>
+
+<h3>系所資訊</h3>
 <p><span class="profile-span-title">中文名稱</span><span id="ch_name"></span></p>
 <p><span class="profile-span-title">英文名稱</span><span id="en_name"></span></p>
-<p><span class="profile-span-title">負責人</span><span id="boss"></span></p>
-<p><span class="profile-span-title">統一編號</span><span id="unicode"></span></p>
-<p><span class="profile-span-title">資本額</span><span id="budget"></span></p>
-<p><span class="profile-span-title">員工數</span><span id="stuffnum"></span></p>
+<p><span class="profile-span-title">負責人</span><span id="name"></span></p>
 <br><hr><br>
 
 <h3>聯絡方式</h3>
@@ -108,29 +102,20 @@
 <p><span class="profile-span-title">地址</span><span id="address"></span></p>
 <br><hr><br>
 
-
-<h3>公司類型</h3>
-
-<p><span id="cptype"></span></p>
-
-<br><hr><br>
-
-
 <h3>相關連結</h3>
-
-<p><span class="profile-span-title">公司網站</span><span id="cpurl"></span></p>
-
-
+<p><span class="profile-span-title">其他網站</span><span id="url"></span></p>
 </div>
 
-<div class="profile-boxright">
 
+<!-- 其他資訊(右側) -->
+<div class="profile-boxright">
 <div class="profile-boxinner"><h2>簡介</h2>
 <span id="introduction"></span>
 </div>
 
 <div class="profile-boxinner" id="profile-worklist">
-	<h2>公司職缺</h2>
+	<h2>其他職缺</h2>
+</div>
 </div>
 
 </div>
@@ -138,13 +123,6 @@
 
 
 </div>
-
-
-
-</div>
-
-
-
 
 </body>
 </html>

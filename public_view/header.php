@@ -63,7 +63,7 @@ function echo_data($user,$lev){
             $stmt = sqlsrv_query( $conn, $sql );
 
             while( $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC) ) {
-            $username = $row[name];
+            $username = $row[ch_name];
             }
 
             sqlsrv_free_stmt($stmt);

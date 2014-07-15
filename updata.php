@@ -3,7 +3,6 @@
 echo '<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />';
 
 include_once("cjcuweb_lib.php");
-//響應MvC開發方式 clinet端要POST過來的資料 就是input name要跟資料表欄位相同即可
 
 //取得登入者的ID跟LEVEL權限
 
@@ -19,6 +18,13 @@ $userlevel = $_SESSION['level'];
 	        $params2 = array($_POST['pic'],$_POST['birthday'],$_POST['nickname'],$_POST['sex'],$_POST['phone'],$_POST['address'],$_POST['email'],$_POST['doc']);
 	        student_updata($userid,$params,$params2);
 	    break;
+
+        case 5: //系所
+	        $params = array($_POST['ch_name'],$_POST['en_name'],$_POST['phone'],$_POST['fax'],$_POST['name'],$_POST['email']);
+	        array_push($params,$_POST['address'],$_POST['introduction'],$_POST['url']);
+	        department_updata($userid,$params);
+	    break;
+
 
 	    case 4: //公司
 	        $params = array($_POST['ch_name'],$_POST['en_name'],$_POST['phone'],$_POST['fax'],$_POST['uni_num'],$_POST['name'],$_POST['pic'],$_POST['email']);
@@ -60,7 +66,25 @@ function student_updata($userid,$params,$params2)
       
 	}
 
-
+//系所的資料修改
+function department_updata($userid,$params)
+	{
+		include_once("sqlsrv_connect.php");
+		
+		$sql  = "update department set ch_name=(?), en_name=(?), phone=(?), fax=(?), name=(?), email=(?), address=(?), introduction=(?), url=(?) where no ='".$userid."'"; 
+        
+        if( sqlsrv_query($conn, $sql, $params) )
+        {
+                echo '修改成功!';
+                echo '<meta http-equiv=REFRESH CONTENT=2;url="department_manage.php#department-info">';
+        }
+        else
+        {
+                echo '修改失敗!';
+                die( print_r( sqlsrv_errors(), true));
+        }
+      
+	}
 
 //廠商的資料修改
 function company_updata($userid,$params)
