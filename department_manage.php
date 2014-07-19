@@ -144,16 +144,15 @@
 		<h1>上傳圖片<i class="fa fa-times login-exit" id="upload-close"></i></h1>
 		<p class="login-hint">您可以更新一張代表系上的照片</p>
 
-		<img src="" class="upload-img-max">
-		<img src="" class="upload-img-min">
+		<img src="<? echo 'img_company/'.$_SESSION['username'].'.jpg' ?>" class="upload-img-max">
+		<img src="<? echo 'img_company/'.$_SESSION['username'].'.jpg' ?>" class="upload-img-min">
 		<form id="upload_form" enctype="multipart/form-data" method="post">
-		 <input type="file" name="file1" id="file1"  class="btn-submit" accept="image/*">
+		 <input type="file" name="file1" id="file1"  class="btn-submit" accept="image/*"> <p id="status"></p>
 		
 		</form>
-		 <p id="status"></p>
 		 <button class=" btn-submit2" id="upload-btn-close">關閉</button>
 
-		<progress id="progressBar" value="0" max="100" class="upload-pross"></progress>
+
 
 	</div> 
 </div>

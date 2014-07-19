@@ -7,7 +7,6 @@
 <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 <link rel="stylesheet" type="text/css" href="css/main.css">
-<link rel="stylesheet" type="text/css" href="css/login.css">
 <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet">
 <script>
 
@@ -166,7 +165,7 @@
 <body>
 <div id="view-header"></div>
 
-<div id="cont" class="add">
+<div id="cont" class="register">
 
 <h1>廠商註冊</h1><hr>
 <form class="form addform" name="form" method="post" action="company_add_finish.php" onsubmit="return check_data();">

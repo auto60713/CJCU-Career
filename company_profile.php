@@ -7,6 +7,7 @@
 	<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="../css/main.css">
 	<link rel="stylesheet" type="text/css" href="../css/company_manage.css">
+	<link rel="stylesheet" type="text/css" href="../css/profile.css">
 	<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 	<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 	<script><? include_once("js_company_detail.php");	echo_company_detail_array($_GET['companyid']); 	?></script>
@@ -43,11 +44,14 @@
 		$('#introduction').text(company_detail_array['introduction']);
 
 		var listbox = $('#profile-worklist');
-		for(var i=0;i<pass_work_array.length;i++){
-			var container = $('<p>').addClass('profile-span-box'),
-			tita = $('<a>').attr('href', '../work/'+pass_work_array[i]['wid']).addClass('profile-span-left').text(pass_work_array[i]['wname']),
-			titloc = $('<span>').addClass('profile-span-right').text((pass_work_array[i]['isout']=='0'?'校內 ':'校外 ')+ pass_work_array[i]['propname']);
-			listbox.append(container.append(tita).append(titloc));
+		if(pass_work_array.length == 0){listbox.append("目前沒有其他職缺");}
+		else{
+		    for(var i=0;i<pass_work_array.length;i++){
+		    	var container = $('<p>').addClass('profile-span-box'),
+		    	tita = $('<a>').attr('href', '../work/'+pass_work_array[i]['wid']).addClass('profile-span-left').text(pass_work_array[i]['wname']),
+		    	titloc = $('<span>').addClass('profile-span-right').text((pass_work_array[i]['isout']=='0'?'校內 ':'校外 ')+ pass_work_array[i]['propname']);
+		    	listbox.append(container.append(tita).append(titloc));
+		    }
 		}
 
 		<?
@@ -78,20 +82,15 @@
 <div class="div-align">
 
 
-<div class="profile-cover">
-	<img class="profile-cover-img" src="http://www.teamswork.tv/wp-content/uploads/2011/09/sub-page-1111.jpeg">
-	<h1 class="profile-name" id="profile-name"></h1>
-</div>
 
-<div class="profile-pic">
-	<img class="profile-pic-img" src="<? echo '../img_company/'.$_GET['companyid'].'.jpg' ; ?>">
-	<div class="profile-pic-change">更換照片</div>
-</div>
 
 <div class="profile-content overfix">
-	
 <div class="profile-boxleft">
-<h2>關於 <a id="profile-btn-edit" href="../company_manage.php">修改</a> </h2><br>
+<h2>關於 <a id="profile-btn-edit" href="../company_manage.php">修改</a> </h2>
+<div class="profile-pic">
+	<img class="profile-pic-img" src="<? echo '../img_company/'.$_GET['companyid'].'.jpg' ; ?>">
+</div>
+
 <h3>公司資訊</h3>
 <p><span class="profile-span-title">中文名稱</span><span id="ch_name"></span></p>
 <p><span class="profile-span-title">英文名稱</span><span id="en_name"></span></p>

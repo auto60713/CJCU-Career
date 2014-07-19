@@ -34,8 +34,7 @@ $userlevel = $_SESSION['level'];
 
 	    case 1: //管理員
 	        $params  = array($_POST['st_name']);
-	        $params2 = array($_POST['st_pic'],$_POST['st_phone'],$_POST['st_mail']);
-	        staff_updata($userid,$params,$params2);
+	        staff_updata($userid,$params);
 	    break;
 
 
@@ -108,14 +107,13 @@ function company_updata($userid,$params)
 
 
 //管理員的資料修改
-function staff_updata($userid,$params,$params2)
+function staff_updata($userid,$params)
 	{
 		include_once("sqlsrv_connect.php");
 		
 		$sql   = "update cjcu_user set user_name=(?) where user_no ='".$userid."'"; 
-		$sql2  = "update cjcu_staff set pic=(?), phone=(?), email=(?) where user_no ='".$userid."'"; 
-        
-        if( sqlsrv_query($conn, $sql, $params) && sqlsrv_query($conn, $sql2, $params2) )
+
+        if( sqlsrv_query($conn, $sql, $params) )
         {
                 echo '修改成功!';
                 echo '<meta http-equiv=REFRESH CONTENT=2;url="staff_manage.php#staff-info">';

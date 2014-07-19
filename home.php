@@ -102,7 +102,7 @@
 <!-- 頁尾訊息 -->
 <div class="footer box-shadow2" _height="none">
 	<div class="container footer-bar">
-	7/7最後更新
+	7/16最後更新
     <!--All Jobs | PostaJob | AboutUs | ContactUs-->
 	<br>
 	© 2014 長大職涯網 Inc. 長榮大學 職涯發展組

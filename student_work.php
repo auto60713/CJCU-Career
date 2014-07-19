@@ -33,8 +33,6 @@ else{echo "您無權訪問該頁面!"; exit;}
 
     */
     $(function(){
-
-    	// init to hide the student's work-apply detail of lightbox
     	
     	$('#student-audit-lightbox').hide();
 
@@ -63,10 +61,10 @@ else{echo "您無權訪問該頁面!"; exit;}
 		    		switch(work_list_array[i]['ch']) {
 		    			//老師說要正名
 			    		case 0: check_status='尚未被公司審核'; hint2.addClass('sta1 onecheck').text(check_status); break;
-			    		case 1: check_status='應徵成功!'; hint2.addClass('sta2 yescheck').text(check_status); break;
+			    		case 1: check_status='應徵成功!請等候通知'; hint2.addClass('sta2 yescheck').text(check_status); break;
 			    		case 2: check_status='應徵失敗!'; hint2.addClass('sta3 nocheck').text(check_status); break;
 			    		case 3: check_status='應徵失敗!'; hint2.addClass('sta4 nocheck').text(check_status); subbox3.append(statustxt);break;
-			    		case 4: check_status='已錄取'; hint2.addClass('sta5 yescheck').text(check_status); break;
+			    		case 4: check_status='工作中'; hint2.addClass('sta5 yescheck').text(check_status); break;
 			    		case 5: check_status='不錄取'; hint2.addClass('sta6 nocheck').text(check_status); break;
 			    		case 6: check_status='完成工作'; hint2.addClass('sta7 yescheck').text(check_status); break;
 			    		break;

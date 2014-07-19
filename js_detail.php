@@ -40,7 +40,21 @@ include_once("sqlsrv_connect.php");
 
 }
 
+/* 管理員 */
+function echo_staff_detail($user_no){
+include_once("sqlsrv_connect.php");
 
+	$sql = "select user_name,role "
+	      ."from cjcu_user "
+	      ."where user_no= ?";
+	
+	$stmt = sqlsrv_query($conn, $sql, array($user_no));
+	if($stmt) $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC); 
+	else die(print_r( sqlsrv_errors(), true));
+
+    echo "var staff_detail_array = ". json_encode($row) . ";\n";
+
+}
 
 
 

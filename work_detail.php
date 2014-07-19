@@ -12,7 +12,7 @@ if(isset($_SESSION['username'])) $user_id = $_SESSION['username'];
 	<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="../css/main.css">
 	<link rel="stylesheet" type="text/css" href="../css/company_manage.css">
-
+	<link rel="stylesheet" type="text/css" href="../css/profile.css">
 	<style type="text/css">
 	#ch{
 		font-size: 16px;
@@ -57,6 +57,7 @@ if(isset($_SESSION['username'])) $user_id = $_SESSION['username'];
 
 	include_once("js_company_detail.php"); 
 	echo_company_detail_array($GLOBALS['cust_company']); 
+
 	?> 
 
 	</script>

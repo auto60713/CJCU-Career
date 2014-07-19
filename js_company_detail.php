@@ -1,7 +1,7 @@
 <?
 
 /* 公司詳細資料轉成JS Array */
-function echo_company_detail_array($work_id){
+function echo_company_detail_array($com_id){
 
 include("sqlsrv_connect.php");
 
@@ -11,7 +11,7 @@ include("sqlsrv_connect.php");
 	      ."from company c,zone z,company_type t "
 	      ."where c.id= ? and c.type=t.id and c.zone_id=z.id";
 
-	$stmt = sqlsrv_query($conn, $sql, array($work_id));
+	$stmt = sqlsrv_query($conn, $sql, array($com_id));
 	if($stmt) $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC); 
 	else die(print_r( sqlsrv_errors(), true));
 

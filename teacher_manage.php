@@ -24,7 +24,6 @@
 		  	switch(loc) {
 			case 'teacher-info':doajax(0);break;
 			case 'teacher-sup':doajax(1);break;
-			case 'teacher-notice':doajax(2);break;
 			default:doajax(0);
 			}
 
@@ -48,11 +47,6 @@
 				url = "teacher_sup.php";
 				break;
 
-				case 2:
-				tpe = 'post';
-				para = {level: <? echo "'".$_SESSION['level']."'"; ?>,username: <? echo "'".$_SESSION['username']."'"; ?>};
-				url = "notice.php";	
-				break;
 			}
 
 			$.ajax({
@@ -88,7 +82,6 @@
 
 		<a href="#teacher-info"><div class="list">個人資訊</div></a><hr>
 	    <a href="#teacher-sup"><div class="list">實習監督</div></a><hr>
-		<a href="#teacher-notice"><div class="list">通知</div></a><hr>
 	</div>
 
 

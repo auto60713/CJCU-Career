@@ -30,14 +30,14 @@ if(!isset( $_SESSION['username'])  ) {
 			case 'staff-info':doajax(0);break;
 			case 'staff-audit0':doajax(1.0);break;
 			case 'staff-audit1':doajax(1.1);break;
-
 			case 'staff-maintain':doajax(2);break;
-			case 'staff-notice':doajax(3);break;
 
 			default:doajax(0);
 			}
 
 		});
+
+		$(window).hashchange();
 
 
 		function doajax(idx){
@@ -57,32 +57,26 @@ if(!isset( $_SESSION['username'])  ) {
 				$('.list:eq('+idx+')').addClass('list-active');
 				$('#right-box-title').text($('.list:eq('+idx+')').text());
 
-				switch(idx) {
-				// student info
+			switch(idx) {
+			// student info
 				case 0:
 				tpe = 'get';
 				para = { userid: <? echo "\"".$_SESSION['username']."\"" ?> };
 				url = "staff_detail_edit.php";
 				break;
-				// audit
+			// audit
 				case 1:
 				tpe = 'get';
 				para = {page:pg};
 				url = "staff_audit.php";
 				break;
-	
-				// maintain
+			// maintain
 				case 2:
 				tpe = 'get';
 				para = {};
 				url = "staff_maintain.php";
 				break;
-				// notice
-				case 3:
-				tpe = 'post';
-				para = {};
-				url = "notice.php";	
-				break;
+	
 			}
 			$.ajax({
 			  type: tpe,
@@ -109,7 +103,7 @@ if(!isset( $_SESSION['username'])  ) {
 		<a href="#staff-info"><div class="list">個人資訊</div></a><hr>
 		<a href="#staff-audit0"><div class="list">審核</div></a><hr>
 		<a href="#staff-maintain"><div class="list">維護</div></a><hr>
-		<a href="#staff-notice"><div class="list">通知</div></a><hr>
+
 	</div>
 
 

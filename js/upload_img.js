@@ -14,8 +14,6 @@ $(function(){
 	$('#profile-img').click(function(event) {
 		
 		$("#status").html("");
-		$('.upload-img-max').attr('src','');
-		$('.upload-img-min').attr('src','');
 		$('#upload-profile-lightbox').show();
 
 	});	
@@ -39,7 +37,6 @@ $(function(){
 
 		ajax.open("POST", "image_upload.php");
 		ajax.send(formdata);
-
 		
 	});
 
@@ -54,7 +51,6 @@ $(function(){
 
 	function completeHandler(event){
 	$("#status").html("上傳完成");
-	$("#progressBar").val(0);
 	$('#file1').removeAttr('disabled');
 	$('.upload-img-max').attr('src',event.target.responseText);
 	$('.upload-img-min').attr('src',event.target.responseText);
@@ -71,7 +67,7 @@ $(function(){
 
 
 
-
+   
 
 });
 

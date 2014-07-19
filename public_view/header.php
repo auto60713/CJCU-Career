@@ -83,14 +83,12 @@ function echo_data($user,$lev){
 
 			echo '<span class="username">'.$username.'</span>';
 			echo '<span><a href="../../../cjcuweb/staff_manage.php">管理</a></span>';
-			echo '<span id="header-notice"><a href="../../../cjcuweb/staff_manage.php#staff-notice">通知</a></span>';
 		}
 
 		else if( $lev == $level_teacher){
 
 			echo '<span class="username">'.$username.'</span>';
 			echo '<span><a href="../../../cjcuweb/teacher_manage.php">管理</a></span>';
-			echo '<span id="header-notice"><a href="../../../cjcuweb/teacher_manage.php#staff-notice">通知</a></span>';
 		}
 		echo '<span><a href="../../../cjcuweb/logout.php">登出</a></span>';
 
