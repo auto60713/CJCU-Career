@@ -23,8 +23,11 @@ $usr = $_SESSION['username'];
 
 		var c = $('#msg');
 
+        if((msglist_array_old.length == 0)&&(msglist_array_new.length == 0)){c.prepend("目前沒有訊息");}
+        else{
 		appenData(msglist_array_old,0);
 		appenData(msglist_array_new,1);
+		}
 		/*
 		id: 2 mcontent: "您的工" recv: "zap" recv_level: 1 send: "cjcu" 
 		send_level: 1 time: "2014-04-30 04:29:38.863" url: "wedf" icon:...
@@ -46,17 +49,16 @@ $usr = $_SESSION['username'];
 
 			var news_bg = (n==1)? '#efe' : ' ';
 			
-			for(var i=0;i<array.length;i++){
-				
-			   var msg = $('<p>').addClass('notice-msg').html(array[i].mcontent),
-			   	   icon = $('<i>').addClass(array[i].icon),
-			   	   time = $('<p>').addClass('notice-time').append(icon).append(array[i].time.split(' ')[0]),
-			   	   content = $('<div>').addClass('notice-content').append(msg).append(time),
-			   	   img = $('<img>').attr('src', 'http://akademik.unissula.ac.id/themes/sia/images/user.png').addClass('notice-sender-img'),
-			   	   box=$('<a>').attr('href', array[i].url).addClass('notice-list').append(img).append(content).css('background-color', news_bg);
-			   c.prepend(box);
-			}	
-		
+			    for(var i=0;i<array.length;i++){
+			    	
+			       var msg = $('<p>').addClass('notice-msg').html(array[i].mcontent),
+			       	   icon = $('<i>').addClass(array[i].icon),
+			       	   time = $('<p>').addClass('notice-time').append(icon).append(array[i].time.split(' ')[0]),
+			       	   content = $('<div>').addClass('notice-content').append(msg).append(time),
+			       	   img = $('<img>').attr('src', 'http://akademik.unissula.ac.id/themes/sia/images/user.png').addClass('notice-sender-img'),
+			       	   box=$('<a>').attr('href', array[i].url).addClass('notice-list').append(img).append(content).css('background-color', news_bg);
+			       c.prepend(box);
+			    }	
 		}
 		
 

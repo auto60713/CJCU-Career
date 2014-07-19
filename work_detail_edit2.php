@@ -31,7 +31,7 @@ function isCompanyWork($conn,$companyid,$workid){
 		// 該工作的詳細資料修改
 		$.ajax({
 		  type: 'get',
-		  url: 'add_work.php',
+		  url: 'work_add.php',
 		  async:false,
 		  data: {mode:'edit',workid:  <?  echo (int)$_POST['workid']; ?> },
 		  success: function (data) { $('#workedit-content-edit').html(data) ;  }
@@ -151,7 +151,7 @@ function isCompanyWork($conn,$companyid,$workid){
 
 	<!-- 工作設定 -->
 	<div id='workedit-content-set' class="workedit-content-hide" tabtoggle='workedit2'>	
-	<h2>刪除工作</h2>
+	<h2 class="delete-work">刪除工作</h2>
 	</div>
 
 

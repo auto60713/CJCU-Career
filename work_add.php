@@ -60,7 +60,7 @@ function isCompanyWork($conn,$companyid,$workid){
 
 <button id="btn-copy-work" class="btn-copy-work"><i class="fa fa-files-o"></i> 從現有工作複製</button>
 
-<form name="work" id="work_edit_form" method="post" action="register_work.php" onsubmit="return check_data();" >
+<form name="work" id="work_edit_form" method="post" action="work_add_finish.php" onsubmit="return check_data();" >
 <table>
 
 <tr>

@@ -20,19 +20,19 @@ if(!isset($_SESSION['username']) || $_SESSION['level'] != $level_student) {
 <body>
 <script>
 //後端傳來個人資料
-<? include_once("js_student_detail.php"); echo_student_detail_array($_SESSION['username']); ?>
+<? include_once("js_detail.php"); echo_student_detail($_SESSION['username']); ?>
 
 	$(function(){
 	
 		var detail_column = "",detail_input = "",idx = 0;
 
-		for(var key in user_detail_array){
+		for(var key in student_profile_array){
 			
 			//資料的敘述
 			detail_column+=column_name[idx]+"<br>";
 			
 			//資料的內容
-            detail_input+=user_detail_array[key]+"<br>";
+            detail_input+=student_profile_array[key]+"<br>";
             
 			idx++;
 		}	

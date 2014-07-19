@@ -44,7 +44,7 @@
 		$('#introduction').text(company_detail_array['introduction']);
 
 		var listbox = $('#profile-worklist');
-		if(pass_work_array.length == 0){listbox.append("目前沒有其他職缺");}
+		if(pass_work_array.length == 0){listbox.append("目前沒有職缺");}
 		else{
 		    for(var i=0;i<pass_work_array.length;i++){
 		    	var container = $('<p>').addClass('profile-span-box'),

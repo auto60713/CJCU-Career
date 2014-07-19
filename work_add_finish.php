@@ -59,11 +59,11 @@ if( !isset($name) || !isset($work_type)  || !isset($year1) || !isset($month1) ||
 	$result = sqlsrv_query($conn, $sql, $params);
 	if($result){
 		echo '新增成功! 跳轉中，請稍候...';
-		echo '<meta http-equiv=REFRESH CONTENT=1;url=home.php>';
+		echo '<meta http-equiv=REFRESH CONTENT=1;url=company_manage.php#company-work>';
 	}
 	else{
-		echo '新增失敗! 跳轉中，請稍候...';
-		echo '<meta http-equiv=REFRESH CONTENT=1;url=add_work.php>';
+		echo '新增失敗! 請連管理員...';
+		echo '<meta http-equiv=REFRESH CONTENT=1;url=company_manage.php>';
 	}
 }
 ?>

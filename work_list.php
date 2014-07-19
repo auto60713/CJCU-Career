@@ -28,10 +28,11 @@ else{echo "No permission!"; exit;
     */
     $(function(){
 
- 		 var body = $('#company-work-list-container');
+ 		var body = $('#company-work-list-container');
 
-
-		 for(var i=0;i<work_list_array.length;i++){
+        if(work_list_array.length == 0){body.append("目前沒有工作");}
+        else{
+		    for(var i=0;i<work_list_array.length;i++){
 
 		   		chclass='';
 		   		chtxt='';
@@ -68,6 +69,7 @@ else{echo "No permission!"; exit;
 		    		
 		    		body.append(mainbox);
 		    }
+		}
 
 		  $('#search-typefilter').on('change', function(event) {
 		  	resort_work();

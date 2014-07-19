@@ -7,6 +7,7 @@
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 	<link rel="stylesheet" type="text/css" href="css/company_manage.css">
 	<link rel="stylesheet" type="text/css" href="css/work_detail_edit.css">
+	<link rel="stylesheet" type="text/css" href="css/profile.css">
 	<link href="font-awesome/css/font-awesome.min.css" rel="stylesheet">
 	<script src="js/jquery.js"></script>
 	<script src="js/jquery.hashchange.min.js"></script>
@@ -88,7 +89,7 @@
 	<div id="" class="left-box" >
 
 		<div class="profile-box">
-			<img src="<? echo 'img_user/'.$_SESSION['username'].'.jpg' ?>" class="profile-img" id="profile-img">
+			<img src="<? echo 'img_user/'.$_SESSION['username'].'.jpg' ?>" class="profile-img" id="profile-img"><br>
 			<h2><? echo $_SESSION['username'] ?></h2>
 		</div>
 
@@ -127,7 +128,7 @@
 		 <p id="status"></p>
 		 <button class=" btn-submit2" id="upload-btn-close">關閉</button>
 
-		<progress id="progressBar" value="0" max="100" class="upload-pross"></progress>
+		<!-- <progress id="progressBar" value="0" max="100" class="upload-pross"></progress> -->
 
 	</div> 
 </div>
