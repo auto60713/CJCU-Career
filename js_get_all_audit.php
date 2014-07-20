@@ -5,7 +5,7 @@ function  get_all_audit($ch){
 
 include("sqlsrv_connect.php");
 
-$sql = "select w.id id,w.name wname,z.name zname,w.is_outside isout,p.name propname,[recruitment _no] rno,w.date date
+$sql = "select w.id id,w.name wname,w.company_id comid,z.name zname,w.is_outside isout,p.name propname,[recruitment _no] rno,w.date date
  from work w,zone z,work_prop p
  where w.zone_id = z.id and work_prop_id = p.id and w.[check]=?";
 
@@ -33,8 +33,6 @@ if($stmt) {
 
 }
 else die(print_r( sqlsrv_errors(), true));
-
-
 }
 
 

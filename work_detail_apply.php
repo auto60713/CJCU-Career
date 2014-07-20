@@ -33,7 +33,7 @@ function isCompanyWork($conn,$companyid,$workid){
 <html>
 <head>
 	<meta charset="UTF-8">
-    <script><? include_once('js_company_work_detai_list.php'); echo_company_work_apply_list_array($_GET['workid']);  ?>
+    <script><? include_once('js_work_detail_apply.php'); echo_work_apply_list_array($_GET['workid']);  ?>
     /*
     <div class="work-list-box">
 	<div class="sub-box"><img src="" class="work-img"></div>
@@ -53,16 +53,15 @@ function isCompanyWork($conn,$companyid,$workid){
     	var body = $('#company-work-list-container');
 
     	// 如果有人應徵，清空列表區域，準備顯示
-    	if(company_work_apply_list_array.length>0) body.html('');
+    	if(work_apply_list_array.length>0) body.html('');
 
-    	for(var i=0;i<company_work_apply_list_array.length;i++){
+    	for(var i=0;i<work_apply_list_array.length;i++){
 
     		var wimg = $('<img>').attr('src', 'http://akademik.unissula.ac.id/themes/sia/images/user.png').addClass('work-img'),
-    			tita = $('<a>').attr('href', 'student/'+company_work_apply_list_array[i]['user_id']).text(company_work_apply_list_array[i]['user_id']),
+    			tita = $('<a>').attr('href', 'student/'+work_apply_list_array[i]['user_id']).text(work_apply_list_array[i]['name']),
     			
     			
-    			overview = $('<i>').addClass('fa fa-eye'),
-    			doca = $('<a>').attr('href', '').append(overview).append(' Overview'),
+    			doca = $('<a>').append(work_apply_list_array[i]['depname']),
 
     			gear = $('<i>').addClass('fa fa-cog'),
     			auditbtn = $('<button>').addClass('staff-audit-btn').append(gear).append(' 審核'),
@@ -72,7 +71,7 @@ function isCompanyWork($conn,$companyid,$workid){
     			.append($('<p>').addClass('work-hint').append(doca)),
     			subbox3 = $('<div>').addClass('sub-box2');
 
-    			subbox3.on('click', {arr:company_work_apply_list_array[i]} ,function(event) {
+    			subbox3.on('click', {arr:work_apply_list_array[i]} ,function(event) {
 					//event.data.arr['user_id']
 
 						$('.staff-apply-form').remove();
@@ -103,7 +102,7 @@ function isCompanyWork($conn,$companyid,$workid){
 				});
 
 
-				switch(company_work_apply_list_array[i]['check']) {
+				switch(work_apply_list_array[i]['check']) {
 					case 0:case 3:
 						subbox3.append(auditbtn);break;
 					case 1:

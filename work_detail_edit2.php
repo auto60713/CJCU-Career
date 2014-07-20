@@ -40,7 +40,7 @@ function isCompanyWork($conn,$companyid,$workid){
 		// 該工作的應徵者列表
 		$.ajax({
 		  type: 'get',
-		  url: 'company_work_apply_list.php',
+		  url: 'work_detail_apply.php',
 		  data: {workid:  <?  echo (int)$_POST['workid']; ?> },
 		  success: function (data) { $('#workedit-content-apply').html(data) ;  }
 		});

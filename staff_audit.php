@@ -92,9 +92,9 @@ if($_SESSION['level']!=$level_staff){
 			wlink= $('<a>').attr({href: lintext+'/'+data.id,target: '_blank'}).text(" "+titname),
 			h1 = $('<h1>').append(icon).append(wlink),
 			eyes = $('<i>').addClass('fa fa-eye'),
-			overview = $('<a>').addClass('staff-audit-overview').append(eyes).append(' Overview'),
+			href = $('<a>').attr("href", "/cjcuweb/company/"+data.comid).attr("target", "_blank"),
+			overview = href.addClass('staff-audit-overview').append(eyes).append("發布自 "+data.comid),
 			left = $('<div>').addClass('staff-audit-list-left').append(h1).append(overview),
-
 			gear= $('<i>').addClass('fa fa-cog'),
 			btn = $('<button>').addClass('staff-audit-btn').attr({'t': type, 'i':i , ch:ch}).append(gear).append(' 審核'),
 			right= $('<div>').addClass('staff-audit-list-right').append(btn),

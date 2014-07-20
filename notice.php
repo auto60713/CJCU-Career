@@ -22,7 +22,6 @@ $usr = $_SESSION['username'];
 	$(function(){
 
 		var c = $('#msg');
-
         if((msglist_array_old.length == 0)&&(msglist_array_new.length == 0)){c.prepend("目前沒有訊息");}
         else{
 		appenData(msglist_array_old,0);

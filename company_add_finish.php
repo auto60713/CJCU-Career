@@ -30,6 +30,7 @@ if(empty($id) || empty($pw) || empty($ch_name) || empty($uni_num) || empty($name
 }
 
 else{
+    // 新增公司
 	// MD5加密
 	$pw = md5($pw);
     $sql = "INSERT INTO company (id,pw,ch_name,en_name,phone,fax,uni_num,name,pic,email,type,zone_id,address,budget,introduction,doc,staff_num,censored,url) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -39,18 +40,29 @@ else{
     $stmt = sqlsrv_query( $conn, $sql, $params);
     if( $stmt === false ) {
 
-        echo '註冊失敗...';
+        echo '註冊失敗...錯誤類型:"公司無法註冊"';
         echo '<meta http-equiv=REFRESH CONTENT=1;url=company_add.php>';
 
         die( print_r( sqlsrv_errors(), true));
     }
     else{
+        //新增通知系統
+        $sql = "INSERT INTO cjcu_notify (user_no,user_level,isnews) VALUES (?, ?, ?)";
+        $params = array($id, 1 , 0);
+        $stmt = sqlsrv_query( $conn, $sql, $params);
+        if( $stmt === false ) {
+
+        echo '註冊失敗...錯誤類型:"通知系統"';
+        echo '<meta http-equiv=REFRESH CONTENT=1;url=company_add.php>';
+        }
+        else{
 
         $_SESSION['username'] = $id;
         $_SESSION['level'] = 4;
 
         echo '註冊成功! 登入中...';
 		echo '<meta http-equiv=REFRESH CONTENT=1;url=home.php>';
+        }
 	
 	}
 

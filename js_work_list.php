@@ -115,15 +115,17 @@ function echo_pass_work_array($companyid){
 }	
 
 
+
+//學生應徵的工作
 function echo_student_apply_list_array($userid){
 
 		include("sqlsrv_connect.php");
 		include("cjcuweb_lib.php");
 		$para = array($userid);
 
-		$sql = "select w.id wid,w.name wname,z.name zname,w.is_outside isout,p.name propname,[recruitment _no] rno,w.date date,t.name,l.[check] ch
-				from work w,zone z,work_prop p,work_type t,line_up l
-				where l.work_id = w.id  and w.zone_id = z.id and work_prop_id = p.id and w.work_type_id=t.id and l.user_id=?";
+		$sql = "select w.id wid,w.name wname,z.name zname,c.id comid,c.ch_name comname,w.is_outside isout,p.name propname,[recruitment _no] rno,w.date date,t.name,l.[check] ch
+				from work w,company c,zone z,work_prop p,work_type t,line_up l
+				where l.work_id = w.id and c.id = w.company_id and w.zone_id = z.id and work_prop_id = p.id and w.work_type_id=t.id and l.user_id=?";
 		
 		$stmt = sqlsrv_query($conn, $sql, $para);
 		$work_list_array = array();

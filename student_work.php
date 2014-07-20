@@ -38,23 +38,26 @@ else{echo "您無權訪問該頁面!"; exit;}
 
  		 var body = $('#company-work-list-container');
 
+if(work_list_array.length == 0){body.prepend("目前沒有任何應徵");}
+else{
  		 for(var i=0;i<work_list_array.length;i++){
 
 
  		 		var icon = $('<i>').addClass('fa fa-book icon').addClass('work-img'),
 		    		tita = $('<a>').attr('href', 'work/'+work_list_array[i]['wid']).text(work_list_array[i]['wname']),
 		    		tit = $('<h1>').addClass('work-tit').append(tita),
-		    		hint = $('<p>').addClass('work-hint')
-		    		.append(work_list_array[i]['name']+'<br>'+ (work_list_array[i]['isout']=='0'?'校內 ':'校外 ') + work_list_array[i]['propname'] +'<br>'+ work_list_array[i]['date']),
+		    		companyherf = $('<a>').attr('href', 'company/'+work_list_array[i]['comid']).text(work_list_array[i]['comname']),
+		    		company = $('<div>').addClass('manage-company-herf').text("發布自 ").append(companyherf),
+		    		hint = $('<p>').addClass('work-hint').append((work_list_array[i]['isout']=='0'?'校內 ':'校外 ') + work_list_array[i]['propname'] +'<br>'+ work_list_array[i]['date']),
 		    		hint2 = $('<p>').attr({
-		    			workid : work_list_array[i]['wid'],
+		    		    workid : work_list_array[i]['wid'],
 		    			audit : work_list_array[i]['ch']
 		    		}).addClass('check-lightbox'),
 
 		    		// 移動到LightBox內 pass = $('<div>').attr('workid', work_list_array[i]['wid']).addClass('pass-req').text("要求再審核"),
 		    		statustxt = $('<span>').addClass('nocheck').text('已要求重新再審！'),
 		    		subbox1 = $('<div>').addClass('sub-box').append(icon),
-		    		subbox2 = $('<div>').addClass('sub-box').append(tit).append(hint),
+		    		subbox2 = $('<div>').addClass('sub-box').append(tit).append(company).append(hint),
 		    		subbox3 = $('<div>').addClass('sub-box2').append(hint2);
 
 		    		var check_status='';
@@ -62,7 +65,7 @@ else{echo "您無權訪問該頁面!"; exit;}
 		    			//老師說要正名
 			    		case 0: check_status='尚未被公司審核'; hint2.addClass('sta1 onecheck').text(check_status); break;
 			    		case 1: check_status='應徵成功!請等候通知'; hint2.addClass('sta2 yescheck').text(check_status); break;
-			    		case 2: check_status='應徵失敗!'; hint2.addClass('sta3 nocheck').text(check_status); break;
+			    		case 2: check_status='應徵失敗!(查看原因)'; hint2.addClass('sta3 nocheck').text(check_status); break;
 			    		case 3: check_status='應徵失敗!'; hint2.addClass('sta4 nocheck').text(check_status); subbox3.append(statustxt);break;
 			    		case 4: check_status='工作中'; hint2.addClass('sta5 yescheck').text(check_status); break;
 			    		case 5: check_status='不錄取'; hint2.addClass('sta6 nocheck').text(check_status); break;
@@ -162,9 +165,8 @@ else{echo "您無權訪問該頁面!"; exit;}
 							for(var i=0;i<data.length;i++){
 								var time = $('<span>').addClass('student-audit-htime').text(data[i].time.split(' ')[0]),
 									iconcalss = (data[i].censored==1)? 'fa fa-check':'fa fa-times',
-									statustxt = (data[i].censored==1)? ' 應徵成功':' 應徵失敗',
 									icon = $('<i>').addClass(iconcalss),
-									hstatus = $('<span>').addClass('student-audit-hstatus').append(icon).append(statustxt),
+									hstatus = $('<span>').addClass('student-audit-hstatus').append(icon),
 									msg = $('<span>').addClass('student-audit-hmsg').text(data[i].msg),
 									list = $('<div>').addClass('student-audit-list').append(time).append(hstatus).append(msg);
 								historybox.append(list);
@@ -182,6 +184,7 @@ else{echo "您無權訪問該頁面!"; exit;}
 		    		body.prepend(mainbox);
 
  		 }
+} //else
 
 		  $('#search-txt').on('input', function(event) {
 		  	//console.log($('#search-txt').val());

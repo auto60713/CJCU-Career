@@ -99,7 +99,7 @@ if(!isset( $_SESSION['username'])  ) {
 <div class="div-align overfix">
 
 	<div class="left-box" >
-		<h2><? echo $_SESSION['username'] ?></h2><br><hr>
+		<h2><? echo $_SESSION['username'] ?></h2><br>
 		<a href="#staff-info"><div class="list">個人資訊</div></a><hr>
 		<a href="#staff-audit0"><div class="list">審核</div></a><hr>
 		<a href="#staff-maintain"><div class="list">維護</div></a><hr>
