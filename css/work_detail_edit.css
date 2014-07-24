@@ -394,3 +394,15 @@
 	float: right;
 	font-size: 16px;
 }
+
+
+
+
+/* 刪除工作 */
+.delete-work{
+    font-size:20px;
+}
+.delete-work:hover{
+	cursor: pointer;
+	color: #B00000;
+}

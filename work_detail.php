@@ -55,8 +55,8 @@ if(isset($_SESSION['username'])) $user_id = $_SESSION['username'];
 	include_once('js_work_list.php'); 
 	echo_pass_work_array($GLOBALS['cust_company']);  
 
-	include_once("js_company_detail.php"); 
-	echo_company_detail_array($GLOBALS['cust_company']); 
+	include_once("js_detail.php"); 
+	echo_publisher_detail($GLOBALS['publisher'],$GLOBALS['cust_company']); 
 
 	?> 
 
@@ -152,10 +152,18 @@ if(isset($_SESSION['username'])) $user_id = $_SESSION['username'];
 			listbox.append(container.append(tita).append(titloc));
 		}
 
-		$('#cp_name').append($('<a>').attr('href', '../company/'+<? echo "'".$GLOBALS['cust_company']."'"; ?>).text(company_detail_array['ch_name']));
-		$('#cp_type').text(company_detail_array['typename']);
-		$('#cp_boss').text(company_detail_array['name']);
-		$('#cp_phone').text(company_detail_array['phone']);
+
+if(work_detail_array['pub'] ==1){
+    var pub_type_name = "關於公司",pub_type = "company";
+}
+else if(work_detail_array['pub'] ==2){
+    var pub_type_name = "關於系所",pub_type = "department";
+}
+        $('#about_work h2').text(pub_type_name);
+		$('#pub_name').append($('<a>').attr('href', '../'+pub_type+'/'+publisher_detail_array['id']).text(publisher_detail_array['name']));
+		$('#pub_boss').text(publisher_detail_array['boss']);
+		$('#pub_phone').text(publisher_detail_array['phone']);
+		$('#pub_email').text(publisher_detail_array['email']);
 
 
 
@@ -204,23 +212,23 @@ if(isset($_SESSION['username'])) $user_id = $_SESSION['username'];
 
 <div class="profile-boxright">
 
-<div class="profile-boxinner" id="about_work"><h2>關於公司</h2>
+<div class="profile-boxinner" id="about_work"><h2></h2>
 
 <p class="profile-span-box">
 <span class="profile-span-left">名稱</span>
-<span class="profile-span-right" id="cp_name"></span></p>
-
-<p class="profile-span-box">
-<span class="profile-span-left">類型</span>
-<span class="profile-span-right" id="cp_type"></span></p>
+<span class="profile-span-right" id="pub_name"></span></p>
 
 <p class="profile-span-box">
 <span class="profile-span-left">負責人</span>
-<span class="profile-span-right" id="cp_boss"></span></p>
+<span class="profile-span-right" id="pub_boss"></span></p>
 
 <p class="profile-span-box">
 <span class="profile-span-left">連絡電話</span>
-<span class="profile-span-right" id="cp_phone"></span></p>
+<span class="profile-span-right" id="pub_phone"></span></p>
+
+<p class="profile-span-box">
+<span class="profile-span-left">信箱</span>
+<span class="profile-span-right" id="pub_email"></span></p>
 
 
 </div>

@@ -8,6 +8,7 @@
 	<link rel="stylesheet" type="text/css" href="css/company_manage.css">
 	<link rel="stylesheet" type="text/css" href="css/work_detail_edit.css">
 	<link rel="stylesheet" type="text/css" href="css/company_worK_apply_list.css">
+	<link rel="stylesheet" type="text/css" href="css/profile.css">
 	<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
 	<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 	<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>

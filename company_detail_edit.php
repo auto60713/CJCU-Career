@@ -5,7 +5,7 @@ if(isset($_GET['companyid'])) $_SESSION['username']=$_GET['companyid']; else{hea
 <!doctype html>
 <html>
 <head>
-	<script><? include_once("js_company_detail.php"); echo_company_detail_array($_SESSION['username']); ?></script>
+	<script><? include_once("js_detail.php"); echo_company_detail($_SESSION['username']); ?></script>
 	<script><? include_once("js_audit_detail.php"); echo_audit_detail_array($_SESSION['username'],0); ?></script>
 </head>
 

@@ -120,6 +120,26 @@ function isCompanyWork($conn,$companyid,$workid){
 		});
 		tabgroup[<?  echo (int)$_POST['page']; ?>].click();
 
+
+        //刪除工作
+        var delete_work = $('a.delete-work');
+		delete_work.click(function(event) {
+			//以後要做一個AJAX拿工作名字的
+		    if (confirm ("確定要刪除此工作  ?")){
+
+		    	$.ajax({
+			     	type:"POST",
+			     	url: "delete.php",
+			     	data:{mode:0,workid:<? echo (int)$_POST['workid']; ?>},
+                    success: function (data) { 
+			      	    alert(data);
+                	    window.location.href = 'company_manage.php#company-work';
+			      }
+			    });
+		    }
+		});
+
+
 	});
 
 
@@ -151,7 +171,7 @@ function isCompanyWork($conn,$companyid,$workid){
 
 	<!-- 工作設定 -->
 	<div id='workedit-content-set' class="workedit-content-hide" tabtoggle='workedit2'>	
-	<h2 class="delete-work">刪除工作</h2>
+	<a class="delete-work">刪除工作</a>
 	</div>
 
 

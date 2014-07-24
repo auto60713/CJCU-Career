@@ -14,7 +14,7 @@ if(isset($_POST['workid']) &&  $_SESSION['level'] == $level_student )
 
 
 
-//學校審核公司的理由
+//管理員審核公司的理由
 function echo_audit_detail_array($obj_id,$type){
 
 	include("sqlsrv_connect.php");

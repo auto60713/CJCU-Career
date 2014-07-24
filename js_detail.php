@@ -11,8 +11,6 @@
 function echo_student_profile($stu_no){
 include_once("sqlsrv_connect.php");
 
-	$column_name = array("學號","姓名","系所","履歷檔案");
-
 	$sql = "select user_no number,user_name name,dep_name depname "
 		  ."from cjcu_user where user_no=?";
 	
@@ -66,6 +64,44 @@ include_once("sqlsrv_connect.php");
 
 }
 
+/* 公司 */
+function echo_company_detail($com_id){
+
+include("sqlsrv_connect.php");
+
+    $sql = "select c.ch_name,c.en_name,c.phone,c.fax,c.uni_num,c.name,c.pic,c.email,t.name typename,z.name zonename,c.address,c.budget,c.introduction,c.doc,c.staff_num,c.url,c.censored "
+	      ."from company c,zone z,company_type t "
+	      ."where c.id= ? and c.type=t.id and c.zone_id=z.id";
+
+	$stmt = sqlsrv_query($conn, $sql, array($com_id));
+	if($stmt) $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC); 
+	else die(print_r( sqlsrv_errors(), true));
+
+    echo "var company_detail_array = ". json_encode($row) . ";";
+}
+
+/* 公司的位置跟類型 */
+function echo_company_type_and_zone($work_id){
+include("sqlsrv_connect.php");
+
+// 取出公司類型編號 (因為detail_array是直接取得typename)
+    $sql = "select type,zone_id "
+	      ."from company "
+	      ."where id= ?";
+
+	$stmt = sqlsrv_query($conn, $sql, array($work_id));
+	if($stmt) $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC); 
+
+	else die(print_r( sqlsrv_errors(), true));
+
+    echo "var company_type = ".$row[type].";";
+    echo "var company_zone = ".$row[zone_id].";";
+}
+
+
+
+
+
 /* 系所 */
 function echo_department_detail($dep_no){
 include_once("sqlsrv_connect.php");
@@ -99,7 +135,28 @@ include_once("sqlsrv_connect.php");
 }
 
 
+/* to work detail ------------------------- */
 
+/* 公司或系所的資料 to work detail */
+function echo_publisher_detail($pub,$id){
+
+include("sqlsrv_connect.php");
+if($pub == 1){
+
+    $sql = "select id,ch_name name,phone,name boss,email FROM company WHERE id= ?";
+}
+else if(($pub == 2)){
+
+    $sql = "select no id,ch_name name,phone,name boss,email FROM department WHERE no= ?";
+}
+
+	$stmt = sqlsrv_query($conn, $sql, array($id));
+	if($stmt) $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC); 
+	else die(print_r( sqlsrv_errors(), true));
+
+    //發布者
+    echo "var publisher_detail_array = ". json_encode($row) . ";";
+}
 
 
 ?>
