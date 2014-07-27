@@ -23,6 +23,21 @@ include_once("sqlsrv_connect.php");
 }
 
 
+/* 管理員 */
+function echo_staff_profile($id){
+include_once("sqlsrv_connect.php");
+
+	$sql = "SELECT user_name name FROM cjcu_user WHERE user_no=?";
+	
+	$stmt = sqlsrv_query($conn, $sql, array($id));
+	if($stmt) $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC); 
+	else die(print_r( sqlsrv_errors(), true));
+
+    echo "var staff_profile_array = ". json_encode($row) . ";\n";
+
+}
+
+
 /* 系所 */
 function echo_department_profile($dep_no){
 include("sqlsrv_connect.php");

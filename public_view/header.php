@@ -5,18 +5,21 @@ $user = $_SESSION['username'];
 
 
 //抓取資料庫 此username的用戶名稱
-function echo_username(){
+function echo_username($user,$mod){
 
-            include("../sqlsrv_connect.php");
-            $sql = "SELECT * FROM cjcu_user WHERE user_no = '".$user."'";
-            $stmt = sqlsrv_query( $conn, $sql );
+    include("../sqlsrv_connect.php");
+     if ($mod == "com")  $sql = "SELECT ch_name  username FROM company WHERE id = ?";
+else if ($mod == "dep")  $sql = "SELECT ch_name username FROM department WHERE no = ?";
+else if ($mod == "user") $sql = "SELECT user_name username FROM cjcu_user WHERE user_no = ?";
 
-            while( $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC) ) {
-            $username = $row[user_name];
-            }
+        $stmt = sqlsrv_query( $conn, $sql ,array($user));
 
-            sqlsrv_free_stmt($stmt);
-            //釋放記憶體資源
+        while( $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC) ) {
+        $GLOBALS['header_name'] = $row[username];
+        }
+
+        sqlsrv_free_stmt($stmt);
+        //釋放記憶體資源
 }
 
 function echo_data($user,$lev){
@@ -25,78 +28,39 @@ function echo_data($user,$lev){
 	include_once("../cjcuweb_lib.php");
 	if(isset ($user)){
 
-         //抓取資料庫 此username的用戶名稱
-		    include("../sqlsrv_connect.php");
-            $sql = "SELECT * FROM cjcu_user WHERE user_no = '".$user."'";
-            $stmt = sqlsrv_query( $conn, $sql );
-
-            while( $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC) ) {
-            $username = $row[user_name];
-            }
-
-            sqlsrv_free_stmt($stmt);
-            //釋放記憶體資源
-
 		if( $lev == $level_company) {
-
-			//抓取資料庫 此username的用戶名稱
-		    include("../sqlsrv_connect.php");
-            $sql = "SELECT * FROM company WHERE id = '".$user."'";
-            $stmt = sqlsrv_query( $conn, $sql );
-
-            while( $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC) ) {
-            $username = $row[ch_name];
-            }
-
-            sqlsrv_free_stmt($stmt);
-            //釋放記憶體資源
-
-			echo '<span class="username"><a href="../../../cjcuweb/company/'.$user.'">'.$username.'</a></span>';
+            echo_username($user,'com');
+			echo '<span class="username"><a href="../../../cjcuweb/company/'.$user.'">'.$GLOBALS['header_name'].'</a></span>';
 			echo '<span><a href="../../../cjcuweb/company_manage.php">管理</a></span>';
 			echo '<span id="header-notice"><a href="../../../cjcuweb/company_manage.php#company-notice">通知</a></span>';
 		}
 		else if( $lev == $level_department) {
-
-			//抓取資料庫 此username的用戶名稱
-		    include("../sqlsrv_connect.php");
-            $sql = "SELECT * FROM department WHERE no = '".$user."'";
-            $stmt = sqlsrv_query( $conn, $sql );
-
-            while( $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC) ) {
-            $username = $row[ch_name];
-            }
-
-            sqlsrv_free_stmt($stmt);
-            //釋放記憶體資源
-            
-			echo '<span class="username"><a href="../../../cjcuweb/department/'.$user.'">'.$username.'</a></span>';
+            echo_username($user,'dep');
+			echo '<span class="username"><a href="../../../cjcuweb/department/'.$user.'">'.$GLOBALS['header_name'].'</a></span>';
 			echo '<span><a href="../../../cjcuweb/department_manage.php">管理</a></span>';
 			echo '<span id="header-notice"><a href="../../../cjcuweb/department_manage.php#department-notice">通知</a></span>';
 		}
 		else if( $lev == $level_student){
-		
-			echo '<span class="username"><a href="../../../cjcuweb/student/'.$user.'">'.$username.'</a></span>';
+            echo_username($user,'user');
+			echo '<span class="username"><a href="../../../cjcuweb/student/'.$user.'">'.$GLOBALS['header_name'].'</a></span>';
 			echo '<span><a href="../../../cjcuweb/student_manage.php">管理</a></span>';
 			echo '<span id="header-notice"><a href="../../../cjcuweb/student_manage.php#student-notice">通知</a></span>';
 		}
 		else if( $lev == $level_staff){
-
-			echo '<span class="username">'.$username.'</span>';
+            echo_username($user,'user');
+			echo '<span class="username"><a href="../../../cjcuweb/staff/'.$user.'">'.$GLOBALS['header_name'].'</a></span>';
 			echo '<span><a href="../../../cjcuweb/staff_manage.php">管理</a></span>';
 		}
 
 		else if( $lev == $level_teacher){
-
-			echo '<span class="username">'.$username.'</span>';
+            echo_username($user,'user');
+			echo '<span class="username">'.$GLOBALS['header_name'].'</span>';
 			echo '<span><a href="../../../cjcuweb/teacher_manage.php">管理</a></span>';
 		}
 		echo '<span><a href="../../../cjcuweb/logout.php">登出</a></span>';
 
 	}	
 	else echo '<span><a href="#" id="login-btn">登入</a></span>';
-
-
-	//echo $user." >".$lev." >".$level_student ." >" .$_SESSION['level2'];
 }
 
 

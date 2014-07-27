@@ -21,28 +21,35 @@ if($_SESSION['level']!=$level_staff){
 	var fa;
 	$(function(){
 
-		var notyet = $('#staff-audit-notyet');
+        //
+		var notyet = $('#staff-audit-notyet'),
+            total_list = company_list_array0.length+work_list_array0.length;
 
-		for(var i=0;i<company_list_array0.length;i++){
-				notyet.append( append_data(0,company_list_array0[i],i,0) );
-		}
+        if(total_list == 0) notyet.append("沒有任何請求");
+        else {
+		    for(var i=0;i<company_list_array0.length;i++){
+		    		notyet.append( append_data(0,company_list_array0[i],i,0) );
+		    }
 
-		for(var i=0;i<work_list_array0.length;i++){
-				notyet.append( append_data(1,work_list_array0[i],i,0) );			
-		}
+		    for(var i=0;i<work_list_array0.length;i++){
+		    		notyet.append( append_data(1,work_list_array0[i],i,0) );			
+		    }
+        }
 
+        //
+		var again = $('#staff-audit-again'),
+		    total_list2 = company_list_array3.length+work_list_array3.length;
 
-		var again = $('#staff-audit-again');
+        if(total_list2 == 0) again.append("沒有任何請求");
+        else {
+		    for(var i=0;i<company_list_array3.length;i++){
+		    		again.append( append_data(0,company_list_array3[i],i,3) );
+		    }
 
-		for(var i=0;i<company_list_array3.length;i++){
-				again.append( append_data(0,company_list_array3[i],i,3) );
-		}
-
-		for(var i=0;i<work_list_array3.length;i++){
-				again.append( append_data(1,work_list_array3[i],i,3) );			
-		}
-
-
+		    for(var i=0;i<work_list_array3.length;i++){
+		    		again.append( append_data(1,work_list_array3[i],i,3) );			
+		    }
+        }
 		/*
 			<div class="staff-audit-list">
 
