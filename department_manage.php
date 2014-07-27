@@ -51,13 +51,13 @@
 				case 1:
 				tpe = 'get';
 				para = {mode:'add'};
-				url = "add_work.php";
+				url = "work_add.php";
 				break;
 				// manage work
 				case 2:
 				tpe = 'get';
 				para = {};
-				url = "company_work_list.php";
+				url = "work_list.php";
 				break;
 				// notice
 				case 3:

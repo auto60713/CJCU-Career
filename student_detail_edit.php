@@ -21,6 +21,7 @@ if(!isset($_SESSION['username']) || $_SESSION['level'] != $level_student) {
 <script>
 //後端傳來個人資料
 <? include_once("js_detail.php"); echo_student_detail($_SESSION['username']); ?>
+/*
 
 	$(function(){
 	
@@ -43,8 +44,10 @@ if(!isset($_SESSION['username']) || $_SESSION['level'] != $level_student) {
 		$('#detail_input').html(detail_input);
 
 	});
+*/
 </script>
 <!-- 呈現欄位名稱 -->
+要配合學生系統的資料以及電子履歷
 <div style="float:left; padding-right:50px;" id="detail_column"></div>
 <!-- 個人資料 -->
 <form method="post" action="updata.php" id="detail_input"></form>

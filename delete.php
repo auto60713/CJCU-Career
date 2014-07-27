@@ -3,12 +3,13 @@
 
 
 switch($_POST['mode']){
+
   case 0:
-        delete_work($_POST['workid']);
+      delete_work($_POST['workid']);
   break;
 
   case 1:
-     //內容
+      delete_lineup($_POST['workid']);
   break;
 }
 
@@ -46,6 +47,25 @@ include("sqlsrv_connect.php");
     }
 
 }
+
+
+//取消應徵
+function delete_lineup($workid){
+
+include("sqlsrv_connect.php");
+
+    $sql = "DELETE FROM line_up WHERE work_id = ? and user_id =? and [check] IN (0,2,3)";
+    $stmt = sqlsrv_query($conn, $sql, array($workid,$_SESSION['username']));
+
+    if($stmt) {
+        sqlsrv_free_stmt($stmt);
+        echo "取消成功";
+    }
+    else die(print_r( sqlsrv_errors(), true));
+
+
+}
+
 
 
 

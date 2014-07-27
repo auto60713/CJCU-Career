@@ -42,20 +42,24 @@ if(work_list_array.length == 0){body.prepend("目前沒有任何應徵");}
 else{
  		 for(var i=0;i<work_list_array.length;i++){
 
+                //分辨發布者是公司還是系所
+     	        if(work_list_array[i]['pub'] == 1)
+   		             var pub_name = pub_name_array[i]['comname'];
+   		        else var pub_name = pub_name_array[i]['depname'];
 
  		 		var icon = $('<i>').addClass('fa fa-book icon').addClass('work-img'),
 		    		tita = $('<a>').attr('href', 'work/'+work_list_array[i]['wid']).text(work_list_array[i]['wname']),
 		    		tit = $('<h1>').addClass('work-tit').append(tita),
-		    		companyherf = $('<a>').attr('href', 'company/'+work_list_array[i]['comid']).text(work_list_array[i]['comname']),
+		    		companyherf = $('<a>').attr('href', 'company/'+pub_name_array[i]['comid']).text(pub_name),
 		    		company = $('<div>').addClass('manage-company-herf').text("發布自 ").append(companyherf),
-		    		hint = $('<p>').addClass('work-hint').append((work_list_array[i]['isout']=='0'?'校內 ':'校外 ') + work_list_array[i]['propname'] +'<br>'+ work_list_array[i]['date']),
+		    		hint = $('<p>').addClass('work-hint').append((work_list_array[i]['zone']) +'  '+ work_list_array[i]['prop']),
 		    		hint2 = $('<p>').attr({
 		    		    workid : work_list_array[i]['wid'],
 		    			audit : work_list_array[i]['ch']
 		    		}).addClass('check-lightbox'),
 
 		    		// 移動到LightBox內 pass = $('<div>').attr('workid', work_list_array[i]['wid']).addClass('pass-req').text("要求再審核"),
-		    		statustxt = $('<span>').addClass('nocheck').text('已要求重新再審！'),
+		    	    statustxt = $('<span>').addClass('nocheck').text('已要求重新再審！'),
 		    		subbox1 = $('<div>').addClass('sub-box').append(icon),
 		    		subbox2 = $('<div>').addClass('sub-box').append(tit).append(company).append(hint),
 		    		subbox3 = $('<div>').addClass('sub-box2').append(hint2);
@@ -76,7 +80,7 @@ else{
 		    	
 		    		mainbox = $('<div>').addClass('work-list-box').append(subbox1).append(subbox2).append(subbox3);
 		    		
-		    		// Show 出該工作詳細的歷史應徵審查紀錄
+		    		//Show 出該工作詳細的歷史應徵審查紀錄
 
 		    		hint2.click(function(event) {
 
@@ -89,55 +93,76 @@ else{
 		    			var audit = parseInt(th.attr('audit'));
 		    			var check_status_box = $('#student-audit-current-status').removeClass('yescheck').removeClass('nocheck');
 		    			var c_status ='';
+                        // 消應徵按鈕   要求再審按鈕
+		    	    	var delete_lu = $('<div>').attr('luid', workid).addClass('delete-lu').text("取消應徵"),
+                            pass = $('<div>').attr('workid', workid).addClass('pass-req').text("要求再審核");
 
+
+                        // 工作對學生的狀態意義
 		    			switch(audit) {
-			    		//老師說要正名
-			    		case 0: c_status='尚未被公司審核'; check_status_box.addClass('sta1 onecheck').text(c_status); break;
+			    		
+			    		case 0: c_status='尚未被公司審核'; check_status_box.addClass('sta1 onecheck').text(c_status); 
+			    	            $('.student-audit-lightbox-status').append(delete_lu); break;
+
 			    		case 1: c_status='應徵成功!'; check_status_box.addClass('sta2 yescheck').text(c_status); break;
 			    		
 			    		case 2: c_status='應徵失敗!'; check_status_box.addClass('sta3 nocheck').text(c_status); 
-
-				    		pass = $('<div>').attr('workid', workid).addClass('pass-req').text("要求再審核");
-
-				    		pass.click(function(event) {
-				    		    btn = $(this);
-			    			    work_id = btn.attr('workid');
-				                $.ajax({
-								url: 'ajax_line_up.php',
-								type: 'post',
-								data: {work_id:work_id},
-						    	})
-						    	.done(function (data){
-						    		console.log(data);
-						    		if(data=='OK'){
-							    		$('#student-audit-again').text('已要求重新再審！');
-							    		btn.remove();
-							    		th.attr('audit', '3');
-						    		}
-						    		else{
-						    			$('#student-audit-again').text('失敗，請再試一次！');
-						    		}
-						    	
-
-						    	});
-				    		});
-			    			$('.student-audit-lightbox-status').append(pass); 
- 
-			    			break;
+			    	            $('.student-audit-lightbox-status').append(delete_lu); 
+				                $('.student-audit-lightbox-status').append(pass); break;
 
 
-			    		case 3: c_status='應徵失敗!'; 
-			    		check_status_box.addClass('sta4 nocheck').text(c_status); 
-			    		$('#student-audit-again').text('已要求重新再審！'); 
-			    		break;
+			    		case 3: c_status='應徵失敗!'; check_status_box.addClass('sta4 nocheck').text(c_status); 
+			    	        	$('.student-audit-lightbox-status').append(delete_lu); 
+			    	        	$('#student-audit-again').text('已要求重新再審！'); break;
 
 			    		case 4: c_status='已錄取'; check_status_box.addClass('sta5 yescheck').text(c_status); break;
 			    		case 5: c_status='不錄取'; check_status_box.addClass('sta6 nocheck').text(c_status); break;
 			    		case 6: c_status='完成工作'; check_status_box.addClass('sta7 yescheck').text(c_status); break;
 			    		
 			    		}
+			    	
+                        //取消應徵AJAX
+                        delete_lu.click(function(event) {
+				    		if (confirm ("確定要放棄此應徵  ?")){
+	
+			    			    var luid = $(this).attr('luid');
+				                $.ajax({
+								url: 'delete.php',
+								type: 'post',
+								data: {mode:1,workid:luid},
+						    	})
+						    	.done(function (data){
+						    	
+						           alert(data);
+						           location.reload();
+						    	});
+						    }
+				        });
 
-			    			// 從後端拉紀錄回來(json格式)
+                        //要求重新再審AJAX
+				    	pass.click(function(event) {
+			    			work_id = $(this).attr('workid');
+				            $.ajax({
+								url: 'ajax_line_up.php',
+								type: 'post',
+								data: {work_id:work_id},
+						    })
+						    .done(function (data){
+						    	console.log(data);
+						    	if(data=='OK'){
+							    	$('#student-audit-again').text('已要求重新再審！');
+							    	$(this).remove();
+							    	th.attr('audit', '3');
+						    	}
+						    	else{
+						    		$('#student-audit-again').text('失敗，請再試一次！');
+						    	}
+						    });
+				    	});
+
+
+
+			    		// 從後端拉紀錄回來(json格式)
 		    			$.ajax({
 		    				url: 'js_audit_detail.php',
 		    				type: 'post',
@@ -179,12 +204,13 @@ else{
 
 
 		    		});
-
-
+                   
 		    		body.prepend(mainbox);
 
- 		 }
-} //else
+ 		 }//這個是工作項目FOR迴圈的下括號
+
+ 		
+} //這格式假如有工作的下括號
 
 		  $('#search-txt').on('input', function(event) {
 		  	//console.log($('#search-txt').val());
@@ -228,11 +254,12 @@ else{
 
          
 
-	     // 關閉詳細審核紀錄LightBox,清除裡面所有資料
+	    // 關閉詳細審核紀錄LightBox,清除裡面所有資料
 		$( "#student-audit-lightbox-exit" ).click(function() {
         	 $('#student-audit-lightbox').fadeOut(100);
         	 $('#student-audit-history, .student-audit-current-status, #student-audit-again').html('');
         	 $('.pass-req').remove();
+        	 $('.delete-lu').remove();
         });
 
     });

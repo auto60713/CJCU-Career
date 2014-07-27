@@ -53,12 +53,6 @@
 				para = {};
 				url = "student_work.php";
 				break;
-				/* 移除工作日誌
-				case 2:
-				tpe = 'get';
-				para = {};
-				url = "student_note.php";
-				break;*/
 				// notice
 				case 2:
 				tpe = 'post';
@@ -110,7 +104,7 @@
 
 
 
-<!-- upload image -->
+<!-- upload image
 
 <div class="staff-apply-form" id="upload-profile-lightbox"> 
 	
@@ -128,12 +122,10 @@
 		 <p id="status"></p>
 		 <button class=" btn-submit2" id="upload-btn-close">關閉</button>
 
-		<!-- <progress id="progressBar" value="0" max="100" class="upload-pross"></progress> -->
-
 	</div> 
 </div>
 
-
+ -->
 
 </body>
 </html>
