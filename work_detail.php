@@ -9,6 +9,7 @@ if(isset($_SESSION['username'])) $user_id = $_SESSION['username'];
 <html>
 <head>
 	<meta charset="UTF-8">
+	<title></title>
 	<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="../css/main.css">
 	<link rel="stylesheet" type="text/css" href="../css/company_manage.css">

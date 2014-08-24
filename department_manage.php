@@ -20,10 +20,10 @@
 		$('#view-header').load('public_view/header.php');
 
 		$(window).hashchange( function(){
-			ctu=false;
+
 		  	var loc = location.hash.replace( /^#/, '' );
 		  	switch(loc) {
-			case 'department-info':case '':doajax(0);break;
+			case 'department-info','':doajax(0);break;
 			case 'department-addwork':doajax(1);break;
 			case 'department-work':doajax(2);break;
 			case 'department-notice':doajax(3);break;
@@ -72,7 +72,7 @@
 				var wid = location.hash.replace( /^#work/, '' ).split("-");
 				para = {workid:wid[0],page:wid[1]};
 				url = "work_detail_edit2.php";	
-				var goback = $('<a>').attr({href:'#company-work',id:'gobackbtn'}).append($('<i>').addClass('fa fa-reply').append(' '));
+				var goback = $('<a>').attr({href:'#dapartment-work',id:'gobackbtn'}).append($('<i>').addClass('fa fa-reply').append(' '));
 				break;
 			}
 
@@ -92,10 +92,6 @@
 			$('#right-box-title').html('').append($('.list:eq('+idx+')').text());
 			if(goback) $('#right-box-title').prepend(goback);
 			}
-
-
-            //依照公司審核通過與否 後端傳來的資料不同
-            <? include_once("company_manage_apply.php"); censored_check(); ?>
 
 
 	});

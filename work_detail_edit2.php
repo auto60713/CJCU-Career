@@ -132,8 +132,11 @@ function isCompanyWork($conn,$companyid,$workid){
 			     	url: "delete.php",
 			     	data:{mode:0,workid:<? echo (int)$_POST['workid']; ?>},
                     success: function (data) { 
-			      	    alert(data);
-                	    window.location.href = 'company_manage.php#company-work';
+                    	if(data != 0){
+                    		alert('刪除成功');
+                	        window.location.href = data+'_manage.php#'+data+'-work';
+                    	}
+			      	    else alert('資料驗證不正確 無法刪除');
 			      }
 			    });
 		    }

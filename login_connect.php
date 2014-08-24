@@ -1,7 +1,7 @@
 <?session_start();?>
 
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-
+<title>長大職涯網</title>
 <?
 
 include_once("sqlsrv_connect.php");
@@ -28,7 +28,7 @@ switch ($sel) {
 
 function school_login($conn,$userid,$pw){
 
-    //此登入包含 管理員.指導老師.學生 三種身分 均稱作學校登入
+    //此登入包含 學生,校友,老師 三種身分 均稱作師生登入
 
     $sql = "select * from cjcu_user where user_no=?";
     $params  = array($userid);
@@ -42,20 +42,10 @@ function school_login($conn,$userid,$pw){
         // 資料表查無帳號 , 沒有輸入
         if(count($row) != 0 && $userid != null && $pw != null){
 
-            //管理員驗證
-            if($row[role] == 1){
-            $_SESSION['username'] = $row[user_no];
-            $_SESSION['level']  = $row[role];
-
-            login_echo(2);
-            }
-            //計中驗證
-            else{
             $_SESSION['username'] = $row[user_no];
             $_SESSION['level']  = $row[role];
 
             login_echo(3);
-            }
         }
         else{
             login_echo(0);
@@ -107,17 +97,24 @@ function department_login($conn,$userid,$pw,$level_department){
 
         if(count($row) != 0 && $userid != null && $pw != null && (trim($row[1])) == $pw){
 
-            $_SESSION['username'] = $userid;
-            $_SESSION['level'] = $level_department;
+            //職涯發展組
+            if(trim($row[0]) == 'CIA'){
+                $_SESSION['username'] = $userid;
+                $_SESSION['level']  = 1;
 
-            login_echo(1);
+                login_echo(2);
+            }
+            else{
+                $_SESSION['username'] = $userid;
+                $_SESSION['level'] = $level_department;
+
+                login_echo(1);
+            }
         }
-        
         else{
 
             login_echo(0);
         }
-    
     }
 }
 

@@ -72,7 +72,7 @@ function return_work_detail_array($work_id){
 		declare @j int;set @j = (select parent_no from work_type  where id=@i);
 
 		select w.id,w.name,[date],t1.id type1,t2.id type2,t3.id type3,
-		w.start_date,w.end_date,w.work_prop_id,w.is_outside,w.zone_id,w.address,w.phone,w.pay,[recruitment _no] rno,w.detail,[check],z.zone zone
+		w.start_date,w.end_date,w.zone_id,w.address,w.phone,w.pay,[recruitment _no] rno,w.detail,[check],z.zone zone
 		from work w , work_type t1,work_type t2,work_type t3,zone z
 		where w.id=? and t1.id=@j and t2.id=@i and t3.id=@h and z.id=w.zone_id";
 

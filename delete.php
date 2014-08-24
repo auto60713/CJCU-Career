@@ -15,14 +15,27 @@ switch($_POST['mode']){
 
 
 
+switch ($_SESSION['level']) {
 
+    case 1:
+        $publisher = 'staff';
+    break;
+
+    case 4:
+        $publisher = 'company';
+    break;
+
+    case 5:
+        $publisher = 'department';
+    break;
+}
 
 
 
 
 
 //刪除工作
-function delete_work($workid){
+function delete_work($workid,$publisher){
 
 include("sqlsrv_connect.php");
 
@@ -38,12 +51,12 @@ include("sqlsrv_connect.php");
 
         if($stmt) {
             sqlsrv_free_stmt($stmt);
-            echo "刪除成功";
+            echo $publisher;
         }
         else die(print_r( sqlsrv_errors(), true));
     }
     else{
-    	echo "資料驗證不正確 無刪除";
+    	echo "0";
     }
 
 }

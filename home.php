@@ -3,7 +3,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>長榮大學 - 媒合系統</title>
+	<title>長大職涯網</title>
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 	<link rel="stylesheet" type="text/css" href="css/home.css">
 	<link href="font-awesome/css/font-awesome.min.css" rel="stylesheet">
@@ -102,7 +102,7 @@
 <!-- 頁尾訊息 -->
 <div class="footer box-shadow2" _height="none">
 	<div class="container footer-bar">
-	7/16最後更新
+	7/27最後更新
     <!--All Jobs | PostaJob | AboutUs | ContactUs-->
 	<br>
 	© 2014 長大職涯網 Inc. 長榮大學 職涯發展組

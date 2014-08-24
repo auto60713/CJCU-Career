@@ -78,10 +78,10 @@
 <div class="div-align overfix">
 
 	<div id="" class="left-box" >
-		<h2><? echo $_SESSION['username'] ?></h2><br><hr>
+		<h2><? echo $_SESSION['username'] ?></h2><br><br><hr>
 
 		<a href="#teacher-info"><div class="list">個人資訊</div></a><hr>
-	    <a href="#teacher-sup"><div class="list">實習監督</div></a><hr>
+	    <a href="#teacher-sup"><div class="list">管理實習</div></a><hr>
 	</div>
 
 

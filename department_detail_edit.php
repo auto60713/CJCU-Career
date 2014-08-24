@@ -18,9 +18,16 @@ if(isset($_SESSION['username'])) 0; else{header("Location: home.php"); exit;}
 		var column_name = ["帳號","中文名稱","英文名稱","電話","傳真","負責人","信箱","辦公室","簡介","網站連結"];
 
 		for(var key in department_detail_array){
-			
+
 			detail_column+="<tr><td style='padding-right:60px;'>"+column_name[idx]+"</td>";
-			detail_column+="<td><input type='text' name ='"+key+"' value='"+department_detail_array[key]+"'></td></tr>";
+
+            //不可修改的資料 背後PHP不要POST
+			if(key == "no"){
+                detail_column+="<td><input type='text' name ='"+key+"' value='"+department_detail_array[key]+"' disabled='disabled'></td></tr>";
+			}
+		    else{
+                detail_column+="<td><input type='text' name ='"+key+"' value='"+department_detail_array[key]+"'></td></tr>";
+		    }
 			idx++;
 		}	
 

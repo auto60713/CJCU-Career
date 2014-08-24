@@ -18,8 +18,7 @@
 		$('#view-header').load('../public_view/header.php #header');
 
 		// init load data
-		$('title').text(student_profile_array['username']);
-		$('#username').text(student_profile_array['name']);
+		$('title,#username').text(student_profile_array['name']);
 		$('#userno').text(student_profile_array['number']);
 		$('#depname').text(student_profile_array['depname']);
 

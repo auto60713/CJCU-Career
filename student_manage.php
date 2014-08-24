@@ -3,7 +3,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>帳戶管理</title>
+	<title>個人頁面</title>
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 	<link rel="stylesheet" type="text/css" href="css/company_manage.css">
 	<link rel="stylesheet" type="text/css" href="css/work_detail_edit.css">
