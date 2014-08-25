@@ -23,7 +23,7 @@
 
 		  	var loc = location.hash.replace( /^#/, '' );
 		  	switch(loc) {
-			case 'department-info','':doajax(0);break;
+			case 'department-info':case'':doajax(0);break;
 			case 'department-addwork':doajax(1);break;
 			case 'department-work':doajax(2);break;
 			case 'department-notice':doajax(3);break;

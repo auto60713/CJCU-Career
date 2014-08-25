@@ -154,7 +154,7 @@
 
 			work_name = $('<h1>').text(work_list_array[i].wname),
 			work_zone = $('<p>').text(work_list_array[i].zname).prepend($('<i>').addClass('fa fa-map-marker')),
-			work_propn = $('<p>').text(((work_list_array[i].isout=='0')?'校內 ':'校外 ') + work_list_array[i].propname),
+			work_propn = $('<p>').text(((work_list_array[i].isout=='0')?'校外 ':'校內 ') + work_list_array[i].propname),
 			work_recr = $('<p>').text('需求 '+ work_list_array[i].rno +' 人'),
 			work_date = $('<p>').addClass('date').text('開始招募'+work_list_array[i].date.split(' ')[0]);
 			

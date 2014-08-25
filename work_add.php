@@ -97,7 +97,7 @@ function isCompanyWork($conn,$companyid,$workid){
 		<select name="minute2" id="minute2"></select>分
 	</td>
 </tr>
-<!--
+
 <tr>
 	<td>工作性質：</td>
 	<td><select name="work_prop" id="work_prop"></select></td>
@@ -109,7 +109,7 @@ function isCompanyWork($conn,$companyid,$workid){
 	    <input type="radio" name="isoutside" value="1">校內工作
 	</td>
 </tr>
--->
+
 <tr>
 	<td>工作地點：</td>
 	<td><select name="zone" id="zone"></select> 

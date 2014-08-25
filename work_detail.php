@@ -96,7 +96,7 @@ if(isset($_SESSION['username'])) $user_id = $_SESSION['username'];
 		// init load data
 		$('title, #name').text(work_detail_array['name']);
 		$('#date').text(work_detail_array['date'].split(" ")[0]);
-		$('#prop').text( (work_detail_array['is_outside']=='0'?'校內':'校外')+' '+ work_detail_array['popname']);
+		$('#prop').text( (work_detail_array['is_outside']=='0'?'校外':'校內')+' '+ work_detail_array['popname']);
 		$('#type').text(work_detail_array['typeone']+" > "+work_detail_array['typetwo']+" > "+work_detail_array['typethree']);
 		$('#rno').text(work_detail_array['recruitment _no']);
 		$('#pay').text(work_detail_array['pay']);
@@ -107,13 +107,12 @@ if(isset($_SESSION['username'])) $user_id = $_SESSION['username'];
 		$('#detail').text(work_detail_array['detail']);
 
         //優化UI避免與應徵工作混淆
-		if(work_detail_array['check']=='0')
-			$('#ch').text('未審核').css('color', '#444');
-		else if(work_detail_array['check']=='1')
-			$('#ch').text('正在招募').css('color', '#339933');
-		else
-			$('#ch').text('審核不通過').css('color', '#CC3333');
-		// in this way, check = 2 or 3 is not pass
+        switch(work_detail_array['check']) {
+
+	        case 0: $('#ch').text('等待審核').css('color', '#444'); break;
+		    case 1: $('#ch').text('正在招募').css('color', '#339933'); break;
+
+        }
 
 		<?
 			function isapplywork($user_id,$work_id){
@@ -149,7 +148,7 @@ if(isset($_SESSION['username'])) $user_id = $_SESSION['username'];
 		for(var i=0;i<pass_work_array.length;i++){
 			var container = $('<p>').addClass('profile-span-box'),
 			tita = $('<a>').attr('href', '../work/'+pass_work_array[i]['wid']).addClass('profile-span-left').text(pass_work_array[i]['wname']),
-			titloc = $('<span>').addClass('profile-span-right').text((pass_work_array[i]['isout']=='0'?'校內 ':'校外 ')+ pass_work_array[i]['propname']);
+			titloc = $('<span>').addClass('profile-span-right').text((pass_work_array[i]['isout']=='0'?'校外 ':'校內 ')+ pass_work_array[i]['propname']);
 			listbox.append(container.append(tita).append(titloc));
 		}
 
@@ -161,7 +160,7 @@ else if(work_detail_array['pub'] ==2){
     var pub_type_name = "關於系所",pub_type = "department";
 }
         $('#about_work h2').text(pub_type_name);
-		$('#pub_name').append($('<a>').attr('href', '../'+pub_type+'/'+publisher_detail_array['id']).text(publisher_detail_array['name']));
+		$('#pub_name').append($('<a>').attr({'target':'_blank','href':'../'+pub_type+'/'+publisher_detail_array['id']}).text(publisher_detail_array['name']));
 		$('#pub_boss').text(publisher_detail_array['boss']);
 		$('#pub_phone').text(publisher_detail_array['phone']);
 		$('#pub_email').text(publisher_detail_array['email']);

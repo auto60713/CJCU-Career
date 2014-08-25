@@ -48,18 +48,28 @@ function isCompanyWork($conn,$companyid,$workid){
 		switch(work_detail_array.check) {
 			case 0:
 				icontxt ='fa fa-minus-square-o';
-				statustxt = ' 未審核';
+				statustxt = ' 等待校方審核';
 				color = '#555';
 				break;
 			case 1:
 				icontxt ='fa fa-check';
-				statustxt = ' 通過';
+				statustxt = ' 應徵中';
 				color = '#339933';
 				break;
 			case 2 : case 3:
 				icontxt ='fa fa-times';
-				statustxt = ' 不通過';
+				statustxt = ' 校方審核不通過';
 				color = '#CC3333';
+				break;
+			case 4:
+				icontxt ='fa fa-check';
+				statustxt = ' 工作中';
+				color = '#339933';
+				break;
+			case 5:
+				icontxt ='fa fa-check';
+				statustxt = ' 工作結束';
+				color = '#339933';
 				break;
 		}
 
@@ -68,7 +78,7 @@ function isCompanyWork($conn,$companyid,$workid){
 		for(var i=0;i<audit_array.length;i++){
 
 			var icontxt2 = (audit_array[i].censored==1)? 'fa fa-check': 'fa fa-times',
-				statustxt2 = (audit_array[i].censored==1)? ' 通過': ' 不通過',
+				statustxt2 = (audit_array[i].censored==1)? ' 審核通過': ' 審核不通過',
 				time = $('<span>').addClass('company-audit-time').text(audit_array[i].time.split(' ')[0]),
 				icon = $('<i>').addClass(icontxt2),
 				censored = $('<span>').addClass('company-audit-censored').append(icon).append(statustxt2),
@@ -121,8 +131,26 @@ function isCompanyWork($conn,$companyid,$workid){
 		tabgroup[<?  echo (int)$_POST['page']; ?>].click();
 
 
+
+        //結束應徵 開始工作
+        var delete_work = $('a#divbtn-start');
+		delete_work.click(function(event) {
+			//以後要做一個AJAX拿工作名字的
+		    if (confirm ("確定要刪除此工作  ?")){
+
+		    	$.ajax({
+			     	type:"POST",
+			     	url: "work_edit.php",
+			     	data:{mode:0,workid:<? echo (int)$_POST['workid']; ?>},
+                    success: function (data) { 
+          
+                    	$('#workedit-content-start').text(data);
+			        }
+			    });
+		    }
+		});
         //刪除工作
-        var delete_work = $('a.delete-work');
+        var delete_work = $('a#divbtn-delete');
 		delete_work.click(function(event) {
 			//以後要做一個AJAX拿工作名字的
 		    if (confirm ("確定要刪除此工作  ?")){
@@ -137,7 +165,7 @@ function isCompanyWork($conn,$companyid,$workid){
                 	        window.location.href = data+'_manage.php#'+data+'-work';
                     	}
 			      	    else alert('資料驗證不正確 無法刪除');
-			      }
+			        }
 			    });
 		    }
 		});
@@ -154,29 +182,32 @@ function isCompanyWork($conn,$companyid,$workid){
 <div class="workedit-tabbox">
 	<div class="sub-tab tab-active" tabtoggle='workedit1'><i class="fa fa-pencil tab-img"></i> 編輯</div>
 	<div class="sub-tab" tabtoggle='workedit1'><i class="fa fa-user tab-img"></i> 應徵</div>
-	<div class="sub-tab" tabtoggle='workedit1'><i class="fa fa-check tab-img"></i> 審核</div>
-	<div class="sub-tab" tabtoggle='workedit1'><i class="fa fa-cog tab-img"></i> 設定</div>
+	<div class="sub-tab" tabtoggle='workedit1'><i class="fa fa-bullhorn tab-img"></i> 執行</div>
+	<div class="sub-tab" tabtoggle='workedit1'><i class="fa fa-check tab-img"></i> 狀態</div>
+	<div class="sub-tab" tabtoggle='workedit1'><i class="fa fa-cog tab-img"></i> 刪除</div>
 </div>
 
 <div class="workedit-content" id='workedit-content'>
+
 	<!-- 該工作的資料編輯，AJAX別的畫面 -->
 	<div id='workedit-content-edit' class="" tabtoggle='workedit2'></div>
 	<!-- 該工作的應徵學生列表，AJAX別的畫面 -->
 	<div id='workedit-content-apply' class="workedit-content-hide" tabtoggle='workedit2'></div>
-
-
+	<!-- 該工作應徵結束 -->
+	<div id='workedit-content-start' class="workedit-content-hide" tabtoggle='workedit2'>
+		<a id="divbtn-strat" class="work-divbtn">開始實習(跳到4)</a><br>
+		<a id="divbtn-end" class="work-divbtn">結束應徵(跳到5)</a>
+	</div>
 	<!-- 該工作的審核狀態 -->
 	<div id='workedit-content-audit' class="workedit-content-hide" tabtoggle='workedit2'>
-		<h1 class="company-audit-status">審核狀況：</h1>
+		<h1 class="company-audit-status">工作狀況：</h1>
 		<p>歷史紀錄：</p>
 		<div class="company-audit-history" id="company-audit-history">無歷史紀錄</div>
 	</div>
-
-	<!-- 工作設定 -->
+	<!-- 工作刪除 -->
 	<div id='workedit-content-set' class="workedit-content-hide" tabtoggle='workedit2'>	
-	<a class="delete-work">刪除工作</a>
+	    <a id="divbtn-delete" class="work-divbtn">刪除工作</a>
 	</div>
-
 
 
 </div>

@@ -67,14 +67,12 @@ else{
 		    		var check_status='';
 		    		switch(work_list_array[i]['ch']) {
 		    			//老師說要正名
-			    		case 0: check_status='尚未被公司審核'; hint2.addClass('sta1 onecheck').text(check_status); break;
-			    		case 1: check_status='應徵成功!請等候通知'; hint2.addClass('sta2 yescheck').text(check_status); break;
-			    		case 2: check_status='應徵失敗!(查看原因)'; hint2.addClass('sta3 nocheck').text(check_status); break;
-			    		case 3: check_status='應徵失敗!'; hint2.addClass('sta4 nocheck').text(check_status); subbox3.append(statustxt);break;
-			    		case 4: check_status='工作中'; hint2.addClass('sta5 yescheck').text(check_status); break;
-			    		case 5: check_status='不錄取'; hint2.addClass('sta6 nocheck').text(check_status); break;
-			    		case 6: check_status='完成工作'; hint2.addClass('sta7 yescheck').text(check_status); break;
-			    		break;
+			    		case 0: check_status='公司審核中'; hint2.addClass('sta1 onecheck').text(check_status); break;
+			    		case 1: check_status='已錄取!'; hint2.addClass('sta2 yescheck').text(check_status); break;
+			    		case 2: check_status='應徵失敗..(查看原因)'; hint2.addClass('sta3 nocheck').text(check_status); break;
+			    		case 3: check_status='應徵失敗..'; hint2.addClass('sta4 nocheck').text(check_status); subbox3.append(statustxt);break;
+			    		case 4: check_status='完成工作!'; hint2.addClass('sta7 yescheck').text(check_status); break;
+			    		
 		    		}
 
 		    	

@@ -58,10 +58,10 @@ function isCompanyWork($conn,$companyid,$workid){
     	for(var i=0;i<work_apply_list_array.length;i++){
 
     		var wimg = $('<img>').attr('src', 'http://akademik.unissula.ac.id/themes/sia/images/user.png').addClass('work-img'),
-    			tita = $('<a>').attr('href', 'student/'+work_apply_list_array[i]['user_id']).text(work_apply_list_array[i]['name']),
+    			tita = $('<a>').attr({'target':'_blank','href':'student/'+work_apply_list_array[i]['user_id']}).text(work_apply_list_array[i]['name']),
     			
-    			
-    			doca = $('<a>').append(work_apply_list_array[i]['depname']),
+    			eyes = $('<i>').addClass('fa fa-eye'),
+    			doca = $('<a>').attr({'target':'_blank','href':'department/'+work_apply_list_array[i]['depno']}).append(eyes,work_apply_list_array[i]['depname']),
 
     			gear = $('<i>').addClass('fa fa-cog'),
     			auditbtn = $('<button>').addClass('staff-audit-btn').append(gear).append(' 審核'),

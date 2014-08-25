@@ -363,12 +363,12 @@
 	margin-bottom: 30px;
 }
 .company-audit-censored{
-	width:70px;
+	width:100px;
 	color: #333;
 }
 .company-audit-msg{
 	color: #333;
-	width: 305px;
+	width: 275px;
 	overflow: hidden;
 	word-break:break-all;
 	
@@ -398,11 +398,11 @@
 
 
 
-/* 刪除工作 */
-.delete-work{
+/* work_detail_edit2 特殊動作按鈕 */
+.work-divbtn{
     font-size:20px;
 }
-.delete-work:hover{
+.work-divbtn:hover{
 	cursor: pointer;
 	color: #B00000;
 }

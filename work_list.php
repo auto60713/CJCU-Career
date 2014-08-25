@@ -39,16 +39,24 @@ else{echo "No permission!"; exit;
 
 		    	switch(work_list_array[i]['ch']) {
 		    		case 0:
-		    			chtxt="未審核";
+		    			chtxt="等待校方審核";
 		    			chclass="work-ch-unaudit";
 		    		break;
 		    		case 1:
-		    			chtxt="審核通過";
+		    			chtxt="應徵中";
 		    			chclass="work-ch-pass";
 		    		break;
 		    		case 2: case 3:
-		    			chtxt="審核不通過";
+		    			chtxt="校方審核不通過";
 		    			chclass="work-ch-unpass";
+		    		break;
+		    		case 4:
+		    			chtxt="工作中";
+		    			chclass="work-ch-pass";
+		    		break;
+		    		case 5:
+		    			chtxt="工作已結束";
+		    			chclass="work-ch-pass";
 		    		break;
 		    	}
 		    	

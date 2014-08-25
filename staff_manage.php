@@ -32,7 +32,7 @@ if(!isset( $_SESSION['username']) ) {
 
 		  	var loc = location.hash.replace( /^#/, '' );
 		  	switch(loc) {
-			case 'staff-info','':doajax(0);break;
+			case 'staff-info':case'':doajax(0);break;
 			case 'staff-audit0':doajax(1.0);break;
 			case 'staff-audit1':doajax(1.1);break;
 			case 'staff-addwork':doajax(2);break;
