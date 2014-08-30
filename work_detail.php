@@ -111,7 +111,7 @@ if(isset($_SESSION['username'])) $user_id = $_SESSION['username'];
 
 	        case 0: $('#ch').text('等待審核').css('color', '#444'); break;
 		    case 1: $('#ch').text('正在招募').css('color', '#339933'); break;
-
+		    case 4: $('#ch').text('實習中').css('color', '#339933'); break;
         }
 
 		<?
