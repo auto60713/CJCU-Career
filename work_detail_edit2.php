@@ -131,7 +131,7 @@ function isCompanyWork($conn,$companyid,$workid){
 				break;
 			case 4:
 				icontxt ='fa fa-check';
-				statustxt = ' 工作中';
+				statustxt = ' 實習中';
 				color = '#339933';
 				break;
 			case 5:
@@ -218,7 +218,7 @@ function isCompanyWork($conn,$companyid,$workid){
 
         //開始實習
         var work_start = $('a#divbtn-start');
-		work_start.click(function(event) {
+		work_start.live( "click", function() {
 		    if (confirm ("要結束應徵開始實習嗎?")){
 
 		    	$.ajax({

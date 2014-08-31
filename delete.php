@@ -2,19 +2,6 @@
 
 
 
-switch($_POST['mode']){
-
-  case 0:
-      delete_work($_POST['workid']);
-  break;
-
-  case 1:
-      delete_lineup($_POST['workid']);
-  break;
-}
-
-
-
 switch ($_SESSION['level']) {
 
     case 1:
@@ -30,6 +17,19 @@ switch ($_SESSION['level']) {
     break;
 }
 
+
+
+
+switch($_POST['mode']){
+
+  case 0:
+      delete_work($_POST['workid'],$publisher);
+  break;
+
+  case 1:
+      delete_lineup($_POST['workid']);
+  break;
+}
 
 
 

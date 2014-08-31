@@ -103,36 +103,50 @@ switch($row[work_prop_id]){
 function work_state_change($workid,$check){
 	include_once("sqlsrv_connect.php");
 
-  $sql = "select [check] from work where id =?"; 
+  $sql = "select work_prop_id,[check] from work where id =?"; 
   $stmt = sqlsrv_query($conn, $sql, array($workid));
 
   if($stmt) $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC);
 
-    switch($row[check]){
+    switch($check){
 
-          case 4:  
-              $text = '完成實習!';
+          case 4: 
+              $text = '結束應徵並開始實習!';
           break;
 
-          case 3:  
-              $text = '已經結束應徵!';
+          case 5:  
+              switch($row[work_prop_id]){
+
+              case 3:  //實習
+                  $text = '完成實習!';
+              break;
+                      
+              default:
+                  $text = '結束應徵!';
+              }
+             
           break;
     }
 		
-
+//改變工作狀態
 	$sql  = "update work set [check]=(?) where id =?"; 
+//改變應徵狀態
+//只改變該工作有錄取(以上)的
+  $sql2  = "update line_up set [check]=(?) where work_id =? and [check] IN (1,4)"; 
+//沒錄取的通通變成不通過
+  $sql3  = "update line_up set [check]=2 where work_id =? and [check] <4"; 
 
+  
 
-        if( sqlsrv_query($conn, $sql, array($check,$workid)) )
-        {
+        if( sqlsrv_query($conn, $sql, array($check,$workid)) ){
+          if( sqlsrv_query($conn, $sql2, array($check,$workid)) ){
+            if( sqlsrv_query($conn, $sql3, array($workid)) ){
+
                 echo $text;
-        }
-        else
-        {
-                echo '操作失敗!';
-                die( print_r( sqlsrv_errors(), true));
-        }
 
+            }else echo '操作失敗!狀況三';
+          }else echo '操作失敗!狀況二';
+        }else echo '操作失敗!狀況一';
 
 
 }
