@@ -26,9 +26,12 @@
 			case 'department-info':case'':doajax(0);break;
 			case 'department-addwork':doajax(1);break;
 			case 'department-work':doajax(2);break;
-			case 'department-notice':doajax(3);break;
-			default:doajax(4);
-			}
+			case 'department-match':doajax(3);break;
+			case 'department-notice':doajax(4);break;
+
+			default:doajax(10);
+
+			}  //要按照順序
 
 		});
 
@@ -40,34 +43,39 @@
 
 
 				switch(idx) {
-				// company info page 0
+
 				case 0:
 				tpe = 'get';
 				para = {};
 				url = "department_detail_edit.php";
 				break;
 
-				// add work
 				case 1:
 				tpe = 'get';
 				para = {mode:'add'};
 				url = "work_add.php";
 				break;
-				// manage work
+
 				case 2:
 				tpe = 'get';
 				para = {};
 				url = "work_list.php";
 				break;
-				// notice
-				case 3:
+
+                case 3:
+				tpe = 'get';
+				para = {};
+				url = "department_match.php";
+				break;
+
+				case 4:
 				tpe = 'post';
 				para = {level: <? echo "'".$_SESSION['level']."'"; ?>,username: <? echo "'".$_SESSION['username']."'"; ?>};
 				url = "notice.php";	
 				break;
 
 				// work-detail
-				case 4:
+				case 10:
 				tpe = 'post';
 				var wid = location.hash.replace( /^#work/, '' ).split("-");
 				para = {workid:wid[0],page:wid[1]};
@@ -116,6 +124,7 @@
 		<a href="#department-info"><div class="list">系所資訊</div></a><hr>
 		<a href="#department-addwork"><div class="list">新增工作</div></a><hr>
 		<a href="#department-work"><div class="list">管理工作</div></a><hr>
+		<a href="#department-match"><div class="list">實習媒合</div></a><hr>
 		<a href="#department-notice"><div class="list">通知</div></a><hr>
 
 	</div>
