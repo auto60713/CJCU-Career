@@ -218,7 +218,7 @@ function isCompanyWork($conn,$companyid,$workid){
 
         //開始實習
         var work_start = $('a#divbtn-start');
-		work_start.live( "click", function() {
+		work_start.on( "click", function() {
 		    if (confirm ("要結束應徵開始實習嗎?")){
 
 		    	$.ajax({
@@ -234,7 +234,7 @@ function isCompanyWork($conn,$companyid,$workid){
 		});
 		//完成實習(結束應徵)
         var work_end = $('a#divbtn-end');
-		work_end.live( "click", function() {
+		work_end.on( "click", function() {
 		var btn_text = $('a#divbtn-end').text();
 
 		    if (confirm ("確定要"+btn_text+"?")){

@@ -5,9 +5,9 @@ function echo_match_list_array($dep_no){
 
 include("sqlsrv_connect.php");
 
-$sql = "select u.user_no userid,u.user_name username,w.id wid,w.name wname,c.id comid,c.ch_name comname
+$sql = "select u.user_no userid,u.user_name username,w.id wid,w.name wname,c.id comid,c.ch_name comname,l.no line_no
  from line_up l,cjcu_user u,work w,company c
- where l.[check]=4 and u.dep_no=? and u.user_no=l.user_id and l.work_id=w.id and w.company_id=c.id";
+ where l.[check]=4 and l.match_no is NULL and u.dep_no=? and l.user_id=u.user_no and w.id=l.work_id and c.id=w.company_id";
 
 $para = array($dep_no);
 $stmt = sqlsrv_query($conn, $sql, $para);

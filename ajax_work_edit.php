@@ -26,6 +26,12 @@ switch($_POST['mode']){
   case 3://回傳可執行的動作
       echo_work_divbtn_array($_POST['workid']);
   break;
+
+
+  case 4://系所媒合老師
+      department_match($_POST['tea_no'],$_POST['line_no']);
+  break;
+
 }
 
 
@@ -152,6 +158,18 @@ function work_state_change($workid,$check){
 }
 
 
+
+//新增媒合配對
+function department_match($tea_no,$line_no){
+  include_once("sqlsrv_connect.php");
+
+
+  $sql  = "update line_up set match_no=(?) where no=?"; 
+
+  if( sqlsrv_query($conn, $sql, array($tea_no,(int)$line_no)) ) echo 'Success';     
+  else echo '操作失敗!';
+    
+}
 
 
 ?>

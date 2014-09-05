@@ -121,9 +121,9 @@ function echo_student_apply_list_array($userid){
 
 		include("sqlsrv_connect.php");
 //工作的資料
-		$sql = "SELECT w.id wid,w.name wname,w.publisher pub,p.name prop,z.name zone,l.[check] ch
-				FROM work w,line_up l,work_prop p,zone z
-				WHERE l.user_id=? and w.id = l.work_id and p.id = w.work_prop_id and z.id = w.zone_id";
+		$sql = "SELECT w.id wid,w.name wname,w.publisher pub,p.name prop,z.name zone,l.[check] ch,l.match_no tea_name 
+				FROM work w,line_up l,work_prop p,zone z 
+				WHERE l.user_id=? and w.id=l.work_id and p.id=w.work_prop_id and z.id=w.zone_id";
 
 		$stmt = sqlsrv_query($conn, $sql, array($userid));
 		$work_list_array = array();

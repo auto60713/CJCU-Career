@@ -30,12 +30,11 @@ else{echo "No permission!"; exit;
 		    		com_herf = $('<a>').attr({'target':'_blank','href':'company/'+match_list_array[i]['comid']}).text(match_list_array[i]['comname']),
 		    		detil = $('<div>').addClass('manage-company-herf').append(work_herf,' 發布自 ',com_herf),
 		   
-                    match_btn = $('<div>').attr('id','match-btn').addClass('btn').text("選擇老師"),
-                    sel = $('<select>').attr('id','match-sel'),
+                    match_btn = $('<div>').attr('id',match_list_array[i]['line_no']).addClass('match-btn btn').text("媒合老師"),
 
 		    		subbox1 = $('<div>').addClass('sub-box').append(img),
 	                subbox2 = $('<div>').addClass('sub-box').append(stu).append(detil),
-		    		subbox3 = $('<div>').addClass('sub-box2').append(match_btn,sel),
+		    		subbox3 = $('<div>').addClass('sub-box2').append(match_btn),
 
 		    		mainbox = $('<div>').addClass('work-list-box').append(subbox1).append(subbox2).append(subbox3);
 		    		
@@ -50,10 +49,41 @@ else{echo "No permission!"; exit;
             }
 	    }
 
+	    //選擇老師
+        var match_btn = $('div.match-btn'),
+            tea_name = $( "#match-sel option:selected" ).text(),
+            tea_no = $( "select#match-sel" ).val();
+
+		match_btn.on( "click", function() {
+		    if (confirm ('此工作將會配對 "'+tea_name+'"')){
+
+		    	var line_no = $(this).attr('id'),
+		    	    item = $(this).parents('.work-list-box');
+
+		    	$.ajax({
+			     	type:"POST",
+			     	url: "ajax_work_edit.php",
+			     	data:{mode:4,line_no:line_no,tea_no:tea_no},
+                    success: function (data) { 
+          
+                        if(data == 'Success') item.fadeOut();
+                    	else alert(data);
+			        }
+			    });
+		    }
+		});
+
+
+
+
+
     });
 </script>
 </head>
 <body>
+
+請選擇校方負責人
+<select id="match-sel"></select>
 
 <div id='match-list-container'></div>
 </body>

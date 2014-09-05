@@ -57,12 +57,13 @@ else{
 		    		    workid : work_list_array[i]['wid'],
 		    			audit : work_list_array[i]['ch']
 		    		}).addClass('check-lightbox'),
+                    teacher = $('<a>').text('負責老師 '+work_list_array[i]['tea_name']),
 
 		    		// 移動到LightBox內 pass = $('<div>').attr('workid', work_list_array[i]['wid']).addClass('pass-req').text("要求再審核"),
 		    	    statustxt = $('<span>').addClass('nocheck').text('已要求重新再審！'),
 		    		subbox1 = $('<div>').addClass('sub-box').append(icon),
 		    		subbox2 = $('<div>').addClass('sub-box').append(tit).append(company).append(hint),
-		    		subbox3 = $('<div>').addClass('sub-box2').append(hint2);
+		    		subbox3 = $('<div>').addClass('sub-box2').append(hint2,teacher);
 
 		    		var check_status='';
 		    		switch(work_list_array[i]['ch']) {
