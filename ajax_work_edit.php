@@ -32,6 +32,10 @@ switch($_POST['mode']){
       department_match($_POST['tea_no'],$_POST['line_no']);
   break;
 
+  case 5://該實習所錄取的學生
+      match_stu_array($_POST['workid']);
+  break;
+
 }
 
 
@@ -170,6 +174,32 @@ function department_match($tea_no,$line_no){
   else echo '操作失敗!';
     
 }
+
+
+
+//工作能執行的動作
+function match_stu_array($workid){
+
+include("sqlsrv_connect.php");
+
+$sql = "SELECT u.user_no stuid,u.user_name stuname FROM cjcu_user u,line_up l WHERE u.user_no=l.user_id AND (l.work_id=? AND l.[check]>3)";
+
+$para = array($workid);
+$stmt = sqlsrv_query($conn, $sql, $para);
+
+
+    if($stmt) {
+
+      $match_stu_array = array();
+
+      while( $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC) )  $match_stu_array[] = $row;
+
+      echo json_encode($match_stu_array); 
+    }
+
+
+}
+
 
 
 ?>

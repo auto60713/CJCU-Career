@@ -1,7 +1,7 @@
 <?
 
 //列出該系上所有的實習中的學生
-function echo_match_list_array($dep_no){
+function echo_line_up_array($dep_no){
 
 include("sqlsrv_connect.php");
 
@@ -15,14 +15,14 @@ $stmt = sqlsrv_query($conn, $sql, $para);
 
 if($stmt) {
 
-    $match_list_array = array();
+    $line_up_array = array();
 
 	while( $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC) ) 
     {
-		$match_list_array[] = $row;
+		$line_up_array[] = $row;
 	}
 
-	echo "var match_list_array = ". json_encode($match_list_array) . ";";	
+	echo "var line_up_array = ". json_encode($line_up_array) . ";";	
 }
 else die(print_r( sqlsrv_errors(), true));
 
@@ -60,6 +60,32 @@ else die(print_r( sqlsrv_errors(), true));
 
 
 
+//列出該系上所有的實習
+function echo_match_list_array($dep_no){
+
+include("sqlsrv_connect.php");
+
+$sql = "SELECT w.id workid,w.name workname,w.[check] state,c.id comid,c.ch_name comname,l.match_no teaname FROM cjcu_user u,work w,company c,line_up l 
+WHERE u.dep_no=? AND (l.user_id=u.user_no AND l.match_no is not NULL)AND w.id=l.work_id AND c.id=w.company_id";
+
+$para = array($dep_no);
+$stmt = sqlsrv_query($conn, $sql, $para);
+
+
+if($stmt) {
+
+    $match_list_array = array();
+
+	while( $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC) ) 
+    {
+		$match_list_array[] = $row;
+	}
+
+	echo "var match_list_array = ". json_encode($match_list_array) . ";";	
+}
+else die(print_r( sqlsrv_errors(), true));
+
+}
 
 
 
