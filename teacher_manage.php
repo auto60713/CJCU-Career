@@ -23,7 +23,7 @@
 		  	var loc = location.hash.replace( /^#/, '' );
 		  	switch(loc) {
 			case 'teacher-info':doajax(0);break;
-			case 'teacher-sup':doajax(1);break;
+			case 'teacher-match':doajax(1);break;
 			default:doajax(0);
 			}
 
@@ -44,7 +44,7 @@
 	        	case 1:
 				tpe = 'get';
 				para = {};
-				url = "teacher_sup.php";
+				url = "teacher_match.php";
 				break;
 
 			}
@@ -61,7 +61,7 @@
 			$('.list:eq('+idx+')').addClass('list-active');
 
 			$('#right-box-title').html('').append($('.list:eq('+idx+')').text());
-			if(goback) $('#right-box-title').prepend(goback);
+
 			
 		}
 
@@ -81,7 +81,7 @@
 		<h2><? echo $_SESSION['username'] ?></h2><br><br><hr>
 
 		<a href="#teacher-info"><div class="list">個人資訊</div></a><hr>
-	    <a href="#teacher-sup"><div class="list">管理實習</div></a><hr>
+	    <a href="#teacher-match"><div class="list">實習列表</div></a><hr>
 	</div>
 
 

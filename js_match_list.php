@@ -89,5 +89,33 @@ else die(print_r( sqlsrv_errors(), true));
 
 
 
+//列出該老師所對應的實習資料
+function echo_match_teacher_array($tea_no){
+
+include("sqlsrv_connect.php");
+
+$sql = "SELECT w.id workid,w.name workname,w.[check] state,c.id comid,c.ch_name comname,u.user_no stuid,u.user_name stuname 
+FROM line_up l,work w,company c,cjcu_user u
+WHERE l.match_no=? AND w.id=l.work_id AND c.id=w.company_id AND u.user_no=l.user_id";
+
+$para = array($tea_no);
+$stmt = sqlsrv_query($conn, $sql, $para);
+
+
+if($stmt) {
+
+    $match_teacher_array = array();
+
+	while( $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC) ) 
+    {
+		$match_teacher_array[] = $row;
+	}
+
+	echo "var match_teacher_array = ". json_encode($match_teacher_array) . ";";	
+}
+else die(print_r( sqlsrv_errors(), true));
+
+}
+
 
 ?>
