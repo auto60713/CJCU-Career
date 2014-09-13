@@ -131,7 +131,8 @@ function echo_data($user,$lev){
 
 
 <!--<div id="header">-->
-	<div class="sub"><a href="../../../cjcuweb/home.php"><h1>長大職涯網</h1></a></div>
+	<!--舊的<div class="sub"><a href="../../../cjcuweb/home.php"><h1>長大職涯網</h1></a></div>-->
+	<div class="sub"><a href="../../../cjcuweb/home.php"><img src="public_view/logo.jpg"></a></div>
 	<div class="sub2"> 
 	<? echo_data($user,$lev)	 ?>  
 	</div>

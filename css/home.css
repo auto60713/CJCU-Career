@@ -151,15 +151,14 @@
 
 	.footer{
 		text-align: right;
-		background-color: #222;
+		background-color: #991133;
 		color: #efefef;
 		font-size: 12px;
+		border-radius:5px;
+		margin-bottom: 10px;
 	}
 	.footer-bar{
-		padding-top: 10px;
-		padding-bottom: 10px;
-		background-color: #222;
-
+       padding: 10px;
 	}
 
 

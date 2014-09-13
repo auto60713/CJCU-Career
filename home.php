@@ -37,7 +37,7 @@
 
 <div none="true">
 <!-- 版頭 -->
-<div id="view-header" class="box-shadow1" _height="none"></div>
+<div id="view-header" class="" _height="none"></div>
 
 <!-- 搜尋 -->
 <div class="div-search margin-top20" _height="none">
@@ -100,8 +100,8 @@
 
 
 <!-- 頁尾訊息 -->
-<div class="footer box-shadow2" _height="none">
-	<div class="container footer-bar">
+<div class="footer div-align" _height="none">
+	<div class="footer-bar">
 	7/27最後更新
     <!--All Jobs | PostaJob | AboutUs | ContactUs-->
 	<br>

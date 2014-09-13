@@ -5,7 +5,9 @@
 }
 
 body{
-	background-color: #ddd;
+	background-color: linear-gradient(top,#E2F1F6,#FFFFFF);
+    background:-moz-linear-gradient(top,#E2F1F6,#FFFFFF);
+    background:-webkit-linear-gradient(top,#E2F1F6,#FFFFFF); 
 }
 a{
 	text-decoration: none;   
@@ -15,8 +17,7 @@ a{
 	cursor: pointer;
 }
 #view-header{
-	background-color: #222;
-
+	/*background-color: #222;*/
 }
 .div-align{
 	width: 900px;
@@ -24,14 +25,17 @@ a{
 	margin-right: auto;
 }
 #header{
+	margin-top: 10px;
 	overflow: auto;
-	background-color: #222;
 	color: #EEE;
-	padding: 9px;	
 }
 #header .sub{
 	float: left;
-	width: auto;
+}
+#header .sub img{
+	width: 220px;
+	height: 50px;
+	margin-bottom: -5px;
 }
 #header .sub a{
 	color: #EEE;
@@ -39,13 +43,18 @@ a{
 }
 
 #header .sub2{
-	margin-top: 10px;
 	float: right;
-	width: auto;
 	overflow: auto;
+    width: 70%;
+    height: 50px;
+	background-color: #991133;
+	border-radius:10px;
 }
 
 #header .sub2 a{
+	margin: 11px;
+	margin-right: 20px;
+	float: right;
 	color: #EEE;
 	text-decoration: none;
 }
