@@ -23,7 +23,7 @@
 			ctu=false;
 		  	var loc = location.hash.replace( /^#/, '' );
 		  	switch(loc) {
-			case 'company-info-0':case '':doajax('0-0');break;
+			case 'company-info-0':case 'company-info':case '':doajax('0-0');break;
 			case 'company-info-1': doajax('0-1');break;
 			case 'company-addwork':doajax(1);break;
 			case 'company-work':doajax(2);break;

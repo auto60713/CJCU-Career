@@ -26,40 +26,41 @@ function echo_data($user,$lev){
 	//if($lev=='0')$lev = $_SESSION['level2'];
 
 	include_once("../cjcuweb_lib.php");
+
 	if(isset ($user)){
+
+		echo '<span><a href="../../../cjcuweb/logout.php">登出</a></span>';
 
 		if( $lev == $level_company) {
             echo_username($user,'com');
-			echo '<span class="username"><a href="../../../cjcuweb/company/'.$user.'">'.$GLOBALS['header_name'].'</a></span>';
+            echo '<span id="header-notice"><a href="../../../cjcuweb/company_manage.php#company-notice">通知</a></span>';
 			echo '<span><a href="../../../cjcuweb/company_manage.php">管理</a></span>';
-			echo '<span id="header-notice"><a href="../../../cjcuweb/company_manage.php#company-notice">通知</a></span>';
+			echo '<span class="username"><a href="../../../cjcuweb/company/'.$user.'">'.$GLOBALS['header_name'].'</a></span>';
 		}
 		else if( $lev == $level_department) {
             echo_username($user,'dep');
+            echo '<span id="header-notice"><a href="../../../cjcuweb/department_manage.php#department-notice">通知</a></span>';
+            echo '<span><a href="../../../cjcuweb/department_manage.php">管理</a></span>';
 			echo '<span class="username"><a href="../../../cjcuweb/department/'.$user.'">'.$GLOBALS['header_name'].'</a></span>';
-			echo '<span><a href="../../../cjcuweb/department_manage.php">管理</a></span>';
-			echo '<span id="header-notice"><a href="../../../cjcuweb/department_manage.php#department-notice">通知</a></span>';
 		}
 		else if( $lev == $level_student){
             echo_username($user,'user');
+            echo '<span id="header-notice"><a href="../../../cjcuweb/student_manage.php#student-notice">通知</a></span>';
+            echo '<span><a href="../../../cjcuweb/student_manage.php">管理</a></span>';
 			echo '<span class="username"><a href="../../../cjcuweb/student/'.$user.'">'.$GLOBALS['header_name'].'</a></span>';
-			echo '<span><a href="../../../cjcuweb/student_manage.php">管理</a></span>';
-			echo '<span id="header-notice"><a href="../../../cjcuweb/student_manage.php#student-notice">通知</a></span>';
 		}
 		else if( $lev == $level_staff){
             echo_username($user,'dep');
-			echo '<span class="username"><a href="../../../cjcuweb/staff/'.$user.'">'.$GLOBALS['header_name'].'</a></span>';
+			echo '<span id="header-notice"><a href="../../../cjcuweb/staff_manage.php#staff-notice">通知</a></span>';	
 			echo '<span><a href="../../../cjcuweb/staff_manage.php">管理</a></span>';
-			echo '<span id="header-notice"><a href="../../../cjcuweb/staff_manage.php#staff-notice">通知</a></span>';
+			echo '<span class="username"><a href="../../../cjcuweb/staff/'.$user.'">'.$GLOBALS['header_name'].'</a></span>';
 		}
 
 		else if( $lev == $level_teacher){
             echo_username($user,'user');
+            echo '<span><a href="../../../cjcuweb/teacher_manage.php">管理</a></span>';
 			echo '<span class="username"><a href="../../../cjcuweb/teacher/'.$user.'">'.$GLOBALS['header_name'].'</a></span>';
-			echo '<span><a href="../../../cjcuweb/teacher_manage.php">管理</a></span>';
 		}
-		echo '<span><a href="../../../cjcuweb/logout.php">登出</a></span>';
-
 	}	
 	else echo '<span><a href="#" id="login-btn">登入</a></span>';
 }
@@ -132,7 +133,7 @@ function echo_data($user,$lev){
 
 <!--<div id="header">-->
 	<!--舊的<div class="sub"><a href="../../../cjcuweb/home.php"><h1>長大職涯網</h1></a></div>-->
-	<div class="sub"><a href="../../../cjcuweb/home.php"><img src="public_view/logo.jpg"></a></div>
+	<div class="sub"><a href="../../../cjcuweb/home.php"><img src="http://www.cjcu.edu.tw/zh_tw/images/id.jpg"></a></div>
 	<div class="sub2"> 
 	<? echo_data($user,$lev)	 ?>  
 	</div>
@@ -154,7 +155,7 @@ function echo_data($user,$lev){
 <i class="fa fa-lock login-icon"></i><input type="password" name="pw" placeholder="輸入密碼" class="login-input"><span class="null-echo" id="pw-null" ></span>
 <br>
 <input type="submit" class="btn-submit" name="button" value="登入" />
-<a href="company_forgotpwd.php">忘記密碼</a> 
+<a href="forgotpwd.php">忘記密碼</a> 
 
 <p class="login-hint">學生請選擇學校登入，廠商未註冊請先<a href="company_add.php" class="login-signup">註冊新帳號</a>。</p>
 </form>
