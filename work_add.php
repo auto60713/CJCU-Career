@@ -54,7 +54,14 @@ function isCompanyWork($conn,$companyid,$workid){
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<style type="text/css">span{color: #f00;}</style>
+<style type="text/css">
+
+span{color: #f00;}
+
+.match_dep{
+	display: none;
+}
+</style>
 </head>
 <body>
 
@@ -100,7 +107,9 @@ function isCompanyWork($conn,$companyid,$workid){
 
 <tr>
 	<td>工作性質：</td>
-	<td><select name="work_prop" id="work_prop"></select></td>
+	<td><select name="work_prop" id="work_prop"></select>
+        <div class="match_dep">請選擇系所<select name="match_dep" id="dep_list"></select></div>
+	</td>
 </tr>
 
 <tr>
@@ -266,6 +275,25 @@ function isCompanyWork($conn,$companyid,$workid){
 		});
 
 		
+		// 如果工作是實習 列出所有系所
+		$('#work_prop').change(function() {
+			var id=$(this).val();
+			$("#dep_list option").remove();
+			if(id==3) {
+            $( ".match_dep" ).fadeIn();
+			$.ajax({
+			    type:"POST",
+			    async:false, 
+			    url:"ajax_dep_list.php",
+			    data:"",
+			    success:function(msg){ $('#dep_list').html(msg);	},
+			    error: function(){alert("網路連線出現錯誤!");}
+			});
+
+			}
+			else{$( ".match_dep" ).fadeOut();}
+		});
+
 
 
 		// 工作地點改變時，用AJAX列出地點細目

@@ -65,8 +65,8 @@ function echo_match_list_array($dep_no){
 
 include("sqlsrv_connect.php");
 
-$sql = "SELECT w.id workid,w.name workname,w.[check] state,c.id comid,c.ch_name comname,l.match_no teaname FROM cjcu_user u,work w,company c,line_up l 
-WHERE u.dep_no=? AND (l.user_id=u.user_no AND l.match_no is not NULL)AND w.id=l.work_id AND c.id=w.company_id";
+$sql = "SELECT w.id workid,w.name workname,w.[check] state,c.id comid,c.ch_name comname FROM work w,company c
+WHERE w.match_dep=? AND (w.[check]=1 OR w.[check]>3) AND c.id=w.company_id";
 
 $para = array($dep_no);
 $stmt = sqlsrv_query($conn, $sql, $para);

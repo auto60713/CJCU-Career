@@ -32,7 +32,7 @@ switch($_POST['mode']){
       department_match($_POST['tea_no'],$_POST['line_no']);
   break;
 
-  case 5://該實習所錄取的學生
+  case 5://該實習錄取的學生
       match_stu_array($_POST['workid']);
   break;
 
@@ -177,12 +177,12 @@ function department_match($tea_no,$line_no){
 
 
 
-//工作能執行的動作
+//該實習錄取的學生
 function match_stu_array($workid){
 
 include("sqlsrv_connect.php");
 
-$sql = "SELECT u.user_no stuid,u.user_name stuname FROM cjcu_user u,line_up l WHERE u.user_no=l.user_id AND (l.work_id=? AND l.[check]>3)";
+$sql = "SELECT u.user_no stuid,u.user_name stuname FROM cjcu_user u,line_up l WHERE u.user_no=l.user_id AND l.work_id=? AND (l.[check]=1 OR l.[check]>3)";
 
 $para = array($workid);
 $stmt = sqlsrv_query($conn, $sql, $para);

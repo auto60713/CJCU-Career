@@ -129,7 +129,7 @@ else{echo "No permission!"; exit;
 //載入該系上的實習列表
         var body = $('#workedit-content-match-list');
 
-        if(match_list_array.length == 0){body.append("請先配對老師");}
+        if(match_list_array.length == 0){body.html("目前系上沒有任何實習");}
         else{
 		    for(var i=0;i<match_list_array.length;i++){
 
@@ -139,7 +139,7 @@ else{echo "No permission!"; exit;
 		    		com_herf = $('<a>').attr({'target':'_blank','href':'company/'+match_list_array[i]['comid']}).text(match_list_array[i]['comname']),
 		    		detil = $('<div>').addClass('manage-company-herf').append('發布自 ',com_herf),
                     stu = $('<div>').addClass('manage-company-herf').append(' 實習學生 '),
-                    state = $('<a>').addClass('work-ch-pass').text((match_list_array[i]['state']=='4'?'實習中':'實習結束'));
+                    state = $('<a>').addClass('work-ch-pass').text(match_list_array[i]['state']);
 
                     //該實習所錄取的學生
 		                $.ajax({
@@ -148,10 +148,12 @@ else{echo "No permission!"; exit;
 		                  data:{mode:5,workid:match_list_array[i]['workid']},
 		                  success: function (data) { 
                             var stu_array = JSON.parse(data);
-                          
-                            for(var i=0;i<stu_array.length;i++){
-                            stu_herf = $('<a>').attr({'target':'_blank','href':'student/'+stu_array[i]['stuid']}).text(stu_array[i]['stuname']);
-		                    stu.append(stu_herf);
+                            if(stu_array.length == 0) stu.append('尚未有學生錄取');
+                            else{
+                              for(var i=0;i<stu_array.length;i++){
+                                var stu_herf = $('<a>').attr({'target':'_blank','href':'student/'+stu_array[i]['stuid']}).text(stu_array[i]['stuname']);
+		                        stu.append(stu_herf);
+		                      }
 		                    }
 		                  }
 		                });
