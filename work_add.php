@@ -58,17 +58,25 @@ function isCompanyWork($conn,$companyid,$workid){
 
 span{color: #f00;}
 
-.match_dep{
+.match_dep,.instead{
 	display: none;
+}
+.instead td{
+	color: #DF7000;
 }
 </style>
 </head>
 <body>
 
 <button id="btn-copy-work" class="btn-copy-work"><i class="fa fa-files-o"></i> 從現有工作複製</button>
+<button id="btn-instead-work" class="btn-copy-work"><i class="fa fa-files-o"></i> 廠商代PO</button>
 
 <form name="work" id="work_edit_form" method="post" action="work_add_finish.php" onsubmit="return check_data();" >
 <table>
+<tr class="instead">
+	<td>請輸入廠商帳號</td>
+	<td><input type="text" name="instead_com"/></td>
+</tr>
 
 <tr>
 	<td>工作名稱：</td>
@@ -273,6 +281,13 @@ span{color: #f00;}
 			error: function(){alert("網路連線出現錯誤!");}
 			});
 		});
+
+
+        //廠商代PO
+        $( "#btn-instead-work" ).click(function() {
+            $( ".instead" ).fadeIn();
+        });
+
 
 		
 		// 如果工作是實習 列出所有系所

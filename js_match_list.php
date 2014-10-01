@@ -1,6 +1,6 @@
 <?
 
-//列出該系上所有的實習中的學生
+//列出該系上所有的"實習中"的學生
 function echo_line_up_array($dep_no){
 
 include("sqlsrv_connect.php");

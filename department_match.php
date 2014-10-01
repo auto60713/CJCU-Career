@@ -70,7 +70,7 @@ else{echo "No permission!"; exit;
 //載入該系上的需要媒合的實習
         var body = $('#workedit-content-match');
 
-        if(line_up_array.length == 0){body.append("目前系上沒有任何實習");}
+        if(line_up_array.length == 0){body.html("目前沒有實習需要媒合");}
         else{
 		    for(var i=0;i<line_up_array.length;i++){
 
@@ -138,8 +138,21 @@ else{echo "No permission!"; exit;
 		    		work = $('<h1>').addClass('work-tit').append(work_herf),
 		    		com_herf = $('<a>').attr({'target':'_blank','href':'company/'+match_list_array[i]['comid']}).text(match_list_array[i]['comname']),
 		    		detil = $('<div>').addClass('manage-company-herf').append('發布自 ',com_herf),
-                    stu = $('<div>').addClass('manage-company-herf').append(' 實習學生 '),
-                    state = $('<a>').addClass('work-ch-pass').text(match_list_array[i]['state']);
+                    stu = $('<div>').addClass('manage-company-herf').append(' 實習學生 ');
+
+                    switch(match_list_array[i]['state']) {
+                        case 1:
+                            var state_val = "應徵中";
+                            break;
+                        case 4:
+                            var state_val = "實習中";
+                            break;
+                        case 5:
+                            var state_val = "實習完成";
+                            break;
+                    } 
+
+                var state = $('<a>').addClass('work-ch-pass').text(state_val);
 
                     //該實習所錄取的學生
 		                $.ajax({

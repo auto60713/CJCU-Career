@@ -9,6 +9,9 @@ hr{
 .overfix{
 	overflow: auto;
 }
+.overhidden{
+	overflow: hidden;
+}
 .hidden{
     visibility:hidden;
 }

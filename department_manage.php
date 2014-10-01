@@ -13,6 +13,7 @@
 	<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 	<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 	<script src="js/jquery.hashchange.min.js"></script>
+	<script type="text/javascript" src="js/full_height.js"></script>
 	<script src="js/upload_img.js"></script>
 	<script>
 	$(function(){
@@ -112,7 +113,7 @@
 <div id="view-header"></div>
 
 
-<div class="div-align overfix">
+<div class="div-align overhidden" _height="auto">
 
 	<div id="" class="left-box" >
 
@@ -162,6 +163,8 @@
 
 	</div> 
 </div>
+
+
 
 
 </body>
