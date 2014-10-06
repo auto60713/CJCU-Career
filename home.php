@@ -9,7 +9,7 @@
 	<link href="font-awesome/css/font-awesome.min.css" rel="stylesheet">
 	<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 	<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-	<script type="text/javascript" src="js/full_height.js"></script>
+    <!-- <script type="text/javascript" src="js/full_height.js"></script> -->
 	<script>
 	$(function(){ 	
 
@@ -35,12 +35,12 @@
 </head>
 <body>
 
-<div none="true">
+
 <!-- 版頭 -->
-<div id="view-header" class="" _height="none"></div>
+<div id="view-header" class=""></div>
 
 <!-- 搜尋 -->
-<div class="div-search margin-top20" _height="none">
+<div class="div-search margin-top20">
 
 	<div class="search-bar container">
 		<div class="set-center">
@@ -85,14 +85,15 @@
 
 
 <!-- 工作列表 -->
-<div class="center margin-bottom50" _height="auto">
+<div class="center margin-bottom70" style="min-height: 520px">
 	<!-- 取消進階搜尋 -->
 	<div class="container rush-search">
 		<a href="home.php" class="<? if(count($_GET)==0) echo "rush-searching"; ?>">最新工作</a>
+		<a href="home.php?mode=search&io=1" class="<? if($_GET['io']=='1') echo "rush-searching"; ?>">校內工作</a>
 		<a href="home.php?mode=search&prop=2" class="<? if($_GET['prop']=='2') echo "rush-searching"; ?>">正職</a>
-		<a href="home.php?mode=search&io=0" class="<? if($_GET['io']=='0') echo "rush-searching"; ?>">校內工作</a>
-		<a href="home.php?mode=search&prop=3" class="<? if($_GET['prop']=='3') echo "rush-searching"; ?>">實習</a>
-		<a href="home.php?mode=search&prop=1&io=1" class="<? if($_GET['prop']=='1' && $_GET['io']=='1') echo "rush-searching"; ?>">打工</a>			
+		<a href="home.php?mode=search&prop=1" class="<? if($_GET['prop']=='1') echo "rush-searching"; ?>">工讀</a>	
+
+		<a href="home.php?mode=search&prop=3" class="<? if($_GET['prop']=='3') echo "rush-searching"; ?>">實習</a>		
 	</div>
 	<!-- 工作顯示 -->
 	<div class="work-list-bar container" id="home-work-list-box"></div>
@@ -100,16 +101,16 @@
 
 
 <!-- 頁尾訊息 -->
-<div class="footer div-align" _height="none">
+<div class="footer div-align">
 	<div class="footer-bar">
-	7/27最後更新
+	10/2最後更新
     <!--All Jobs | PostaJob | AboutUs | ContactUs-->
 	<br>
 	© 2014 長大職涯網 Inc. 長榮大學 職涯發展組
 
 	</div>
 </div>
-</div>
+
 
 </body>
 

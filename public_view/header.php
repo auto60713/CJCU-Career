@@ -71,10 +71,6 @@ function echo_data($user,$lev){
 
 
 <html>
-<head>
-<link rel="stylesheet" type="text/css" href="css/header.css">
-<link rel="stylesheet" type="text/css" href="../css/header.css">
-</head>
 <body>
 <div id="header" class="div-align">
 <script>
@@ -145,9 +141,9 @@ function echo_data($user,$lev){
 <h1>登入 <i class="fa fa-times login-exit" id="login-exit"></i><br></h1>
 <form class="form" name="login" method="post" action="../../../cjcuweb/login_connect.php" onsubmit="return check_data()">
 選擇身分：<select name ="sel" class="login-select">
-  <option value="school" selected="selected">師生登入(+校友)</option>
-  <option value="company">廠商登入</option>
-  <option value="department">系所單位登入</option>
+  <option value="school" selected="selected">在校師生(校友)</option>
+  <option value="company">公司廠商</option>
+  <option value="department">系所單位</option>
 </select><br>
 
 <span class="null-echo" id="sel-null"></span><br>

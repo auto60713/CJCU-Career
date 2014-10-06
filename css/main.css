@@ -3,12 +3,17 @@
 	padding: 0;
 	font-family: 微軟正黑體;
 }
-
+html{
+    min-height: 100%;
+}
 body{
 	background-color: linear-gradient(top,#E2F1F6,#FFFFFF);
     background:-moz-linear-gradient(top,#E2F1F6,#FFFFFF);
     background:-webkit-linear-gradient(top,#E2F1F6,#FFFFFF); 
+    height: 100%;
 }
+
+
 a{
 	text-decoration: none;   
 	color:#0559B6;
@@ -17,7 +22,7 @@ a{
 	cursor: pointer;
 }
 #view-header{
-	/*background-color: #222;*/
+
 }
 .div-align{
 	width: 900px;
@@ -25,7 +30,7 @@ a{
 	margin-right: auto;
 }
 #header{
-	margin-top: 10px;
+	padding-top: 10px;
 	overflow: auto;
 	color: #EEE;
 }
@@ -59,7 +64,7 @@ a{
 	text-decoration: none;
 }
 #header .sub2 a:hover{
-	color: #aea;
+	color: #CAF286;
 }
 
 #header .sub2 span{
@@ -193,14 +198,3 @@ a{
 
 
 
-/* 廠商註冊 */
-
-.register{
-	background-color: #FFFFFF;
-	margin-left: 20%;
-	margin-right: 20%;
-	padding: 20px;
-border-left-style:solid;
-border-right-style:solid;
-    border-width: 1px;
-}

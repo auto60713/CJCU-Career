@@ -28,7 +28,7 @@ if(isset($_SESSION['username'])) $user_id = $_SESSION['username'];
 		width: 100px;
 		height: 40px;
 		font-size: 16px;
-		background-color: #CC6600;
+		background-color: #991133;
 		color: #FFF;
 		text-align: center;
 		font-weight: bold;
@@ -38,7 +38,7 @@ if(isset($_SESSION['username'])) $user_id = $_SESSION['username'];
 	}
 
 	#btn-apply:hover{
-		background-color: #FF9900;
+		background-color: #E0184A;
 	}
 	.b-space{
 		margin-bottom: 100px;

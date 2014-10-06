@@ -126,19 +126,19 @@ function login_echo($login_msg){
     switch ($login_msg) {
     case 1:
         echo '登入成功! 跳轉中，請稍後...';
-        echo '<meta http-equiv=REFRESH CONTENT=2;url=home.php>';
+        echo '<meta http-equiv=REFRESH CONTENT=1;url=home.php>';
     break;
     case 2:
         echo '管理員驗證成功! 跳轉中，請稍後...';
-        echo '<meta http-equiv=REFRESH CONTENT=2;url=home.php>';
+        echo '<meta http-equiv=REFRESH CONTENT=1;url=home.php>';
     break;
     case 3:
         echo '計中驗證成功! 跳轉中，請稍後...';
-        echo '<meta http-equiv=REFRESH CONTENT=2;url=home.php>';
+        echo '<meta http-equiv=REFRESH CONTENT=1;url=home.php>';
     break;
     default: 
         echo '帳號或密碼錯誤! 跳轉中...';
-        echo '<meta http-equiv=REFRESH CONTENT=2;url=home.php>';
+        echo '<meta http-equiv=REFRESH CONTENT=1;url=home.php>';
     }
 
 }

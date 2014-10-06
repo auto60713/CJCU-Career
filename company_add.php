@@ -161,6 +161,23 @@
 	
 
 </script>
+<style type="text/css">
+
+
+
+.register{
+	background-color: #FFFFFF;
+	width: 700px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 20px;
+	margin-bottom: 50px;
+
+	padding: 20px;
+    border:#000000 1px solid; 
+}
+
+</style>
 </head>
 <body>
 <div id="view-header"></div>

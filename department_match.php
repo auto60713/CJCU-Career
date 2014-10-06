@@ -133,12 +133,30 @@ else{echo "No permission!"; exit;
         else{
 		    for(var i=0;i<match_list_array.length;i++){
 
+		    	//該實習所錄取的學生
+                        var msg='實習學生 ',stu_link='';
+		                $.ajax({
+		                  type: 'POST',
+		                  url: 'ajax_work_edit.php',
+		                  data:{mode:5,workid:match_list_array[i]['workid']},
+		                  success: function (data) { 
+                            var stu_array = JSON.parse(data);
+                            if(stu_array.length == 0) msg = '尚未有學生錄取';
+                            else{
+                              for(var i=0;i<stu_array.length;i++){
+                                stu_link = $('<a>').attr({'target':'_blank','href':'student/'+stu_array[i]['stuid']}).text(stu_array[i]['stuname']);
+		                      }
+		                    }
+		                  },
+		                  async: false
+		                });
+
 		    	var img = $('<i>').addClass('fa fa-book').addClass('work-img'),
 		    		work_herf = $('<a>').attr({'target':'_blank','href':'work/'+match_list_array[i]['workid']}).text(match_list_array[i]['workname']),
 		    		work = $('<h1>').addClass('work-tit').append(work_herf),
 		    		com_herf = $('<a>').attr({'target':'_blank','href':'company/'+match_list_array[i]['comid']}).text(match_list_array[i]['comname']),
 		    		detil = $('<div>').addClass('manage-company-herf').append('發布自 ',com_herf),
-                    stu = $('<div>').addClass('manage-company-herf').append(' 實習學生 ');
+                    stu = $('<div>').addClass('manage-company-herf').append(msg,stu_link);
 
                     switch(match_list_array[i]['state']) {
                         case 1:
@@ -154,22 +172,7 @@ else{echo "No permission!"; exit;
 
                 var state = $('<a>').addClass('work-ch-pass').text(state_val);
 
-                    //該實習所錄取的學生
-		                $.ajax({
-		                  type: 'POST',
-		                  url: 'ajax_work_edit.php',
-		                  data:{mode:5,workid:match_list_array[i]['workid']},
-		                  success: function (data) { 
-                            var stu_array = JSON.parse(data);
-                            if(stu_array.length == 0) stu.append('尚未有學生錄取');
-                            else{
-                              for(var i=0;i<stu_array.length;i++){
-                                var stu_herf = $('<a>').attr({'target':'_blank','href':'student/'+stu_array[i]['stuid']}).text(stu_array[i]['stuname']);
-		                        stu.append(stu_herf);
-		                      }
-		                    }
-		                  }
-		                });
+                   
 
 		    	var	subbox1 = $('<div>').addClass('sub-box').append(img),
 	                subbox2 = $('<div>').addClass('sub-box').append(work).append(detil).append(stu),
