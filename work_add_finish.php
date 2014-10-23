@@ -59,7 +59,7 @@ $pay = trim($_POST['pay']);
 $detail = trim($_POST['detail']);
 
 //廠商代PO
-if( isset($_POST['instead_com']) ) $company_id = trim($_POST['instead_com']);$publisher = 1;
+if( $_POST['instead_com']!=null ) { $company_id = trim($_POST['instead_com']); $publisher = 1; }
 
 if( !isset($name) || !isset($work_type)  || !isset($year1) || !isset($month1) || !isset($date1) || !isset($hour1) || !isset($minute1) 
 	|| !isset($work_prop) || !isset($isoutside) || !isset($zone_name) || !isset($address) || !isset($year2) || !isset($month2) || !isset($date2) 

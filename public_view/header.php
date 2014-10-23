@@ -77,7 +77,7 @@ function echo_data($user,$lev){
 
 	$(function(){
 
-		polling();
+		//polling();
 		function polling(){
 			$.ajax({
 			url: '../../../cjcuweb/ajax_get_news_num.php',

@@ -69,8 +69,7 @@ array(
       'sender_level'=>  $_SESSION['level'],
       'recv_id'=>       $userid,
       'recv_level'=>    0,
-      'msg'=>           '您應徵的工作「<b>'.$work_name.'</b>」審核<b>'.$chtxt.'，</b>請前往查看。',
-      'url'=>           '../../../cjcuweb/student_manage.php#student-applywork',
+      'msg'=>           '您應徵的工作「<b>'.$work_name.'</b>」審核<b>'.$chtxt.'，</b>。',
       'icon'=>          $icon
 );
 if(!send_msg($arr)){

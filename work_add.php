@@ -69,7 +69,7 @@ span{color: #f00;}
 <body>
 
 <button id="btn-copy-work" class="btn-copy-work"><i class="fa fa-files-o"></i> 從現有工作複製</button>
-<button id="btn-instead-work" class="btn-copy-work"><i class="fa fa-files-o"></i> 廠商代PO</button>
+<button id="btn-instead-work" class="btn-copy-work hidden"><i class="fa fa-files-o"></i> 廠商代PO</button>
 
 <form name="work" id="work_edit_form" method="post" action="work_add_finish.php" onsubmit="return check_data();" >
 <table>
@@ -194,6 +194,8 @@ span{color: #f00;}
 	include_once('js_work_detail.php');
 	echo_work_detail_edit_array($conn,$_GET['workid']);
 	}
+	//應該要做一個回傳身分的ajax
+	if( $_SESSION['level'] != 4 ) echo '$( "#btn-instead-work" ).removeClass( "hidden" );';
 
 	?> 
 	

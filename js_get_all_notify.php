@@ -10,11 +10,12 @@ function get_all_notify($user,$level){
 
 		$para = array($user , $level , $user , $level);
 	
-		$sql1 ="select * from msg where recv=? and recv_level=? 
-		and time>(select time from cjcu_notify where user_no=? and user_level=?) ";
+		$sql1 ="select * from msg where (recv=? or recv='-all')
+		and time>0";
+		//and time>(select time from cjcu_notify where user_no=? and user_level=?) ";
 
-		$sql2 ="select * from msg where recv=? and recv_level=? 
-		and time<=(select time from cjcu_notify where user_no=? and user_level=?) ";
+		$sql2 ="select * from msg where (recv=? or recv='-all')
+		and time<=0";
 
 		$stmt1 = sqlsrv_query($conn, $sql1, $para);
 		$stmt2 = sqlsrv_query($conn, $sql2, $para);

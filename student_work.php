@@ -63,21 +63,21 @@ else{
 		    	    statustxt = $('<span>').addClass('nocheck').text('已要求重新再審！'),
 		    		subbox1 = $('<div>').addClass('sub-box').append(icon),
 		    		subbox2 = $('<div>').addClass('sub-box').append(tit).append(company).append(hint),
-		    		subbox3 = $('<div>').addClass('sub-box2').append(hint2,teacher);
+		    		subbox3 = $('<div>').addClass('sub-box2').append(hint2);
 
 		    		var check_status='';
 		    		switch(work_list_array[i]['ch']) {
 		    			//老師說要正名
 			    		case 0: check_status='公司審核中'; hint2.addClass('sta1 onecheck').text(check_status); break;
 			    		case 1: check_status='已錄取!'; hint2.addClass('sta2 yescheck').text(check_status); break;
-			    		case 2: check_status='應徵失敗..(查看原因)'; hint2.addClass('sta3 nocheck').text(check_status); break;
-			    		case 3: check_status='應徵失敗..'; hint2.addClass('sta4 nocheck').text(check_status); subbox3.append(statustxt);break;
+			    case 22:case 2: check_status='應徵失敗..(查看原因)'; hint2.addClass('sta3 nocheck').text(check_status); break;
+			    		case 3: check_status='應徵失敗..(查看原因)'; hint2.addClass('sta4 nocheck').text(check_status); subbox3.append(statustxt);break;
 			    		case 4: check_status='實習中'; hint2.addClass('sta5 yescheck').text(check_status); break;
 			    		case 5: check_status='完成工作!'; hint2.addClass('sta5 yescheck').text(check_status); break;
 		    		}
 
-		    	
-		    		mainbox = $('<div>').addClass('work-list-box').append(subbox1).append(subbox2).append(subbox3);
+		        	subbox3.append($('<br>'),teacher);
+		    		var mainbox = $('<div>').addClass('work-list-box').append(subbox1).append(subbox2).append(subbox3);
 		    		
 		    		//Show 出該工作詳細的歷史應徵審查紀錄
 
@@ -92,7 +92,7 @@ else{
 		    			var audit = parseInt(th.attr('audit'));
 		    			var check_status_box = $('#student-audit-current-status').removeClass('yescheck').removeClass('nocheck');
 		    			var c_status ='';
-                        // 消應徵按鈕   要求再審按鈕
+                        // 取消應徵   要求再審
 		    	    	var delete_lu = $('<div>').attr('luid', workid).addClass('delete-lu').text("取消應徵"),
                             pass = $('<div>').attr('workid', workid).addClass('pass-req').text("要求再審核");
 
@@ -110,9 +110,8 @@ else{
 				                $('.student-audit-lightbox-status').append(pass); break;
 
 
-			    		case 3: c_status='應徵失敗!'; check_status_box.addClass('sta4 nocheck').text(c_status); 
-			    	        	$('.student-audit-lightbox-status').append(delete_lu); 
-			    	        	$('#student-audit-again').text('已要求重新再審！'); break;
+			    case 22:case 3: c_status='應徵失敗!'; check_status_box.addClass('sta4 nocheck').text(c_status); 
+			    	        	$('.student-audit-lightbox-status').append(delete_lu); break;
 
 			    		case 4: c_status='已錄取'; check_status_box.addClass('sta5 yescheck').text(c_status); break;
 			    		case 5: c_status='不錄取'; check_status_box.addClass('sta6 nocheck').text(c_status); break;

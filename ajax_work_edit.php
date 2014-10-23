@@ -1,6 +1,6 @@
 <?
-/* 廠商管理工作要用到的AJAX都放在這裡 */
-
+// 廠商管理工作要用到的AJAX都放在這裡 
+// 系所實習媒合
 session_start(); 
 
 
@@ -144,7 +144,7 @@ function work_state_change($workid,$check){
 //只改變該工作有錄取(以上)的
   $sql2  = "update line_up set [check]=(?) where work_id =? and [check] IN (1,4)"; 
 //沒錄取的通通變成不通過
-  $sql3  = "update line_up set [check]=2 where work_id =? and [check] <4"; 
+  $sql3  = "update line_up set [check]=22 where work_id =? and [check] <4"; 
 
   
 
@@ -182,7 +182,7 @@ function match_stu_array($workid){
 
 include("sqlsrv_connect.php");
 
-$sql = "SELECT u.user_no stuid,u.user_name stuname FROM cjcu_user u,line_up l WHERE u.user_no=l.user_id AND l.work_id=? AND (l.[check]=1 OR l.[check]>3)";
+$sql = "SELECT u.user_no stuid,u.user_name stuname FROM cjcu_user u,line_up l WHERE l.work_id=? AND u.user_no=l.user_id AND (l.[check]=1 OR l.[check]>3)";
 
 $para = array($workid);
 $stmt = sqlsrv_query($conn, $sql, $para);

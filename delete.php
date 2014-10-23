@@ -51,6 +51,14 @@ include("sqlsrv_connect.php");
 
         if($stmt) {
             sqlsrv_free_stmt($stmt);
+
+            //將此工作的應徵者轉成不錄取
+            $sql2  = "UPDATE line_up SET [check]=22 WHERE work_id =? AND [check] IN [0,2,3]"; 
+            sqlsrv_query($conn, $sql2, array($workid));
+
+            $sql3 = "INSERT INTO msg(recv,mcontent,icon) values(?,?,?)";
+            sqlsrv_query($conn, $sql3, array('-all','你所應徵的工作「<b>'.$workid.'</b>」已被原廠商刪除','fa fa-times'));
+
             echo $publisher;
         }
         else die(print_r( sqlsrv_errors(), true));
