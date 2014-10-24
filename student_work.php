@@ -114,8 +114,7 @@ else{
 			    	        	$('.student-audit-lightbox-status').append(delete_lu); break;
 
 			    		case 4: c_status='已錄取'; check_status_box.addClass('sta5 yescheck').text(c_status); break;
-			    		case 5: c_status='不錄取'; check_status_box.addClass('sta6 nocheck').text(c_status); break;
-			    		case 6: c_status='完成工作'; check_status_box.addClass('sta7 yescheck').text(c_status); break;
+			    		case 5: c_status='完成工作'; check_status_box.addClass('sta7 yescheck').text(c_status); break;
 			    		
 			    		}
 			    	
@@ -271,8 +270,8 @@ else{
 	<div class="staff-apply-form" id="student-audit-lightbox"> 
 		<div id='workedit-content-audit' class="staff-apply-box"> 
 
-			<h1 class="student-audit-title">審核狀況 <i class="fa fa-times login-exit" id="student-audit-lightbox-exit"></i> </h1>
-			<div class="student-audit-lightbox-status">目前審核狀態：
+			<h1 class="student-audit-title">審核訊息 <i class="fa fa-times login-exit" id="student-audit-lightbox-exit"></i> </h1>
+			<div class="student-audit-lightbox-status">目前狀況：
 				<span id="student-audit-current-status"></span>
 				<!--<div class="pass-req">要求再審核</div>-->
 				<span id="student-audit-again"></span>

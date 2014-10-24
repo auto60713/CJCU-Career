@@ -88,11 +88,9 @@
 }
 .nonecheck{
 	color: #666;
-	font-size: 16px;
 }
 .yescheck{
 	color:#339933;
-	font-size: 16px;
 }
 .nocheck{
 	color: #CC3333;
@@ -155,8 +153,7 @@
 	padding-bottom: 10px;
 }
 #student-audit-current-status{
-	font-size: 20px;
-	vertical-align: middle;
+
 }
 .student-audit-list{
 	border-bottom: solid 1px #CCC;

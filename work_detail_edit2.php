@@ -253,22 +253,35 @@ function isCompanyWork($conn,$companyid,$workid){
         //刪除工作
         var work_delete = $('a#divbtn-delete');
 		work_delete.click(function(event) {
-			//以後要做一個AJAX拿工作名字的
-		    if (confirm ("確定要刪除此工作  ?")){
 
-		    	$.ajax({
-			     	type:"POST",
-			     	url: "delete.php",
-			     	data:{mode:0,workid:<? echo (int)$_POST['workid']; ?>},
-                    success: function (data) { 
-                    	if(data != 0){
-                    		alert('刪除成功');
-                	        window.location.href = data+'_manage.php#'+data+'-work';
-                    	}
+            //查詢該工作名字
+			$.ajax({
+			    type:"POST",
+			    url: "ajax_echo_name.php",
+			    data:{mode:'work',workid:<? echo (int)$_POST['workid']; ?>},
+                success: function (data) { //上括號
+                if(data != 0){
+                var work_name=data;
+                  
+		            if (confirm ("確定要刪除此工作 「"+work_name+"」 ?")){
+
+		    	    $.ajax({
+			         	type:"POST",
+			         	url: "delete.php",
+			         	data:{mode:0,workid:<? echo (int)$_POST['workid']; ?>,workname:work_name},
+                        success: function (data2) { 
+                        	if(data2 != 0){
+                        		alert('刪除成功');
+                    	        window.location.href = data2+'_manage.php#'+data2+'-work';
+                        	}
 			      	    else alert('資料驗證不正確 無法刪除');
-			        }
-			    });
-		    }
+			            }
+			        });
+		            }
+
+		    	}
+			    }//下括號
+			});
 		});
 
 

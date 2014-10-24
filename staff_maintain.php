@@ -75,11 +75,26 @@ if($_SESSION['level']!=1) { echo "No permission"; exit; }
 </body>
 <script type="text/javascript">
 
+function echo_work_name(workid) {
+
+		$.ajax({
+			type:"POST",
+			url: "ajax_echo_name.php",
+			data:{mode:'work',workid:workid},
+              success: function (data) { 
+                  if(data != 0) return data;
+              }
+		});    	
+}
+
+
 //關閉工作
 function close_work() {
 
 	var workid = $('input:text[name=close_work_id]').val();
-	if (confirm ("確定要關閉工作編號 "+workid+" ?")){
+	var workname = echo_work_name(workid);
+
+	if (confirm ("確定要關閉工作「"+workname+"」?")){
 
 		$.ajax({
 			type:"POST",
@@ -87,7 +102,7 @@ function close_work() {
 			data:{mode:0,workid:workid},
               success: function (data) { 
               	if(data == 'Success'){
-              	   var log = $('<h4>').addClass('log').text("已經關閉工作編號"+workid+"了");
+              	   var log = $('<h4>').addClass('log').text("已經關閉工作「"+workname+"」了");
               	   $('.work_page').append(log);
               	}
 			    else alert(data);
