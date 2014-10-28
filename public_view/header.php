@@ -15,7 +15,9 @@ else if ($mod == "user") $sql = "SELECT user_name username FROM cjcu_user WHERE 
         $stmt = sqlsrv_query( $conn, $sql ,array($user));
 
         while( $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC) ) {
-        $GLOBALS['header_name'] = $row[username];
+        if ($row[username]!='') $GLOBALS['header_name'] = $row[username];
+        else { $GLOBALS['header_name'] = $user; }
+        
         }
 
         sqlsrv_free_stmt($stmt);
@@ -51,7 +53,7 @@ function echo_data($user,$lev){
 		}
 		else if( $lev == $level_staff){
             echo_username($user,'dep');
-			echo '<span id="header-notice"><a href="../../../cjcuweb/staff_manage.php#staff-notice">通知</a></span>';	
+			echo '<span id="header-notice"><a href="../../../cjcuweb/department_manage.php#staff-notice">通知</a></span>';	
 			echo '<span><a href="../../../cjcuweb/staff_manage.php">管理</a></span>';
 			echo '<span class="username"><a href="../../../cjcuweb/staff/'.$user.'">'.$GLOBALS['header_name'].'</a></span>';
 		}

@@ -1,10 +1,6 @@
 <? session_start(); 
-// 審核頁面  身分驗證
 include_once('cjcuweb_lib.php');
-if($_SESSION['level']!=$level_staff){
-	echo "No permission"; exit; 
-}
-
+if($_SESSION['level']!=$level_staff){echo "No permission"; exit; }
 ?>
 
 <!doctype html>

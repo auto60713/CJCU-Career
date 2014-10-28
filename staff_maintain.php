@@ -1,6 +1,4 @@
 <? session_start(); 
-
-//身分驗證
 if($_SESSION['level']!=1) { echo "No permission"; exit; }
 ?>
 

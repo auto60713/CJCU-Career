@@ -1,4 +1,4 @@
-<?session_start();?>
+<?session_start();  header("location: home.php")?>
 
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>長大職涯網</title>
@@ -125,22 +125,19 @@ function login_echo($login_msg){
 
     switch ($login_msg) {
     case 1:
-        echo '登入成功! 跳轉中，請稍後...';
-        echo '<meta http-equiv=REFRESH CONTENT=1;url=home.php>';
+        echo '登入成功!';
     break;
     case 2:
-        echo '管理員驗證成功! 跳轉中，請稍後...';
-        echo '<meta http-equiv=REFRESH CONTENT=1;url=home.php>';
+        echo '管理員驗證成功!';
     break;
     case 3:
-        echo '計中驗證成功! 跳轉中，請稍後...';
-        echo '<meta http-equiv=REFRESH CONTENT=1;url=home.php>';
+        echo '計中驗證成功!';
     break;
     default: 
-        echo '帳號或密碼錯誤! 跳轉中...';
-        echo '<meta http-equiv=REFRESH CONTENT=1;url=home.php>';
+        echo '帳號或密碼錯誤!';
     }
-
+    //if($login_msg>0) echo '<meta http-equiv=REFRESH CONTENT=0;url=home.php>';
+    
 }
 
 session_write_close(); 

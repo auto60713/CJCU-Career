@@ -19,7 +19,7 @@ if($stmt) {
 	
 	echo "var work_list_array".$ch." = ". json_encode($work_list_array) . ";";	
 
-	$sql2 ="select c.id, c.ch_name,c.en_name,c.phone,c.fax,c.uni_num,c.name,c.pic,c.email,t.name typename,z.name zonename,c.address,c.budget,c.introduction,c.doc,c.staff_num,c.url,c.censored 
+	$sql2 ="select c.id, c.ch_name,c.en_name,c.phone,c.fax,c.uni_num,c.boss_name,c.email,t.name typename,z.name zonename,c.address,c.budget,c.introduction,c.doc,c.staff_num,c.url,c.censored 
 			from company c,zone z,company_type t
 			where c.censored=? and c.type=t.id and c.zone_id=z.id";
 	$stmt2 = sqlsrv_query($conn, $sql2, array($ch));

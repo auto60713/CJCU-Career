@@ -1,4 +1,6 @@
-<? session_start(); ?>
+<? session_start(); 
+if(!isset($_SESSION['username'])) { header("Location: home.php"); exit; }
+?>
 <!doctype html>
 <html>
 <head>
@@ -20,6 +22,7 @@
 		$('#view-header').load('public_view/header.php');
 
 		$(window).hashchange( function(){
+
 			ctu=false;
 		  	var loc = location.hash.replace( /^#/, '' );
 		  	switch(loc) {
@@ -39,6 +42,7 @@
 
 		function doajax(idx){
 
+                $('#right-box-title').html('載入中...請稍後');
 
 				switch(idx) {
 				// company info page 0

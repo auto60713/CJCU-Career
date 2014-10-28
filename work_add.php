@@ -479,7 +479,7 @@ span{color: #f00;}
 			$('#minute2').val(mm);
 
 
-			$('#work_prop').val(work_detail_array['work_prop_id']);
+			$('#work_prop').val(work_detail_array['work_prop_id']); //這邊沒抓出來
 			$('input[type="radio"][value="'+work_detail_array['is_outside']+'"]').attr('checked', 'true');
 			$('#zone').val(work_detail_array['zone']);
 			$('#zone_name').val(work_detail_array['zone_id']);

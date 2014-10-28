@@ -1,5 +1,5 @@
 <? session_start(); 
-if(isset($_GET['companyid'])) $_SESSION['username']=$_GET['companyid']; else{header("Location: home.php"); exit;}
+if(!isset($_SESSION['username'])) { echo 'No permission!'; exit; }
 ?>
 
 <!doctype html>
@@ -8,44 +8,50 @@ if(isset($_GET['companyid'])) $_SESSION['username']=$_GET['companyid']; else{hea
 	<script><? include_once("js_detail.php"); echo_company_detail($_SESSION['username']); ?></script>
 	<script><? include_once("js_audit_detail.php"); echo_audit_detail_array($_SESSION['username'],0); ?></script>
 </head>
-
+<style type="text/css">
+.td1{
+    width: 80px;
+    overflow: hidden;
+}
+.td2{
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+</style>
 <body>
 <script>
 	$(function(){
 
 		var html_detail = "",idx = 0;
 		//column_name array必須優化成json格式 不然目前依賴index順序
-		var column_name = ["中文名稱","英文名稱","連絡電話","傳真號碼","統一編號","負責人　","照片網址","電子信箱","公司類別","公司位置","公司地址","資本額　","關於公司","相關文件","員工數量","相關連結"];
+		var column_name = ["中文名稱","英文名稱","連絡電話","傳真號碼","電子信箱","統一編號","負責人","公司類別","公司位置","公司地址","員工數量","資本額","公司網站","關於公司","相關文件"];
 		for(var key in company_detail_array){
 	     	//特殊處理欄位
-	     	if(key == "typename"||key == "zonename"||key == "censored"){
+	     	if(key == "typename"||key == "zonename"||key == "introduction"||key == "censored"){
 
                 //公司類型
-			    if(key == "typename"){
-	     			html_detail+=column_name[idx]+"&emsp;&emsp;&emsp;<select name='"+key+"' id='company_type'></select> <br>";
-	     		}
-
+			    if(key == "typename") html_detail+="<tr><td class='td1'>"+column_name[idx]+"</td><td class='td2'><select name='"+key+"' id='company_type'></select></td</tr>";
+	     		
 	     		//公司地點
-			    if(key == "zonename"){
-	     			html_detail+=column_name[idx]+"&emsp;&emsp;&emsp;<select name='"+key+"' id='company_zone'></select> <br>";
-	     		}
+			    if(key == "zonename") html_detail+="<tr><td class='td1'>"+column_name[idx]+"</td><td class='td2'><select name='"+key+"' id='company_zone'></select></td</tr>";
 
-	     		if(key == "censored"){
-	     		//審核狀況不印出
-	     		}
-
+	     		//關於公司
+	     		if(key == "introduction") html_detail+="<tr><td class='td1'>"+column_name[idx]+"</td><td class='td2'><textarea rows='2' cols='30' name='"+key+"'>"+company_detail_array[key]+"</textarea></td</tr>";
+	     		
+	     		//不印出
+	     		if(key == "censored") {}
 
 	     	}
 
             //普通欄位
 	     	else{
-            html_detail+=column_name[idx]+"&emsp;&emsp;&emsp;<input type='text' name ='"+key+"' value='"+company_detail_array[key]+"'><br>";
+            html_detail+="<tr><td class='td1'>"+column_name[idx]+"</td><td class='td2'><input type='text' name ='"+key+"' value='"+company_detail_array[key]+"'></td</tr>";
 		    }
 			idx++;
 		}	
-		    html_detail+="<br><input type='submit' value='修改資料'/>";
-		$('#detail').html(html_detail);
-	
+		    var submit ="<br><input type='submit' value='修改資料'/>";
+		$('#detail table').html(html_detail);
+	    $('#detail').append(submit);
 
 
 
@@ -178,7 +184,9 @@ if(isset($_GET['companyid'])) $_SESSION['username']=$_GET['companyid']; else{hea
 <div class="workedit-content" id='workedit-content'>
 	
 	<div id='workedit-content-edit' class="" tabtoggle='workedit2'>
-		<form method="post" action="updata.php" id="detail"></form>
+		<form method="post" action="updata.php" id="detail">
+        <table></table>
+		</form>
 	</div>
 
 

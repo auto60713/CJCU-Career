@@ -1,11 +1,10 @@
 <?
 
-
 /* SQL語法裡面應該要盡量使用別名 不然輸出JSON欄位都被人猜光光*/
 
 
-/* to profile -------------------------   */
 
+/* to profile -------------------------   */
 
 /* 學生 */
 function echo_student_profile($stu_no){
@@ -58,7 +57,6 @@ include("sqlsrv_connect.php");
 
 /* to manage -------------------------    */
 
-
 /* 學生 */
 function echo_student_detail($user_id){
 include_once("sqlsrv_connect.php");
@@ -84,7 +82,7 @@ function echo_company_detail($com_id){
 
 include("sqlsrv_connect.php");
 
-    $sql = "select c.ch_name,c.en_name,c.phone,c.fax,c.uni_num,c.name,c.pic,c.email,t.name typename,z.name zonename,c.address,c.budget,c.introduction,c.doc,c.staff_num,c.url,c.censored "
+    $sql = "select c.ch_name,c.en_name,c.phone,c.fax,c.email,c.uni_num,c.boss_name,t.name typename,z.name zonename,c.address,c.staff_num,c.budget,c.url,c.introduction,c.doc,c.censored "
 	      ."from company c,zone z,company_type t "
 	      ."where c.id= ? and c.type=t.id and c.zone_id=z.id";
 

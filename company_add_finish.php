@@ -4,37 +4,35 @@
 
 include("sqlsrv_connect.php");
 
-$id = trim($_POST['id']);
-$pw = trim($_POST['pw']);
+$id      = trim($_POST['id']);
+$pw      = trim($_POST['pw']);
 $ch_name = trim($_POST['ch_name']);
 $en_name = trim($_POST['en_name']);
-$phone = trim($_POST['phone']);
-$fax = trim($_POST['fax']);
+$phone   = trim($_POST['phone']);
+$fax     = trim($_POST['fax']);
 $uni_num = trim($_POST['uni_num']);
-$name = trim($_POST['name']);
-$pic = trim($_POST['pic']);
-$email = trim($_POST['email']);
-$type = trim($_POST['type']);
+$boss_name    = trim($_POST['boss_name']);
+$email   = trim($_POST['email']);
+$type    = trim($_POST['type']);
 $zone_id = trim($_POST['zone_name']);
-$adress = trim($_POST['address']);
-$budget = trim($_POST['budget']);
+$address  = trim($_POST['address']);
+$staff_num    =trim( $_POST['staff_num']);
+$budget  = trim($_POST['budget']);
+$url          = trim($_POST['url']);
 $introduction = trim($_POST['introduction']);
-$doc = trim($_POST['doc']);
-$staff_num =trim( $_POST['staff_num']);
-$url = trim($_POST['url']);
+$doc          = trim($_POST['doc']);
 
 
-if(empty($id) || empty($pw) || empty($ch_name) || empty($uni_num) || empty($name) || empty($address)){
-	echo 'You are hacker!';
+if(empty($id) || empty($pw) || empty($ch_name) || empty($phone) || empty($uni_num) || empty($boss_name) || empty($address)){
+	echo '資料有缺失!';
     echo '<meta http-equiv=REFRESH CONTENT=1;url=add_company.php>';
 }
-
 else{
     // 新增公司
 	// MD5加密
 	$pw = md5($pw);
-    $sql = "INSERT INTO company (id,pw,ch_name,en_name,phone,fax,uni_num,name,pic,email,type,zone_id,address,budget,introduction,doc,staff_num,censored,url) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-    $params = array($id, $pw , $ch_name , $en_name , $phone , $fax , $uni_num , $name , $pic , $email , (int)$type , (int)$zone_id , $address , (int)$budget , $introduction , $doc , (int)$staff_num, 0 , $url);
+    $sql = "INSERT INTO company (id,pw,ch_name,en_name,phone,fax,uni_num,boss_name,email,type,zone_id,address,staff_num,budget,url,introduction,doc,censored) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    $params = array($id,$pw,$ch_name,$en_name,$phone,$fax,$uni_num,$boss_name,$email,(int)$type,(int)$zone_id ,$address,(int)$staff_num,(int)$budget,$url,$introduction,$doc, 0 );
     //type,zone_id,censored資料型態都只有0跟1
 
     $stmt = sqlsrv_query( $conn, $sql, $params);

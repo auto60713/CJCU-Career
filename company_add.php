@@ -195,10 +195,9 @@
 <tr><td>公司名稱(英文)：</td>   <td><input type="text" name="en_name"/></td></tr>
 <tr><td>公司電話*：</td>        <td><input type="text" name="phone"/></td></tr>
 <tr><td>傳真：</td>             <td><input type="text" name="fax"/></td></tr>
-<tr><td>統一編號*：</td>        <td><input type="text" name="uni_num"/></td></tr>
-<tr><td>負責人姓名*：</td>      <td><input type="text" name="name"/></td></tr>
-<tr><td>負責人大頭照檔：</td>   <td><input type="file" name="pic"/></td></tr>
 <tr><td>Email：</td>            <td><input type="text" name="email"/></td></tr>
+<tr><td>統一編號*：</td>        <td><input type="text" name="uni_num"/></td></tr>
+<tr><td>負責人姓名*：</td>      <td><input type="text" name="boss_name"/></td></tr>
 <tr><td>公司行業類型 :</td>     <td><select name="type" id="company_type"></select></td></tr>
 
 <script> //接受後端php傳來的js陣列
@@ -210,8 +209,8 @@
 <tr><td>公司地點*：</td>        <td><select name="zone" id="zone"></select>  
 			                        <select name="zone_name" id="zone_name"></select></td></tr>
 <tr><td>公司地址*：</td>        <td><input type="text" name="address" /> </td></tr>
-<tr><td>公司資本額：</td>       <td><input type="number" name="budget" min="0" max="999999999"/></td></tr>
 <tr><td>員工人數：</td>         <td><input type="number" name="staff_num" min="1" max="99999"/></td></tr>
+<tr><td>公司資本額：</td>       <td><input type="number" name="budget" min="0" max="999999999"/></td></tr>
 <tr><td>公司網址：</td>         <td><input type="text" name="url" /></td></tr>
 </table>
 
