@@ -31,60 +31,58 @@ a{
 	cursor: pointer;
 }
 .div-align{
-	width: 900px;
 	margin-left: auto;
 	margin-right: auto;
 }
 
-
+/* 版頭 */
 #view-header{
-
+	text-align: center;
+	height: 70px;
 }
 #header{
+	width: 1000px;
 	padding-top: 10px;
+	padding-bottom: 10px;
 	overflow: hidden;
-	color: #EEE;
 }
-#header .sub{
+.sub,.sub2,.sub3,.sub4{
 	float: left;
 }
+
 #header .sub img{
 	width: 220px;
 	height: 50px;
 	margin-bottom: -5px;
 }
-#header .sub a{
-	color: #EEE;
-	text-decoration: none;
-}
-
 #header .sub2{
+	width: 220px;
+}
+#header .sub2 h1{
+	color: #991133;
+	letter-spacing: 3px;　     
+}
+  
+#header .sub4{
 	float: right;
 	overflow: hidden;
-    width: 70%;
     height: 50px;
-	background-color: #991133;
-	border-radius:10px;
 	padding-right: 20px;
 }
 
-#header .sub2 span{
+#header .sub4 span{
 	float: right;
 	height: 100%;
     padding-left:  10px;
     padding-right: 10px;
 }
-#header .sub2 span a{
-	color: #F3F3F3;
+#header .sub4 span a{
 	text-decoration: none;
     line-height:50px;
 }
-#header .sub2 span a:hover{
-	color: #CAF286;
+#header .sub4 span a:hover{
+	color: #A73065;
 }
-
-
-
 
 .header-notice-num{
 	display: inline-block;
@@ -98,10 +96,7 @@ a{
 
 
 
-
-/*Login*/
-
-/*登入*/
+/* 登入 */
 
 .login{
 	width: 425px;

@@ -22,12 +22,10 @@
                     }
 		});
 
-		$('#search-detail').hide();
-		$('#btn_detail_search').on('click', function(event) {
-			event.preventDefault();
-			$('#search-detail').slideToggle('fast');
+		//進階搜尋
+		$('#high_search_btn').on('click', function(event) {
+		
 		});
-
 
 	})
 	</script>
@@ -39,28 +37,53 @@
 <!-- 版頭 -->
 <div id="view-header" class=""></div>
 
-<!-- 搜尋 -->
-<div class="div-search margin-top20">
+<!-- 菜單 -->
+<div id="menu">
+    <ul class="div-align">
+        <li><a href="#">首頁</a></li>
+        <li><a href="#">焦點新聞</a></li>
+        <li><a href="#">工作列表</a></li>
+        <li><a href="#">校內新聞</a></li>
+        <li><a href="#">職場高手</a></li>
+        <li><a href="#">職場動態</a></li>
+        <li><a href="#">職場萬花筒</a></li>
+    </ul>
 
-	<div class="search-bar container">
-		<div class="set-center">
+</div>
+
+
+<!-- 主體 -->
+<div id="main" class="div-align">
+
+
+<!-- 焦點新聞 -->
+<div id="xxx1" class="area_box"><h1 id="area_title">焦點新聞</h1>
+</div>
+<!-- FB -->
+<div id="xxx2" class="area_box">
+</div>
+
+
+<!-- 工作列表 -->
+<div id="work_list" class="area_box"><h1 id="area_title">工作列表</h1>
+
+	<!-- 搜尋 -->
+	<div class="search-bar">
 			<input type="text" id="normal-search">
 			<input type="button" id="search" value="搜尋">
-			<a href="#" id="btn_detail_search" class="search-detail"><i class="fa fa-cog"></i>進階搜尋</a>
-		</div>
+			<a href="#" id="high_search_btn"><i class="fa fa-cog"></i>進階搜尋</a>
 	</div>
 
-	<!--進階搜尋-->
-
-	<div class="container" id="search-detail">
-	<div class="tag-bar">
+    <!-- 進階搜尋 -->
+	<div class="high_search-bar">
 	
+	<!-- 條件1 -->
 	<div class="search-detail-sub">
-		 <input type="checkbox" id="search_prop" value="prop" class="search-detail-input">
+		 <input type="checkbox" id="search_prop" value="prop">
 	     <label for="search_prop">工作性質 : </label><select name="work_prop" id="work_prop"></select>
 	</div>
 	
-
+    <!-- 條件2 -->
 	<div class="search-detail-sub">
 	    <input type="checkbox" id="search_io" value="io">
 	     <label for="search_io">校內外工作：</label>
@@ -70,7 +93,7 @@
 	     </select> 
 	</div>
 
-
+    <!-- 條件3 -->
 	<div class="search-detail-sub">
 	    <input type="checkbox" id="search_zone" value="zone" >
 	    <label for="search_zone">工作地點 : </label>
@@ -78,36 +101,47 @@
 		<select name="zone_name" id="zone_name" class="search-detail-input"></select>
 	</div>
 
-
     </div>
-    </div>
-</div>
 
 
-<!-- 工作列表 -->
-<div class="center margin-bottom70" style="min-height: 520px">
-	<!-- 取消進階搜尋 -->
-	<div class="container rush-search">
+
+    <!-- 快速搜尋 -->
+	<div class="rush-search">
 		<a href="home.php" class="<? if(count($_GET)==0) echo "rush-searching"; ?>">最新工作</a>
 		<a href="home.php?mode=search&io=1" class="<? if($_GET['io']=='1') echo "rush-searching"; ?>">校內工作</a>
 		<a href="home.php?mode=search&prop=2" class="<? if($_GET['prop']=='2') echo "rush-searching"; ?>">正職</a>
 		<a href="home.php?mode=search&prop=1" class="<? if($_GET['prop']=='1') echo "rush-searching"; ?>">工讀</a>	
-
 		<a href="home.php?mode=search&prop=3" class="<? if($_GET['prop']=='3') echo "rush-searching"; ?>">實習</a>		
 	</div>
-	<!-- 工作顯示 -->
-	<div class="work-list-bar container" id="home-work-list-box"></div>
+
+	<!-- 列表 -->
+	<div id="home-work-list-box"></div>
+</div>
+
+
+
+<!-- 校內新聞 -->
+<div id="xxx3" class="area_box"><h1 id="area_title">校內新聞</h1>
+</div>
+<!-- 職場高手 -->
+<div id="xxx4" class="area_box"><h1 id="area_title">職場高手</h1>
+</div>
+<!-- 職場動態 -->
+<div id="xxx5" class="area_box"><h1 id="area_title">職場動態</h1>
+</div>
+<!-- 職場萬花筒 -->
+<div id="xxx6" class="area_box"><h1 id="area_title">職場萬花筒</h1>
+</div>
+
+
+
 </div>
 
 
 <!-- 頁尾訊息 -->
-<div class="footer div-align">
-	<div class="footer-bar">
-	10/2最後更新
-    <!--All Jobs | PostaJob | AboutUs | ContactUs-->
-	<br>
-	© 2014 長大職涯網 Inc. 長榮大學 職涯發展組
-
+<div id="footer">
+	<div class="footer_text">
+		© 2014 長大職涯網 Inc. 長榮大學 職涯發展組
 	</div>
 </div>
 
@@ -126,20 +160,6 @@
 	include_once("js_search_work_data.php"); echo_work_sub_data();
     ?>
 
-    /*
-		<a href="work/4">
-			<div class="work">
-				<h1>電腦工程大師</h1>
-				<p>臺北市</p>
-				<p>校內 工讀</p>
-				<p>需求 10 人</p>
-				<p class="date">2014-03-09</p>
-			</div>
-		</a>
-
-    */
-
-
 	var box = $('#home-work-list-box');	    
 
 	for(var i=0;i<work_list_array.length;i++){
@@ -149,7 +169,7 @@
 			box3 = $('<div>').addClass('work-box').addClass('box-loc'),
 			box4 = $('<div>').addClass('work-box').addClass('box-pop'),
 
-			img = $('<img>').addClass('work-img').attr('src', 'img_company/'+work_list_array[i].cid+'.jpg'),
+			img = $('<img>').addClass('com-img').attr('src', 'img_company/'+work_list_array[i].cid+'.jpg'),
 			a_link = $('<a>').attr({href:'work/'+work_list_array[i].wid}),
 			div_work = $('<div>').addClass('work'),
 

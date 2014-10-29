@@ -130,9 +130,16 @@ function echo_data($user,$lev){
 
 
 <!--<div id="header">-->
-	<!--舊的<div class="sub"><a href="../../../cjcuweb/home.php"><h1>長大職涯網</h1></a></div>-->
-	<div class="sub"><a href="../../../cjcuweb/home.php"><img src="http://www.cjcu.edu.tw/zh_tw/images/id.jpg"></a></div>
+    <a href="../../../cjcuweb/home.php">
+	<div class="sub"><img src="http://www.cjcu.edu.tw/zh_tw/images/id.jpg"></div>
 	<div class="sub2"> 
+        <h1>長大職涯網</h1>
+	</div>
+	</a>
+	<div class="sub3"> 
+
+	</div>
+	<div class="sub4"> 
 	<? echo_data($user,$lev)	 ?>  
 	</div>
 
