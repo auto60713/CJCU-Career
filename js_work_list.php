@@ -43,11 +43,10 @@ else die(print_r( sqlsrv_errors(), true));
 
 
 //回傳搜尋後的訊息
-if(isset($_GET['mode'])){
-	$work_length = count($work_list_array);
-    if($work_length != 0) {echo "var search_log_cont = '共有 '+".$work_length."+' 項工作符合條件';";}
-    else {echo "var search_log_cont = '沒有工作符合搜尋條件!';";}
-}
+$work_length = count($work_list_array);
+if($work_length != 0) {echo "var search_log_cont = '共有 '+".$work_length."+' 項工作符合條件';";}
+else {echo "var search_log_cont = '沒有工作符合搜尋條件!';";}
+
 
 
 

@@ -192,13 +192,12 @@
 
 	}
 	
-	//設定搜尋後的回應
-	if(typeof search_log_cont =="undefined") search_log_cont = '';
+	//搜尋結果的訊息 search_log_cont從php回傳
+	if(typeof search_log_cont != "undefined") {
 
 	var search_log = $('<a>').addClass('search-log').text(search_log_cont);
-    //搜尋結果的訊息 search_log_cont從php回傳
     box.prepend(search_log);
-
+    }
 
 	// 生成工作類型
 		for(var i=0;i<work_type.length;i++)

@@ -130,7 +130,7 @@ function echo_data($user,$lev){
 
 
 <!--<div id="header">-->
-    <a href="../../../cjcuweb/home.php">
+    <a href="../../../cjcuweb/home.php" style="cursor: pointer;">
 	<div class="sub"><img src="http://www.cjcu.edu.tw/zh_tw/images/id.jpg"></div>
 	<div class="sub2"> 
         <h1>長大職涯網</h1>
