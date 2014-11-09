@@ -168,12 +168,8 @@ span{color: #f00;}
 
 工作內容：<br><textarea name="detail" cols="45" rows="5" id='detail'></textarea> <br>
 
-<? 
-	if($_GET['mode']=='edit'){
-		echo "<input type='hidden' name='work-id' value=".$_GET['workid'].">";
-		echo "審核狀態：<span id='work-check'></span><br>";
-
-	}
+<?  //紀錄該工作的ID
+	if($_GET['mode']=='edit') echo "<input type='hidden' name='work-id' value=".$_GET['workid'].">";
 ?>
 
 <input type="submit" name="button" value="確定" />
@@ -347,11 +343,6 @@ span{color: #f00;}
 
 
 		// 新增工作，從現有工作中複製資料
-		/*
-			<div class="list-copy-work">
-				<i class="fa fa-book"> </i>資深洗碗工助理操作員
-			</div>
-		*/
 		$("#btn-copy-work").click(function(event) {
 			
 				$('#lightbox-copy-work').fadeIn(100, function() {
@@ -479,7 +470,7 @@ span{color: #f00;}
 			$('#minute2').val(mm);
 
 
-			$('#work_prop').val(work_detail_array['work_prop_id']); //這邊沒抓出來
+			$('#work_prop').val(work_detail_array['prop']); 
 			$('input[type="radio"][value="'+work_detail_array['is_outside']+'"]').attr('checked', 'true');
 			$('#zone').val(work_detail_array['zone']);
 			$('#zone_name').val(work_detail_array['zone_id']);
@@ -488,16 +479,6 @@ span{color: #f00;}
 			$('#phone').val(work_detail_array['phone']);
 			$('#pay').val(work_detail_array['pay']);
 			$('#detail').val(work_detail_array['detail']);
-
-			var check_status = '';
-			
-			switch(work_detail_array['check']) {
-				case 0: check_status ='未審核'; break;
-				case 1: check_status ='通過'; break;
-				case 2: check_status ='不通過'; break;
-			}
-			if(!is_copy_mode)
-			$('#work-check').append(check_status);
 		}
 
 

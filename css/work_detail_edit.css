@@ -317,13 +317,9 @@
 	vertical-align: middle;
 	height: 30px;
 	width: 80%;
-	border: 0;
-	background-color: #DDD;
-	color: #333;
 }
 
 .staff-audit-btn:hover{
-	background-color: #EEE;
 	cursor: pointer;
 }
 

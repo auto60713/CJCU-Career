@@ -11,21 +11,7 @@ else{echo "No permission!"; exit;
     <link rel="stylesheet" type="text/css" href="css/work.css">
     <script><? include_once('js_work_list.php'); echo_work_manage_list_array($company_id);  ?>
 
-    /* front-end 架構
-<div class="work-list-box">
-
-	<div class="sub-box"><img src="" class="work-img"></div>
-	<div class="sub-box">
-		<h1 class="work-tit"><a href="#">標題</a></h1>
-		<p class="work-hint">類別<br>校外 工讀<br>時間0</p>
-	</div>
-	<div class="sub-box2">
-		<p class="work-ch-pass/unpass">審核通過/審核不通過</p>
-		<p>應徵人數：20<br>目前通過：0/10</p>
-	</div>
-
-</div>
-    */
+  
     $(function(){
 
  		var body = $('#company-work-list-container');
@@ -34,29 +20,29 @@ else{echo "No permission!"; exit;
         else{
 		    for(var i=0;i<work_list_array.length;i++){
 
-		   		chclass='';
-		   		chtxt='';
+		   		var chclass='';
+		   		var chtxt='';
 
 		    	switch(work_list_array[i]['ch']) {
 		    		case 0:
 		    			chtxt="等待校方審核";
-		    			chclass="work-ch-unaudit";
+		    			chclass="sta0 work-ch-unaudit";
 		    		break;
 		    		case 1:
 		    			chtxt="應徵中";
-		    			chclass="work-ch-pass";
+		    			chclass="sta1 work-ch-pass";
 		    		break;
-		    		case 2: case 3:
+		    		case 2: case 22: case 3:
 		    			chtxt="校方審核不通過";
-		    			chclass="work-ch-unpass";
+		    			chclass="sta2 work-ch-unpass";
 		    		break;
 		    		case 4:
 		    			chtxt="實習中";
-		    			chclass="work-ch-pass";
+		    			chclass="sta4 work-ch-pass";
 		    		break;
 		    		case 5:
 		    			chtxt="工作已結束";
-		    			chclass="work-ch-pass";
+		    			chclass="sta5 work-ch-pass";
 		    		break;
 		    	}
 		    	
@@ -89,23 +75,23 @@ else{echo "No permission!"; exit;
 
 		  function resort_work(){
 
-		  	txt = $('#search-txt').val();
-		  	vl = $('#search-typefilter').val();
+		  	var txt = $('#search-txt').val();
+		  	var search_val = $('#search-typefilter').val();
 
 		  	$('.work-list-box').removeClass('hide-work');
 
-		  		if(vl!=0){
-		  			switch(vl) {	
-		    		case '1': chtxt="審核通過"; break;
-		    		case '2': chtxt="審核不通過"; break;
-		    		case '3': chtxt="未審核"; break;
-		    		}
-		  			$('.work-list-box').each(function(index, el) {
-		  			var tit_txt = $(this).find('#chstatus').text().toLowerCase();
-		  			var search_txt = chtxt;
-		  			if(tit_txt.match(search_txt)==null) $(this).addClass('hide-work');
-		  			});
-		  		}
+		        var is_null = 1; $("#search-echo").text('');
+		  		$('.work-list-box').each(function(index, el) {
+	          	if(search_val==-1){
+	                $('.work-list-box').removeClass('hide-work'); is_null=0;
+	          	}
+	          	else{
+	          		var match_check = $(this).find('.sub-box2 p').attr('class');
+	          		if(match_check.indexOf('sta'+search_val) >= 0){ $(this).removeClass('hide-work'); is_null=0; }
+	          		else{ $(this).addClass('hide-work'); }
+			    }
+	         	});
+	         	if(is_null==1) $("#search-echo").text('沒有工作符合條件');
 
 		  		if(txt!=''){
 		  			$('.work-list-box').each(function(index, el) {
@@ -125,13 +111,15 @@ else{echo "No permission!"; exit;
 <div id='search-box'>
 
 <select id="search-typefilter">
-	<option value='0' selected="selected">顯示全部</option>
-	<option value='1' >僅顯示通過</option>
+	<option value='-1' selected="selected">顯示全部</option>
+	<option value='0' >僅顯示未審核</option>
+	<option value='1' >僅顯示應徵中</option>
 	<option value='2' >僅顯示不通過</option>
-	<option value='3' >僅顯示未審核</option>
+	<option value='4' >僅顯示實習中</option>
+	<option value='5' >僅顯示已結束</option>
 </select>
 <input type='text' placeholder='搜尋工作名稱' id='search-txt'>
 </div>
-<div id='company-work-list-container'></div>
+<div id='company-work-list-container'><div id='search-echo'></div></div>
 </body>
 </html>

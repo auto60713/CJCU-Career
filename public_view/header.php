@@ -25,7 +25,6 @@ else if ($mod == "user") $sql = "SELECT user_name username FROM cjcu_user WHERE 
 }
 
 function echo_data($user,$lev){
-	//if($lev=='0')$lev = $_SESSION['level2'];
 
 	include_once("../cjcuweb_lib.php");
 
@@ -53,9 +52,8 @@ function echo_data($user,$lev){
 		}
 		else if( $lev == $level_staff){
             echo_username($user,'dep');
-			echo '<span id="header-notice"><a href="../../../cjcuweb/department_manage.php#staff-notice">通知</a></span>';	
 			echo '<span><a href="../../../cjcuweb/staff_manage.php">管理</a></span>';
-			echo '<span class="username"><a href="../../../cjcuweb/staff/'.$user.'">'.$GLOBALS['header_name'].'</a></span>';
+			echo '<span class="username"><a href="../../../cjcuweb/department/'.$user.'">'.$GLOBALS['header_name'].'</a></span>';
 		}
 
 		else if( $lev == $level_teacher){

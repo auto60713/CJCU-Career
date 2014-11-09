@@ -1,11 +1,13 @@
-<? session_start(); ?>
+<? session_start();
+if(!isset($_SESSION['username']) || $_SESSION['level'] != 2) { header("Location: home.php"); exit; }
+?>
 <!doctype html>
 <html>
 <head>
 	<meta charset="UTF-8">
 	<title>帳戶管理</title>
 	<link rel="stylesheet" type="text/css" href="css/main.css">
-	<link rel="stylesheet" type="text/css" href="css/company_manage.css">
+	<link rel="stylesheet" type="text/css" href="css/manage.css">
 	<link rel="stylesheet" type="text/css" href="css/work_detail_edit.css">
 	<link rel="stylesheet" type="text/css" href="css/company_worK_apply_list.css">
 	<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
@@ -32,6 +34,8 @@
         $(window).hashchange();
 
 		function doajax(idx){
+
+			$('#right-box-title').html('載入中...請稍後');
 
 			switch(idx) {
 
@@ -75,7 +79,7 @@
 <div id="view-header"></div>
 
 
-<div class="div-align overfix">
+<div class="b-space div-align overfix">
 
 	<div id="" class="left-box" >
 		<h2><? echo $_SESSION['username'] ?></h2><br><br><hr>

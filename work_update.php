@@ -15,27 +15,27 @@ exit;
 include("sqlsrv_connect.php");
 
 // 取得所有表單資料並防止注入
-$name =  sqlsrv_escape(trim($_POST['name']));
-$work_type = (int)sqlsrv_escape(trim($_POST['work_type_list2']));
-$year1 = sqlsrv_escape(trim($_POST['year1']));
-$month1 = sqlsrv_escape(trim($_POST['month1']));
-$date1 = sqlsrv_escape(trim($_POST['date1']));
-$hour1 = sqlsrv_escape(trim($_POST['hour1']));
-$minute1 = sqlsrv_escape(trim($_POST['minute1']));
-$year2 = sqlsrv_escape(trim($_POST['year2']));
-$month2 = sqlsrv_escape(trim($_POST['month2']));
-$date2 = sqlsrv_escape(trim($_POST['date2']));
-$hour2 = sqlsrv_escape(trim($_POST['hour2']));
-$minute2 = sqlsrv_escape(trim($_POST['minute2']));
-$work_prop = (int)sqlsrv_escape(trim($_POST['work_prop']));
-$isoutside = (int)sqlsrv_escape(trim($_POST['isoutside']));
-$zone_id = (int)sqlsrv_escape(trim($_POST['zone_name']));
-$recruitment_no = (int)sqlsrv_escape(trim($_POST['recruitment_no']));
-$address = sqlsrv_escape(trim($_POST['address']));
-$phone = sqlsrv_escape(trim($_POST['phone']));
-$pay = sqlsrv_escape(trim($_POST['pay']));
-$detail = sqlsrv_escape(trim($_POST['detail']));
-$workid = sqlsrv_escape(trim($_POST['work-id']));
+$name =  trim($_POST['name']);
+$work_type = (int)trim($_POST['work_type_list2']);
+$year1 = trim($_POST['year1']);
+$month1 = trim($_POST['month1']);
+$date1 = trim($_POST['date1']);
+$hour1 = trim($_POST['hour1']);
+$minute1 = trim($_POST['minute1']);
+$year2 = trim($_POST['year2']);
+$month2 = trim($_POST['month2']);
+$date2 = trim($_POST['date2']);
+$hour2 = trim($_POST['hour2']);
+$minute2 = trim($_POST['minute2']);
+$work_prop = (int)trim($_POST['work_prop']);
+$isoutside = (int)trim($_POST['isoutside']);
+$zone_id = (int)trim($_POST['zone_name']);
+$recruitment_no = (int)trim($_POST['recruitment_no']);
+$address = trim($_POST['address']);
+$phone = trim($_POST['phone']);
+$pay = trim($_POST['pay']);
+$detail = trim($_POST['detail']);
+$workid = trim($_POST['work-id']);
 // 驗證該工作是否為目前登入的公司所有,如果是才給予繼續
 if(!isCompanyWork($conn,$_SESSION['username'],$workid)){echo '你沒有權限訪問改頁面!!'; exit();}
 function isCompanyWork($conn,$companyid,$workid){

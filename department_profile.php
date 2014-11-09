@@ -6,7 +6,7 @@
 	<title></title>
 	<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="../css/main.css">
-	<link rel="stylesheet" type="text/css" href="../css/company_manage.css">
+	<link rel="stylesheet" type="text/css" href="../css/manage.css">
 	<link rel="stylesheet" type="text/css" href="../css/profile.css">
 	<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 	<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
@@ -72,7 +72,7 @@
 
 <div id="view-header"></div>
 
-<div class="div-align">
+<div class="b-space div-align">
 
 
 
@@ -111,7 +111,7 @@
 </div>
 
 <div class="profile-boxinner" id="profile-worklist">
-	<h2>其他職缺</h2>
+	<h2>公司職缺</h2>
 </div>
 </div>
 

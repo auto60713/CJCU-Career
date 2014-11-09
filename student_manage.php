@@ -1,11 +1,13 @@
-<? session_start(); ?>
+<? session_start();
+if(!isset($_SESSION['username']) || $_SESSION['level'] != 3) { header("Location: home.php"); exit; }
+?>
 <!doctype html>
 <html>
 <head>
 	<meta charset="UTF-8">
 	<title>個人頁面</title>
 	<link rel="stylesheet" type="text/css" href="css/main.css">
-	<link rel="stylesheet" type="text/css" href="css/company_manage.css">
+	<link rel="stylesheet" type="text/css" href="css/manage.css">
 	<link rel="stylesheet" type="text/css" href="css/work_detail_edit.css">
 	<link rel="stylesheet" type="text/css" href="css/profile.css">
 	<link href="font-awesome/css/font-awesome.min.css" rel="stylesheet">
@@ -35,6 +37,8 @@
 
 
 		function doajax(idx){
+
+			    $('#right-box-title').html('載入中...請稍後');
 
 				$('.list').removeClass('list-active');
 				$('.list:eq('+idx+')').addClass('list-active');
@@ -78,7 +82,7 @@
 <div id="view-header"></div>
 
 
-<div class="div-align overfix">
+<div class="b-space div-align overfix">
 
 	<div id="" class="left-box" >
 

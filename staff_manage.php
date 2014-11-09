@@ -1,19 +1,13 @@
 <? session_start();
-
-include('cjcuweb_lib.php');
-if(!isset( $_SESSION['username']) ) {
-	if($_SESSION['level']!=$level_staff)
- 	echo "No permission"; exit; 
- }
-
- ?>
+if(!isset($_SESSION['username']) || $_SESSION['level'] != 1) { header("Location: home.php"); exit; }
+?>
 <!doctype html>
 <html>
 <head>
 	<meta charset="UTF-8">
 	<title>帳戶管理</title>
 	<link rel="stylesheet" type="text/css" href="css/main.css">
-	<link rel="stylesheet" type="text/css" href="css/company_manage.css">
+	<link rel="stylesheet" type="text/css" href="css/manage.css">
 	<link rel="stylesheet" type="text/css" href="css/work_detail_edit.css">
 	<link rel="stylesheet" type="text/css" href="css/company_worK_apply_list.css">
 	<link rel="stylesheet" type="text/css" href="css/profile.css">
@@ -48,6 +42,8 @@ if(!isset( $_SESSION['username']) ) {
 
 
 		function doajax(idx){
+
+			    $('#right-box-title').html('載入中...請稍後');
 
 				var pg = 0;
 
@@ -128,7 +124,7 @@ if(!isset( $_SESSION['username']) ) {
 <div id="view-header"></div>
 
 
-<div class="div-align overfix">
+<div class="b-space div-align overfix">
 
 	<div class="left-box" >
 		
@@ -140,7 +136,7 @@ if(!isset( $_SESSION['username']) ) {
 		<a href="#staff-info"><div class="list">個人資訊</div></a><hr>
 		<a href="#staff-audit0"><div class="list">審核</div></a><hr>
 		<a href="#staff-addwork"><div class="list">新增工作</div></a><hr>
-		<a href="#staff-work"><div class="list">管理工作</div></a><hr>
+		<a href="#staff-work"><div class="list">我的工作</div></a><hr>
 		<a href="#staff-maintain"><div class="list">維護</div></a><hr>
 
 	</div>

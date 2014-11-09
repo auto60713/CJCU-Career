@@ -5,7 +5,7 @@
 	<meta charset="UTF-8">
 	<title></title>
 	<link rel="stylesheet" type="text/css" href="../css/main.css">
-	<link rel="stylesheet" type="text/css" href="../css/company_manage.css">
+	<link rel="stylesheet" type="text/css" href="../css/manage.css">
 	<link rel="stylesheet" type="text/css" href="../css/profile.css">
 	<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 	<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
@@ -49,7 +49,7 @@
 
 <div id="view-header"></div>
 
-<div class="div-align">
+<div class="b-space div-align">
 
 
 <div class="profile-content overfix">

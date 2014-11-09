@@ -9,7 +9,12 @@ if(!isset($_SESSION['username'])) { echo 'No permission!'; exit; }
 	<script><? include_once("js_audit_detail.php"); echo_audit_detail_array($_SESSION['username'],0); ?></script>
 </head>
 <style type="text/css">
+form{
+	padding-left: 20px;
+}
 .td1{
+	font-size: 17px;
+	font-weight: bolder;
     width: 80px;
     overflow: hidden;
 }

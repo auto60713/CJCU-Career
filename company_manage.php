@@ -1,5 +1,5 @@
 <? session_start(); 
-if(!isset($_SESSION['username'])) { header("Location: home.php"); exit; }
+if(!isset($_SESSION['username']) || $_SESSION['level'] != 4) { header("Location: home.php"); exit; }
 ?>
 <!doctype html>
 <html>
@@ -7,7 +7,7 @@ if(!isset($_SESSION['username'])) { header("Location: home.php"); exit; }
 	<meta charset="UTF-8">
 	<title>您的公司</title>
 	<link rel="stylesheet" type="text/css" href="css/main.css">
-	<link rel="stylesheet" type="text/css" href="css/company_manage.css">
+	<link rel="stylesheet" type="text/css" href="css/manage.css">
 	<link rel="stylesheet" type="text/css" href="css/work_detail_edit.css">
 	<link rel="stylesheet" type="text/css" href="css/company_worK_apply_list.css">
 	<link rel="stylesheet" type="text/css" href="css/profile.css">
@@ -120,7 +120,7 @@ if(!isset($_SESSION['username'])) { header("Location: home.php"); exit; }
 <div id="view-header"></div>
 
 
-<div class="div-align overfix">
+<div class="b-space div-align overfix">
 
 	<div id="" class="left-box" >
 

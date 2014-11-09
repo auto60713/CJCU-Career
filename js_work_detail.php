@@ -1,11 +1,10 @@
 <?
-/* 工作詳細資料轉成JS Array */
 $GLOBALS['cust_company'] ='';
 
-if(isset($_POST['workid'])) return_work_detail_array( $_POST['workid'] );
 
+
+//???
 function echo_work_detail_array($work_id){
-
 
 include_once("sqlsrv_connect.php");
 include_once("cjcuweb_lib.php");
@@ -32,10 +31,7 @@ $GLOBALS['publisher'] = $row['pub'];
 }
 
 
-
-
-
-/* 工作詳細資料轉成JS Array ，目的是要 assign 給前端,讓其能設定工作的目前資料,以提供修改 */
+//assign 給前端,讓其能設定工作的目前資料,以提供修改
 function echo_work_detail_edit_array($conn,$work_id){
 
 include_once("cjcuweb_lib.php");
@@ -49,7 +45,7 @@ $sql = "declare @h int;set @h = (select work_type_id from work where id=?);
 		declare @j int;set @j = (select parent_no from work_type  where id=@i);
 
 		select w.id,w.name,[date],t1.id type1,t2.id type2,t3.id type3,
-		w.start_date,w.end_date,w.work_prop_id,w.is_outside,w.zone_id,w.address,w.phone,w.pay,[recruitment _no] rno,w.detail,[check],z.zone zone
+		w.start_date,w.end_date,w.work_prop_id prop,w.is_outside,w.zone_id,w.address,w.phone,w.pay,[recruitment _no] rno,w.detail,[check],z.zone zone
 		from work w , work_type t1,work_type t2,work_type t3,zone z
 		where w.id=? and t1.id=@j and t2.id=@i and t3.id=@h and z.id=w.zone_id";
 
@@ -62,7 +58,10 @@ echo "var work_detail_array = ". json_encode($row) . ";";
 
 
 
-/* 這邊是要讓複製工作的 ajax 行為抽取工作詳細資料 */
+//複製工作
+if(isset($_POST['workid'])) return_work_detail_array( $_POST['workid'] );
+
+//這邊是要讓複製工作的 ajax 行為抽取工作詳細資料
 function return_work_detail_array($work_id){
 
 	include_once("sqlsrv_connect.php");
@@ -71,10 +70,10 @@ function return_work_detail_array($work_id){
 		declare @i int;set @i = (select parent_no from work_type  where id=@h);
 		declare @j int;set @j = (select parent_no from work_type  where id=@i);
 
-		select w.id,w.name,[date],t1.id type1,t2.id type2,t3.id type3,
+		SELECT w.id,w.name,w.work_prop_id prop,[date],t1.id type1,t2.id type2,t3.id type3,
 		w.start_date,w.end_date,w.zone_id,w.address,w.phone,w.pay,[recruitment _no] rno,w.detail,[check],z.zone zone
-		from work w , work_type t1,work_type t2,work_type t3,zone z
-		where w.id=? and t1.id=@j and t2.id=@i and t3.id=@h and z.id=w.zone_id";
+		FROM work w , work_type t1,work_type t2,work_type t3,zone z
+		WHERE w.id=? and t1.id=@j and t2.id=@i and t3.id=@h and z.id=w.zone_id";
 
 	$stmt = sqlsrv_query($conn, $sql, array($work_id,$work_id));
 	if($stmt) $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC); 

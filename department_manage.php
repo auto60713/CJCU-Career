@@ -1,11 +1,13 @@
-<? session_start(); ?>
+<? session_start();
+if(!isset($_SESSION['username']) || $_SESSION['level'] != 5) { header("Location: home.php"); exit; }
+?>
 <!doctype html>
 <html>
 <head>
 	<meta charset="UTF-8">
 	<title>帳號管理</title>
 	<link rel="stylesheet" type="text/css" href="css/main.css">
-	<link rel="stylesheet" type="text/css" href="css/company_manage.css">
+	<link rel="stylesheet" type="text/css" href="css/manage.css">
 	<link rel="stylesheet" type="text/css" href="css/work_detail_edit.css">
 	<link rel="stylesheet" type="text/css" href="css/company_worK_apply_list.css">
 	<link rel="stylesheet" type="text/css" href="css/profile.css">
@@ -40,7 +42,8 @@
 
 
 		function doajax(idx){
-
+			
+			    $('#right-box-title').html('載入中...請稍後');
 
 				switch(idx) {
 
@@ -112,7 +115,7 @@
 <div id="view-header"></div>
 
 
-<div class="div-align overhidden">
+<div class="b-space div-align overhidden">
 
 	<div id="" class="left-box" >
 
@@ -123,8 +126,8 @@
 
 		<a href="#department-info"><div class="list">系所資訊</div></a><hr>
 		<a href="#department-addwork"><div class="list">新增工作</div></a><hr>
-		<a href="#department-work"><div class="list">管理工作</div></a><hr>
-		<a href="#department-match"><div class="list">實習管理</div></a><hr>
+		<a href="#department-work"><div class="list">系上工作</div></a><hr>
+		<a href="#department-match"><div class="list">系上實習</div></a><hr>
 		<a href="#department-notice"><div class="list">通知</div></a><hr>
 
 	</div>

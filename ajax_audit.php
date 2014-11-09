@@ -67,7 +67,6 @@ else{
 			echo '0-5-'.$recvid;  exit; 		}
 
 		$recvtxt=($type=='0')?"註冊的公司":"發布的工作";
-		$url=($type=='0')?'../../../cjcuweb/company_manage.php#company-info-1':'../../../cjcuweb/company_manage.php#company-work';
 		$chtxt = ($censored==1)?"通過":"不通過";
 		$icon = ($censored==1)?"fa fa-check":"fa fa-times";
 		
@@ -79,7 +78,6 @@ else{
 		      'recv_id'=>       $recvid,
 		      'recv_level'=>    $level_company,
 		      'msg'=>           '您'.$recvtxt.'<b>「'.$obj_name.'」</b>，已被審核<b>'.$chtxt.'</b>，請前往查看。',
-		      'url'=>           $url,
 		      'icon'=>          $icon
 		);
 		if(!send_msg($arr)){

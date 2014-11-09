@@ -17,7 +17,7 @@ if($_SESSION['level']!=$level_staff){echo "No permission"; exit; }
 	var fa;
 	$(function(){
 
-        //
+
 		var notyet = $('#staff-audit-notyet'),
             total_list = company_list_array0.length+work_list_array0.length;
 
@@ -32,7 +32,7 @@ if($_SESSION['level']!=$level_staff){echo "No permission"; exit; }
 		    }
         }
 
-        //
+
 		var again = $('#staff-audit-again'),
 		    total_list2 = company_list_array3.length+work_list_array3.length;
 
@@ -46,38 +46,7 @@ if($_SESSION['level']!=$level_staff){echo "No permission"; exit; }
 		    		again.append( append_data(1,work_list_array3[i],i,3) );			
 		    }
         }
-		/*
-			<div class="staff-audit-list">
-
-				<div class="staff-audit-list-left">
-					<h1>
-						<i class="fa fa-book"></i>
-						<a href="eeee">XXXXXX工作</a>
-					</h1>
-
-					<a href="f" class="staff-audit-overview">
-						<i class="fa fa-eye"></i> Overview
-					</a>
-
-				</div>
-
-				<div class="staff-audit-list-right">
-					<button class="staff-audit-btn">
-						<i class="fa fa-cog"></i> 審核
-					</button>
-				</div>	
-
-			</div><hr>
-		*/
-
-		/*	
-		    @function append_data
-		    @type: 0 is company,1 is work
-		    @data: is data object{}
-			@i: is data object in data array index
-			@ch: is data check status; 0 is not audit , 1 is pass , 2 is not pass,
-			     3 is the request audit again. use to find array belong
-		*/
+	
 		function append_data(type,data,i,ch){
 
 			if(type==0){
@@ -98,8 +67,7 @@ if($_SESSION['level']!=$level_staff){echo "No permission"; exit; }
 			href = $('<a>').attr("href", "/cjcuweb/company/"+data.comid).attr("target", "_blank"),
 			overview = href.addClass('staff-audit-overview').append(eyes,"發布自 "+data.comname),
 			left = $('<div>').addClass('staff-audit-list-left').append(h1).append(overview),
-			gear= $('<i>').addClass('fa fa-cog'),
-			btn = $('<button>').addClass('staff-audit-btn').attr({'t': type, 'i':i , ch:ch}).append(gear).append(' 審核'),
+			btn = $('<button>').attr({'type':'button','t': type, 'i':i , ch:ch}).addClass('staff-audit-btn').append(' 審核'),
 			right= $('<div>').addClass('staff-audit-list-right').append(btn),
 
 			all = $('<div>').attr({t:type,n:titname}).addClass('staff-audit-list').append(left).append(right);

@@ -11,13 +11,13 @@
 <script>
 
     $.ajax({
-				url:  'public_view/header.php',
-				type: 'POST',
-				data: {},
-				success: function(data) {
-                    $('#view-header').html(data);
-                }
-	})
+					url:  'public_view/header.php',
+					type: 'POST',
+					data: {},
+					success: function(data) {
+                        $('#view-header').html(data);
+                    }
+	});
 
 	function ajax_check(id,true_func,false_func){
 	var boo = false;
@@ -35,39 +35,6 @@
 	// jQuery AJAX 沒辦法同步得解法
 	function true_func(boo){boo = true ; return boo;}
 	function false_func(boo){boo = false; return boo;}
-
-	function check_data() {
-		if(document.form.id.value==""){
-			alert("account is null");
-			return false;
-		}
-		else if(document.form.pw.value==""){
-			alert("password is null");
-			return false;
-		}
-		else if(document.form.ch_name.value==""){
-			alert("ch_name is null");
-			return false;
-				}
-		else if(document.form.uni_num.value==""){
-			alert("uni_num is null");
-			return false;
-				}
-		else if(document.form.name.value==""){
-			alert("name is null");
-			return false;
-				}
-		else if($('#pw').val() != $(this).val()){
-			alert("password is not match");
-			return false;
-		}
-		else if( ajax_check(document.form.id.value,true_func,false_func) ){	
-			alert("account is exist");
-			return false;
-		}
-		else return true;
-	}
-
 
 	$(function(){
 
@@ -185,7 +152,7 @@
 <div id="cont" class="register">
 
 <h1>廠商註冊</h1><hr>
-<form class="form addform" name="form" method="post" action="company_add_finish.php" onsubmit="return check_data();">
+<form class="form addform" name="form" method="post" action="company_add_finish.php">
 	<!--用table來對齊表格-->
 <table>
 <tr><td>帳號*：</td>            <td><input type="text" name="id" id="id"/> <span id="id_hint"></td></tr>

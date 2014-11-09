@@ -156,11 +156,11 @@ function echo_publisher_detail($pub,$id){
 include("sqlsrv_connect.php");
 if($pub == 1){
 
-    $sql = "select id,ch_name name,phone,name boss,email FROM company WHERE id= ?";
+    $sql = "select id,ch_name name,phone,boss_name boss,email FROM company WHERE id= ?";
 }
 else if(($pub == 2)){
 
-    $sql = "select no id,ch_name name,phone,name boss,email FROM department WHERE no= ?";
+    $sql = "select no id,ch_name name,phone,boss_name boss,email FROM department WHERE no= ?";
 }
 
 	$stmt = sqlsrv_query($conn, $sql, array($id));

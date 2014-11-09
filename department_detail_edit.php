@@ -8,7 +8,21 @@ if(isset($_SESSION['username'])) 0; else{header("Location: home.php"); exit;}
 
 	<script><? include_once("js_detail.php"); echo_department_detail($_SESSION['username']); ?></script>
 </head>
-
+<style type="text/css">
+form{
+	padding-left: 20px;
+}
+.td1{
+	font-size: 17px;
+	font-weight: bolder;
+    width: 80px;
+    overflow: hidden;
+}
+.td2{
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+</style>
 <body>
 <script>
 
@@ -19,14 +33,14 @@ if(isset($_SESSION['username'])) 0; else{header("Location: home.php"); exit;}
 
 		for(var key in department_detail_array){
 
-			detail_column+="<tr><td style='padding-right:60px;'>"+column_name[idx]+"</td>";
+			detail_column+="<tr><td class='td1'>"+column_name[idx]+"</td>";
 
             //不可修改的資料 背後PHP不要POST
 			if(key == "no"){
-                detail_column+="<td><input type='text' name ='"+key+"' value='"+department_detail_array[key]+"' disabled='disabled'></td></tr>";
+                detail_column+="<td class='td2'><input type='text' name ='"+key+"' value='"+department_detail_array[key]+"' disabled='disabled'></td></tr>";
 			}
 		    else{
-                detail_column+="<td><input type='text' name ='"+key+"' value='"+department_detail_array[key]+"'></td></tr>";
+                detail_column+="<td class='td2'><input type='text' name ='"+key+"' value='"+department_detail_array[key]+"'></td></tr>";
 		    }
 			idx++;
 		}	

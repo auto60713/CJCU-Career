@@ -11,27 +11,6 @@ else{echo "您無權訪問該頁面!"; exit;}
 	<meta charset="UTF-8">
     <script><? include_once('js_work_list.php'); echo_student_apply_list_array($userid);  ?>
 
-    /* front-end 架構
-
-	<div class="work-list-box">
-		<div class="sub-box">
-			<i class="fa fa-book icon work-img"></i>
-		</div>
-		<div class="sub-box">
-			<h1 class="work-tit"><a href="work/6">資深Unix系統軟體工程師</a></h1>
-			<p class="work-hint">電腦繪圖人員
-			<br>
-			校內 工讀
-			<br>
-			2014-03-09 15:41:41.447
-			</p>
-		</div>
-		<div class="sub-box2">
-			<p id="6" class="check-lightbox sta1 onecheck">尚未被公司審核</p>
-		</div>
-	</div>
-
-    */
     $(function(){
     	
     	$('#student-audit-lightbox').hide();
@@ -68,11 +47,11 @@ else{
 		    		var check_status='';
 		    		switch(work_list_array[i]['ch']) {
 		    			//老師說要正名
-			    		case 0: check_status='公司審核中'; hint2.addClass('sta1 onecheck').text(check_status); break;
-			    		case 1: check_status='已錄取!'; hint2.addClass('sta2 yescheck').text(check_status); break;
-			    case 22:case 2: check_status='應徵失敗..(查看原因)'; hint2.addClass('sta3 nocheck').text(check_status); break;
-			    		case 3: check_status='應徵失敗..(查看原因)'; hint2.addClass('sta4 nocheck').text(check_status); subbox3.append(statustxt);break;
-			    		case 4: check_status='實習中'; hint2.addClass('sta5 yescheck').text(check_status); break;
+			    		case 0: check_status='公司審核中'; hint2.addClass('sta0 onecheck').text(check_status); break;
+			    		case 1: check_status='已錄取!'; hint2.addClass('sta1 yescheck').text(check_status); break;
+			    case 22:case 2: check_status='應徵失敗..(查看原因)'; hint2.addClass('sta2 nocheck').text(check_status); break;
+			    		case 3: check_status='應徵失敗..(查看原因)'; hint2.addClass('sta2 nocheck').text(check_status); subbox3.append(statustxt);break;
+			    		case 4: check_status='實習中'; hint2.addClass('sta4 yescheck').text(check_status); break;
 			    		case 5: check_status='完成工作!'; hint2.addClass('sta5 yescheck').text(check_status); break;
 		    		}
 
@@ -100,21 +79,21 @@ else{
                         // 工作對學生的狀態意義
 		    			switch(audit) {
 			    		
-			    		case 0: c_status='尚未被公司審核'; check_status_box.addClass('sta1 onecheck').text(c_status); 
+			    		case 0: c_status='尚未被公司審核'; check_status_box.addClass('sta0 onecheck').text(c_status); 
 			    	            $('.student-audit-lightbox-status').append(delete_lu); break;
 
-			    		case 1: c_status='應徵成功!'; check_status_box.addClass('sta2 yescheck').text(c_status); break;
+			    		case 1: c_status='應徵成功!'; check_status_box.addClass('sta1 yescheck').text(c_status); break;
 			    		
-			    		case 2: c_status='應徵失敗!'; check_status_box.addClass('sta3 nocheck').text(c_status); 
+			    		case 2: c_status='應徵失敗!'; check_status_box.addClass('sta2 nocheck').text(c_status); 
 			    	            $('.student-audit-lightbox-status').append(delete_lu); 
 				                $('.student-audit-lightbox-status').append(pass); break;
 
 
-			    case 22:case 3: c_status='應徵失敗!'; check_status_box.addClass('sta4 nocheck').text(c_status); 
+			    case 22:case 3: c_status='應徵失敗!'; check_status_box.addClass('sta2 nocheck').text(c_status); 
 			    	        	$('.student-audit-lightbox-status').append(delete_lu); break;
 
-			    		case 4: c_status='已錄取'; check_status_box.addClass('sta5 yescheck').text(c_status); break;
-			    		case 5: c_status='完成工作'; check_status_box.addClass('sta7 yescheck').text(c_status); break;
+			    		case 4: c_status='已錄取'; check_status_box.addClass('sta4 yescheck').text(c_status); break;
+			    		case 5: c_status='完成工作'; check_status_box.addClass('sta5 yescheck').text(c_status); break;
 			    		
 			    		}
 			    	
@@ -167,23 +146,7 @@ else{
 		    				data: {workid: workid},
 		    			})
 		    			.done(function (data) {
-		    				//console.log(data);
-		    				/* data 架構 [{"
-		    				id":17,
-		    				"company_id":"cjcu",
-		    				"user_id":"stud",
-		    				"work_id":"6",
-		    				"censored":2,
-		    				"msg":"\u4f60\u7684\u8cc7\u6599\u4e0d\u9f4a\u5168",
-		    				"time":"2014-06-17 09:29:13.423"}]  				*/
-
-		    				/* Front-End 架構
-							<div class="student-audit-list">
-								<sapn class="student-audit-htime">2014-05-10</sapn>
-								<sapn class="student-audit-hstatus"><i class="fa fa-check"></i> 審核通過</sapn>
-								<sapn class="student-audit-hmsg">詳細訊息</sapn>
-							</div> 	 */   				
-
+		    				
 							for(var i=0;i<data.length;i++){
 								var time = $('<span>').addClass('student-audit-htime').text(data[i].time.split(' ')[0]),
 									iconcalss = (data[i].censored==1)? 'fa fa-check':'fa fa-times',
@@ -226,27 +189,27 @@ else{
 		  		}
 		  }
 
-		    //注入條件
-          var pass_search = ["全部", "尚未審核", "應徵成功", "應徵失敗", "已錄取", "不錄取", "完成工作"];
-		  for(var i=0;i<pass_search.length;i++)
-          $("#search-sel").append($("<option>").attr("value", i).text(pass_search[i]));
+		  //工作快速搜尋 
+		  var pass_search = {"全部":-1,"公司審核中":0,"已錄取":1,"應徵失敗":2,"實習中":4,"完成工作":5};    
+          for (var key in pass_search)
+          $("#search-sel").append($("<option>").attr("value", pass_search[key]).text(key));
 
-          //用錄取篩選
           $("#search-sel").change(function(event) {
           	sel_val = $('#search-sel').val();
-          	sel_txt = $('#search-sel option:selected').text();
 
+		    var is_null = 1; $("#search-echo").text('');
           	$('.work-list-box').each(function(index, el) {
-	          	if(sel_val==0){
-	                $('.work-list-box').removeClass('hide-work');
+	          	if(sel_val==-1){
+	                $('.work-list-box').removeClass('hide-work'); is_null=0;
 	          	}
 	          	else{
 	          		var match_check = $(this).find('.sub-box2 p').attr('class');
-	          		if(match_check.indexOf('sta'+sel_val) >= 0){ $(this).removeClass('hide-work');}
+	          		if(match_check.indexOf('sta'+sel_val) >= 0){ $(this).removeClass('hide-work'); is_null=0; }
 	          		else{ $(this).addClass('hide-work'); }
 			    }
+			    
 	       	});
-
+            if(is_null==1) $("#search-echo").text('沒有工作符合條件');
 	      });
 
          
@@ -286,6 +249,6 @@ else{
 <select id='search-sel'></select> 
 <input type='text' placeholder='搜尋工作名稱' id='search-txt'>
 </div>
-<div id='company-work-list-container'></div>
+<div id='company-work-list-container'><div id='search-echo'></div></div>
 </body>
 </html>

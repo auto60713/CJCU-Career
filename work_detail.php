@@ -12,7 +12,7 @@ if(isset($_SESSION['username'])) $user_id = $_SESSION['username'];
 	<title></title>
 	<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="../css/main.css">
-	<link rel="stylesheet" type="text/css" href="../css/company_manage.css">
+	<link rel="stylesheet" type="text/css" href="../css/manage.css">
 	<link rel="stylesheet" type="text/css" href="../css/profile.css">
 	<style type="text/css">
 	#ch{
@@ -40,9 +40,6 @@ if(isset($_SESSION['username'])) $user_id = $_SESSION['username'];
 	#btn-apply:hover{
 		background-color: #E0184A;
 	}
-	.b-space{
-		margin-bottom: 100px;
-	}
 	</style>
 	<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 	<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
@@ -65,17 +62,6 @@ if(isset($_SESSION['username'])) $user_id = $_SESSION['username'];
 	<script>
 
 
-	/*
-	var work_detail_array = 
-	{"name":"\u7a7a\u5eda","date":"2014-03-09 15:43:32.997",
-	"company_id":"cjcu","typeone":"\u9910\u98f2\u65c5\u904a\u904b\u52d5",
-	"typetwo":"\u7cfb\u7d71\u5206\u6790\u5de5\u7a0b\u5e2b",
-	"typethree":"\u8cc7\u8a0a\u652f\u63f4\u8207\u670d\u52d9",
-	"start_date":"2014-01-01 00:00:00","end_date":"2014-01-01 00:00:00",
-	"popname":"\u5de5\u8b80","is_outside":0,"zonename":"\u81fa\u5317\u5e02",
-	"address":"\u53f0\u5357\u5e02","phone":"03311111","pay":"1111111",
-	"recruitment _no":3,"detail":"11vwevwvwevw","check":0};
-	*/
 	$(function(){	
 
 		$.ajax({
@@ -87,13 +73,7 @@ if(isset($_SESSION['username'])) $user_id = $_SESSION['username'];
             }
 		});
 
-        //現在只有公司自己可以看到審核沒過的工作
-        //而審核通過的工作不鼓勵修改 (但仍然可以在工作管理修改)
-		//$('#profile-btn-edit').hide();
 
-
-
-		// init load data
 		$('title, #name').text(work_detail_array['name']);
 		$('#date').text(work_detail_array['date'].split(" ")[0]);
 		$('#prop').text( (work_detail_array['is_outside']=='0'?'校外':'校內')+' '+ work_detail_array['popname']);
@@ -138,13 +118,6 @@ if(isset($_SESSION['username'])) $user_id = $_SESSION['username'];
 			$('.profile-boxleft').append(form.append(wid).append(submit));
 		}
 
-
-        /*
-		if(work_detail_array['company_id']==<? echo "'".$_SESSION['username']."'"; ?>){
-			$('#profile-btn-edit').show().attr('href', '../company_manage.php#work'+<? echo "'".$_GET['workid']."'"; ?>);
-		}
-        */
-
 		var listbox = $('#other_work');
 		for(var i=0;i<pass_work_array.length;i++){
 			var container = $('<p>').addClass('profile-span-box'),
@@ -176,7 +149,7 @@ else if(work_detail_array['pub'] ==2){
 <body>
 <div id="view-header"></div><br>
 
-<div class="div-align overfix b-space">
+<div class="b-space div-align overfix">
 
 
 <div class="profile-boxleft">
@@ -234,7 +207,7 @@ else if(work_detail_array['pub'] ==2){
 
 </div>
 
-<div class="profile-boxinner" id="other_work"><h2>其他職缺</h2></div>
+<div class="profile-boxinner" id="other_work"><h2>公司職缺</h2></div>
 
 </div>
 

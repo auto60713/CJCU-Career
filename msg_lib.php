@@ -33,14 +33,13 @@ function send_msg($arr){
     $recv_id =  $arr['recv_id'];
     $recv_level = ($arr['recv_level']==4)?1:0;
     $msg = $arr['msg'];
-    $url = $arr['url'];
     $icon = $arr['icon'];
 
     $sql1 = "UPDATE cjcu_notify SET isnews = 1 ,time = GETDATE() WHERE user_no=? and user_level = ?";
-    $sql2 = "insert into msg(send,send_level,recv,recv_level,mcontent,url,icon) values (?,?,?,?,?,?,?)";
+    $sql2 = "insert into msg(send,send_level,recv,recv_level,mcontent,icon) values (?,?,?,?,?,?)";
 
     $params1 = array($recv_id,$recv_level);
-    $params2 = array($sender_id,$sender_level,$recv_id,$recv_level,$msg,$url,$icon);
+    $params2 = array($sender_id,$sender_level,$recv_id,$recv_level,$msg,$icon);
 
     $result1 = sqlsrv_query($conn, $sql1, $params1);
     $result2 = sqlsrv_query($conn, $sql2, $params2);
