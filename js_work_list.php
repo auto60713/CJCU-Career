@@ -120,7 +120,7 @@ function echo_student_apply_list_array($userid){
 
 		include("sqlsrv_connect.php");
 //工作的資料
-		$sql = "SELECT w.id wid,w.name wname,w.publisher pub,p.name prop,z.name zone,l.[check] ch,l.match_no tea_name 
+		$sql = "SELECT w.id wid,w.name wname,w.publisher pub,w.company_id comid,p.name prop,z.name zone,l.[check] ch,l.match_no tea_name 
 				FROM work w,line_up l,work_prop p,zone z 
 				WHERE l.user_id=? and w.id=l.work_id and p.id=w.work_prop_id and z.id=w.zone_id";
 
@@ -131,21 +131,6 @@ function echo_student_apply_list_array($userid){
 		if($stmt) {
 		while( $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC) ) $work_list_array[] = $row;
 		echo "var work_list_array = ". json_encode($work_list_array) . ";";	
-		}
-		else die(print_r( sqlsrv_errors(), true));
-
-//找公司名字
-		$sql2 = "select c.id comid,c.ch_name comname,d.ch_name depname 
-				from line_up l,work w,company c ,department d 
-				where l.user_id = ? and w.id = l.work_id and (c.id = w.company_id or d.no = w.company_id)";	
-
-		$stmt2 = sqlsrv_query($conn, $sql2, array($userid));
-		$pub_name_array = array();
-
-
-		if($stmt2) {
-		while( $row2 = sqlsrv_fetch_array( $stmt2, SQLSRV_FETCH_ASSOC) ) $pub_name_array[] = $row2;
-		echo "var pub_name_array = ". json_encode($pub_name_array) . ";";	
 		}
 		else die(print_r( sqlsrv_errors(), true));
 

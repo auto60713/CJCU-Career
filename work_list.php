@@ -46,7 +46,7 @@ else{echo "No permission!"; exit;
 		    		break;
 		    	}
 		    	
-		    	var img = $('<i>').addClass('fa fa-book').addClass('work-img'),
+		    	var img = $('<i>').addClass('fa fa-book fa-3x').addClass('work-img'),
 		    		
 		    		tita = $('<a>').attr('href', '#work'+work_list_array[i]['wid']+"-0").text(work_list_array[i]['wname']),
 		    		tit = $('<h1>').addClass('work-tit').append(tita),

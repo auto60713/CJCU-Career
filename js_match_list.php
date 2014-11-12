@@ -65,7 +65,8 @@ function echo_match_list_array($dep_no){
 
 include("sqlsrv_connect.php");
 
-$sql = "SELECT w.id workid,w.name workname,w.[check] state,c.id comid,c.ch_name comname FROM work w,company c
+$sql = "SELECT w.id workid,w.name workname,w.[check] state,c.id comid,c.ch_name comname 
+FROM work w,company c
 WHERE w.match_dep=? AND (w.[check]=1 OR w.[check]>3) AND c.id=w.company_id 
 ORDER BY workid DESC";
 

@@ -14,18 +14,14 @@ else{echo "No permission!"; exit;
 <body>
 	
 <div class="workedit-tabbox">
-	<div id="page-match" class="sub-tab tab-active" tabtoggle='workedit1'><i class="fa fa-pencil tab-img"></i> 媒合老師</div>
-	<div id="page-match-list" class="sub-tab" tabtoggle='workedit1'><i class="fa fa-user tab-img"></i> 實習列表</div>
+	<div id="page-match-list" class="sub-tab tab-active" tabtoggle='workedit1'><i class="fa fa-user tab-img"></i> 實習列表</div>
+	<div id="page-match" class="sub-tab" tabtoggle='workedit1'><i class="fa fa-pencil tab-img"></i> 媒合老師</div>
 </div>
 
 <div class="workedit-content" id='workedit-content'>
 
-	<!-- 媒合老師 -->
-	<div id='workedit-content-match' class="" tabtoggle='workedit2'>
-    請選擇校方負責人<select id="match-sel"></select><br>
-	</div>
 	<!-- 實習列表 -->
-	<div id='workedit-content-match-list' class="workedit-content-hide" tabtoggle='workedit2'>
+	<div id='workedit-content-match-list' class="" tabtoggle='workedit2'>
     <select id="search-typefilter">
 	    <option value='0' selected="selected">顯示全部</option>
 	    <option value='1' >實習中</option>
@@ -33,7 +29,12 @@ else{echo "No permission!"; exit;
     </select>
     <input type='text' placeholder='搜尋工作名稱' id='search-txt'>
 	</div>
-	
+
+	<!-- 媒合老師 -->
+	<div id='workedit-content-match' class="workedit-content-hide" tabtoggle='workedit2'>
+    請選擇校方負責人<select id="match-sel"></select><br>
+	</div>
+
 </div>
 
 </body>
@@ -133,7 +134,7 @@ else{echo "No permission!"; exit;
         else{
 		    for(var i=0;i<match_list_array.length;i++){
 
-		    	var img = $('<i>').addClass('fa fa-book').addClass('work-img'),
+		    	var img = $('<i>').addClass('fa fa-inbox fa-3x').addClass('work-img'),
 		    		work_herf = $('<a>').attr({'target':'_blank','href':'work/'+match_list_array[i]['workid']}).text(match_list_array[i]['workname']),
 		    		work = $('<h1>').addClass('work-tit').append(work_herf),
 		    		com_herf = $('<a>').attr({'target':'_blank','href':'company/'+match_list_array[i]['comid']}).text(match_list_array[i]['comname']),
@@ -160,7 +161,7 @@ else{echo "No permission!"; exit;
 		                  data:{mode:5,workid:match_list_array[i]['workid']},
 		                  success: function (data) { 
                             var stu_array = JSON.parse(data);
-                            if(stu_array.length == 0) msg = '尚未有學生錄取';
+                            if(stu_array.length == 0) {msg = '尚未有學生錄取'; stu.append(msg);}
                             else{
 
                             	stu.append(msg);

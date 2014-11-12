@@ -19,6 +19,12 @@ switch($_POST['mode']){
   case 'dep'://查詢系所的中文名稱
         echo_department_name($_POST['depno']);
   break;
+
+  case 'cnd'://查詢公司或系所(學生應徵)
+        if($_POST['work_pub']==1) echo_company_name($_POST['comid']);
+        else if($_POST['work_pub']==2) echo_department_name($_POST['comid']);
+  break;
+
 }
 
 
@@ -44,7 +50,7 @@ function echo_company_name($comid){
 
 
   $sql = "select ch_name name from company where id =?"; 
-  $stmt = sqlsrv_query($conn, $sql, $workid);
+  $stmt = sqlsrv_query($conn, $sql, array($comid));
 
   if($stmt) $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC);
   else{echo 0;}
@@ -57,7 +63,7 @@ function echo_department_name($depno){
 
 
   $sql = "select ch_name name from department where no =?"; 
-  $stmt = sqlsrv_query($conn, $sql, $workid);
+  $stmt = sqlsrv_query($conn, $sql, array($depno));
 
   if($stmt) $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC);
   else{echo 0;}

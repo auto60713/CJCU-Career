@@ -21,15 +21,24 @@ if(work_list_array.length == 0){body.prepend("目前沒有任何應徵");}
 else{
  		 for(var i=0;i<work_list_array.length;i++){
 
-                //分辨發布者是公司還是系所
-     	        if(work_list_array[i]['pub'] == 1)
-   		             var pub_name = pub_name_array[i]['comname'];
-   		        else var pub_name = pub_name_array[i]['depname'];
+                //公司帳號轉名稱
+                var companyherf = "";
+                    $.ajax({
+						url:  'ajax_echo_name.php',
+						type: 'post',
+						async: false,
+						data: {mode:'cnd',work_pub:work_list_array[i]['pub'],comid:work_list_array[i]['comid']},
+                    success: function (data) {
+						var href ="";
+						work_list_array[i]['pub']==1?(href='company'):(href='department');
+						companyherf = $('<a>').attr('href', href+'/'+work_list_array[i]['comid']).text(data);
+					}
+					});
 
- 		 		var icon = $('<i>').addClass('fa fa-book icon').addClass('work-img'),
+     	  
+ 		 		var icon = $('<i>').addClass('fa fa-book fa-3x').addClass('work-img'),
 		    		tita = $('<a>').attr('href', 'work/'+work_list_array[i]['wid']).text(work_list_array[i]['wname']),
 		    		tit = $('<h1>').addClass('work-tit').append(tita),
-		    		companyherf = $('<a>').attr('href', 'company/'+pub_name_array[i]['comid']).text(pub_name),
 		    		company = $('<div>').addClass('manage-company-herf').text("發布自 ").append(companyherf),
 		    		hint = $('<p>').addClass('work-hint').append((work_list_array[i]['zone']) +'  '+ work_list_array[i]['prop']),
 		    		hint2 = $('<p>').attr({
