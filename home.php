@@ -54,26 +54,30 @@
 
 <!-- 主體 -->
 <div id="main" class="div-align">
-
+<!-- 任何區塊因為空間大小都要限制字數 -->
 
 <!-- 焦點新聞 -->
-<div id="xxx1" class="area_box"><h1 id="area_title">焦點新聞</h1>
+<div id="area1_1" class="area_box"><h1 id="area_title">焦點新聞</h1>
 </div>
+
 <!-- FB -->
-<div id="xxx2" class="area_box">
+<div id="area1_2" class="area_box">
+	<div class="fb-like"></div>
+	<div class="fb-nevin"></div>
+	<div class="fb-footer"><p>Facebook社群外掛元件</p></div>
 </div>
 
 
 <!-- 工作列表 -->
-<div id="work_list" class="area_box"><h1 id="area_title">工作列表</h1>
+<div id="area2_1" class="area_box"><h1 id="area_title">工作列表</h1>
 
-	<!-- 搜尋 -->
+	<!-- 搜尋
 	<div class="search-bar">
 			<input type="text" id="normal-search">
 			<input type="button" id="search" value="搜尋">
 			<a href="#" id="high_search_btn"><i class="fa fa-cog"></i>進階搜尋</a>
 	</div>
-
+    -->
     <!-- 進階搜尋 -->
 	<div class="high_search-bar">
 	
@@ -116,21 +120,69 @@
 
 	<!-- 列表 -->
 	<div id="home-work-list-box"></div>
+	<a class="more-link" href="">更多..</a>
 </div>
 
 
 
 <!-- 校內新聞 -->
-<div id="xxx3" class="area_box"><h1 id="area_title">校內新聞</h1>
+<div id="area2_2" class="area_box"><h1 id="area_title">校內新聞</h1>
+	<p class="link">長榮電子報</p>
+
+	<div class="news">
+        <img class="news-img" src="">
+        <p class="news-time">2014-10-10</p>
+	    <p class="news-nevin">厚外套出動，鋒面今晚過境，東北季風隨之增強...</p>
+	</div>
+	<div class="news">
+        <img class="news-img" src="">
+        <p class="news-time">2014-10-11</p>
+	    <p class="news-nevin">氣象局表示，北部、東部天氣都將受到東北季風影響...</p>
+	</div>
+	<div class="news">
+        <img class="news-img" src="">
+        <p class="news-time">2014-10-12</p>
+	    <p class="news-nevin">氣象局同時發布大雨特報，台北地區有大雨發生...</p>
+	</div>
+	<a class="more-link" href="">更多..</a>
 </div>
+
+
 <!-- 職場高手 -->
-<div id="xxx4" class="area_box"><h1 id="area_title">職場高手</h1>
+<div id="area3_1" class="area_box"><h1 id="area_title">職場高手</h1>
+	<a class="more-link" href="">更多..</a>
+
+	<img class="area3-img" src="">
+	<p class="master-title">享受奔馳 日試駛磁浮列車</p>
+	<p class="master-nevin">JR東海的磁浮列車先前已在笛吹市之間試駛，這次是首度允許民眾試乘。</p>
 </div>
+
+
 <!-- 職場動態 -->
-<div id="xxx5" class="area_box"><h1 id="area_title">職場動態</h1>
+<div id="area3_2" class="area_box"><h1 id="area_title">職場動態</h1>
+	<a class="more-link" href="">更多..</a>
+
+	<img class="area3-img" src="">
+	<div class="workplace">
+	<p class="workplace-title">》奪冠！中華將獎盃留在台灣</p>
+	<p class="workplace-title">》奪冠！中華將獎盃留在台灣</p>	
+	<p class="workplace-title">》奪冠！中華將獎盃留在台灣</p>
+	<p class="workplace-title">》奪冠！中華將獎盃留在台灣</p>
+	</div>
 </div>
+
 <!-- 職場萬花筒 -->
-<div id="xxx6" class="area_box"><h1 id="area_title">職場萬花筒</h1>
+<div id="area3_3" class="area_box"><h1 id="area_title">職場萬花筒</h1>
+	<a class="more-link" href="">更多..</a>
+
+	<img class="area3-img" src="">
+	<div class="workplace">
+	<p class="workplace-title">》奪冠！中華將獎盃留在台灣</p>
+	<p class="workplace-title">》奪冠！中華將獎盃留在台灣</p>	
+	<p class="workplace-title">》奪冠！中華將獎盃留在台灣</p>
+	<p class="workplace-title">》奪冠！中華將獎盃留在台灣</p>
+    </div>
+
 </div>
 
 
@@ -164,29 +216,28 @@
 
 	for(var i=0;i<work_list_array.length;i++){
 
-		var box1 = $('<div>').addClass('work-box').addClass('box-img'),
-			box2 = $('<div>').addClass('work-box').addClass('box-name'),
+		var box2 = $('<div>').addClass('work-box').addClass('box-detail'),
 			box3 = $('<div>').addClass('work-box').addClass('box-loc'),
 			box4 = $('<div>').addClass('work-box').addClass('box-pop'),
 
-			img = $('<img>').addClass('com-img').attr('src', 'img_company/'+work_list_array[i].cid+'.jpg'),
+			img = $('<img>').addClass('box-img').attr('src', 'img_company/'+work_list_array[i].cid+'.jpg'),
 			a_link = $('<a>').attr({href:'work/'+work_list_array[i].wid}),
 			div_work = $('<div>').addClass('work'),
 
 			work_name = $('<h1>').text(work_list_array[i].wname),
 			work_zone = $('<p>').text(work_list_array[i].zname).prepend($('<i>').addClass('fa fa-map-marker')),
 			work_propn = $('<p>').text(((work_list_array[i].isout=='0')?'校外 ':'校內 ') + work_list_array[i].propname),
-			work_recr = $('<p>').text('需求 '+ work_list_array[i].rno +' 人'),
+			work_recr = $('<p>').addClass('num').text('需求 '+ work_list_array[i].rno +' 人'),
 			work_date = $('<p>').addClass('date').text('開始招募'+work_list_array[i].date.split(' ')[0]);
 			
 
-			box1.append(img);
+
 			box2.append(work_name).append(work_recr).append(work_date);
 			box3.append(work_zone);
 			box4.append(work_propn);
 
 
-			div_work.append(box1).append(box2).append(box3).append(box4);
+			div_work.append(img).append(box2).append(box3).append(box4);
 			a_link.append(div_work);
 			box.append(a_link);
 

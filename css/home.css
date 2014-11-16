@@ -7,7 +7,8 @@
 
 /* 區塊 */
 #area_title{
-	margin-left: 5px;
+	margin-top: 5px;
+	margin-left: 10px;
     font-size: 20px;
 }
 .area_box{
@@ -21,7 +22,6 @@
 	background-repeat: no-repeat;
 	background-size: 100% 100%;
 }
-
 
 /* 菜單 */
 #menu{
@@ -51,65 +51,89 @@
 }
 
 
+/* 更多 */
+.more-link{
+   	position: absolute;
+	right: 30px;
+	font-size: 14px;
+}
+
 /* 各區塊大小 */
-#xxx1 #area_title{ color: #EA4B74; }
-#xxx1{  
+#area1_1 #area_title{ color: #EA4B74; }
+#area1_1{  
     background-image:url(../img/area01.jpg);
     filter: progid:DXImageTransform.Microsoft.AlphaImageLoader( src='img/area01.jpg' , sizingMethod='scale');
 	width: 53%;  height: 340px;
 }
-#xxx2 #area_title{ color: #39518B; }
-#xxx2{  
+#area1_2 #area_title{ color: #39518B; }
+#area1_2{  
     background-image:url(../img/area02.jpg);
     filter: progid:DXImageTransform.Microsoft.AlphaImageLoader( src='img/area02.jpg' , sizingMethod='scale');
 	width: 34%;  height: 340px;
 }
 
-#work_list #area_title{ color: #F39D2C; }
-#work_list{  
+#area2_1 #area_title{ color: #F39D2C; }
+#area2_1{  
     background-image:url(../img/area03.jpg);
     filter: progid:DXImageTransform.Microsoft.AlphaImageLoader( src='img/area03.jpg' , sizingMethod='scale');
-	width: 60%;  height: 360px;
+	width: 60%;  height: 340px;
 }
-#xxx3 #area_title{ color: #A396C3; }
-#xxx3{  
+#area2_2 #area_title{ color: #A396C3; }
+#area2_2{  
     background-image:url(../img/area04.jpg);
     filter: progid:DXImageTransform.Microsoft.AlphaImageLoader( src='img/area04.jpg' , sizingMethod='scale');
-	width: 27%;  height: 360px;
+	width: 27%;  height: 340px;
 }
 
-#xxx4 #area_title{ color: #FAD330; }
-#xxx4{  
+#area3_1 #area_title{ color: #FAD330; }
+#area3_1{  
     background-image:url(../img/area05.jpg);
     filter: progid:DXImageTransform.Microsoft.AlphaImageLoader( src='img/area05.jpg' , sizingMethod='scale');
-	width: 27%;  height: 200px;
+	width: 27%;  height: 150px;
 }
-#xxx5 #area_title{ color: #AECC46; }
-#xxx5{  
+#area3_2 #area_title{ color: #AECC46; }
+#area3_2{  
     background-image:url(../img/area06.jpg);
     filter: progid:DXImageTransform.Microsoft.AlphaImageLoader( src='img/area06.jpg' , sizingMethod='scale');
-	width: 27%;  height: 200px;
+	width: 27%;  height: 150px;
 }
-#xxx6 #area_title{ color: #8CCFDF; }
-#xxx6{  
+#area3_3 #area_title{ color: #8CCFDF; }
+#area3_3{  
     background-image:url(../img/area07.jpg);
     filter: progid:DXImageTransform.Microsoft.AlphaImageLoader( src='img/area07.jpg' , sizingMethod='scale');
-	width: 27%;  height: 200px;
+	width: 27%;  height: 150px;
 }
 
 
 /* =======================焦點新聞====================== */
 
 /* ==========================FB========================= */
+#area1_2 div{
+	margin-left: 10px;
+}
+#area1_2 .fb-like{
+	height: 21%;
+	border-bottom:#DBDBDB 1px solid; 
+}
+#area1_2 .fb-nevin{
+	height: 71%;
+    overflow-y: scroll;
 
 
+}
+#area1_2 .fb-footer{
+	border-top:#DBDBDB 1px solid; 
+    padding: 5px;
+    color: #808080;
+	font-size: 13px;
+
+}
 /* =======================工作列表====================== */
-
 
 .search-bar{
 	text-align: center;
-	padding-top: 30px;
-	padding-bottom: 15px;
+	padding-top: 10px;
+	padding-bottom: 10px;
 }
 .search-bar #normal-search{
 	width: 400px;
@@ -136,10 +160,6 @@
 }
 
 
-
-
-
-
 .work{
 	border-bottom: solid 1px #ddd;
 	overflow: hidden;
@@ -155,46 +175,36 @@
 	float: left;
 }
 
-	
 .box-img{
-   padding-right: 10px;
-}
-.com-img{
+	float: left;
 	width: 50px;
 	height: 50px;
-	margin: 4px;
+	margin: 5px;
+	padding-left: 10px;
+	padding-right: 10px;
 }
-
-.box-name{
+.box-detail{
 padding-top: 2px;
 margin-top: 4px\9;
 }
-.box-name p{
-	float: left;
+.box-detail p{
+padding-top: 2px;
+margin-top: 4px\9;
 }
 .box-loc{
 	float: right;
-	padding: 10px;
+	padding-right: 20px;
+	line-height: 50px;
 	margin-top: 8px\9;
 }
 .box-pop{
 	float: right;
-	padding: 10px;
+	padding-right: 20px;
+	line-height: 50px;
 	margin-top: 8px\9;
 }
 
-    
-
-
-
-
-
-
-
-
-
 .tag-bar{
-
 	padding-bottom: 20px;
 }
 
@@ -216,29 +226,20 @@ margin-top: 4px\9;
 		text-decoration: none;
 		display: block;
 	}
-	
-	.work p{
-		display: inline-block;
-	}
 	.work h1{
 		color: #333;
-		font-size:22px;
-		word-break: break-word; /* 文本行的任意字内断开 */ 
-		word-wrap: break-word; /* IE */ 
-		white-space: -moz-pre-wrap; /* Mozilla */ 
-		white-space: -hp-pre-wrap; /* HP printers */ 
-		white-space: -o-pre-wrap; /* Opera 7 */ 
-		white-space: -pre-wrap; /* Opera 4-6 */ 
-		white-space: pre; /* CSS2 */ 
-		white-space: pre-wrap; /* CSS 2.1 */ 
-		white-space: pre-line; /* CSS 3 (and 2.1 as well, actually) */ 
-		
+		font-size:24px;
 	}
 	.work p{
+		display: inline-block;
 		color: #555;
-		padding-left: 5px;
 		font-size:14px;
 	}
+	.work .num{
+		width: 70px;
+	}
+	
+
 
 
 
@@ -269,15 +270,87 @@ margin-top: 4px\9;
 	border-bottom: solid 1px #fff;
 	background-color: #FFF;
 }
+
+/* 更多 */
+#area2_1 .more-link{
+	bottom: 40px;
+}
 	
 /* =======================校內新聞====================== */
 
+#area2_2 .link{
+    color: #A396C3;
+    float: right;
+    margin-right: 20px;
+}
 
+#area2_2 .news{
+	height: 85px;
+	width: 100%;
+	overflow: hidden;
+}
+#area2_2 .news p{
+    font-size: 13px;
+}
+#area2_2 .news .news-img{
+	float: left;
+	padding: 12px;
+	height: 60px;
+    width: 100px;
+}
+#area2_2 .news .news-time{
+	padding-top: 12px;
+	color: #A396C3;
+}
+#area2_2 .news-nevin{
+	margin-right: 15px;
+}
 
+/* 更多 */
+#area2_2 .more-link{
+	bottom: 40px;
+}
 
 /* =======================職場高手====================== */
 
+/* 更多 */
+#area3_1 .more-link,
+#area3_2 .more-link,
+#area3_3 .more-link{
+	top: 30px;
+}
+
+.title-box{
+	width: 100%;
+	height: 20%;
+	overflow: hidden;
+}
+.area3-img{
+    float: left;
+    margin: 10px;
+    height: 90px;
+    width: 90px;
+}
+#area3_1 p{
+    font-size: 14px;
+}
+#area3_1 .master-title{
+	margin-top: 10px;
+    color: #F8C705;
+    font-weight: bold;
+}
+#area3_1 .master-nevin{
+  
+}
+
 /* =======================職場動態====================== */
+.workplace{
+	margin-top: 10px;
+}
+.workplace-title{
+	font-size: 14px;
+	line-height: 22px;
+}
 
 /* ======================職場萬花筒===================== */
 
