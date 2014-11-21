@@ -136,11 +136,11 @@ a{
     padding-left: 40px;
 }
 
-.null-echo{
-    position: absolute;
+.error_echo{
+    margin-left: 30px;
 	font-weight: bold;
 	color: #FF0000;
-	padding-left: 10px;
+	opacity: 0;
 }
 
 #login-lightbox{

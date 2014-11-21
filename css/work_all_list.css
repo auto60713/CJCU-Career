@@ -1,0 +1,195 @@
+
+	*{
+		margin: 0;
+		padding: 0;
+	}
+
+	.container{
+		background-color: #FFF;
+		width: 900px;
+		margin-left: auto;
+		margin-right: auto;
+		box-sizing:border-box;
+		-moz-box-sizing:border-box; 
+		-webkit-box-sizing:border-box; 
+	}
+	.div-search{
+			
+	}
+	.margin-top50{
+		margin-top: 50px;
+	}
+	.margin-top20{
+		margin-top: 20px;
+	}
+	.margin-bottom70{
+		margin-bottom: 70px;
+	}
+    .margin-bottom30{
+		margin-bottom: 30px;
+	}
+    .box-shadow1{
+    	box-shadow:0px 2px 2px rgba(20%,20%,40%,0.8);
+    }
+    .box-shadow2{
+    	box-shadow:0px -2px 2px rgba(20%,20%,40%,0.8);
+    }
+	.tag-bar{
+		margin-left: 135px;
+		padding-bottom: 20px;
+	}
+	.center{
+		height: auto;
+	}
+	.search-detail-sub{
+		font-size: 13.5px;
+		padding-bottom: 5px;
+	}
+
+	.search-detail{
+		text-decoration: none;
+		font-size: 14px;
+		vertical-align: middle;
+	}
+
+	.search-bar{
+
+		text-align: center;
+		padding-top: 30px;
+		padding-bottom: 15px;
+	}
+	.search-bar .set-center{
+		display: inline-block;
+	}
+	.search-bar input[type='text']{
+		vertical-align: middle;
+		width: 480px;
+		height: 30px;
+		font-size: 20px;
+	}
+	.search-bar input[type='button']{
+		vertical-align: middle;
+		width: 80px;
+		height: 34px;
+
+	}
+	.search-log{
+		margin: 10px;
+		color: #408080;
+		font-size: 13.5px;
+	}
+
+
+	.work-list-bar {
+		padding: 3px;
+	}
+	.work-list-bar a{
+		text-decoration: none;
+		display: block;
+
+	}
+	
+
+	.work{
+		border-bottom: solid 1px #ddd;
+		padding: 5px;
+	}
+
+	.work:hover{
+		background-color: #FED;
+	}
+
+	.work-box{
+		display: inline-block;
+		vertical-align: middle;
+	}
+
+	.box-img{
+		margin-right: 5px;
+		height: 50px;
+	}
+	.box-name{
+		height: 50px;
+		width: 530px;
+	}
+	.box-loc{
+		width: 180px;
+	}
+	.box-pop{
+		width: 80px;
+	}
+
+	.work-img{
+		width: 50px;
+		height: 50px;
+		border: solid 1px #DDD;
+	}
+	
+
+	
+	
+	.work p{
+		display: inline-block;
+	}
+	.work h1{
+		color: #333;
+		font-size:22px;
+		word-break: break-word; /* 文本行的任意字内断开 */ 
+		word-wrap: break-word; /* IE */ 
+		white-space: -moz-pre-wrap; /* Mozilla */ 
+		white-space: -hp-pre-wrap; /* HP printers */ 
+		white-space: -o-pre-wrap; /* Opera 7 */ 
+		white-space: -pre-wrap; /* Opera 4-6 */ 
+		white-space: pre; /* CSS2 */ 
+		white-space: pre-wrap; /* CSS 2.1 */ 
+		white-space: pre-line; /* CSS 3 (and 2.1 as well, actually) */ 
+		
+	}
+	.work p{
+		color: #555;
+		padding-left: 5px;
+		font-size:14px;
+	}
+
+	.footer{
+		text-align: right;
+		background-color: #991133;
+		color: #efefef;
+		font-size: 12px;
+		border-radius:5px;
+		margin-bottom: 10px;
+	}
+	.footer-bar{
+       padding: 10px;
+	}
+
+
+/* 快速搜尋 */
+
+	.rush-search{
+		padding: 8px;
+		padding-bottom: 0;
+		border-bottom: solid 1px #CCC;
+	}
+
+
+	.rush-search a{
+		color:#555;
+		display: inline-block;
+		padding:10px;
+		text-decoration: none;
+		text-align: center;
+		margin-bottom: -1px;
+	}
+	.rush-search a:hover{
+		color: #222;
+		cursor: pointer;
+	}
+
+	.rush-searching{
+		color: #222;
+		border: solid 1px #CCC;
+		border-bottom: solid 1px #fff;
+		background-color: #FFF;
+	}
+	

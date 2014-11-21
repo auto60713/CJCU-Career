@@ -109,18 +109,38 @@ function echo_data($user,$lev){
 
    		$( "#login-exit" ).click(function() {
         	$( "#login-lightbox" ).css( "display", "none" ); 
+        	$('.error_echo').text("").css({lineHeight:"0px",opacity:0});
     	});
 
+    	//登入ajax
+    	$( ".btn-submit" ).click(function() {
+    		var sel = $("select[name=sel]").val(),
+    		    id  = $("input:text[name=id]").val(),
+    		    pw  = $("input:password[name=pw]").val();
+
+
     	//判斷欄位是否為空
-	    function check_data(){
-		    $("#cont").find("span").text("");
-			var boo = true;
-			if(document.login.sel.value ==""){$('#sel-null').text("請選擇身分"); boo = false;}
-			else if(document.login.id.value ==""){$('#id-null').text("請輸入帳號"); boo = false;}
-			else if(document.login.pw.value ==""){$('#pw-null').text("請輸入密碼"); boo = false;}
-			else $('#pw-null').text("");
-			return boo;
-	    }
+			if(id==""){
+				$('.error_echo').text("請輸入帳號").animate({lineHeight:"40px",opacity:1}, 200); 
+			}
+			else if(pw==""){
+				$('.error_echo').text("請輸入密碼").animate({lineHeight:"40px",opacity:1}, 200); 
+			}
+			else {
+                $.ajax({
+		          type: 'POST',
+		          url: 'login_connect.php',
+		          data:{sel:sel,id:id,pw:pw},
+		          success: function (data){ 
+                      if(data==1) location.reload();
+                      else $('.error_echo').text("身分或帳號密碼錯誤").animate({lineHeight:"40px",opacity:1}, 200); 
+		           
+		          }
+		        });
+
+			}
+		
+	    });
 	
 	});
 </script>
@@ -146,22 +166,23 @@ function echo_data($user,$lev){
 <div id="login-lightbox">
 <div id="cont" class="login">
 <h1>登入 <i class="fa fa-times login-exit" id="login-exit"></i><br></h1>
-<form class="form" name="login" method="post" action="../../../cjcuweb/login_connect.php" onsubmit="return check_data()">
-選擇身分：<select name ="sel" class="login-select">
+<div class="form" name="login">
+選擇身分：
+<select name ="sel" class="login-select">
   <option value="school" selected="selected">在校師生(校友)</option>
   <option value="company">公司廠商</option>
   <option value="department">系所單位</option>
 </select><br>
 
-<span class="null-echo" id="sel-null"></span><br>
-<i class="fa fa-user login-icon"></i><input type="text" name="id" placeholder="輸入帳號" class="login-input"><span class="null-echo" id="id-null" ></span><br>
-<i class="fa fa-lock login-icon"></i><input type="password" name="pw" placeholder="輸入密碼" class="login-input"><span class="null-echo" id="pw-null" ></span>
+<span class="error_echo"></span><br>
+<i class="fa fa-user login-icon"></i><input type="text" name="id" placeholder="輸入帳號" class="login-input"><br>
+<i class="fa fa-lock login-icon"></i><input type="password" name="pw" placeholder="輸入密碼" class="login-input"></span>
 <br>
 <input type="submit" class="btn-submit" name="button" value="登入" />
 <a href="forgotpwd.php">忘記密碼</a> 
 
 <p class="login-hint">學生請選擇學校登入，廠商未註冊請先<a href="company_add.php" class="login-signup">註冊新帳號</a>。</p>
-</form>
+</div>
 </div>
 </div>
 

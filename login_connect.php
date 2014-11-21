@@ -1,8 +1,5 @@
-<?session_start();  header("location: home.php")?>
+<?session_start();
 
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>長大職涯網</title>
-<?
 
 include_once("sqlsrv_connect.php");
 include_once("cjcuweb_lib.php");
@@ -45,7 +42,7 @@ function school_login($conn,$userid,$pw){
             $_SESSION['username'] = $row[user_no];
             $_SESSION['level']  = $row[role];
 
-            login_echo(3);
+            login_echo(1);
         }
         else{
             login_echo(0);
@@ -102,7 +99,7 @@ function department_login($conn,$userid,$pw,$level_department){
                 $_SESSION['username'] = $userid;
                 $_SESSION['level']  = 1;
 
-                login_echo(2);
+                login_echo(1);
             }
             else{
                 $_SESSION['username'] = $userid;
@@ -125,19 +122,12 @@ function login_echo($login_msg){
 
     switch ($login_msg) {
     case 1:
-        echo '登入成功!';
-    break;
-    case 2:
-        echo '管理員驗證成功!';
-    break;
-    case 3:
-        echo '計中驗證成功!';
+        echo '1';
     break;
     default: 
-        echo '帳號或密碼錯誤!';
+        echo '0';
     }
-    //if($login_msg>0) echo '<meta http-equiv=REFRESH CONTENT=0;url=home.php>';
-    
+  
 }
 
 session_write_close(); 
