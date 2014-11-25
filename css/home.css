@@ -22,6 +22,16 @@
 	background-repeat: no-repeat;
 	background-size: 100% 100%;
 }
+.area_box2{
+	float: left;
+	position: relative;
+	margin-left: 30px;
+	overflow: hidden;
+	padding-right: 15px;
+	padding-bottom: 40px;
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+}
 
 /* 菜單 */
 #menu{
@@ -29,6 +39,7 @@
 	min-width: 1100px;
 }
 #menu ul{
+	overflow: hidden;
 	list-style-type: none;
 	width: 800px;
 	height: 50px;
@@ -104,6 +115,23 @@
 	width: 27%;  height: 150px;
 }
 
+
+#inner4_area_1 #area_title{ color: #AECC46; }
+#inner4_area_1{  
+    background-image:url(../img/inner4_area01.jpg);
+    filter: progid:DXImageTransform.Microsoft.AlphaImageLoader( src='img/inner4_area01.jpg' , sizingMethod='scale');
+	width: 60%;  height: 1100px;
+	padding-top: 30px;
+	margin-top: 20px;
+}
+#inner4_area_2 #area_title{ color: #A296C3; }
+#inner4_area_2{  
+    background-image:url(../img/inner4_area02.jpg);
+    filter: progid:DXImageTransform.Microsoft.AlphaImageLoader( src='img/inner4_area02.jpg' , sizingMethod='scale');
+	width: 28%;  height: 700px;
+	padding-top: 10px;
+	margin-top: 30px;
+}
 
 /* =======================焦點新聞====================== */
 
@@ -359,8 +387,88 @@ margin-top: 4px\9;
 
 
 
+/* 內頁 */
+/* ======================左區塊===================== */
+#inner4_area_1 p,#inner4_area_1 hr{
+position: absolute;
+color: #991133;
+font-weight: bold;
+}
+#inner4_area_1 .before_news{
+float: left;
+left: 30px;
+}
+#inner4_area_1 .next_news{
+float: right;
+right: 45px;
+}
+#inner4_area_1 .bottom_pointer{
+bottom: 40px;
+}
+#inner4_area_1 .begin_hr{
+	top: 60px;
+}
+
+#inner4_area_1 .news_title,#inner4_area_1 .news_cont{
+    margin-left: 25px;
+    margin-right: 25px;
+}
+#inner4_area_1 .news_title{
+	margin-top: 60px;
+	font-size: 24px;
+}
+#inner4_area_1 .news_time{
+	float: right;
+	line-height: 40px;
+	font-size: 20px;
+	color: #000000;
+}
+#inner4_area_1 .news_cont{
+    margin-top: 20px;
+}
 
 
+#inner4_area_1 hr{
+	opacity: 0.4;
+    margin-left: 4%;
+    width: 90%;
+}
+#inner4_area_1 .bottom_hr{
+	bottom: 70px;
+}
+
+/* ======================右區塊===================== */
+#inner4_area_2 .list_one{
+	margin-top: 5%;
+	margin-left: 8%;
+    margin-right: 3%;
+    font-size: 14px;
+}
+#inner4_area_2 .list_time,#inner4_area_2 .list_title{
+    color: #A296C3;
+}
+
+#inner4_area_2 .list_title{
+
+}
+#inner4_area_2 .list_cont{
+
+}
+
+#inner4_area_2 .page_ctrl{
+margin-top: 40px;
+margin-left: 7%;
+
+}
+#inner4_area_2 .page_ctrl a{
+margin-left: 10px;
+	color: #808080;
+
+}
+#inner4_area_2 .page_ctrl .this_page{
+    color: #991133;
+    font-weight: bold;
+}
 
 
 /* 頁尾 */

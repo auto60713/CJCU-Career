@@ -4,9 +4,9 @@
 <head>
 	<meta charset="UTF-8">
 	<title></title>
-	<link rel="stylesheet" type="text/css" href="../css/main.css">
-	<link rel="stylesheet" type="text/css" href="../css/manage.css">
-	<link rel="stylesheet" type="text/css" href="../css/profile.css">
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+	<link rel="stylesheet" type="text/css" href="css/manage.css">
+	<link rel="stylesheet" type="text/css" href="css/profile.css">
 	<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 	<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 	<script><? include_once("js_detail.php"); echo_student_profile($_GET['userid']); ?></script>
@@ -15,7 +15,7 @@
 
 		$('.profile-pic-change, #profile-btn-edit').hide();
 
-		$('#view-header').load('../public_view/header.php #header');
+		$('#view-header').load('public_view/header.php #header');
 
 		// init load data
 		$('title,#username').text(student_profile_array['name']);
@@ -54,9 +54,9 @@
 
 <div class="profile-content overfix">
 <div class="profile-boxleft">
-	<h2>關於 <a id="profile-btn-edit" href="../student_manage.php">修改</a> </h2>
+	<h2>關於 <a id="profile-btn-edit" href="student_manage.php">修改</a> </h2>
 	<div class="profile-pic">
-	<img class="profile-pic-img" src="<? echo '../img_user/'.$_GET['userid'].'.jpg' ; ?>">
+	<img class="profile-pic-img" src="<? echo 'img_user/'.$_GET['userid'].'.jpg' ; ?>">
     </div>
 
 	<!-- 以下欄位皆為參考學生系統之欄位所建 -->

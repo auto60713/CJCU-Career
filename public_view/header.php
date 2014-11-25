@@ -30,36 +30,36 @@ function echo_data($user,$lev){
 
 	if(isset ($user)){
 
-		echo '<span><a href="../../../cjcuweb/logout.php">登出</a></span>';
+		echo '<span><a href="logout.php">登出</a></span>';
 
 		if( $lev == $level_company) {
             echo_username($user,'com');
-            echo '<span id="header-notice"><a href="../../../cjcuweb/company_manage.php#company-notice">通知</a></span>';
-			echo '<span><a href="../../../cjcuweb/company_manage.php">管理</a></span>';
-			echo '<span class="username"><a href="../../../cjcuweb/company/'.$user.'">'.$GLOBALS['header_name'].'</a></span>';
+            echo '<span id="header-notice"><a href="company_manage.php#company-notice">通知</a></span>';
+			echo '<span><a href="company_manage.php">管理</a></span>';
+			echo '<span class="username"><a href="company-'.$user.'">'.$GLOBALS['header_name'].'</a></span>';
 		}
 		else if( $lev == $level_department) {
             echo_username($user,'dep');
-            echo '<span id="header-notice"><a href="../../../cjcuweb/department_manage.php#department-notice">通知</a></span>';
-            echo '<span><a href="../../../cjcuweb/department_manage.php">管理</a></span>';
-			echo '<span class="username"><a href="../../../cjcuweb/department/'.$user.'">'.$GLOBALS['header_name'].'</a></span>';
+            echo '<span id="header-notice"><a href="department_manage.php#department-notice">通知</a></span>';
+            echo '<span><a href="department_manage.php">管理</a></span>';
+			echo '<span class="username"><a href="department-'.$user.'">'.$GLOBALS['header_name'].'</a></span>';
 		}
 		else if( $lev == $level_student){
             echo_username($user,'user');
-            echo '<span id="header-notice"><a href="../../../cjcuweb/student_manage.php#student-notice">通知</a></span>';
-            echo '<span><a href="../../../cjcuweb/student_manage.php">管理</a></span>';
-			echo '<span class="username"><a href="../../../cjcuweb/student/'.$user.'">'.$GLOBALS['header_name'].'</a></span>';
+            echo '<span id="header-notice"><a href="student_manage.php#student-notice">通知</a></span>';
+            echo '<span><a href="student_manage.php">管理</a></span>';
+			echo '<span class="username"><a href="student-'.$user.'">'.$GLOBALS['header_name'].'</a></span>';
 		}
 		else if( $lev == $level_staff){
             echo_username($user,'dep');
-			echo '<span><a href="../../../cjcuweb/staff_manage.php">管理</a></span>';
-			echo '<span class="username"><a href="../../../cjcuweb/department/'.$user.'">'.$GLOBALS['header_name'].'</a></span>';
+			echo '<span><a href="staff_manage.php">管理</a></span>';
+			echo '<span class="username"><a href="department-'.$user.'">'.$GLOBALS['header_name'].'</a></span>';
 		}
 
 		else if( $lev == $level_teacher){
             echo_username($user,'user');
-            echo '<span><a href="../../../cjcuweb/teacher_manage.php">管理</a></span>';
-			echo '<span class="username"><a href="../../../cjcuweb/teacher/'.$user.'">'.$GLOBALS['header_name'].'</a></span>';
+            echo '<span><a href="teacher_manage.php">管理</a></span>';
+			echo '<span class="username"><a href="teacher-'.$user.'">'.$GLOBALS['header_name'].'</a></span>';
 		}
 	}	
 	else echo '<span><a href="#" id="login-btn">登入</a></span>';
@@ -80,7 +80,7 @@ function echo_data($user,$lev){
 		//polling();
 		function polling(){
 			$.ajax({
-			url: '../../../cjcuweb/ajax_get_news_num.php',
+			url: 'ajax_get_news_num.php',
 			type: 'get',
 			})
 			.done(function(d) {
@@ -148,7 +148,7 @@ function echo_data($user,$lev){
 
 
 <!--<div id="header">-->
-    <a href="../../../cjcuweb/home.php" style="cursor: pointer;">
+    <a href="index.php" style="cursor: pointer;">
 	<div class="sub"><img src="http://www.cjcu.edu.tw/zh_tw/images/id.jpg"></div>
 	<div class="sub2"> 
         <h1>長大職涯網</h1>

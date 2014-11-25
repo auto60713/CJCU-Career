@@ -76,10 +76,10 @@ else{echo "No permission!"; exit;
 		    for(var i=0;i<line_up_array.length;i++){
 
 		    	var img = $('<i>').addClass('fa fa-book').addClass('work-img'),
-		    		stu_herf = $('<a>').attr({'target':'_blank','href':'student/'+line_up_array[i]['userid']}).text(line_up_array[i]['username']),
+		    		stu_herf = $('<a>').attr({'target':'_blank','href':'student-'+line_up_array[i]['userid']}).text(line_up_array[i]['username']),
 		    		stu = $('<h1>').addClass('work-tit').append(stu_herf),
-		    		work_herf = $('<a>').attr({'target':'_blank','href':'work/'+line_up_array[i]['wid']}).text(line_up_array[i]['wname']),
-		    		com_herf = $('<a>').attr({'target':'_blank','href':'company/'+line_up_array[i]['comid']}).text(line_up_array[i]['comname']),
+		    		work_herf = $('<a>').attr({'target':'_blank','href':'work-'+line_up_array[i]['wid']}).text(line_up_array[i]['wname']),
+		    		com_herf = $('<a>').attr({'target':'_blank','href':'company-'+line_up_array[i]['comid']}).text(line_up_array[i]['comname']),
 		    		detil = $('<div>').addClass('manage-company-herf').append(work_herf,' 發布自 ',com_herf),
 		   
                     match_btn = $('<div>').attr('id',line_up_array[i]['line_no']).addClass('match-btn btn').text("媒合老師"),
@@ -135,9 +135,9 @@ else{echo "No permission!"; exit;
 		    for(var i=0;i<match_list_array.length;i++){
 
 		    	var img = $('<i>').addClass('fa fa-inbox fa-3x').addClass('work-img'),
-		    		work_herf = $('<a>').attr({'target':'_blank','href':'work/'+match_list_array[i]['workid']}).text(match_list_array[i]['workname']),
+		    		work_herf = $('<a>').attr({'target':'_blank','href':'work-'+match_list_array[i]['workid']}).text(match_list_array[i]['workname']),
 		    		work = $('<h1>').addClass('work-tit').append(work_herf),
-		    		com_herf = $('<a>').attr({'target':'_blank','href':'company/'+match_list_array[i]['comid']}).text(match_list_array[i]['comname']),
+		    		com_herf = $('<a>').attr({'target':'_blank','href':'company-'+match_list_array[i]['comid']}).text(match_list_array[i]['comname']),
 		    		detil = $('<div>').addClass('manage-company-herf').append('發布自 ',com_herf),
                     stu = $('<div>').addClass('manage-company-herf');
 
@@ -166,7 +166,7 @@ else{echo "No permission!"; exit;
 
                             	stu.append(msg);
                               for(var i=0;i<stu_array.length;i++){
-                                stu_link = $('<a>').attr({'target':'_blank','href':'student/'+stu_array[i]['stuid']}).text(stu_array[i]['stuname'] + ' , ');
+                                stu_link = $('<a>').attr({'target':'_blank','href':'student-'+stu_array[i]['stuid']}).text(stu_array[i]['stuname'] + ' , ');
                                 stu.append(stu_link);
 		                      }
 		                    }

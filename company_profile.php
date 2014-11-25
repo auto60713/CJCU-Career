@@ -5,9 +5,9 @@
 	<meta charset="UTF-8">
 	<title></title>
 	<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
-	<link rel="stylesheet" type="text/css" href="../css/main.css">
-	<link rel="stylesheet" type="text/css" href="../css/manage.css">
-	<link rel="stylesheet" type="text/css" href="../css/profile.css">
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+	<link rel="stylesheet" type="text/css" href="css/manage.css">
+	<link rel="stylesheet" type="text/css" href="css/profile.css">
 	<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 	<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 	<script><? include_once("js_detail.php");	echo_company_detail($_GET['companyid']); 	?></script>
@@ -16,7 +16,7 @@
 	$(function(){
 
 		$.ajax({
-			url:  '../public_view/header.php',
+			url:  'public_view/header.php',
 			type: 'POST',
 			data: {},
 			success: function(data) {
@@ -48,7 +48,7 @@
 		else{
 		    for(var i=0;i<pass_work_array.length;i++){
 		    	var container = $('<p>').addClass('profile-span-box'),
-		    	tita = $('<a>').attr('href', '../work/'+pass_work_array[i]['wid']).addClass('profile-span-left').text(pass_work_array[i]['wname']),
+		    	tita = $('<a>').attr('href', 'work-'+pass_work_array[i]['wid']).addClass('profile-span-left').text(pass_work_array[i]['wname']),
 		    	titloc = $('<span>').addClass('profile-span-right').text((pass_work_array[i]['isout']=='0'?'校內 ':'校外 ')+ pass_work_array[i]['propname']);
 		    	listbox.append(container.append(tita).append(titloc));
 		    }
@@ -86,9 +86,9 @@
 
 <div class="profile-content overfix">
 <div class="profile-boxleft">
-<h2>關於 <a id="profile-btn-edit" href="../company_manage.php">修改</a> </h2>
+<h2>關於 <a id="profile-btn-edit" href="company_manage.php">修改</a> </h2>
 <div class="profile-pic">
-	<img class="profile-pic-img" src="<? echo '../img_company/'.$_GET['companyid'].'.jpg' ; ?>">
+	<img class="profile-pic-img" src="<? echo 'img_company/'.$_GET['companyid'].'.jpg' ; ?>">
 </div>
 
 <h3>公司資訊</h3>

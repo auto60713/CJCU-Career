@@ -144,7 +144,7 @@
         <p class="news-time">2014-10-12</p>
 	    <p class="news-nevin">氣象局同時發布大雨特報，台北地區有大雨發生...</p>
 	</div>
-	<a class="more-link" href="">更多..</a>
+	<a class="more-link" href="inner_4.php">更多..</a>
 </div>
 
 
@@ -221,7 +221,7 @@
 			box4 = $('<div>').addClass('work-box').addClass('box-pop'),
 
 			img = $('<img>').addClass('box-img').attr('src', 'img_company/'+work_list_array[i].cid+'.jpg'),
-			a_link = $('<a>').attr({href:'work/'+work_list_array[i].wid}),
+			a_link = $('<a>').attr({href:'work-'+work_list_array[i].wid}),
 			div_work = $('<div>').addClass('work'),
 
 			work_name = $('<h1>').text(work_list_array[i].wname),

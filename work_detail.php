@@ -11,9 +11,9 @@ if(isset($_SESSION['username'])) $user_id = $_SESSION['username'];
 	<meta charset="UTF-8">
 	<title></title>
 	<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
-	<link rel="stylesheet" type="text/css" href="../css/main.css">
-	<link rel="stylesheet" type="text/css" href="../css/manage.css">
-	<link rel="stylesheet" type="text/css" href="../css/profile.css">
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+	<link rel="stylesheet" type="text/css" href="css/manage.css">
+	<link rel="stylesheet" type="text/css" href="css/profile.css">
 	<style type="text/css">
 	#ch{
 		font-size: 16px;
@@ -65,7 +65,7 @@ if(isset($_SESSION['username'])) $user_id = $_SESSION['username'];
 	$(function(){	
 
 		$.ajax({
-			url:  '../public_view/header.php',
+			url:  'public_view/header.php',
 			type: 'POST',
 			data: {},
 			success: function(data) {
@@ -114,14 +114,14 @@ if(isset($_SESSION['username'])) $user_id = $_SESSION['username'];
 		function show_apply_form(){
 			var wid= $('<input>').attr({type: 'hidden',	name: 'workid'}).val(<? echo $_GET['workid'];?>),
 			submit = $('<input>').attr({type: 'submit',name: 'button',id:'btn-apply'}).val('我要應徵'),
-			form = $('<form>').attr({name:'getjobform',method:'post',action:'../student_apply_job.php',id:'apply_form'});
+			form = $('<form>').attr({name:'getjobform',method:'post',action:'student_apply_job.php',id:'apply_form'});
 			$('.profile-boxleft').append(form.append(wid).append(submit));
 		}
 
 		var listbox = $('#other_work');
 		for(var i=0;i<pass_work_array.length;i++){
 			var container = $('<p>').addClass('profile-span-box'),
-			tita = $('<a>').attr('href', '../work/'+pass_work_array[i]['wid']).addClass('profile-span-left').text(pass_work_array[i]['wname']),
+			tita = $('<a>').attr('href', 'work-'+pass_work_array[i]['wid']).addClass('profile-span-left').text(pass_work_array[i]['wname']),
 			titloc = $('<span>').addClass('profile-span-right').text((pass_work_array[i]['isout']=='0'?'校外 ':'校內 ')+ pass_work_array[i]['propname']);
 			listbox.append(container.append(tita).append(titloc));
 		}
@@ -134,7 +134,7 @@ else if(work_detail_array['pub'] ==2){
     var pub_type_name = "關於系所",pub_type = "department";
 }
         $('#about_work h2').text(pub_type_name);
-		$('#pub_name').append($('<a>').attr({'target':'_blank','href':'../'+pub_type+'/'+publisher_detail_array['id']}).text(publisher_detail_array['name']));
+		$('#pub_name').append($('<a>').attr({'target':'_blank','href':pub_type+'-'+publisher_detail_array['id']}).text(publisher_detail_array['name']));
 		$('#pub_boss').text(publisher_detail_array['boss']);
 		$('#pub_phone').text(publisher_detail_array['phone']);
 		$('#pub_email').text(publisher_detail_array['email']);
