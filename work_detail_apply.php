@@ -57,7 +57,7 @@ function isCompanyWork($conn,$companyid,$workid){
 
     	for(var i=0;i<work_apply_list_array.length;i++){
 
-    		var wimg = $('<img>').attr('src', 'http://akademik.unissula.ac.id/themes/sia/images/user.png').addClass('work-img'),
+    		var wimg = $('<img>').attr('src', 'http://akademik.unissula.ac.id/themes/sia/images/user.png').addClass('work-img-apply'),
     			tita = $('<a>').attr({'target':'_blank','href':'student-'+work_apply_list_array[i]['user_id']}).text(work_apply_list_array[i]['name']),
     			
     			eyes = $('<i>').addClass('fa fa-eye'),

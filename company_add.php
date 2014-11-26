@@ -80,6 +80,17 @@ label.error{
 	font-weight: bold;
 	margin-left: 10px;
 }
+
+.yes{
+    color: #00CC00;
+	font-weight: bold;
+	margin-left: 10px;
+}
+.no{
+    color: #D50000;
+	font-weight: bold;
+	margin-left: 10px;
+}
 </style>
 </head>
 
@@ -89,11 +100,11 @@ label.error{
 <div id="cont" class="register">
 
 <h1>廠商註冊</h1><hr>
-<form id="commentForm" name="form" method="post" action="index.php">
+<form id="commentForm" name="form" method="post" action="company_add_finish.php">
 	<!--用table來對齊表格-->
 	有*字號為必填項目
 <table>                                                        
-<tr><td>帳號*：</td>            <td><input type="text" name="id"/></td></tr>
+<tr><td>帳號*：</td>            <td><input type="text" val="" name="id" id="account"/><span class="check_echo"></span></td></tr>
 <tr><td>密碼*：</td>            <td><input type="password" name="pw" id="pw"/></td></tr>
 <tr><td>再一次輸入密碼*：</td>  <td><input type="password" name="pw2"/></td></tr>
 <tr><td>公司名稱(中文)*：</td>  <td><input type="text" name="ch_name"/></td></tr>
@@ -105,8 +116,8 @@ label.error{
 <tr><td>負責人姓名*：</td>      <td><input type="text" name="boss_name" /></td></tr>
 <tr><td>公司行業類型 :</td>     <td><select name="type" id="company_type"></select></td></tr>
 
-<tr><td>公司地點：</td>        <td><select name="zone" id="zone"></select>  
-			                       <select name="zone_name" id="zone_name"></select></td></tr>
+<tr><td>公司地點：</td>         <td><select name="zone" id="zone"></select>  
+			                        <select name="zone_name" id="zone_name"></select></td></tr>
 <tr><td>公司地址*：</td>        <td><input type="text" name="address"/></td></tr>
 <tr><td>員工人數*：</td>        <td><input type="text" name="staff_num"/></td></tr>
 <tr><td>公司資本額：</td>       <td><input type="text" name="budget"/></td></tr>
@@ -129,7 +140,7 @@ $(document).ready(function() {
 
         $("#commentForm").validate({ 
             rules: { 
-                id:      { required:true,rangelength:[4,20] },
+                //id:      { required:true,rangelength:[4,20] },
                 pw:      { required:true,rangelength:[4,20] },
                 pw2:     { required:true,equalTo:"#pw" },
                 ch_name: { required:true,maxlength:20 },
@@ -161,8 +172,23 @@ $(document).ready(function() {
       
       
         //檢測帳號是否重複
-	    $('#id').change(function() {
-	
+	    $("#account").change(function() {
+	    	var account = $("#account").val();
+	    	if(account.length < 4) $(".check_echo").html("最少要4個字元").attr('class','check_echo no');
+            else if(account.length > 20) $(".check_echo").html("不得超過20個字元").attr('class','check_echo no');
+          else{
+            $.ajax({
+			    type:"POST",
+			    url:"check_company_id.php",
+			    data:{id:account},
+			    success:function(boo){
+
+                    if(boo==1) $(".check_echo").html('<i class="fa fa-check"></i>').attr('class','check_echo yes');
+	                else $(".check_echo").html("這個帳號已被使用").attr('class','check_echo no');
+			    }
+			});
+          }
+
 		});
 
 });

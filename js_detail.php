@@ -11,7 +11,7 @@ function echo_student_profile($stu_no){
 include_once("sqlsrv_connect.php");
 
 	$sql = "select sd_stud_no sd_no,sd_stud_name sd_name,sd_birthday,es_system_name es_name,dm_dep_short_name dm_name,sd_grade_now sd_grade,sd_class_no sd_class,sd_entrance_syear sd_syear,sd_contact_addr sd_addr,sd_cell_phone sd_phone "
-		  ."from cjcu_student where sd_stud_no=?";
+		  ."from career_student_data where sd_stud_no=?";
 	
 	$stmt = sqlsrv_query($conn, $sql, array($stu_no));
 	if($stmt) $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC); 
@@ -57,14 +57,14 @@ include("sqlsrv_connect.php");
 
 /* to manage -------------------------    */
 
-/* 學生 */
+/* 學生資料全印出 */
+/* 此function為交換機領資料的關鍵 */
 function echo_student_detail($user_id){
 include_once("sqlsrv_connect.php");
 
-	$column_name = array("學號","姓名","系所","履歷檔案");
+	$column_name = array("學號","在學狀態","中文名","英文名","學制代碼","系所代碼","目前年級","班級代碼","入學年","學制名稱","學制簡稱","系所簡稱","系所英文","班級名稱","生日","家電話","手機","電子信箱","郵遞區號","地址");
 
-	$sql = "select u.user_no userno,u.user_name username,u.dep_name depname,s.doc doc "
-		  ."from cjcu_user u,cjcu_student s where u.user_no=? and s.user_no=?";
+	$sql = "select * from career_student_data where sd_stud_no=?";
 	
 	$stmt = sqlsrv_query($conn, $sql, array($user_id,$user_id));
 	if($stmt) $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC); 
@@ -82,7 +82,7 @@ function echo_company_detail($com_id){
 
 include("sqlsrv_connect.php");
 
-    $sql = "select c.ch_name,c.en_name,c.phone,c.fax,c.email,c.uni_num,c.boss_name,t.name typename,z.name zonename,c.address,c.staff_num,c.budget,c.url,c.introduction,c.doc,c.censored "
+    $sql = "select c.ch_name,c.en_name,c.phone,c.fax,c.email,c.uni_num,c.boss_name,t.name typename,z.name zone_name,c.address,c.staff_num,c.budget,c.url,c.introduction,c.censored "
 	      ."from company c,zone z,company_type t "
 	      ."where c.id= ? and c.type=t.id and c.zone_id=z.id";
 

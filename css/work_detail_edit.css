@@ -59,6 +59,11 @@
 	text-align: right;
 }
 .work-img{
+	margin:10px;
+	margin-top: 20px;
+	color: #585858;
+}
+.work-img-apply{
 	margin-top: 5px;
 	margin-left: 30px;
 	height: 60px;

@@ -34,7 +34,7 @@ function get_all_notify($user,$level){
 
 
 		 	$para = array($user , $level);
-			$sql = "UPDATE cjcu_notify SET isnews=0 ,time=GETDATE() WHERE user_no=? and user_level=?";
+			$sql = "UPDATE notify SET isnews=0 ,time=GETDATE() WHERE user_no=? and user_level=?";
 			$stmt = sqlsrv_query($conn, $sql, $para);
 			if(!$stmt ) die(print_r( sqlsrv_errors(), true));
 

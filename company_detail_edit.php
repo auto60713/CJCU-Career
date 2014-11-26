@@ -5,86 +5,43 @@ if(!isset($_SESSION['username'])) { echo 'No permission!'; exit; }
 <!doctype html>
 <html>
 <head>
-	<script><? include_once("js_detail.php"); echo_company_detail($_SESSION['username']); ?></script>
+	<script></script>
 	<script><? include_once("js_audit_detail.php"); echo_audit_detail_array($_SESSION['username'],0); ?></script>
+	<script src="lib/jquery.validate.js"></script>
 </head>
 <style type="text/css">
-form{
+form,.sign{
 	padding-left: 20px;
 }
 .td1{
 	font-size: 17px;
 	font-weight: bolder;
-    width: 80px;
+    width: 110px;
     overflow: hidden;
 }
 .td2{
     padding-top: 5px;
     padding-bottom: 5px;
 }
+label.error{
+
+	color: #D50000;
+	font-weight: bold;
+	margin-left: 10px;
+}
 </style>
 <body>
 <script>
 	$(function(){
 
-		var html_detail = "",idx = 0;
-		//column_name array必須優化成json格式 不然目前依賴index順序
-		var column_name = ["中文名稱","英文名稱","連絡電話","傳真號碼","電子信箱","統一編號","負責人","公司類別","公司位置","公司地址","員工數量","資本額","公司網站","關於公司","相關文件"];
-		for(var key in company_detail_array){
-	     	//特殊處理欄位
-	     	if(key == "typename"||key == "zonename"||key == "introduction"||key == "censored"){
+		<?  //公司的基本資料
+		    include_once("js_detail.php"); echo_company_detail($_SESSION['username']); 
+		?>
 
-                //公司類型
-			    if(key == "typename") html_detail+="<tr><td class='td1'>"+column_name[idx]+"</td><td class='td2'><select name='"+key+"' id='company_type'></select></td</tr>";
-	     		
-	     		//公司地點
-			    if(key == "zonename") html_detail+="<tr><td class='td1'>"+column_name[idx]+"</td><td class='td2'><select name='"+key+"' id='company_zone'></select></td</tr>";
-
-	     		//關於公司
-	     		if(key == "introduction") html_detail+="<tr><td class='td1'>"+column_name[idx]+"</td><td class='td2'><textarea rows='2' cols='30' name='"+key+"'>"+company_detail_array[key]+"</textarea></td</tr>";
-	     		
-	     		//不印出
-	     		if(key == "censored") {}
-
-	     	}
-
-            //普通欄位
-	     	else{
-            html_detail+="<tr><td class='td1'>"+column_name[idx]+"</td><td class='td2'><input type='text' name ='"+key+"' value='"+company_detail_array[key]+"'></td</tr>";
-		    }
-			idx++;
+	    for(var key in company_detail_array){
+	        $( "[name='"+key+"']" ).val( company_detail_array[key] );
 		}	
-		    var submit ="<br><input type='submit' value='修改資料'/>";
-		$('#detail table').html(html_detail);
-	    $('#detail').append(submit);
-
-
-
-
-
-
-		// append audit data
-		/*
-		<div class="company-audit-list">
-
-			<span class="company-audit-time">2014-05-30</span>
-
-			<span class="company-audit-censored">
-				<i class="fa fa-times"></i> 不通過
-			</span>
-
-			<span class="company-audit-msg">afewewfewfewf</span>
-
-			<span class="company-audit-via">
-				審核人：<a href="staff/wu">Wu</a>
-			</span>
-
-		</div>
-<!-- <i class="fa fa-times"></i> -->
-<!-- <i class="fa fa-check"></i> -->
-{"staff_no":"wu","censored":1,"msg":"erveververve","time":"2014-05-12 09:35:59.260"},
-		*/
-		
+		   
 		var audit_history_container = $('#company-audit-history');
 		if(audit_array.length>0) audit_history_container.html('');
 		for(var i=0;i<audit_array.length;i++){
@@ -167,12 +124,12 @@ form{
 
     //從後端得到公司地點
     for(var i=0;i<company_zone_array.length;i++)
-    $("#company_zone").append($("<option>").attr("value", company_zone_array_id[i]).text(company_zone_array[i]));
+    $("#zone_name").append($("<option>").attr("value", company_zone_array_id[i]).text(company_zone_array[i]));
 
     //js_company_detail.php取得公司類型與位置
     <? echo_company_type_and_zone($_SESSION['username']); ?>
     $("#company_type").val(company_type);
-	$("#company_zone").val(company_zone);
+	$("#zone_name").val(company_zone);
 	
 </script>
 
@@ -189,9 +146,29 @@ form{
 <div class="workedit-content" id='workedit-content'>
 	
 	<div id='workedit-content-edit' class="" tabtoggle='workedit2'>
-		<form method="post" action="updata.php" id="detail">
-        <table></table>
-		</form>
+	
+	<form id="detail" name="form" method="post" action="updata.php">
+	<!--用table來對齊表格-->
+	有*字號為必填項目
+        <table>                                                        
+        <tr><td class='td1'>中文名稱*：</td>    <td class='td2'><input type="text" name="ch_name"/></td></tr>
+        <tr><td class='td1'>英文名稱：</td>     <td class='td2'><input type="text" name="en_name"/></td></tr>
+        <tr><td class='td1'>公司電話*：</td>    <td class='td2'><input type="text" name="phone"/></td></tr>
+        <tr><td class='td1'>傳真：</td>         <td class='td2'><input type="text" name="fax"/></td></tr>
+        <tr><td class='td1'>Email*：</td>       <td class='td2'><input type="text" name="email"/></td></tr>
+        <tr><td class='td1'>統一編號*：</td>    <td class='td2'><input type="text" name="uni_num"/></td></tr>
+        <tr><td class='td1'>負責人*：</td>      <td class='td2'><input type="text" name="boss_name" /></td></tr>
+        <tr><td class='td1'>行業類型 :</td>     <td class='td2'><select name="type" id="company_type"></select></td></tr>
+        <tr><td class='td1'>地點：</td>         <td class='td2'><select name="zone_name" id="zone_name"></select></td></tr>
+        <tr><td class='td1'>公司地址*：</td>    <td class='td2'><input type="text" name="address"/></td></tr>
+        <tr><td class='td1'>員工人數*：</td>    <td class='td2'><input type="text" name="staff_num"/></td></tr>
+        <tr><td class='td1'>資本額：</td>       <td class='td2'><input type="text" name="budget"/></td></tr>
+        <tr><td class='td1'>網址：</td>         <td class='td2'><input type="text" name="url" class="url"/></td></tr>
+        <tr><td class='td1'>簡介：</td>         <td class='td2'><textarea name="introduction" cols="45" rows="5"></textarea></td></tr>
+        </table>
+
+        <input type="submit" name="button" value="修改" />　　
+    </form>
 	</div>
 
 
@@ -213,7 +190,43 @@ form{
 
 </div>
 
+<script type="text/javascript">
+//欄位限制
+$(document).ready(function() { 
 
+        $("#detail").validate({ 
+            rules: { 
+                ch_name: { required:true,maxlength:20 },
+                en_name: { maxlength:20 },
+                phone:   { required:true,maxlength:12 },
+                fax:     { maxlength:12 },
+                email:   { required:true,email:true },
+                uni_num: { required:true,rangelength:[8,8],digits:true },
+                boss_name:    { required:true,maxlength:12 },
+                zone_name:    { required:true },
+                address:      { required:true,maxlength:40 },
+                staff_num:    { required:true,digits:true },
+                budget:       { digits:true },
+                url:          { url:true },
+                introduction: { maxlength:80 }
+            }
+        }); 
+
+        jQuery.extend(jQuery.validator.messages, {
+            required: "此為必填項目",
+            email: "請輸入正確的電子信箱",
+            url: "請輸入正確的網址",
+            digits: "請輸入數字",
+            equalTo: "密碼不正確",
+            maxlength: jQuery.validator.format("不得超過{0}個字"),
+            rangelength: jQuery.validator.format("不符合格式"),
+        });
+
+      
+});
+
+
+</script>
 
 
 </body>

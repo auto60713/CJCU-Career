@@ -27,7 +27,7 @@ function school_login($conn,$userid,$pw){
 
     //此登入包含 學生,校友,老師 三種身分 均稱作師生登入
 
-    $sql = "select * from cjcu_user where user_no=?";
+    $sql = "select * from career_student_data where sd_stud_no=?";
     $params  = array($userid);
     $options = array("Scrollable" => SQLSRV_CURSOR_KEYSET);
 
@@ -37,10 +37,10 @@ function school_login($conn,$userid,$pw){
     $row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC);
     
         // 資料表查無帳號 , 沒有輸入
-        if($userid != null && $pw != null){
+        if(count($row) != 0 && $userid != null && $pw != null){
 
-            $_SESSION['username'] = $userid;
-            $_SESSION['level']  = 3;
+            $_SESSION['username'] = $row[sd_stud_no];
+            $_SESSION['level'] = 3;
 
             login_echo(1);
         }

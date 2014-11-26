@@ -45,7 +45,7 @@ else{
     }
     else{
         //新增通知系統
-        $sql = "INSERT INTO cjcu_notify (user_no,user_level,isnews) VALUES (?, ?, ?)";
+        $sql = "INSERT INTO notify (user_no,user_level,isnews) VALUES (?, ?, ?)";
         $params = array($id, 1 , 0);
         $stmt = sqlsrv_query( $conn, $sql, $params);
         if( $stmt === false ) {
