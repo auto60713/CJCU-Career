@@ -37,10 +37,10 @@ function school_login($conn,$userid,$pw){
     $row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC);
     
         // 資料表查無帳號 , 沒有輸入
-        if(count($row) != 0 && $userid != null && $pw != null){
+        if($userid != null && $pw != null){
 
-            $_SESSION['username'] = $row[user_no];
-            $_SESSION['level']  = $row[role];
+            $_SESSION['username'] = $userid;
+            $_SESSION['level']  = 3;
 
             login_echo(1);
         }

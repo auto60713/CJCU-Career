@@ -22,6 +22,14 @@
                         $('#view-header').html(data);
                     }
 		});
+
+        //此頁面名稱
+        var html_name = location.pathname.split('/').slice(-1)[0];
+
+        //改變菜單的型態
+        $( "a[href='"+html_name+"']" ).parent("li").addClass( "this_html" );
+        $( "a[href='"+html_name+"']" ).attr("href","#");
+
 	})
 	</script>
     
@@ -37,13 +45,13 @@
 <!-- 菜單 -->
 <div id="menu">
     <ul class="div-align">
-        <li><a href="#">首頁</a></li>
-        <li><a href="#">焦點新聞</a></li>
-        <li><a href="#">工作列表</a></li>
-        <li><a href="#">校內新聞</a></li>
-        <li><a href="#">職場高手</a></li>
-        <li><a href="#">職場動態</a></li>
-        <li><a href="#">職場萬花筒</a></li>
+        <li><a href="index.php">首頁</a></li>
+        <li><a href="inner_2.php">焦點新聞</a></li>
+        <li><a href="inner_3.php">工作列表</a></li>
+        <li><a href="inner_4.php">校內新聞</a></li>
+        <li><a href="inner_5.php">職場高手</a></li>
+        <li><a href="inner_6.php">職場動態</a></li>
+        <li><a href="inner_7.php">職場萬花筒</a></li>
     </ul>
 
 </div>

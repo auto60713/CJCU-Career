@@ -60,6 +60,9 @@
 	font-size: 20px;
 	color: #F0F0F0;
 }
+#menu ul .this_html,#menu ul .this_html:hover{
+	background-color: #4C0E20;
+}
 
 
 /* 更多 */
@@ -117,21 +120,22 @@
 
 
 #inner4_area_1 #area_title{ color: #AECC46; }
-#inner4_area_1{  
+#inner4_area_1,#inner3_area_1{  
     background-image:url(../img/inner4_area01.jpg);
     filter: progid:DXImageTransform.Microsoft.AlphaImageLoader( src='img/inner4_area01.jpg' , sizingMethod='scale');
 	width: 60%;  height: 1100px;
 	padding-top: 30px;
 	margin-top: 20px;
 }
-#inner4_area_2 #area_title{ color: #A296C3; }
-#inner4_area_2{  
+#inner4_area_2 #area_title,#inner3_area_2 #area_title{ color: #A296C3; }
+#inner4_area_2,#inner3_area_2{  
     background-image:url(../img/inner4_area02.jpg);
     filter: progid:DXImageTransform.Microsoft.AlphaImageLoader( src='img/inner4_area02.jpg' , sizingMethod='scale');
 	width: 28%;  height: 700px;
 	padding-top: 10px;
 	margin-top: 30px;
 }
+
 
 /* =======================焦點新聞====================== */
 
@@ -158,33 +162,25 @@
 }
 /* =======================工作列表====================== */
 
-.search-bar{
-	text-align: center;
-	padding-top: 10px;
-	padding-bottom: 10px;
-}
-.search-bar #normal-search{
-	width: 400px;
-	height: 25px;
-	font-size: 20px;
-}
-.search-bar #search{
-    width: 100px;
-	height: 30px;
-}
-#high_search_btn{
-    font-size: 16px;
-}
-
-
-.high_search-bar{
-	margin-left: 135px;
-    display: none;
-}
 .search-log{
 	margin: 10px;
 	color: #408080;
 	font-size: 13.5px;
+}
+
+
+
+.high_search-bar{
+	margin-top: 10%;
+	margin-left: 20%;
+}
+.high_search-bar #normal-search{
+	width: 60%;
+	margin-bottom: 10px;
+}
+.high_search-bar #search{
+    margin-top: 20px;
+    width: 100px;
 }
 
 

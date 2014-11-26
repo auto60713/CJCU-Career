@@ -11,6 +11,7 @@ function echo_username($user,$mod){
      if ($mod == "com")  $sql = "SELECT ch_name  username FROM company WHERE id = ?";
 else if ($mod == "dep")  $sql = "SELECT ch_name username FROM department WHERE no = ?";
 else if ($mod == "user") $sql = "SELECT user_name username FROM cjcu_user WHERE user_no = ?";
+else if ($mod == "stu") $sql = "SELECT sd_stud_name username FROM cjcu_student WHERE sd_stud_no = ?";
 
         $stmt = sqlsrv_query( $conn, $sql ,array($user));
 
@@ -45,7 +46,7 @@ function echo_data($user,$lev){
 			echo '<span class="username"><a href="department-'.$user.'">'.$GLOBALS['header_name'].'</a></span>';
 		}
 		else if( $lev == $level_student){
-            echo_username($user,'user');
+            echo_username($user,'stu');
             echo '<span id="header-notice"><a href="student_manage.php#student-notice">通知</a></span>';
             echo '<span><a href="student_manage.php">管理</a></span>';
 			echo '<span class="username"><a href="student-'.$user.'">'.$GLOBALS['header_name'].'</a></span>';

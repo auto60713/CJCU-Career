@@ -22,8 +22,6 @@ function isCompanyWork($conn,$companyid,$workid){
 <html>
 <head>
 	<meta charset="UTF-8">
-	<link rel="stylesheet" type="text/css" href="css/work_detail_edit.css?v=3">
-	
 </head>
 <body>
 	

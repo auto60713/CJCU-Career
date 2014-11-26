@@ -3,13 +3,13 @@
 /* 工作列表轉成JS Array */
 
 //首頁顯示的工作
-function echo_work_list_array(){
+function echo_work_list_array($work_length){
 
 include("sqlsrv_connect.php");
 
 $para = array();
 
-$sql = "select TOP 3 w.company_id cid, w.id wid,w.name wname,z.name zname,w.is_outside isout,p.name propname,[recruitment _no] rno,w.date date
+$sql = "select TOP ".$work_length." w.company_id cid, w.id wid,w.name wname,z.name zname,w.is_outside isout,p.name propname,[recruitment _no] rno,w.date date
  from work w,zone z,work_prop p
  where w.zone_id = z.id and work_prop_id = p.id and w.[check] = 1";
 //check=1 只秀出通過審核的工作

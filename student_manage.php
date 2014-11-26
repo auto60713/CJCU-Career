@@ -25,7 +25,6 @@ if(!isset($_SESSION['username']) || $_SESSION['level'] != 3) { header("Location:
 		  	switch(loc) {
 			case 'student-info':doajax(0);break;
 			case 'student-applywork':doajax(1);break;
-			//case 'student-note':doajax(2);break;
 			case 'student-notice':doajax(2);break;
 			default:doajax(0);
 			}
@@ -33,7 +32,6 @@ if(!isset($_SESSION['username']) || $_SESSION['level'] != 3) { header("Location:
 		});
 
 		$(window).hashchange();
-
 
 
 		function doajax(idx){
@@ -73,6 +71,14 @@ if(!isset($_SESSION['username']) || $_SESSION['level'] != 3) { header("Location:
 		}
 
 
+		
+		<?	//load data
+		    include_once("js_detail.php"); echo_student_profile($_SESSION['username']); 
+		?>
+
+        $("#profile-img").attr("src",'http://esrdoc.cjcu.edu.tw/esr_photo/'+student_profile_array['sd_syear'].trim()+'/'+student_profile_array['sd_no'].trim()+'.jpg');
+        $(".profile-box h2").text(student_profile_array['sd_no']);
+
 	});
 	</script>
 </head>
@@ -87,8 +93,8 @@ if(!isset($_SESSION['username']) || $_SESSION['level'] != 3) { header("Location:
 	<div id="" class="left-box" >
 
 		<div class="profile-box">
-			<img src="<? echo 'img_user/'.$_SESSION['username'].'.jpg' ?>" class="profile-img" id="profile-img"><br>
-			<h2><? echo $_SESSION['username'] ?></h2>
+			<img src="" id="profile-img" class="profile-img-stu"><br>
+			<h2></h2>
 		</div>
 
 		<a href="#student-info"><div class="list">個人資訊</div></a><hr>

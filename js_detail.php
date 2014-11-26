@@ -10,8 +10,8 @@
 function echo_student_profile($stu_no){
 include_once("sqlsrv_connect.php");
 
-	$sql = "select user_no number,user_name name,dep_name depname "
-		  ."from cjcu_user where user_no=?";
+	$sql = "select sd_stud_no sd_no,sd_stud_name sd_name,sd_birthday,es_system_name es_name,dm_dep_short_name dm_name,sd_grade_now sd_grade,sd_class_no sd_class,sd_entrance_syear sd_syear,sd_contact_addr sd_addr,sd_cell_phone sd_phone "
+		  ."from cjcu_student where sd_stud_no=?";
 	
 	$stmt = sqlsrv_query($conn, $sql, array($stu_no));
 	if($stmt) $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC); 
@@ -160,7 +160,7 @@ if($pub == 1){
 }
 else if(($pub == 2)){
 
-    $sql = "select no id,ch_name name,phone,boss_name boss,email FROM department WHERE no= ?";
+    $sql = "select no id,ch_name name,phone,name boss,email FROM department WHERE no= ?";
 }
 
 	$stmt = sqlsrv_query($conn, $sql, array($id));

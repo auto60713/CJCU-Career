@@ -22,10 +22,12 @@
                     }
 		});
 
-		//進階搜尋
-		$('#high_search_btn').on('click', function(event) {
-		
-		});
+        //此頁面名稱
+        var html_name = location.pathname.split('/').slice(-1)[0];
+
+        //改變菜單的型態
+        $( "a[href='"+html_name+"']" ).parent("li").addClass( "this_html" );
+        $( "a[href='"+html_name+"']" ).attr("href","#");
 
 	})
 	</script>
@@ -40,13 +42,13 @@
 <!-- 菜單 -->
 <div id="menu">
     <ul class="div-align">
-        <li><a href="#">首頁</a></li>
-        <li><a href="#">焦點新聞</a></li>
-        <li><a href="#">工作列表</a></li>
-        <li><a href="#">校內新聞</a></li>
-        <li><a href="#">職場高手</a></li>
-        <li><a href="#">職場動態</a></li>
-        <li><a href="#">職場萬花筒</a></li>
+        <li><a href="index.php">首頁</a></li>
+        <li><a href="inner_2.php">焦點新聞</a></li>
+        <li><a href="inner_3.php">工作列表</a></li>
+        <li><a href="inner_4.php">校內新聞</a></li>
+        <li><a href="inner_5.php">職場高手</a></li>
+        <li><a href="inner_6.php">職場動態</a></li>
+        <li><a href="inner_7.php">職場萬花筒</a></li>
     </ul>
 
 </div>
@@ -71,56 +73,18 @@
 <!-- 工作列表 -->
 <div id="area2_1" class="area_box"><h1 id="area_title">工作列表</h1>
 
-	<!-- 搜尋
-	<div class="search-bar">
-			<input type="text" id="normal-search">
-			<input type="button" id="search" value="搜尋">
-			<a href="#" id="high_search_btn"><i class="fa fa-cog"></i>進階搜尋</a>
-	</div>
-    -->
-    <!-- 進階搜尋 -->
-	<div class="high_search-bar">
-	
-	<!-- 條件1 -->
-	<div class="search-detail-sub">
-		 <input type="checkbox" id="search_prop" value="prop">
-	     <label for="search_prop">工作性質 : </label><select name="work_prop" id="work_prop"></select>
-	</div>
-	
-    <!-- 條件2 -->
-	<div class="search-detail-sub">
-	    <input type="checkbox" id="search_io" value="io">
-	     <label for="search_io">校內外工作：</label>
-	     <select name="work_io" id="work_io" class="search-detail-input">
-	          <option value="0">校內</option>
-	          <option value="1">校外</option>
-	     </select> 
-	</div>
-
-    <!-- 條件3 -->
-	<div class="search-detail-sub">
-	    <input type="checkbox" id="search_zone" value="zone" >
-	    <label for="search_zone">工作地點 : </label>
-	    <select name="zone" id="zone" class="search-detail-input"></select> 
-		<select name="zone_name" id="zone_name" class="search-detail-input"></select>
-	</div>
-
-    </div>
-
-
-
     <!-- 快速搜尋 -->
 	<div class="rush-search">
-		<a href="home.php" class="<? if(count($_GET)==0) echo "rush-searching"; ?>">最新工作</a>
-		<a href="home.php?mode=search&io=1" class="<? if($_GET['io']=='1') echo "rush-searching"; ?>">校內工作</a>
-		<a href="home.php?mode=search&prop=2" class="<? if($_GET['prop']=='2') echo "rush-searching"; ?>">正職</a>
-		<a href="home.php?mode=search&prop=1" class="<? if($_GET['prop']=='1') echo "rush-searching"; ?>">工讀</a>	
-		<a href="home.php?mode=search&prop=3" class="<? if($_GET['prop']=='3') echo "rush-searching"; ?>">實習</a>		
+		<a href="inner_3.php" class="<? if(count($_GET)==0) echo "rush-searching"; ?>">最新工作</a>
+		<a href="inner_3.php?mode=search&io=1" class="<? if($_GET['io']=='1') echo "rush-searching"; ?>">校內工作</a>
+		<a href="inner_3.php?mode=search&prop=2" class="<? if($_GET['prop']=='2') echo "rush-searching"; ?>">正職</a>
+		<a href="inner_3.php?mode=search&prop=1" class="<? if($_GET['prop']=='1') echo "rush-searching"; ?>">工讀</a>	
+		<a href="inner_3.php?mode=search&prop=3" class="<? if($_GET['prop']=='3') echo "rush-searching"; ?>">實習</a>		
 	</div>
 
 	<!-- 列表 -->
 	<div id="home-work-list-box"></div>
-	<a class="more-link" href="">更多..</a>
+	<a class="more-link" href="inner_3.php">更多..</a>
 </div>
 
 
@@ -150,7 +114,7 @@
 
 <!-- 職場高手 -->
 <div id="area3_1" class="area_box"><h1 id="area_title">職場高手</h1>
-	<a class="more-link" href="">更多..</a>
+	<a class="more-link" href="inner_5.php">更多..</a>
 
 	<img class="area3-img" src="">
 	<p class="master-title">享受奔馳 日試駛磁浮列車</p>
@@ -160,7 +124,7 @@
 
 <!-- 職場動態 -->
 <div id="area3_2" class="area_box"><h1 id="area_title">職場動態</h1>
-	<a class="more-link" href="">更多..</a>
+	<a class="more-link" href="inner_6.php">更多..</a>
 
 	<img class="area3-img" src="">
 	<div class="workplace">
@@ -173,7 +137,7 @@
 
 <!-- 職場萬花筒 -->
 <div id="area3_3" class="area_box"><h1 id="area_title">職場萬花筒</h1>
-	<a class="more-link" href="">更多..</a>
+	<a class="more-link" href="inner_7.php">更多..</a>
 
 	<img class="area3-img" src="">
 	<div class="workplace">
@@ -206,10 +170,7 @@
 <script>
     <? 
     //後端傳來的工作資料
-    include_once('js_work_list.php'); echo_work_list_array(); 
-
-	//後端傳來"進階搜尋項目"的資料
-	include_once("js_search_work_data.php"); echo_work_sub_data();
+    include_once('js_work_list.php'); echo_work_list_array(3); 
     ?>
 
 	var box = $('#home-work-list-box');	    
@@ -250,16 +211,5 @@
     box.prepend(search_log);
     }
 
-	// 生成工作類型
-		for(var i=0;i<work_type.length;i++)
-		$("#work_type").append($("<option></option>").attr("value", work_type_id[i]).text(work_type[i]));
-
-
 </script>
-
-
-
-
-<!--搜尋功能的API-->
-<script src="js/home_search_lib.js"></script>
 </html>
