@@ -135,8 +135,8 @@ form[id='detail'] input[type='text']{
 
 
 .upload-img-max{
-	width: 200px;
-	height: 200px;
+	max-width: 200px;
+	max-height: 200px;
 	border: solid 1px #CCC;
 	margin: 5px;
 }

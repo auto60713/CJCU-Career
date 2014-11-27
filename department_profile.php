@@ -40,13 +40,15 @@
 		$('#introduction').text(department_profile_array['introduction']);
 
 		var listbox = $('#profile-worklist');
+		if(pass_work_array.length==0) listbox.append("目前沒有應徵");
+		else{
 		for(var i=0;i<pass_work_array.length;i++){
 			var container = $('<p>').addClass('profile-span-box'),
 			tita = $('<a>').attr('href', 'work-'+pass_work_array[i]['wid']).addClass('profile-span-left').text(pass_work_array[i]['wname']),
 			titloc = $('<span>').addClass('profile-span-right').text((pass_work_array[i]['isout']=='0'?'校內 ':'校外 ')+ pass_work_array[i]['propname']);
 			listbox.append(container.append(tita).append(titloc));
 		}
-
+        }
 		<?
 			if($_GET['companyid']==$_SESSION['userid']){
 				echo "isCompany();";
@@ -111,7 +113,7 @@
 </div>
 
 <div class="profile-boxinner" id="profile-worklist">
-	<h2>公司職缺</h2>
+	<h2>工作機會</h2>
 </div>
 </div>
 

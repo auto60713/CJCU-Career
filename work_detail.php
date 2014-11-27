@@ -119,13 +119,15 @@ if(isset($_SESSION['username'])) $user_id = $_SESSION['username'];
 		}
 
 		var listbox = $('#other_work');
+		if(pass_work_array.length==0) listbox.append("公司目前沒有職缺");
+		else{
 		for(var i=0;i<pass_work_array.length;i++){
 			var container = $('<p>').addClass('profile-span-box'),
 			tita = $('<a>').attr('href', 'work-'+pass_work_array[i]['wid']).addClass('profile-span-left').text(pass_work_array[i]['wname']),
 			titloc = $('<span>').addClass('profile-span-right').text((pass_work_array[i]['isout']=='0'?'校外 ':'校內 ')+ pass_work_array[i]['propname']);
 			listbox.append(container.append(tita).append(titloc));
 		}
-
+        }
 
 if(work_detail_array['pub'] ==1){
     var pub_type_name = "關於公司",pub_type = "company";

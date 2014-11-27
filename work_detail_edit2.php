@@ -41,7 +41,6 @@ function isCompanyWork($conn,$companyid,$workid){
 	<div id='workedit-content-apply' class="workedit-content-hide" tabtoggle='workedit2'></div>
 	<!-- 該工作應徵結束 -->
 	<div id='workedit-content-start' class="workedit-content-hide" tabtoggle='workedit2'>
-
 	</div>
 	<!-- 該工作的審核狀態 -->
 	<div id='workedit-content-audit' class="workedit-content-hide" tabtoggle='workedit2'>
@@ -149,7 +148,7 @@ function isCompanyWork($conn,$companyid,$workid){
 				icon = $('<i>').addClass(icontxt2),
 				censored = $('<span>').addClass('company-audit-censored').append(icon).append(statustxt2),
 				msg = $('<span>').addClass('company-audit-msg').text(audit_array[i].msg),
-				vialink = $('<a>').attr('target','_blank').attr('href', 'staff/'+audit_array[i].staff_no).text(audit_array[i].staff_no),
+				vialink = $('<a>').attr('target','_blank').attr('href', 'department-'+audit_array[i].staff_no).text(audit_array[i].staff_no),
 				via = $('<span>').addClass('company-audit-via').append('審核者：').append(vialink),
 				all = $('<div>').addClass('company-audit-list').append(time).append(censored)
 				.append(msg).append(via);
@@ -160,10 +159,7 @@ function isCompanyWork($conn,$companyid,$workid){
 		
 			var icon = icon = $('<i>').addClass(icontxt),
 			again_txt = $('<span>').addClass('company-audit-again-txt').text('已要求再次審核！'),
-			again_btn = $('<input>').addClass('company-audit-again').attr({
-				value: '請求再次審核',
-				type: 'button'
-			}).on('click', function(event) {
+			again_btn = $('<button >').addClass('company-audit-again').text("要求再審").on('click', function(event) {
 				
 				$.ajax({
 					url: 'ajax_audit_again.php',
@@ -215,8 +211,7 @@ function isCompanyWork($conn,$companyid,$workid){
 
 
         //開始實習
-        var work_start = $('a#divbtn-start');
-		work_start.on( "click", function() {
+		$(document).on( "click",'a#divbtn-start', function() {
 		    if (confirm ("要結束應徵開始實習嗎?")){
 
 		    	$.ajax({
@@ -231,8 +226,7 @@ function isCompanyWork($conn,$companyid,$workid){
 		    }
 		});
 		//完成實習(結束應徵)
-        var work_end = $('a#divbtn-end');
-		work_end.on( "click", function() {
+		$(document).on( "click",'a#divbtn-end', function() {
 		var btn_text = $('a#divbtn-end').text();
 
 		    if (confirm ("確定要"+btn_text+"?")){

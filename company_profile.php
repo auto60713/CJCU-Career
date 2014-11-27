@@ -37,7 +37,7 @@
 		$('#stuffnum').text(company_detail_array['staff_num']);
 		$('#phone').text(company_detail_array['phone']);
 		$('#email').text(company_detail_array['email']);
-		$('#fax').text(company_detail_array['uni_num']);
+		$('#fax').text(company_detail_array['fax']);
 		$('#address').text(company_detail_array['zonename']+" "+company_detail_array['address']);
 		$('#cptype').text(company_detail_array['typename']);
 		$('#cpurl').append($('<a>').attr('href',company_detail_array['url']).text(company_detail_array['url']));

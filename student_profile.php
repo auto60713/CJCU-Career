@@ -72,7 +72,7 @@
 
 	<br><hr><br>
 	<h3>其他資訊</h3>
-	<p><span class="profile-span-title">專長補充</span><span id=""></span></p>
+	<p><span class="profile-span-title">專長補充</span><span id="">無</span></p>
 
 </div>
 

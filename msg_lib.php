@@ -35,7 +35,7 @@ function send_msg($arr){
     $msg = $arr['msg'];
     $icon = $arr['icon'];
 
-    $sql1 = "UPDATE cjcu_notify SET isnews = 1 ,time = GETDATE() WHERE user_no=? and user_level = ?";
+    $sql1 = "UPDATE notify SET isnews = 1 ,time = GETDATE() WHERE user_no=? and user_level = ?";
     $sql2 = "insert into msg(send,send_level,recv,recv_level,mcontent,icon) values (?,?,?,?,?,?)";
 
     $params1 = array($recv_id,$recv_level);

@@ -63,11 +63,17 @@
 	margin-top: 20px;
 	color: #585858;
 }
+.work-img-match{
+	font-size: 40px;
+	margin:10px;
+	margin-top: 20px;
+	color: #585858;
+}
 .work-img-apply{
 	margin-top: 5px;
 	margin-left: 30px;
 	height: 60px;
-	width: 60px;
+	width: 50px;
 }
 .work-tit a{
 	text-decoration: none;
@@ -323,6 +329,13 @@
 	height: 30px;
 	width: 80%;
 }
+.staff-audit-btn2{
+	display: inline-block;
+	vertical-align: middle;
+	margin-top: 10px;
+	height: 30px;
+	width: 80%;
+}
 
 .staff-audit-btn:hover{
 	cursor: pointer;
@@ -361,8 +374,8 @@
 	margin-bottom: 30px;
 }
 .company-audit-censored{
-	width:100px;
-	color: #333;
+	width:120px;
+	color: #636363;
 }
 .company-audit-msg{
 	color: #333;
@@ -374,21 +387,20 @@
 .company-audit-again{
 	display: inline-block;
 	float: right;
+	margin: 7px;
 	width: 120px;
 	height: 33px;
-	border: none;
-	background-color: #CCC;
 	font-size: 16px;
 
 }
 .company-audit-again:hover{
 	cursor: pointer;
-	background-color: #EEE;
 
 }
 
 .company-audit-again-txt{
 	display: inline-block;
+	margin-top: 12px;
 	float: right;
 	font-size: 16px;
 }

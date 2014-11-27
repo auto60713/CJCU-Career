@@ -53,19 +53,20 @@ if($_SESSION['level']!=$level_staff){echo "No permission"; exit; }
 				icontype = 'fa fa-building-o';
 				lintext = 'company';
 				titname = data.ch_name;
+				overview = $('<p>').addClass('staff-audit-overview').text("請務必核對帳號");
 			}
 			else{
 				icontype = 'fa fa-book';
 				lintext = 'work';
 				titname = data.wname;
+			var	href = $('<a>').attr("href", "/cjcuweb/company-"+data.comid).attr("target", "_blank"),
+				eyes = $('<i>').addClass('fa fa-eye');
+				overview = href.addClass('staff-audit-overview').append(eyes,"發布自 "+data.comname);
 			}
 			var 
 			icon = $('<i>').addClass(icontype),
-			wlink= $('<a>').attr({href: lintext+'/'+data.id,target: '_blank'}).text(" "+titname),
+			wlink= $('<a>').attr({href: lintext+'-'+data.id,target: '_blank'}).text(" "+titname),
 			h1 = $('<h1>').append(icon).append(wlink),
-			eyes = $('<i>').addClass('fa fa-eye'),
-			href = $('<a>').attr("href", "/cjcuweb/company/"+data.comid).attr("target", "_blank"),
-			overview = href.addClass('staff-audit-overview').append(eyes,"發布自 "+data.comname),
 			left = $('<div>').addClass('staff-audit-list-left').append(h1).append(overview),
 			btn = $('<button>').attr({'type':'button','t': type, 'i':i , ch:ch}).addClass('staff-audit-btn').append(' 審核'),
 			right= $('<div>').addClass('staff-audit-list-right').append(btn),

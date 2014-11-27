@@ -52,7 +52,7 @@ label.error{
 				icon = $('<i>').addClass(icontxt),
 				censored = $('<span>').addClass('company-audit-censored').append(icon).append(statustxt),
 				msg = $('<span>').addClass('company-audit-msg').text(audit_array[i].msg),
-				vialink = $('<a>').attr('target','_blank').attr('href', 'staff/'+audit_array[i].staff_no).text(audit_array[i].staff_no),
+				vialink = $('<a>').attr('target','_blank').attr('href', 'department-'+audit_array[i].staff_no).text(audit_array[i].staff_no),
 				via = $('<span>').addClass('company-audit-via').append('審核者：').append(vialink),
 				all = $('<div>').addClass('company-audit-list').append(time).append(censored)
 				.append(msg).append(via);

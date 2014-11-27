@@ -13,7 +13,7 @@ $userlevel = $_SESSION['level'];
 	switch ($userlevel) {
 
 
-        case 5: //系所
+        case 5:case 1: //系所
 	        $params = array($_POST['ch_name'],$_POST['en_name'],$_POST['phone'],$_POST['fax'],$_POST['name'],$_POST['email']);
 	        array_push($params,$_POST['address'],$_POST['introduction'],$_POST['url']);
 	        department_updata($userid,$params);
@@ -26,10 +26,7 @@ $userlevel = $_SESSION['level'];
 	        company_updata($userid,$params);
 	    break;
 
-	    case 1: //管理員
-	        $params  = array($_POST['st_name']);
-	        staff_updata($userid,$params);
-	    break;
+	  
 
 
 	    default: 
@@ -48,8 +45,8 @@ function department_updata($userid,$params)
         
         if( sqlsrv_query($conn, $sql, $params) )
         {
-                echo '修改成功!';
-                echo '<meta http-equiv=REFRESH CONTENT=2;url="department_manage.php#department-info">';
+        	if($_SESSION['level']==5) echo '修改成功!<meta http-equiv=REFRESH CONTENT=1;url="department_manage.php#department-info">';
+            else if($_SESSION['level']==1) echo '修改成功!<meta http-equiv=REFRESH CONTENT=1;url="staff_manage.php#staff-info">';
         }
         else
         {
@@ -69,7 +66,7 @@ function company_updata($userid,$params)
         if( sqlsrv_query($conn, $sql, $params) )
         {
                 echo '修改成功!';
-                echo '<meta http-equiv=REFRESH CONTENT=2;url="company_manage.php#company-info">';
+                echo '<meta http-equiv=REFRESH CONTENT=1;url="company_manage.php#company-info">';
         }
         else
         {
@@ -79,26 +76,6 @@ function company_updata($userid,$params)
       
 	}
 
-
-//管理員的資料修改
-function staff_updata($userid,$params)
-	{
-		include_once("sqlsrv_connect.php");
-		
-		$sql   = "update cjcu_user set user_name=(?) where user_no ='".$userid."'"; 
-
-        if( sqlsrv_query($conn, $sql, $params) )
-        {
-                echo '修改成功!';
-                echo '<meta http-equiv=REFRESH CONTENT=2;url="staff_manage.php#staff-info">';
-        }
-        else
-        {
-                echo '修改失敗!';
-                die( print_r( sqlsrv_errors(), true));
-        }
-      
-	}
 
 
 ?>

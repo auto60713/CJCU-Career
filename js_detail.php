@@ -77,7 +77,7 @@ include_once("sqlsrv_connect.php");
 
 }
 
-/* 公司 */
+/* 公司+pofile */
 function echo_company_detail($com_id){
 
 include("sqlsrv_connect.php");

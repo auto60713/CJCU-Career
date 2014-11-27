@@ -31,13 +31,13 @@ else{
                     success: function (data) {
 						var href ="";
 						work_list_array[i]['pub']==1?(href='company'):(href='department');
-						companyherf = $('<a>').attr('href', href+'/'+work_list_array[i]['comid']).text(data);
+						companyherf = $('<a>').attr('href', href+'-'+work_list_array[i]['comid']).text(data);
 					}
 					});
 
      	  
  		 		var icon = $('<i>').addClass('fa fa-book fa-3x').addClass('work-img'),
-		    		tita = $('<a>').attr('href', 'work/'+work_list_array[i]['wid']).text(work_list_array[i]['wname']),
+		    		tita = $('<a>').attr('href', 'work-'+work_list_array[i]['wid']).text(work_list_array[i]['wname']),
 		    		tit = $('<h1>').addClass('work-tit').append(tita),
 		    		company = $('<div>').addClass('manage-company-herf').text("發布自 ").append(companyherf),
 		    		hint = $('<p>').addClass('work-hint').append((work_list_array[i]['zone']) +'  '+ work_list_array[i]['prop']),

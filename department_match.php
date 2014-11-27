@@ -15,7 +15,7 @@ else{echo "No permission!"; exit;
 	
 <div class="workedit-tabbox">
 	<div id="page-match-list" class="sub-tab tab-active" tabtoggle='workedit1'><i class="fa fa-user tab-img"></i> 實習列表</div>
-	<div id="page-match" class="sub-tab" tabtoggle='workedit1'><i class="fa fa-pencil tab-img"></i> 媒合老師</div>
+	<div id="page-match" class="sub-tab" tabtoggle='workedit1'><i class="fa fa-pencil tab-img"></i> 負責老師</div>
 </div>
 
 <div class="workedit-content" id='workedit-content'>
@@ -71,11 +71,11 @@ else{echo "No permission!"; exit;
 //載入該系上的需要媒合的實習
         var body = $('#workedit-content-match');
 
-        if(line_up_array.length == 0){body.html("目前沒有實習需要媒合");}
+        if(line_up_array.length == 0){body.html("沒有實習需要負責老師");}
         else{
 		    for(var i=0;i<line_up_array.length;i++){
 
-		    	var img = $('<i>').addClass('fa fa-book').addClass('work-img'),
+		    	var img = $('<i>').addClass('fa fa-book').addClass('work-img-match'),
 		    		stu_herf = $('<a>').attr({'target':'_blank','href':'student-'+line_up_array[i]['userid']}).text(line_up_array[i]['username']),
 		    		stu = $('<h1>').addClass('work-tit').append(stu_herf),
 		    		work_herf = $('<a>').attr({'target':'_blank','href':'work-'+line_up_array[i]['wid']}).text(line_up_array[i]['wname']),
@@ -108,7 +108,7 @@ else{echo "No permission!"; exit;
             tea_no = $( "select#match-sel" ).val();
 
 		match_btn.on( "click", function() {
-		    if (confirm ('此工作將會配對 "'+tea_name+'"')){
+		    if (confirm ('此實習的負責老師決定為 "'+tea_name+'"')){
 
 		    	var line_no = $(this).attr('id'),
 		    	    item = $(this).parents('.work-list-box');

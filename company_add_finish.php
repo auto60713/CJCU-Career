@@ -59,7 +59,7 @@ else{
         $_SESSION['level'] = 4;
 
         echo '註冊成功! 登入中...';
-		echo '<meta http-equiv=REFRESH CONTENT=1;url=home.php>';
+		echo '<meta http-equiv=REFRESH CONTENT=1;url=index.php>';
         }
 	
 	}

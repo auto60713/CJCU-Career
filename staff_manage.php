@@ -129,7 +129,7 @@ if(!isset($_SESSION['username']) || $_SESSION['level'] != 1) { header("Location:
 	<div class="left-box" >
 		
 		<div class="profile-box">
-			<img src="<? echo 'img_company/'.$_SESSION['username'].'.jpg' ?>" class="profile-img" id="profile-img">
+			<img src="<? echo 'img_company/'.$_SESSION['username'].'.jpg' ?>" class="profile-img" id="profile-img"><br>
 			<h2><? echo $_SESSION['username'] ?></h2>
 		</div>
 
@@ -160,7 +160,6 @@ if(!isset($_SESSION['username']) || $_SESSION['level'] != 1) { header("Location:
 		<p class="login-hint">您可以更新一張代表系上的照片</p>
 
 		<img src="<? echo 'img_company/'.$_SESSION['username'].'.jpg' ?>" class="upload-img-max">
-		<img src="<? echo 'img_company/'.$_SESSION['username'].'.jpg' ?>" class="upload-img-min">
 		<form id="upload_form" enctype="multipart/form-data" method="post">
 		 <input type="file" name="file1" id="file1"  class="btn-submit" accept="image/*"> <p id="status"></p>
 		

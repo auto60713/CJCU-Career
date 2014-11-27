@@ -7,7 +7,9 @@ if(isset ($_SESSION['username']) && $_SESSION['level'] == $level_company|$level_
 
 	// 取得公司電話與地址
 	include_once("sqlsrv_connect.php");
-	$sql = "select address,phone from company where id=?";
+
+	if($_SESSION['level']==4) {$sql = "select address,phone from company where id=?"; $who = '公司';}
+	else if($_SESSION['level']==5) {$sql = "select address,phone from department where no=?"; $who = '系所';}
 	$params = array($_SESSION['username']);
 	$options =  array( "Scrollable" => SQLSRV_CURSOR_KEYSET );
 	$result = sqlsrv_query($conn,$sql,$params,$options);
@@ -143,7 +145,7 @@ span{color: #f00;}
 <tr>
 	<td>聯絡地址：</td>
 	<td><input type="text" name="address" id="address"/> 
-		<label><input type="checkbox" id="address_same" >同公司地址</label> 
+		<label><input type="checkbox" id="address_same" >同<? echo $who ?>地址</label> 
 		<? echo '<input type="hidden" name="hidden_address" id="hidden_address" value="'.$company_address.'"/>';?>
 	</td>
 	<td><span id="address_hint"></span></td>
@@ -152,7 +154,7 @@ span{color: #f00;}
 <tr>
 	<td>連絡電話：</td>
 	<td><input type="text" name="phone" id="phone"/> 
-		<label><input type="checkbox" id="phone_same" >同公司電話</label>
+		<label><input type="checkbox" id="phone_same" >同<? echo $who ?>電話</label>
 		<? echo '<input type="hidden" name="hidden_phone" id="hidden_phone" value="'.$company_phone.'"/>';?>
 	</td>
 	<td><span id="zone_name_hint"></span></td>

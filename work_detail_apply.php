@@ -34,20 +34,6 @@ function isCompanyWork($conn,$companyid,$workid){
 <head>
 	<meta charset="UTF-8">
     <script><? include_once('js_work_detail_apply.php'); echo_work_apply_list_array($_GET['workid']);  ?>
-    /*
-    <div class="work-list-box">
-	<div class="sub-box"><img src="" class="work-img"></div>
-	<div class="sub-box">
-		<h1 class="work-tit"><a href="#">Chou Gun Gun</a></h1>
-		**<p class="work-hint"><a href="#">下載履歷</a></p>
-		  <p class="work-hint"><a href="#"><i class="fa fa-eye"></i> Overview</a></p>
-	</div>
-	<div class="sub-box2">
-		**<input type="button" value="錄取" class="passing-btn">
-		**<input type="button" value="不錄取" class="notpassing-btn" >
-		<button class="staff-audit-btn"><i class="fa fa-cog"></i> 審核</button>
-	</div>
-	</div>*/
 
     $(function(){
     	var body = $('#company-work-list-container');
@@ -57,14 +43,13 @@ function isCompanyWork($conn,$companyid,$workid){
 
     	for(var i=0;i<work_apply_list_array.length;i++){
 
-    		var wimg = $('<img>').attr('src', 'http://akademik.unissula.ac.id/themes/sia/images/user.png').addClass('work-img-apply'),
+            var img_src='http://esrdoc.cjcu.edu.tw/esr_photo/'+work_apply_list_array[i]['sd_syear'].trim()+'/'+work_apply_list_array[i]['user_id'].trim()+'.jpg',
+    		    wimg = $('<img>').attr('src', img_src).addClass('work-img-apply'),
     			tita = $('<a>').attr({'target':'_blank','href':'student-'+work_apply_list_array[i]['user_id']}).text(work_apply_list_array[i]['name']),
-    			
-    			eyes = $('<i>').addClass('fa fa-eye'),
-    			doca = $('<a>').attr({'target':'_blank','href':'department-'+work_apply_list_array[i]['depno']}).append(eyes,work_apply_list_array[i]['depname']),
+    			doca = $('<a>').attr({'target':'_blank','href':'department-'+work_apply_list_array[i]['depno']}).append(work_apply_list_array[i]['depname']),
 
     			gear = $('<i>').addClass('fa fa-cog'),
-    			auditbtn = $('<button>').addClass('staff-audit-btn').append(gear).append(' 審核'),
+    			auditbtn = $('<button>').addClass('staff-audit-btn2').append(gear).append(' 審核'),
 
     			subbox1 = $('<div>').addClass('sub-box').append(wimg),
     			subbox2 = $('<div>').addClass('sub-box').append($('<h1>').addClass('work-tit').append(tita))
