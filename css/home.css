@@ -41,7 +41,7 @@
 #menu ul{
 	overflow: hidden;
 	list-style-type: none;
-	width: 800px;
+	width: 900px;
 	height: 50px;
 	line-height: 50px;
 }
@@ -138,6 +138,9 @@
 
 
 /* =======================焦點新聞====================== */
+#amazingslider-1{
+	
+}
 
 /* ==========================FB========================= */
 #area1_2 div{

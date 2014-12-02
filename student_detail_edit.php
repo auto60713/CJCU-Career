@@ -38,7 +38,9 @@ if(!isset($_SESSION['username']) || $_SESSION['level'] != $level_student) {
     include_once("js_detail.php"); echo_student_detail($_SESSION['username']); 
 ?>
 
-		var detail_column = "",idx = 0;
+    var column_name = ["學號","在學狀態","中文名","英文名","學制代碼","系所代碼","目前年級","班級代碼","入學年","學制名稱","學制簡稱","系所簡稱","系所英文","班級名稱","生日","家電話","手機","電子信箱","郵遞區號","地址"],
+		detail_column = "",
+		idx = 0;
 		
 		for(var key in user_detail_array){
 

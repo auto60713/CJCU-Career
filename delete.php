@@ -34,7 +34,7 @@ switch($_POST['mode']){
 
 
 
-//刪除工作(暫不開放)
+//刪除工作(假性刪除)
 function delete_work($workid,$workname,$publisher){
 
 include("sqlsrv_connect.php");
@@ -52,7 +52,7 @@ include("sqlsrv_connect.php");
         sqlsrv_query($conn, $sql, $para);
 
         //刪除
-        $sql = "DELETE FROM work WHERE id = ?";
+        $sql = "UPDATE work SET [check]=24 WHERE id =?";
         $stmt = sqlsrv_query($conn, $sql, array($workid));
 
         if($stmt) {

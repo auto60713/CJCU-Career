@@ -24,8 +24,7 @@ if(!isset($_SESSION['username']) || $_SESSION['level'] != 2) { header("Location:
 			ctu=false;
 		  	var loc = location.hash.replace( /^#/, '' );
 		  	switch(loc) {
-			case 'teacher-info':doajax(0);break;
-			case 'teacher-match':doajax(1);break;
+			case 'teacher-match':doajax(0);break;
 			default:doajax(0);
 			}
 
@@ -39,13 +38,7 @@ if(!isset($_SESSION['username']) || $_SESSION['level'] != 2) { header("Location:
 
 			switch(idx) {
 
-				case 0:
-				tpe = 'get';
-				para = {};
-				url = "teacher_detail.php";
-				break;
-		
-	        	case 1:
+	        	case 0:
 				tpe = 'get';
 				para = {};
 				url = "teacher_match.php";
@@ -84,7 +77,7 @@ if(!isset($_SESSION['username']) || $_SESSION['level'] != 2) { header("Location:
 	<div id="" class="left-box" >
 		<h2><? echo $_SESSION['username'] ?></h2><br><br><hr>
 
-		<a href="#teacher-info"><div class="list">個人資訊</div></a><hr>
+		<!--<a href="#teacher-info"><div class="list">個人資訊</div></a><hr>-->
 	    <a href="#teacher-match"><div class="list">實習列表</div></a><hr>
 	</div>
 

@@ -60,7 +60,7 @@ function echo_data($user,$lev){
 		else if( $lev == $level_teacher){
             echo_username($user,'user');
             echo '<span><a href="teacher_manage.php">管理</a></span>';
-			echo '<span class="username"><a href="teacher-'.$user.'">'.$GLOBALS['header_name'].'</a></span>';
+			echo '<span class="username"><a href="http://eportal.cjcu.edu.tw/Syllabus/Home/Eportfolio">'.$GLOBALS['header_name'].'</a></span>';
 		}
 	}	
 	else echo '<span><a href="#" id="login-btn">登入</a></span>';
@@ -114,7 +114,7 @@ function echo_data($user,$lev){
     	});
 
     	//登入ajax
-    	$( ".btn-submit" ).click(function() {
+    	$( ".btn-submit-login" ).click(function() {
     		var sel = $("select[name=sel]").val(),
     		    id  = $("input:text[name=id]").val(),
     		    pw  = $("input:password[name=pw]").val();
@@ -170,16 +170,17 @@ function echo_data($user,$lev){
 <div class="form" name="login">
 選擇身分：
 <select name ="sel" class="login-select">
-  <option value="school" selected="selected">在校師生(校友)</option>
+  <option value="school" selected="selected">學生登入</option>
   <option value="company">公司廠商</option>
   <option value="department">系所單位</option>
+  <option value="teacher">老師登入</option>
 </select><br>
 
 <span class="error_echo"></span><br>
 <i class="fa fa-user login-icon"></i><input type="text" name="id" placeholder="輸入帳號" class="login-input"><br>
 <i class="fa fa-lock login-icon"></i><input type="password" name="pw" placeholder="輸入密碼" class="login-input"></span>
 <br>
-<input type="submit" class="btn-submit" name="button" value="登入" />
+<input type="submit" class="btn-submit-login" name="button" value="登入" />
 <a href="forgotpwd.php">忘記密碼</a> 
 
 <p class="login-hint">學生請選擇學校登入，廠商未註冊請先<a href="company_add.php" class="login-signup">註冊新帳號</a>。</p>

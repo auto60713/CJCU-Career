@@ -2,7 +2,7 @@
 
 /* SQL語法裡面應該要盡量使用別名 不然輸出JSON欄位都被人猜光光*/
 
-
+if($_GET["stu_no"]) echo_student_detail($_GET["stu_no"]);
 
 /* to profile -------------------------   */
 
@@ -62,8 +62,7 @@ include("sqlsrv_connect.php");
 function echo_student_detail($user_id){
 include_once("sqlsrv_connect.php");
 
-	$column_name = array("學號","在學狀態","中文名","英文名","學制代碼","系所代碼","目前年級","班級代碼","入學年","學制名稱","學制簡稱","系所簡稱","系所英文","班級名稱","生日","家電話","手機","電子信箱","郵遞區號","地址");
-
+	
 	$sql = "select * from career_student_data where sd_stud_no=?";
 	
 	$stmt = sqlsrv_query($conn, $sql, array($user_id,$user_id));
@@ -71,9 +70,6 @@ include_once("sqlsrv_connect.php");
 	else die(print_r( sqlsrv_errors(), true));
 
     echo "var user_detail_array = ". json_encode($row) . ";\n";
-
-    echo "var column_name = ['".implode("','", $column_name)."'];\n";
-
 
 }
 

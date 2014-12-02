@@ -18,6 +18,9 @@ switch ($sel) {
     case "department":
         department_login($conn,$userid,$pw,$level_department);
     break;
+    case "teacher":
+        teacher_login($conn,$userid,$pw);
+    break;
     // 竄改資料,登入失敗
     default: login_echo(0);
 }
@@ -25,7 +28,7 @@ switch ($sel) {
 
 function school_login($conn,$userid,$pw){
 
-    //此登入包含 學生,校友,老師 三種身分 均稱作師生登入
+    //此登入包含 學生,校友
 
     $sql = "select * from career_student_data where sd_stud_no=?";
     $params  = array($userid);
@@ -41,6 +44,31 @@ function school_login($conn,$userid,$pw){
 
             $_SESSION['username'] = $row[sd_stud_no];
             $_SESSION['level'] = 3;
+
+            login_echo(1);
+        }
+        else{
+            login_echo(0);
+        }
+    }
+}
+
+function teacher_login($conn,$userid,$pw){
+
+    $sql = "select * from cjcu_user where user_no=?";
+    $params  = array($userid);
+    $options = array("Scrollable" => SQLSRV_CURSOR_KEYSET);
+
+    $result  = sqlsrv_query( $conn , $sql , $params , $options );
+    if( $result ){
+
+    $row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC);
+    
+        // 資料表查無帳號 , 沒有輸入
+        if(count($row) != 0 && $userid != null && $pw != null){
+
+            $_SESSION['username'] = $row[user_no];
+            $_SESSION['level'] = 2;
 
             login_echo(1);
         }

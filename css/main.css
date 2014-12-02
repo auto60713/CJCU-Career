@@ -25,7 +25,6 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#E1F0F6', end
 
 a{
 	text-decoration: none;   
-	color:#0559B6;
 }
 .btn{
 	cursor: pointer;
@@ -162,7 +161,7 @@ a{
 	padding-top: 10px;
 }
 
-.btn-submit{
+.btn-submit-login{
 	height: 30px;
 	width: 200px;
 	margin-bottom: 10px;

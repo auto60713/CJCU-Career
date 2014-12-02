@@ -4,7 +4,7 @@
 	<meta charset="UTF-8">
 	<title>長大職涯網</title>
 
-	<!-- 職場萬花筒 -->
+	<!-- 校內新聞 -->
 
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 	<link rel="stylesheet" type="text/css" href="css/home.css">
@@ -23,12 +23,7 @@
                     }
 		});
 
-        //此頁面名稱
-        var html_name = location.pathname.split('/').slice(-1)[0];
-
-        //改變菜單的型態
-        $( "a[href='"+html_name+"']" ).parent("li").addClass( "this_html" );
-        $( "a[href='"+html_name+"']" ).attr("href","#");
+        $("#menu").load('public_view/menu.html');
 
 	})
 	</script>
@@ -43,18 +38,7 @@
 
 
 <!-- 菜單 -->
-<div id="menu">
-    <ul class="div-align">
-        <li><a href="index.php">首頁</a></li>
-        <li><a href="inner_2.php">焦點新聞</a></li>
-        <li><a href="inner_3.php">工作列表</a></li>
-        <li><a href="inner_4.php">校內新聞</a></li>
-        <li><a href="inner_5.php">職場高手</a></li>
-        <li><a href="inner_6.php">職場動態</a></li>
-        <li><a href="inner_7.php">職場萬花筒</a></li>
-    </ul>
-
-</div>
+<div id="menu"></div>
 
 
 <!-- 主體 -->
@@ -65,12 +49,49 @@
 
 <!-- 左區塊 -->
 <div id="inner4_area_1" class="area_box2">
-	
+	<p class="before_news">[上一則]</p><p class="next_news">[下一則]</p>
+	<hr class="begin_hr">
+
+	<h1 class="news_title"><a class="news_time"></a></h1> 
+	<div class="news_cont">
+   </div>
+
+	<hr class="bottom_hr">
+	<p class="before_news bottom_pointer">[上一則]</p><p class="next_news bottom_pointer">[下一則]</p>
 </div>
 
 <!-- 右區塊 -->
 <div id="inner4_area_2" class="area_box2"><h1 id="area_title">職場萬花筒</h1>
 
+
+    <div class="list_one"><p class="list_time">2014-9-10</p><p class="list_title">柯辦竊聽案 通聯簡訊曝光了</p>
+        <div class="list_cont">
+        柯文哲政策辦公室政策部幕僚彭盛韶今日下午在競選總部總幹事姚立明等人陪同下公布柯辦監聽疑雲簡訊內容。
+        </div>
+    </div>
+     <div class="list_one"><p class="list_time">2014-9-10</p><p class="list_title">柯辦竊聽案 通聯簡訊曝光了</p>
+        <div class="list_cont">
+        柯文哲政策辦公室政策部幕僚彭盛韶今日下午在競選總部總幹事姚立明等人陪同下公布柯辦監聽疑雲簡訊內容。
+        </div>
+    </div>
+    <div class="list_one"><p class="list_time">2014-9-10</p><p class="list_title">柯辦竊聽案 通聯簡訊曝光了</p>
+        <div class="list_cont">
+        柯文哲政策辦公室政策部幕僚彭盛韶今日下午在競選總部總幹事姚立明等人陪同下公布柯辦監聽疑雲簡訊內容。
+        </div>
+    </div>
+    <div class="list_one"><p class="list_time">2014-9-10</p><p class="list_title">柯辦竊聽案 通聯簡訊曝光了</p>
+        <div class="list_cont">
+        柯文哲政策辦公室政策部幕僚彭盛韶今日下午在競選總部總幹事姚立明等人陪同下公布柯辦監聽疑雲簡訊內容。
+        </div>
+    </div>
+    <div class="list_one"><p class="list_time">2014-9-10</p><p class="list_title">柯辦竊聽案 通聯簡訊曝光了</p>
+        <div class="list_cont">
+        柯文哲政策辦公室政策部幕僚彭盛韶今日下午在競選總部總幹事姚立明等人陪同下公布柯辦監聽疑雲簡訊內容。
+        </div>
+    </div>
+<div class="page_ctrl">
+<a class="this_page">[上一頁]</a><a class="this_page">1</a><a>2</a><a>3</a><a>4</a><a>5</a><a>...</a><a class="this_page">[下一頁]</a>
+</div>
 </div>
 
 
@@ -91,6 +112,24 @@
 
 
 <script>
-   
+    <? echo 'var article_id = "'.$_GET["article_id"].'";'?>
+
+        //文章資訊
+        $.ajax({
+          type: 'POST',
+          url: 'cjcu_career/cc/index.php/news/detail/'+article_id,
+          data:{},
+          success: function (data) { 
+            if(data=='false') $('.news_title').text('查無此文章');  
+            else{
+
+            var article_array = JSON.parse(data);
+            $('.news_title').prepend(article_array.title);  
+            $('.news_time').html(article_array.created_date.split(" ")[0]);  
+            $('.news_cont').html(article_array.content);  
+            }
+          }
+        });
+    
 </script>
 </html>
