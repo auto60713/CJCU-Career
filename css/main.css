@@ -25,8 +25,12 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#E1F0F6', end
 
 a{
 	text-decoration: none;   
-	color:#000000;
+	color:#003264;
 }
+a:hover{
+    color:#008ACC;
+}
+
 .btn{
 	cursor: pointer;
 }

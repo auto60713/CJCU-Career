@@ -69,8 +69,15 @@
 
 		$( ".submit-btn" ).click(function() {
 
-			var old_pw = $('#old_pw').val(),
+            var old_pw = $('#old_pw').val(),
                 new_pw = $('#new_pw').val();
+                new_pw2 = $('#new_pw2').val();
+
+            if(new_pw!=new_pw2){
+				$(".success").css( "display", "none" ); 
+	            $(".fail").fadeIn().text('兩次新密碼不同');
+			}
+			else{
 
 			$.ajax({
 					url:  'change_pw_apply.php',
@@ -88,7 +95,7 @@
 	                    }
                     }
 		    });
-
+            }
         });
 
 

@@ -42,6 +42,7 @@ function echo_data($user,$lev){
 		}
 		else if( $lev == $level_department) {
             echo_username($user,'dep');
+            echo '<span><a href="change_pw.php">修改密碼</a></span>';
             echo '<span id="header-notice"><a href="department_manage.php#department-notice">通知</a></span>';
             echo '<span><a href="department_manage.php">管理</a></span>';
 			echo '<span class="username"><a href="department-'.$user.'">'.$GLOBALS['header_name'].'</a></span>';
@@ -54,6 +55,7 @@ function echo_data($user,$lev){
 		}
 		else if( $lev == $level_staff){
             echo_username($user,'dep');
+            echo '<span><a href="change_pw.php">修改密碼</a></span>';
 			echo '<span><a href="staff_manage.php">管理</a></span>';
 			echo '<span class="username"><a href="department-'.$user.'">'.$GLOBALS['header_name'].'</a></span>';
 		}

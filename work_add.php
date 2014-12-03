@@ -9,13 +9,13 @@ if(isset ($_SESSION['username']) && $_SESSION['level'] == $level_company|$level_
 	include_once("sqlsrv_connect.php");
 
 	if($_SESSION['level']==4) {$sql = "select address,phone from company where id=?"; $who = '公司';}
-	else if($_SESSION['level']==5) {$sql = "select address,phone from department where no=?"; $who = '系所';}
+	else if($_SESSION['level']==5|1) {$sql = "select address,phone from department where no=?"; $who = '系所';}
 	$params = array($_SESSION['username']);
 	$options =  array( "Scrollable" => SQLSRV_CURSOR_KEYSET );
 	$result = sqlsrv_query($conn,$sql,$params,$options);
 	$row = sqlsrv_fetch_array($result,SQLSRV_FETCH_NUMERIC);
-	$company_address = $row[0];
-	$company_phone = $row[1];
+	$company_address = trim($row[0]);
+	$company_phone = trim($row[1]);
 
 
 
