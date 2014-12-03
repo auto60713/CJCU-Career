@@ -182,7 +182,9 @@ function match_stu_array($workid){
 
 include("sqlsrv_connect.php");
 
-$sql = "SELECT u.sd_stud_no stuid,u.sd_stud_name stuname FROM career_student_data u,line_up l WHERE l.work_id=? AND u.sd_stud_no=l.user_id AND (l.[check]=1 OR l.[check]>3)";
+$sql = "SELECT u.sd_stud_no stuid,u.sd_stud_name stuname,l.match_no tid 
+        FROM career_student_data u,line_up l 
+        WHERE l.work_id=? AND u.sd_stud_no=l.user_id AND (l.[check]=1 OR l.[check]>3)";
 
 $para = array($workid);
 $stmt = sqlsrv_query($conn, $sql, $para);

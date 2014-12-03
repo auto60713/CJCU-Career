@@ -1,0 +1,28 @@
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+$lang['college_manage']			= '管理院、系所';
+$lang['college_edit']				= '編輯';
+$lang['college_true']				= 'True';
+$lang['college_false']				= 'False';
+$lang['college_create']			= '新增';
+$lang['college_edit_text']			= '可管理院、系所資料';
+$lang['college_no_records']			= '目前尚未有系所資料';
+$lang['college_create_new']			= '新增學院資料';
+$lang['college_create_success']			= '學院名稱已新增成功';
+$lang['college_create_failure']			= '新增時遇上問題，詳見以下訊息: ';
+$lang['college_create_new_button']			= '新增';
+$lang['college_invalid_id']			= '無效 ID.';
+$lang['college_edit_success']			= '編輯成功';
+$lang['college_edit_failure']			= '儲存編輯時遇上了問題，詳見以下訊息: ';
+$lang['college_delete_success']			= '成功刪除學院資料';
+$lang['college_delete_failure']			= '刪除學院資料遇上了些問題，詳見以下訊息: ';
+$lang['college_actions']			= '動作';
+$lang['college_cancel']			= '取消';
+$lang['college_delete_record']			= '刪除這筆學院資料';
+$lang['college_delete_confirm']			= '您確定要刪除此學院資料?';
+$lang['dept_delete_confirm']			= '您確定要刪除此系所資料?';
+$lang['college_edit_heading']			= '編輯學院資料';
+$lang['dept_no_records'] = '目前無任何系所資料';
+// Activities
+$lang['college_act_create_record']			= '系統訊息:Created record with ID';
+$lang['college_act_edit_record']			= '系統訊息:Updated record with ID';
+$lang['college_act_delete_record']			= '系統訊息:Deleted record with ID';

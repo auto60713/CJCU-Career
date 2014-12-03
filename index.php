@@ -10,13 +10,6 @@
 	<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 	<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
     <!-- <script type="text/javascript" src="js/full_height.js"></script> -->
-
-    <!-- Insert to your webpage before the </head> -->
-    <script src="slider/sliderengine/jquery.js"></script>
-    <script src="slider/sliderengine/amazingslider.js"></script>
-    <script src="slider/sliderengine/initslider-1.js"></script>
-    <!-- End of head section HTML codes -->
-
 	<script>
 	$(function(){ 	
 
@@ -31,11 +24,17 @@
 
 		$("#menu").load('public_view/menu.html');
 
-
-	})
+    })
 	</script>
+
+    <!-- Insert to your webpage before the </head> -->
+    <script src="slider/sliderengine/initslider-1.js"></script>
+    <script src="slider/sliderengine/amazingslider.js"></script>
+
+    <!-- End of head section HTML codes -->
     
 </head>
+
 <body>
 
 
@@ -54,16 +53,10 @@
 <div id="area1_1" class="area_box"><h1 id="area_title">焦點新聞</h1>
 
 	<!-- Insert to your webpage where you want to display the slider -->
-    <div id="amazingslider-1" style="display:block;position:relative;margin:16px auto 32px;">
+    <div id="amazingslider-1" style="display:block;position:relative;margin:10px;">
         <ul class="amazingslider-slides" style="display:none;">
-            <li><img src="slider/images/chicago_illinois-wallpaper-1920x1080.jpg" alt="chicago_illinois-wallpaper-1920x1080" /></li>
-            <li><img src="slider/images/city_buildings_at_night-wallpaper-1920x1080.jpg" alt="city_buildings_at_night-wallpaper-1920x1080" /></li>
-            <li><a href="直接對應detail"><img src="slider/images/cold-evening1.jpg" alt="cold-evening1" /></a></li>
         </ul>
         <ul class="amazingslider-thumbnails" style="display:none;">
-            <li><img src="slider/images/chicago_illinois-wallpaper-1920x1080-tn.jpg" /></li>
-            <li><img src="slider/images/city_buildings_at_night-wallpaper-1920x1080-tn.jpg" /></li>
-            <li><img src="slider/images/cold-evening1-tn.jpg" /></li>
         </ul>
         <div class="amazingslider-engine" style="display:none;"><a href="http://amazingslider.com">jQuery Image Slider</a></div>
     </div>
@@ -71,10 +64,18 @@
 </div>
 
 <!-- FB -->
-<div id="area1_2" class="area_box">
-	<div class="fb-like"></div>
-	<div class="fb-nevin"></div>
-	<div class="fb-footer"><p>Facebook社群外掛元件</p></div>
+<div id="area1_2" class="area_box"><h1 id="area_title">職涯發展組</h1>
+
+	<div id="fb-root"></div>
+    <div class="fb-like-box" data-href="https://www.facebook.com/pages/%E9%95%B7%E6%A6%AE%E5%A4%A7%E5%AD%B8-%E5%AD%B8%E7%94%9F%E8%81%B7%E6%B6%AF%E7%99%BC%E5%B1%95%E6%9A%A8%E6%A0%A1%E5%8F%8B%E6%9C%8D%E5%8B%99/220146198083687" data-width="355" data-colorscheme="light" data-show-faces="true" data-header="true" data-stream="false" data-show-border="true"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/zh_TW/sdk.js#xfbml=1&appId=988385617844066&version=v2.0";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+</script>
 </div>
 
 
@@ -202,7 +203,7 @@
 
 
 
-
+        
         //校內新聞
         $.ajax({
 		  type: 'POST',
@@ -211,13 +212,13 @@
 		  success: function (data) { 
             var article_array = JSON.parse(data);
 
-            for (var i = 0; i < article_array.length; i++) { if (i==2) break;
+            for (var i = 0; i < article_array.length; i++) { if (i==3) break;
           
             //<a href=""><div class="news"><img class="news-img" src=""><p class="news-time">2014-10-10</p><p class="news-nevin">架構</p></div>
             //<a class="more-link" href="inner_4.php">更多..</a>
                 var nevin = $('<p>').addClass('news-nevin').html(article_array[i].content),
                     time  = $('<p>').addClass('news-time').text(article_array[i].created_date.split(" ")[0]),
-                    img   = $('<img>').addClass('news-img').attr("src",article_array[i].pic),
+                    img   = $('<img>').addClass('news-img').attr("src","cjcu_career/cc/product_img/"+article_array[i].pic),
                     link  = $('<a>').attr("href",'inner_4.php?article_id='+article_array[0].id).append(img,time,nevin),
                     news  = $('<div>').addClass('news').append(link);
                     
@@ -230,12 +231,12 @@
 		//職場高手
         $.ajax({
 		  type: 'POST',
-		  url: 'cjcu_career/cc/index.php/news/lists/1',
+		  url: 'cjcu_career/cc/index.php/news/lists/2',
 		  data:{},
 		  success: function (data) { 
             var article_array = JSON.parse(data);
 
-            $('.a3-1').attr("src",article_array[0].pic);
+            $('.a3-1').attr("src","cjcu_career/cc/product_img/"+article_array[0].pic);
 		  	$('.master-title').text(article_array[0].title);  
 		    $('.master-nevin').html(article_array[0].content);  
             $('.area_box_link').attr("href",'inner_5.php?article_id='+article_array[0].id);  
@@ -244,14 +245,14 @@
 		//職場動態
         $.ajax({
 		  type: 'POST',
-		  url: 'cjcu_career/cc/index.php/news/lists/1',
+		  url: 'cjcu_career/cc/index.php/news/lists/3',
 		  data:{},
 		  success: function (data) { 
             var article_array = JSON.parse(data);
 
-            $('.a3-2').attr("src",article_array[0].pic);
+            $('.a3-2').attr("src","cjcu_career/cc/product_img/"+article_array[0].pic);
 
-            for (var i = 0; i < article_array.length; i++) { if (i==3) break;
+            for (var i = 0; i < article_array.length; i++) { if (i==4) break;
             
                 //<a href=""><p class="workplace-title">架構</p></a>
                 var work = $('<p>').addClass('workplace-title').text('》'+article_array[i].title),
@@ -263,14 +264,14 @@
 		//職場萬花筒
         $.ajax({
 		  type: 'POST',
-		  url: 'cjcu_career/cc/index.php/news/lists/1',
+		  url: 'cjcu_career/cc/index.php/news/lists/4',
 		  data:{},
 		  success: function (data) { 
             var article_array = JSON.parse(data);
 
-            $('.a3-3').attr("src",article_array[0].pic);
+            $('.a3-3').attr("src","cjcu_career/cc/product_img/"+article_array[0].pic);
 
-            for (var i = 0; i < article_array.length; i++) { if (i==3) break;
+            for (var i = 0; i < article_array.length; i++) { if (i==4) break;
             
                 //<a href=""><p class="workplace-title">架構</p></a>
                 var work = $('<p>').addClass('workplace-title').text('》'+article_array[i].title),

@@ -154,7 +154,7 @@ else{echo "No permission!"; exit;
                     } 
 
                     //該實習所錄取的學生
-                        var msg='實習學生 ',stu_link='';
+                        var msg='實習學生 : 負責老師 》',stu_link='';
 		                $.ajax({
 		                  type: 'POST',
 		                  url: 'ajax_work_edit.php',
@@ -166,8 +166,11 @@ else{echo "No permission!"; exit;
 
                             	stu.append(msg);
                               for(var i=0;i<stu_array.length;i++){
-                                stu_link = $('<a>').attr({'target':'_blank','href':'student-'+stu_array[i]['stuid']}).text(stu_array[i]['stuname'] + ' , ');
-                                stu.append(stu_link);
+                              	if (stu_array[i]['tid'] == null) stu_array[i]['tid'] = '(未配對)';
+                                var stu_link = $('<a>').attr({'target':'_blank','href':'student-'+stu_array[i]['stuid']}).text(stu_array[i]['stuname'].trim()),
+                                    tea_link = $('<a>').text(stu_array[i]['tid']);
+                                
+                                stu.append(stu_link,' : ',tea_link,' , ');
 		                      }
 		                    }
 		                  },

@@ -216,7 +216,7 @@ $(document).ready(function() {
             required: "此為必填項目",
             email: "請輸入正確的電子信箱",
             url: "請輸入正確的網址",
-            digits: "請輸入數字",
+            digits: "請輸入正整數",
             equalTo: "密碼不正確",
             maxlength: jQuery.validator.format("不得超過{0}個字"),
             rangelength: jQuery.validator.format("不符合格式"),

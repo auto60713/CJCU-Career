@@ -7,7 +7,7 @@ include("sqlsrv_connect.php");
 
 $sql = "select u.sd_stud_no userid,u.sd_stud_name username,w.id wid,w.name wname,c.id comid,c.ch_name comname,l.no line_no
  from line_up l,career_student_data u,work w,company c
- where l.[check]=4 and l.match_no is NULL and u.sd_dep_no=? and l.user_id=u.sd_stud_no and w.id=l.work_id and c.id=w.company_id";
+ where l.[check]IN(1,4) and l.match_no is NULL and u.sd_dep_no=? and l.user_id=u.sd_stud_no and w.id=l.work_id and c.id=w.company_id";
 
 $para = array($dep_no);
 $stmt = sqlsrv_query($conn, $sql, $para);

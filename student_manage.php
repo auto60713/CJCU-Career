@@ -23,10 +23,10 @@ if(!isset($_SESSION['username']) || $_SESSION['level'] != 3) { header("Location:
 
 		  	var loc = location.hash.replace( /^#/, '' );
 		  	switch(loc) {
-			case 'student-info':doajax(0);break;
+			case 'student-info':case'':doajax(0);break;
 			case 'student-applywork':doajax(1);break;
 			case 'student-notice':doajax(2);break;
-			default:doajax(0);
+			default:doajax(3);
 			}
 
 		});
@@ -37,10 +37,6 @@ if(!isset($_SESSION['username']) || $_SESSION['level'] != 3) { header("Location:
 		function doajax(idx){
 
 			    $('#right-box-title').html('載入中...請稍後');
-
-				$('.list').removeClass('list-active');
-				$('.list:eq('+idx+')').addClass('list-active');
-				$('#right-box-title').text($('.list:eq('+idx+')').text());
 
 				switch(idx) {
 				// student info
@@ -61,6 +57,15 @@ if(!isset($_SESSION['username']) || $_SESSION['level'] != 3) { header("Location:
 				para = {};
 				url = "notice.php";	
 				break;
+
+				// 工讀單
+				case 3:
+				tpe = 'get';
+				var wid = location.hash.replace( /^#work/, '' );
+				para = {workid:wid};
+				url = "student_work_time.php";	
+				var goback = $('<a>').attr({href:'#student-applywork',id:'gobackbtn'}).append($('<i>').addClass('fa fa-reply').append(' '));
+				break;
 			}
 			$.ajax({
 			  type: tpe,
@@ -68,8 +73,17 @@ if(!isset($_SESSION['username']) || $_SESSION['level'] != 3) { header("Location:
 			  data: para,
 			  success: function (data) { $('#contailer-box').html(data) ;  }
 			});
-		}
+		
 
+            $('#right-box-title').text($('.list:eq('+idx+')').text());
+            if(idx==3){
+            	$('#right-box-title').text('工讀單');
+            	idx=1;
+            }
+            $('.list').removeClass('list-active');
+            $('.list:eq('+idx+')').addClass('list-active');
+				
+        }
 
 		
 		<?	//load data

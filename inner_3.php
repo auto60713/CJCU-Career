@@ -54,7 +54,7 @@
 
     <!-- 快速搜尋 -->
     <div class="rush-search">
-        <a href="inner_3.php" class="<? if(count($_GET)==0) echo "rush-searching"; ?>">最新工作</a>
+        <a href="?" class="<? if(count($_GET)==0) echo "rush-searching"; ?>">最新工作</a>
         <a href="inner_3.php?mode=search&io=1" class="<? if($_GET['io']=='1') echo "rush-searching"; ?>">校內工作</a>
         <a href="inner_3.php?mode=search&prop=2" class="<? if($_GET['prop']=='2') echo "rush-searching"; ?>">正職</a>
         <a href="inner_3.php?mode=search&prop=1" class="<? if($_GET['prop']=='1') echo "rush-searching"; ?>">工讀</a>    

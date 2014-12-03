@@ -39,8 +39,10 @@ else{
  		 		var icon = $('<i>').addClass('fa fa-book fa-3x').addClass('work-img'),
 		    		tita = $('<a>').attr('href', 'work-'+work_list_array[i]['wid']).text(work_list_array[i]['wname']),
 		    		tit = $('<h1>').addClass('work-tit').append(tita),
-		    		company = $('<div>').addClass('manage-company-herf').text("發布自 ").append(companyherf),
+		    		company = $('<div>').addClass('manage-company-herf').append("發布自 ",companyherf),
 		    		hint = $('<p>').addClass('work-hint').append((work_list_array[i]['zone']) +'  '+ work_list_array[i]['prop']),
+		    		wtime = $('<a>').attr('href', '#work'+work_list_array[i]['wid']).text('工讀單'),
+
 		    		hint2 = $('<p>').attr({
 		    		    workid : work_list_array[i]['wid'],
 		    			audit : work_list_array[i]['ch']
@@ -50,7 +52,7 @@ else{
 		    		// 移動到LightBox內 pass = $('<div>').attr('workid', work_list_array[i]['wid']).addClass('pass-req').text("要求再審核"),
 		    	    statustxt = $('<span>').addClass('nocheck').text('已要求重新再審！'),
 		    		subbox1 = $('<div>').addClass('sub-box').append(icon),
-		    		subbox2 = $('<div>').addClass('sub-box').append(tit).append(company).append(hint),
+		    		subbox2 = $('<div>').addClass('sub-box').append(tit).append(company,hint,wtime),
 		    		subbox3 = $('<div>').addClass('sub-box2').append(hint2);
 
 		    		var check_status='';

@@ -6,7 +6,7 @@ $GLOBALS['cust_company'] ='';
 //???
 function echo_work_detail_array($work_id){
 
-include_once("sqlsrv_connect.php");
+include("sqlsrv_connect.php");
 include_once("cjcuweb_lib.php");
 
 // id name date *company_id [work_type_id] start_date end_date [work_prop_id] is_outside 

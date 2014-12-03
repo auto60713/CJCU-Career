@@ -1,0 +1,27 @@
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+$lang['news_manage']			= '新聞稿管理';
+$lang['news_edit']				= '編輯';
+$lang['news_true']				= 'True';
+$lang['news_false']				= 'False';
+$lang['news_create']			= '新增';
+$lang['news_edit_text']			= '您可在此新增以及管理新聞稿,點擊新增按鈕開始使用';
+$lang['news_no_records']			= '目前系統無任何新聞稿';
+$lang['news_create_new']			= '新增新聞稿';
+$lang['news_create_success']			= '新增新聞稿成功';
+$lang['news_create_failure']			= '糟糕~新增時出了一些問題，請參考以下訊息： ';
+$lang['news_create_new_button']			= '新增';
+$lang['news_invalid_id']			= '不正確的id名.';
+$lang['news_edit_success']			= '編輯新聞稿成功!';
+$lang['news_edit_failure']			= '糟糕~編輯時出了一些問題，請參考以下訊息：';
+$lang['news_delete_success']			= '刪除成功';
+$lang['news_delete_failure']			= '很抱歉 目前我們無法刪除此新聞稿，請參考以下訊息：';
+$lang['news_actions']			= '動作';
+$lang['news_cancel']			= '取消';
+$lang['news_delete_record']			= '刪除這個新聞稿';
+$lang['news_delete_confirm']			= '您確定要刪除此新聞稿訊息?';
+$lang['news_edit_heading']			= '編輯新聞稿內容';
+$lang['news_del_text']			= '此動作不可逆，請確定後再執行';
+// Activities
+$lang['news_act_create_record']			= '系統訊息：Created record with ID';
+$lang['news_act_edit_record']			= '系統訊息：Updated record with ID';
+$lang['news_act_delete_record']			= '系統訊息：Deleted record with ID';

@@ -41,7 +41,7 @@
 #menu ul{
 	overflow: hidden;
 	list-style-type: none;
-	width: 900px;
+	width: 1020px;
 	height: 50px;
 	line-height: 50px;
 }
@@ -71,6 +71,11 @@
 	right: 30px;
 	font-size: 14px;
 }
+/* 選擇 */
+.more-link:hover,.news-nevin:hover,.master-nevin:hover,.workplace-title:hover,.list_cont:hover{
+    color:#0080C0;
+}
+
 
 /* 各區塊大小 */
 #area1_1 #area_title{ color: #EA4B74; }
@@ -79,7 +84,7 @@
     filter: progid:DXImageTransform.Microsoft.AlphaImageLoader( src='img/area01.jpg' , sizingMethod='scale');
 	width: 53%;  height: 340px;
 }
-#area1_2 #area_title{ color: #39518B; }
+#area1_2 #area_title{ color: #39518B; margin-bottom: 15px;}
 #area1_2{  
     background-image:url(../img/area02.jpg);
     filter: progid:DXImageTransform.Microsoft.AlphaImageLoader( src='img/area02.jpg' , sizingMethod='scale');
@@ -305,6 +310,14 @@ margin-top: 4px\9;
 	
 /* =======================校內新聞====================== */
 
+.no_paper{
+	display: block;
+    margin: 10px;
+    margin-top: 20px;
+    color: #CE3131;
+    font-size: 40px;
+}
+
 #area2_2 .link{
     color: #A396C3;
     float: right;
@@ -331,6 +344,8 @@ margin-top: 4px\9;
 }
 #area2_2 .news-nevin{
 	margin-right: 15px;
+	max-height: 35px;
+	overflow: hidden;
 }
 
 /* 更多 */
@@ -367,6 +382,9 @@ margin-top: 4px\9;
     font-weight: bold;
 }
 #area3_1 .master-nevin{
+	max-height: 80px;
+	margin-right: 20px;
+	overflow: hidden;
   
 }
 
@@ -377,6 +395,8 @@ margin-top: 4px\9;
 .workplace-title{
 	font-size: 14px;
 	line-height: 22px;
+	max-height: 20px;
+	overflow: hidden;
 }
 
 /* ======================職場萬花筒===================== */
@@ -388,7 +408,7 @@ margin-top: 4px\9;
 
 /* 內頁 */
 /* ======================左區塊===================== */
-#inner4_area_1 p,#inner4_area_1 hr{
+.before_news,.next_news{
 position: absolute;
 color: #991133;
 font-weight: bold;
@@ -405,7 +425,9 @@ right: 45px;
 bottom: 40px;
 }
 #inner4_area_1 .begin_hr{
-	top: 60px;
+color: #991133;
+font-weight: bold;
+margin-top: 10px;
 }
 
 #inner4_area_1 .news_title,#inner4_area_1 .news_cont{
@@ -413,7 +435,7 @@ bottom: 40px;
     margin-right: 25px;
 }
 #inner4_area_1 .news_title{
-	margin-top: 60px;
+	margin-top: 20px;
 	font-size: 24px;
 }
 #inner4_area_1 .news_time{
@@ -424,6 +446,10 @@ bottom: 40px;
 }
 #inner4_area_1 .news_cont{
     margin-top: 20px;
+    padding-right: 30px;
+    width: 600px;
+    height:900px;
+    overflow-y:scroll;
 }
 
 
@@ -451,18 +477,19 @@ bottom: 40px;
 
 }
 #inner4_area_2 .list_cont{
-
+    max-height: 60px;
+    overflow:hidden;
 }
 
 #inner4_area_2 .page_ctrl{
-margin-top: 40px;
-margin-left: 7%;
+    position: absolute;
+    left: 5%;
+    bottom: 40px;
 
 }
 #inner4_area_2 .page_ctrl a{
-margin-left: 10px;
-	color: #808080;
-
+    margin-left: 10px;
+    color: #808080;
 }
 #inner4_area_2 .page_ctrl .this_page{
     color: #991133;

@@ -35,6 +35,7 @@ function echo_data($user,$lev){
 
 		if( $lev == $level_company) {
             echo_username($user,'com');
+            echo '<span><a href="change_pw.php">修改密碼</a></span>';
             echo '<span id="header-notice"><a href="company_manage.php#company-notice">通知</a></span>';
 			echo '<span><a href="company_manage.php">管理</a></span>';
 			echo '<span class="username"><a href="company-'.$user.'">'.$GLOBALS['header_name'].'</a></span>';

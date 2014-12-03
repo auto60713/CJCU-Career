@@ -55,10 +55,9 @@ function isCompanyWork($conn,$companyid,$workid){
 <!DOCTYPE html>
 <html>
 <head>
+<script src="lib/jquery.validate.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <style type="text/css">
-
-span{color: #f00;}
 
 .match_dep,.instead{
 	display: none;
@@ -66,6 +65,27 @@ span{color: #f00;}
 .instead td{
 	color: #DF7000;
 }
+
+label.error{
+
+	color: #D50000;
+	font-weight: bold;
+	margin-left: 10px;
+}
+form{
+	padding-left: 20px;
+}
+.td1{
+	font-size: 17px;
+	font-weight: bolder;
+    width: 110px;
+    overflow: hidden;
+
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+
 </style>
 </head>
 <body>
@@ -73,30 +93,28 @@ span{color: #f00;}
 <button id="btn-copy-work" class="btn-copy-work"><i class="fa fa-files-o"></i> 從現有工作複製</button>
 <button id="btn-instead-work" class="btn-copy-work hidden"><i class="fa fa-files-o"></i> 廠商代PO</button>
 
-<form name="work" id="work_edit_form" method="post" action="work_add_finish.php" onsubmit="return check_data();" >
+<form name="work" id="work_edit_form" method="post" action="work_add_finish.php">
 <table>
 <tr class="instead">
-	<td>請輸入廠商帳號</td>
+	<td class='td1'>請輸入廠商帳號</td>
 	<td><input type="text" name="instead_com"/></td>
 </tr>
 
 <tr>
-	<td>工作名稱：</td>
+	<td class='td1'>工作名稱：</td>
 	<td><input type="text" name="name" id="name"/></td>
-	<td><span id="name_hint"></span></td>
 </tr>
 
 <tr>
-	<td>工作類型：</td>
+	<td class='td1'>工作類型：</td>
 	<td><select name="work_type" id="work_type"><option>請選擇</option></select> 
 		<select name="work_type_list1" id="work_type_list1"><option>請選擇</option></select>
 		<select name="work_type_list2" id="work_type_list2"><option>請選擇</option></select>
 	</td>
-	<td><span id="work_type_hint"></span></td>
 </tr>
 
 <tr>
-	<td>開始日期：</td>
+	<td class='td1'>開始日期：</td>
 	<td><select name="year1" id="year1"></select>年
 		<select name="month1" id="month1"></select>月
 		<select name="date1" id="date1"></select>日
@@ -106,7 +124,7 @@ span{color: #f00;}
 </tr>
 
 <tr>
-	<td>截止日期：</td>
+	<td class='td1'>截止日期：</td>
 	<td><select name="year2" id="year2"></select>年
 		<select name="month2" id="month2"></select>月
 		<select name="date2" id="date2"></select>日
@@ -116,66 +134,64 @@ span{color: #f00;}
 </tr>
 
 <tr>
-	<td>工作性質：</td>
+	<td class='td1'>工作性質：</td>
 	<td><select name="work_prop" id="work_prop"></select>
         <div class="match_dep">請選擇系所<select name="match_dep" id="dep_list"></select></div>
 	</td>
 </tr>
 
 <tr>
-	<td>工作類別：</td>
+	<td class='td1'>工作類別：</td>
 	<td><input type="radio" name="isoutside" value="0" checked="true">校外工作
 	    <input type="radio" name="isoutside" value="1">校內工作
 	</td>
 </tr>
 
 <tr>
-	<td>工作地點：</td>
+	<td class='td1'>工作地點：</td>
 	<td><select name="zone" id="zone"></select> 
 		<select name="zone_name" id="zone_name"></select>
 	</td>
-	<td><span id="zone_name_hint"></span></td>
 </tr>
 
 <tr>
-	<td>招募人數：</td>
-	<td><input type="number" name="recruitment_no" id="recruitment_no" value="1" /></td>
+	<td class='td1'>招募人數：</td>
+	<td><input type="text" name="recruitment_no" id="recruitment_no" value="1" /></td>
 </tr>
 
 <tr>
-	<td>聯絡地址：</td>
+	<td class='td1'>聯絡地址：</td>
 	<td><input type="text" name="address" id="address"/> 
 		<label><input type="checkbox" id="address_same" >同<? echo $who ?>地址</label> 
 		<? echo '<input type="hidden" name="hidden_address" id="hidden_address" value="'.$company_address.'"/>';?>
 	</td>
-	<td><span id="address_hint"></span></td>
 </tr>
 
 <tr>
-	<td>連絡電話：</td>
+	<td class='td1'>連絡電話：</td>
 	<td><input type="text" name="phone" id="phone"/> 
 		<label><input type="checkbox" id="phone_same" >同<? echo $who ?>電話</label>
 		<? echo '<input type="hidden" name="hidden_phone" id="hidden_phone" value="'.$company_phone.'"/>';?>
 	</td>
-	<td><span id="zone_name_hint"></span></td>
 </tr>
   
 <tr>
-	<td>薪資待遇：</td>
+	<td class='td1'>薪資待遇：</td>
 	<td><input type="pay" name="pay" id='pay'/>(可填 時薪,月薪 或 面議)</td>
-	<td><span id="zone_name_hint"></span></td>
+</tr>
+
+<tr>
+	<td class='td1'>工作內容：</td>
+	<td><textarea name="detail" cols="45" rows="5" id='detail'></textarea></td> 
 </tr>
 
 </table>
-
-工作內容：<br><textarea name="detail" cols="45" rows="5" id='detail'></textarea> <br>
 
 <?  //紀錄該工作的ID
 	if($_GET['mode']=='edit') echo "<input type='hidden' name='work-id' value=".$_GET['workid'].">";
 ?>
 
 <input type="submit" name="button" value="確定" />
-<input type="button"  value="取消" onclick="location.href='home.php'"/>
 </form>
 
 
@@ -198,8 +214,6 @@ span{color: #f00;}
 	?> 
 	
 	$(function(){
-
-		$('#lightbox-copy-work').hide();
 
 		// 生成年 
 		for(var i=0;i<year_array.length;i++)
@@ -486,38 +500,39 @@ span{color: #f00;}
 
 	});
 
-	  function check_data(){
-			var boo = true;
-			if($('#name').val()==""){
-				boo = false;
-				$('#name_hint').text("姓名不可為空");
-			}
-			else $('#name_hint').text("");
-			if($('#work_type_list2').val()==null){
-				boo = false;
-				$('#work_type_hint').text("請選擇工作類型");
-			}
-			else $('#work_type_hint').text("");
-			if($('#address').val()==""){
-				boo = false;
-				$('#address_hint').text("請填寫正確地址");
-			}
-			else $('#address_hint').text("");
-			if($('#zone_name').val()=="請選擇"){
-				boo = false;
-				$('#zone_name_hint').text("請選擇工作地點");
-			}
-			else $('#zone_name_hint').text("");
-			
-			return boo;
-		}
+
+//欄位限制
+$(document).ready(function() { 
+
+        $("#work_edit_form").validate({ 
+            rules: { 
+                name:            { required:true,maxlength:20 },
+                work_type_list2: { required:true },
+                zone_name:       { required:true },
+                recruitment_no:  { required:true,maxlength:3,digits:true },
+                address:         { required:true,maxlength:40 },
+                phone:           { required:true,maxlength:14 },
+                detail:          { maxlength:80 }
+            }
+        }); 
+
+        jQuery.extend(jQuery.validator.messages, {
+            required: "此為必填項目",
+            digits: "請輸入正整數",
+            maxlength: jQuery.validator.format("不得超過{0}個字"),
+            rangelength: jQuery.validator.format("不符合格式"),
+        });
+
+      
+});
+
 
 </script>
 
 
 
 <!-- 從現有的工作中複製 -->
-<div class="staff-apply-form" id="lightbox-copy-work"> 
+<div class="staff-apply-form" id="lightbox-copy-work" style="display:none"> 
 	<div class="staff-apply-box"> 
 	
 		<h2 class="listbox-copy-work-title"><i class="fa fa-files-o"></i> 複製工作 <i class="fa fa-times login-exit" id="lightbox-copy-exit"></i></h2>  

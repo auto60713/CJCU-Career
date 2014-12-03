@@ -49,53 +49,28 @@
 
 <!-- 左區塊 -->
 <div id="inner4_area_1" class="area_box2">
-	<p class="before_news">[上一則]</p><p class="next_news">[下一則]</p>
-	<hr class="begin_hr">
 
-	<h1 class="news_title">鞏俐轟金馬不專業 拒絕再度參加<a class="news_time">2014年11月25日</a></h1> 
+	<h1 class="news_title"><a class="news_time"></a></h1> 
+    <hr class="begin_hr">
+
 	<div class="news_cont">
-    知名藝人鞏俐22號才剛參加完金馬獎，卻抱憾而歸，原本鞏俐在離台前都向媒體表示，此次來台灣非常開心，希望未來還有機會來台，
-    但今天(25號)鞏俐的經紀人曾敬超替她發表聲明指出，感謝金馬獎給鞏俐機會，讓她了解一個不專業的電影節是怎麼樣的，而且一個不公正的電影節，
-    會讓所有藝術人員瞧不起他們。
-    鞏俐甚至表示，這是她第一次來金馬獎，也是最後一次，因為參加這個業餘的電影節，一點意義都沒有，但鞏俐強調，她喜歡台灣，也會再度來台。
-	</div>
-
+   </div>
+<!--
 	<hr class="bottom_hr">
-	<p class="before_news bottom_pointer">[上一則]</p><p class="next_news bottom_pointer">[下一則]</p>
+	<a class="before_news bottom_pointer">[上一則]</a><a class="next_news bottom_pointer">[下一則]</a>
+-->
 </div>
 
 <!-- 右區塊 -->
 <div id="inner4_area_2" class="area_box2"><h1 id="area_title">校內新聞</h1>
 
+    <!-- 載入五筆 -->
 
-    <div class="list_one"><p class="list_time">2014-9-10</p><p class="list_title">柯辦竊聽案 通聯簡訊曝光了</p>
-        <div class="list_cont">
-        柯文哲政策辦公室政策部幕僚彭盛韶今日下午在競選總部總幹事姚立明等人陪同下公布柯辦監聽疑雲簡訊內容。
-        </div>
-    </div>
-     <div class="list_one"><p class="list_time">2014-9-10</p><p class="list_title">柯辦竊聽案 通聯簡訊曝光了</p>
-        <div class="list_cont">
-        柯文哲政策辦公室政策部幕僚彭盛韶今日下午在競選總部總幹事姚立明等人陪同下公布柯辦監聽疑雲簡訊內容。
-        </div>
-    </div>
-    <div class="list_one"><p class="list_time">2014-9-10</p><p class="list_title">柯辦竊聽案 通聯簡訊曝光了</p>
-        <div class="list_cont">
-        柯文哲政策辦公室政策部幕僚彭盛韶今日下午在競選總部總幹事姚立明等人陪同下公布柯辦監聽疑雲簡訊內容。
-        </div>
-    </div>
-    <div class="list_one"><p class="list_time">2014-9-10</p><p class="list_title">柯辦竊聽案 通聯簡訊曝光了</p>
-        <div class="list_cont">
-        柯文哲政策辦公室政策部幕僚彭盛韶今日下午在競選總部總幹事姚立明等人陪同下公布柯辦監聽疑雲簡訊內容。
-        </div>
-    </div>
-    <div class="list_one"><p class="list_time">2014-9-10</p><p class="list_title">柯辦竊聽案 通聯簡訊曝光了</p>
-        <div class="list_cont">
-        柯文哲政策辦公室政策部幕僚彭盛韶今日下午在競選總部總幹事姚立明等人陪同下公布柯辦監聽疑雲簡訊內容。
-        </div>
-    </div>
+
 <div class="page_ctrl">
-<a class="this_page">[上一頁]</a><a class="this_page">1</a><a>2</a><a>3</a><a>4</a><a>5</a><a>...</a><a class="this_page">[下一頁]</a>
+<!--<a class="this_page">1</a>-->
 </div>
+
 </div>
 
 
@@ -116,6 +91,60 @@
 
 
 <script>
-   
+    <? echo 'var article_id = "'.$_GET["article_id"].'";'?>
+
+        //文章資訊
+        $.ajax({
+          type: 'POST',
+          url: 'cjcu_career/cc/index.php/news/detail/'+article_id,
+          data:{},
+          success: function (data) { 
+            if(data=='false') $('.news_title').text('請按右方選擇文章');  
+            else{
+
+            var article_array = JSON.parse(data);
+            $('.news_title').prepend(article_array.title);  
+            $('.news_time').html(article_array.created_date.split(" ")[0]);  
+            $('.news_cont').html(article_array.content);  
+            }
+          }
+        });
+
+        //文章選單
+        $.ajax({
+          type: 'POST',
+          url: 'cjcu_career/cc/index.php/news/lists/1',
+          data:{},
+          success: function (data) { 
+
+            if(data=='false') $('#inner4_area_2').append($('<a>').addClass('no_paper').text('目前沒有文章'));
+            else article_array = JSON.parse(data);
+          },
+          async: false
+        });
+
+
+            var this_page=1,min=0,max=5;
+            <? if($_GET[page]) echo "this_page=".$_GET[page].";min=(".$_GET[page]."-1)*5;max=((".$_GET[page]."-1)*5)+5;"; ?>
+           
+            var page_num=1+Math.floor(article_array.length/5);
+            for (var i = 1; i <= page_num; i++) {
+                page = $('<a>').addClass('point'+i).attr("href",'inner_2.php?page='+i).text(i);
+                $('.page_ctrl').append(page);
+            }
+            $('.point'+this_page ).addClass('this_page');
+
+            for (var i = min; i < article_array.length; i++) { if (i==max) break;
+            
+                var time  = $('<p>').addClass('list_time').text(article_array[i].created_date.split(" ")[0]),
+                    title = $('<p>').addClass('list_title').text(article_array[i].title),
+                    nevin = $('<div>').addClass('list_cont').html(article_array[i].content),
+                    link  = $('<a>').attr("href",'inner_2.php?article_id='+article_array[i].id).append(time,title,nevin), 
+                    work  = $('<div>').addClass('list_one').append(link);
+
+                $('#inner4_area_2').append(work);
+            }
+
+
 </script>
 </html>

@@ -12,10 +12,12 @@
 	<script type="text/javascript" src="js/full_height.js"></script>
 	<style type="text/css">
 	    .fix-position{
+	    	margin-top: 5%;
 	    	padding: 30px;
 	    	margin-right: auto;
 	    	margin-left: auto;
-	    	width: 90%;
+	    	width: 50%;
+	    	background-color: #FFFFFF;
 	    }
 	    .fix-position h1{
 	    	line-height: 50px;
@@ -39,10 +41,14 @@
 
 	    .apply-echo{
 	    	display: none;
-	    	background-color: #FF8080;
 	    	padding: 5px;
 	    }
-
+	    .success{
+            background-color: #ABE19D;
+	    }
+        .fail{
+            background-color: #FF8080;
+        }
 	</style>
 	<script>
 	$(function(){ 	
@@ -64,10 +70,16 @@
 			$.ajax({
 					url:  'forgotpwd_apply.php',
 					type: 'POST',
-					data: {mail:mail_val},
+					data: {email:mail_val},
 					success: function(data) {
-
-						$(".apply-echo").fadeIn().text(data);
+                        if(data=="success") { 
+                        	$(".fail").css( "display", "none" ); 
+                        	$(".success").fadeIn().text('寄信成功! 請到信箱確認');
+                        }
+	                    else{
+	                    	$(".success").css( "display", "none" ); 
+	                    	$(".fail").fadeIn().text(data);
+	                    }
                     }
 		    });
 
@@ -88,7 +100,7 @@
 <div _height="auto">
 <div class="container margin-top20"><div class="fix-position">
 
-    <div class="apply-echo"></div>
+    <div class="apply-echo success"></div><div class="apply-echo fail"></div>
     <h1>登入有問題嗎?</h1>
     <p>請輸入您註冊的電子郵件地址，我們會寄送說明給您，協助您解決問題。</p><br>
     <h4>註冊的電子郵件</h4>

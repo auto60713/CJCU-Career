@@ -1,5 +1,5 @@
 <? session_start(); 
-if(isset($_SESSION['username'])) 0; else{header("Location: home.php"); exit;}
+if(!isset($_SESSION['username'])) { header("Location: index.php"); exit; }
 ?>
 
 <!doctype html>

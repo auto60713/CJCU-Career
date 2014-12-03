@@ -1,4 +1,32 @@
 jQuery(document).ready(function(){
+
+        //焦點新聞
+        $.ajax({
+          type: 'POST',
+          async: false,
+          url: 'http://localhost/cjcuweb/cjcu_career/cc/index.php/news',
+          data:{},
+          success: function (data) { 
+            article_array = JSON.parse(data);
+          }
+        });
+
+            for (var i = 0; i < article_array.length; i++) { 
+          
+                //<li><a href="新聞頁面1"><img src="cjcu_career/cc/product_img/新聞照1" alt="新聞標題1" /></a></li>
+                //<li><img src="slider/images/chicago_illinois-wallpaper-1920x1080-tn.jpg" /></li>
+                var img = $('<img>').attr({"alt":article_array[i].title,"src":"cjcu_career/cc/product_img/"+article_array[i].pic}),
+                    link = $('<a>').attr("href",'inner_2.php?article_id='+article_array[i].id).append(img),
+                    li = $('<li>').append(link);
+
+                var img2 = $('<img>').attr("src","cjcu_career/cc/product_img/"+article_array[i].pic),
+                    li2 = $('<li>').append(img2);
+
+                $('.amazingslider-slides').append(li);
+                $('.amazingslider-thumbnails').append(li2);
+            }
+
+
     var scripts = document.getElementsByTagName("script");
     var jsFolder = "";
     for (var i= 0; i< scripts.length; i++)
@@ -8,8 +36,8 @@ jQuery(document).ready(function(){
     }
     jQuery("#amazingslider-1").amazingslider({
         jsfolder:jsFolder,
-        width:572,
-        height:308,
+        width:380,
+        height:280,
         skinsfoldername:"",
         watermarkstyle:"text",
         loadimageondemand:false,
@@ -122,7 +150,7 @@ jQuery(document).ready(function(){
         navshowplaypausestandaloneheight:28,
         backgroundimagewidth:120,
         navcolor:"#999999",
-        navthumbtitlewidth:150,
+        navthumbtitlewidth:100,
         navpreviewposition:"top",
         arrowheight:32,
         arrowmargin:8,
