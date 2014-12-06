@@ -4,7 +4,7 @@ jQuery(document).ready(function(){
         $.ajax({
           type: 'POST',
           async: false,
-          url: 'http://localhost/cjcuweb/cjcu_career/cc/index.php/news',
+          url: 'cjcu_career/cc/index.php/news',
           data:{},
           success: function (data) { 
             article_array = JSON.parse(data);

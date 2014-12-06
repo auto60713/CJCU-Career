@@ -99,7 +99,7 @@
 
 <!-- 校內新聞 -->
 <div id="area2_2" class="area_box"><h1 id="area_title">校內新聞</h1>
-	<p class="link">長榮電子報</p>
+	<a href="http://www.pop.com.tw/prnc/epaper/main.php"><p class="link">長榮電子報</p></a>
     
 		<!-- 載入資料 4篇-->
 </div>

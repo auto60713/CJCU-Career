@@ -93,27 +93,12 @@
 <script>
     <? echo 'var article_id = "'.$_GET["article_id"].'";'?>
 
-        //文章資訊
-        $.ajax({
-          type: 'POST',
-          url: 'cjcu_career/cc/index.php/news/detail/'+article_id,
-          data:{},
-          success: function (data) { 
-            if(data=='false') $('.news_title').text('請按右方選擇文章');  
-            else{
-
-            var article_array = JSON.parse(data);
-            $('.news_title').prepend(article_array.title);  
-            $('.news_time').html(article_array.created_date.split(" ")[0]);  
-            $('.news_cont').html(article_array.content);  
-            }
-          }
-        });
+       
 
         //文章選單
         $.ajax({
           type: 'POST',
-          url: 'http://localhost/cjcuweb/cjcu_career/cc/index.php/news',
+          url: 'cjcu_career/cc/index.php/news',
           data:{},
           success: function (data) { 
 
@@ -123,10 +108,35 @@
           async: false
         });
 
-
             var this_page=1,min=0,max=5;
             <? if($_GET[page]) echo "this_page=".$_GET[page].";min=(".$_GET[page]."-1)*5;max=((".$_GET[page]."-1)*5)+5;"; ?>
            
+           
+
+             //文章資訊
+        $.ajax({
+          type: 'POST',
+          url: 'cjcu_career/cc/index.php/news/detail/'+article_id,
+          data:{},
+          success: function (data) { 
+            if(data!='false') {
+
+            var paper_array = JSON.parse(data);
+            $('.news_title').prepend(paper_array.title);  
+            $('.news_time').html(paper_array.created_date.split(" ")[0]);  
+            $('.news_cont').html(paper_array.content);  
+            }
+            else{
+              //右邊邊第一篇
+            $('.news_title').prepend(article_array[min].title);  
+            $('.news_time').html(article_array[min].created_date.split(" ")[0]);  
+            $('.news_cont').html(article_array[min].content);  
+            }
+          }
+        });
+
+
+
             var page_num=1+Math.floor(article_array.length/5);
             for (var i = 1; i <= page_num; i++) {
                 page = $('<a>').addClass('point'+i).attr("href",'inner_2.php?page='+i).text(i);

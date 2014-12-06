@@ -28,7 +28,8 @@
 		<div id="tabs-1">
 			<div>		
 						<!--<a class="button good" href="<?php echo site_url().'/admin/settings/banner';?>">輪播管理</a>-->
-						<a class="button good" href="<?php echo site_url().'/admin/settings/news';?>">最新消息管理</a>
+						<a class="button good" href="<?php echo site_url().'/admin/settings/news';?>">新聞稿管理</a>
+						<a class="button good" href="http://www.career.com.tw/exam/cjcu/online_exam_login.asp">CPAS測驗</a>
 						<a class="button good" href="<?php echo site_url().'/admin/settings/users';?>">後台使用者管理</a>
 			</div>
 			</div>
@@ -39,7 +40,7 @@
 <?php echo form_close();?>
 <?php echo form_open(); ?>
 <div>
-	<div class="tabs">
+	<!--<div class="tabs">
 		<ul>
 			<li>
 				<a href="#tabs-1">基本個人資料</a>
@@ -52,6 +53,7 @@
 			</div>
 
 		</div>
+	-->
 </div>
 
 	<?php echo form_close(); ?>
