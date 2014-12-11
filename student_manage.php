@@ -1,4 +1,4 @@
-<? session_start();
+<?php session_start();
 if(!isset($_SESSION['username']) || $_SESSION['level'] != 3) { header("Location: home.php"); exit; }
 ?>
 <!doctype html>
@@ -42,7 +42,7 @@ if(!isset($_SESSION['username']) || $_SESSION['level'] != 3) { header("Location:
 				// student info
 				case 0:
 				tpe = 'get';
-				para = { userid: <? echo "\"".$_SESSION['username']."\"" ?> };
+				para = { userid: <?php echo "\"".$_SESSION['username']."\"" ?> };
 				url = "student_detail_edit.php";
 				break;
 				// 學生應徵的工作
@@ -86,7 +86,7 @@ if(!isset($_SESSION['username']) || $_SESSION['level'] != 3) { header("Location:
         }
 
 		
-		<?	//load data
+		<?php	//load data
 		    include_once("js_detail.php"); echo_student_profile($_SESSION['username']); 
 		?>
 

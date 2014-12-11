@@ -1,4 +1,4 @@
-<? session_start(); 
+<?php session_start(); 
 
 include("cjcuweb_lib.php");
 include("sqlsrv_connect.php");
@@ -33,7 +33,7 @@ function isCompanyWork($conn,$companyid,$workid){
 <html>
 <head>
 	<meta charset="UTF-8">
-    <script><? include_once('js_work_detail_apply.php'); echo_work_apply_list_array($_GET['workid']);  ?>
+    <script><?php include_once('js_work_detail_apply.php'); echo_work_apply_list_array($_GET['workid']);  ?>
 
     $(function(){
     	var body = $('#company-work-list-container');
@@ -110,7 +110,7 @@ function isCompanyWork($conn,$companyid,$workid){
     		$.ajax({
 					  type: 'post',
 					  url: 'company_work_apply_user.php',
-					  data: {check:chk, user: userid ,workid:<? echo $_GET['workid']; ?>,msg:msg} ,
+					  data: {check:chk, user: userid ,workid:<?php echo $_GET['workid']; ?>,msg:msg} ,
 					  befoerSend:function(){
 					  	$('#staff-audit-apply-ok, #staff-audit-apply-no ,#staff-audit-apply-msg').attr('disabled', '');
 					  },

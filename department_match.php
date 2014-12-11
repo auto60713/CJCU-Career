@@ -1,4 +1,4 @@
-<? session_start(); 
+<?php session_start(); 
 if(isset($_SESSION['username'])) $department_no = $_SESSION['username']; 
 else{echo "No permission!"; exit;
 } 
@@ -40,7 +40,7 @@ else{echo "No permission!"; exit;
 </body>
 
 <script>
-<? include_once('js_match_list.php'); 
+<?php include_once('js_match_list.php'); 
     echo_line_up_array($department_no);  
     echo_dep_teacher_array($department_no);
     echo_match_list_array($department_no);
@@ -64,7 +64,7 @@ else{echo "No permission!"; exit;
 				break;
 			}
 		});
-		tabgroup[<?  echo (int)$_POST['page']; ?>].click();
+		tabgroup[<?php echo (int)$_POST['page']; ?>].click();
 
 
 

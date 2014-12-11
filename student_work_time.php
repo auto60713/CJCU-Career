@@ -1,4 +1,4 @@
-<? session_start(); header("Content-Type:text/html; charset=utf-8");
+<?php session_start(); header("Content-Type:text/html; charset=utf-8");
 
 if(!isset($_SESSION['username'])) { echo "您無權訪問該頁面!"; exit; }
 else if($_GET['workid']==null) { echo "錯誤的操作!"; exit; }
@@ -64,7 +64,7 @@ td input{
 $(function(){	
 
     
-    <?  //load data
+    <?php  //load data
 		include_once("js_detail.php"); echo_student_profile($_SESSION['username']); 
         include_once("js_work_detail.php"); echo_work_detail_array($_GET['workid']);
 	?>

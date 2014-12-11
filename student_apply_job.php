@@ -1,7 +1,8 @@
-<?session_start();
-/*
-本程式為學生欲申請應徵工作 由 AJAX 執行的程式
-*/
+<?php
+session_start();
+
+//本程式為學生欲申請應徵工作 由 AJAX 執行的程式
+
 include_once("cjcuweb_lib.php");
 // 確認身分為學生
 if(isset($_SESSION['username']) && $_SESSION['level']==$level_student){

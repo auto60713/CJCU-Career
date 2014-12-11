@@ -1,5 +1,13 @@
-<? session_start(); 
-if($_SESSION['level']!=1) { echo "No permission"; exit; }
+<?php
+session_start(); 
+if(isset($_SESSION['level']){
+    if($_SESSION['level']!=1){ 
+    	echo "No permission"; exit; 
+    }
+}
+else{ 
+	echo "No permission"; exit; 
+}
 ?>
 
 <!doctype html>

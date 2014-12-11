@@ -1,4 +1,4 @@
-<? 
+<?php
 session_start(); 
 include_once("cjcuweb_lib.php");
 // 立刻驗證登入身分，防止駭客繞過登入
@@ -11,7 +11,7 @@ exit;
 }
 ?>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<?
+<?php
 include("sqlsrv_connect.php");
 
 // 取得所有表單資料並防止注入

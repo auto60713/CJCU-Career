@@ -1,4 +1,4 @@
-<?
+<?php
 session_start();
 include_once("cjcuweb_lib.php");
 
@@ -162,16 +162,16 @@ form{
 <tr>
 	<td class='td1'>聯絡地址：</td>
 	<td><input type="text" name="address" id="address"/> 
-		<label><input type="checkbox" id="address_same" >同<? echo $who ?>地址</label> 
-		<? echo '<input type="hidden" name="hidden_address" id="hidden_address" value="'.$company_address.'"/>';?>
+		<label><input type="checkbox" id="address_same" >同<?php echo $who ?>地址</label> 
+		<?php echo '<input type="hidden" name="hidden_address" id="hidden_address" value="'.$company_address.'"/>';?>
 	</td>
 </tr>
 
 <tr>
 	<td class='td1'>連絡電話：</td>
 	<td><input type="text" name="phone" id="phone"/> 
-		<label><input type="checkbox" id="phone_same" >同<? echo $who ?>電話</label>
-		<? echo '<input type="hidden" name="hidden_phone" id="hidden_phone" value="'.$company_phone.'"/>';?>
+		<label><input type="checkbox" id="phone_same" >同<?php echo $who ?>電話</label>
+		<?php echo '<input type="hidden" name="hidden_phone" id="hidden_phone" value="'.$company_phone.'"/>';?>
 	</td>
 </tr>
   
@@ -187,7 +187,7 @@ form{
 
 </table>
 
-<?  //紀錄該工作的ID
+<?php  //紀錄該工作的ID
 	if($_GET['mode']=='edit') echo "<input type='hidden' name='work-id' value=".$_GET['workid'].">";
 ?>
 
@@ -199,7 +199,7 @@ form{
 <script>
 
 	
-	<? 
+	<?php
 	// php load some help data for js array
 	include_once("js_search_work_data.php"); echo_work_sub_data();
 	include_once('js_work_list.php'); echo_work_manage_list_array($_SESSION['username']);
@@ -411,7 +411,7 @@ form{
 		   編輯模模式...................................................................
 		// .............................................................................*/
 
-		<?  if($_GET['mode']=='edit') 
+		<?php  if($_GET['mode']=='edit') 
 		echo 'setInit(work_detail_array,false); $("#btn-copy-work").remove();' ?>
 
 		function setInit(work_detail_array,is_copy_mode){

@@ -1,5 +1,5 @@
+<?php
 
-<?
 function get_all_notify($user,$level){
 
 	include("sqlsrv_connect.php");

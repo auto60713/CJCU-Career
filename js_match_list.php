@@ -1,4 +1,4 @@
-<?
+<?php
 
 //列出該系上"實習中"而且沒有負責老師的學生
 function echo_line_up_array($dep_no){

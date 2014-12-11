@@ -1,4 +1,4 @@
-<? session_start(); 
+<?php session_start(); 
 include('cjcuweb_lib.php');
 if(!isset($_SESSION['username']) || $_SESSION['level'] != $level_teacher) {
  	echo "No permission";

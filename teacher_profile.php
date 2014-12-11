@@ -1,4 +1,4 @@
-<? session_start(); ?>
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,7 +9,7 @@
 	<link rel="stylesheet" type="text/css" href="../css/profile.css">
 	<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 	<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-	<script><? include_once("js_detail.php"); echo_staff_profile($_GET['userid']); ?></script>
+	<script><?php include_once("js_detail.php"); echo_staff_profile($_GET['userid']); ?></script>
 	<script> 
 	$(function(){
 
@@ -41,7 +41,7 @@
 <div class="profile-boxleft">
 	<h2>關於</h2>
 	<div class="profile-pic">
-	<img class="profile-pic-img" src="<? echo '../img_user/'.$_GET['userid'].'.jpg' ; ?>">
+	<img class="profile-pic-img" src="<?php echo '../img_user/'.$_GET['userid'].'.jpg' ; ?>">
     </div>
 
 	<!-- 以下欄位皆為參考學生系統之欄位所建 -->

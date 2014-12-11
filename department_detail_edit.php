@@ -1,4 +1,4 @@
-<? session_start(); 
+<?php session_start(); 
 if(!isset($_SESSION['username'])) { header("Location: index.php"); exit; }
 ?>
 
@@ -6,7 +6,7 @@ if(!isset($_SESSION['username'])) { header("Location: index.php"); exit; }
 <html>
 <head>
 
-	<script><? include_once("js_detail.php"); echo_department_detail($_SESSION['username']); ?></script>
+	<script><?php include_once("js_detail.php"); echo_department_detail($_SESSION['username']); ?></script>
 </head>
 <style type="text/css">
 form{

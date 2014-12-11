@@ -1,4 +1,4 @@
-<? session_start(); 
+<?php session_start(); 
 if(isset($_SESSION['username'])) $company_id = $_SESSION['username']; 
 else{echo "No permission!"; exit;
 } 
@@ -9,7 +9,7 @@ else{echo "No permission!"; exit;
 <head>
 	<meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="css/work.css">
-    <script><? include_once('js_work_list.php'); echo_work_manage_list_array($company_id);  ?>
+    <script><?php include_once('js_work_list.php'); echo_work_manage_list_array($company_id);  ?>
 
   
     $(function(){

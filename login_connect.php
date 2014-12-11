@@ -1,4 +1,5 @@
-<?session_start();
+<?php
+session_start();
 
 
 include_once("sqlsrv_connect.php");

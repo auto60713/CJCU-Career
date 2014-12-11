@@ -1,4 +1,4 @@
-<? session_start(); 
+<?php session_start(); 
 include_once("cjcuweb_lib.php");
 
 if(isset($_GET['workid'])) $work_id=$_GET['workid']; else{header("Location: home.php"); exit;}
@@ -46,7 +46,7 @@ if(isset($_SESSION['username'])) $user_id = $_SESSION['username'];
 
 	<script>
 
-	<? 
+	<?php
 	include_once("js_work_detail.php"); 
 	echo_work_detail_array($_GET['workid']);
 
@@ -95,7 +95,7 @@ if(isset($_SESSION['username'])) $user_id = $_SESSION['username'];
 		    case 4: $('#ch').text('實習中').css('color', '#339933'); break;
         }
 
-		<?
+		<?php
 			function isapplywork($user_id,$work_id){
 				include("sqlsrv_connect.php");
 				$sql="select count(user_id) from line_up where user_id=? and work_id=?";
@@ -112,7 +112,7 @@ if(isset($_SESSION['username'])) $user_id = $_SESSION['username'];
 		?>
 
 		function show_apply_form(){
-			var wid= $('<input>').attr({type: 'hidden',	name: 'workid'}).val(<? echo $_GET['workid'];?>),
+			var wid= $('<input>').attr({type: 'hidden',	name: 'workid'}).val(<?php echo $_GET['workid'];?>),
 			submit = $('<input>').attr({type: 'submit',name: 'button',id:'btn-apply'}).val('我要應徵'),
 			form = $('<form>').attr({name:'getjobform',method:'post',action:'student_apply_job.php',id:'apply_form'});
 			$('.profile-boxleft').append(form.append(wid).append(submit));

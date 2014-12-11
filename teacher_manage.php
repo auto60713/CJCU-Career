@@ -1,4 +1,4 @@
-<? session_start();
+<?php session_start();
 if(!isset($_SESSION['username']) || $_SESSION['level'] != 2) { header("Location: home.php"); exit; }
 ?>
 <!doctype html>
@@ -82,7 +82,7 @@ if(!isset($_SESSION['username']) || $_SESSION['level'] != 2) { header("Location:
 <div class="b-space div-align overfix">
 
 	<div id="" class="left-box" >
-		<h2><? echo $_SESSION['username'] ?></h2><br><br><hr>
+		<h2><?php echo $_SESSION['username'] ?></h2><br><br><hr>
 
 		<a href="#teacher-info"><div class="list">個人資訊</div></a><hr>
 	    <a href="#teacher-match"><div class="list">實習列表</div></a><hr>

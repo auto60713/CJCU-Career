@@ -1,4 +1,4 @@
-<? session_start(); 
+<?php session_start(); 
 if(!isset($_SESSION['username'])) {
 	session_write_close();  
 	echo "0";	
@@ -7,9 +7,7 @@ if(!isset($_SESSION['username'])) {
 $lev = $_SESSION['level'];
 $user = $_SESSION['username'];
 session_write_close();
-?>
 
-<?
 // is not sign in 
 include("sqlsrv_connect.php");
 

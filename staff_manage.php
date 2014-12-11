@@ -1,4 +1,4 @@
-<? session_start();
+<?php session_start();
 if(!isset($_SESSION['username']) || $_SESSION['level'] != 1) { header("Location: home.php"); exit; }
 ?>
 <!doctype html>
@@ -60,7 +60,7 @@ if(!isset($_SESSION['username']) || $_SESSION['level'] != 1) { header("Location:
 			// student info
 				case 0:
 				tpe = 'get';
-				para = { userid: <? echo "\"".$_SESSION['username']."\"" ?> };
+				para = { userid: <?php echo "\"".$_SESSION['username']."\"" ?> };
 				url = "department_detail_edit.php";
 				break;
 			// audit
@@ -129,8 +129,8 @@ if(!isset($_SESSION['username']) || $_SESSION['level'] != 1) { header("Location:
 	<div class="left-box" >
 		
 		<div class="profile-box">
-			<img src="<? echo 'img_company/'.$_SESSION['username'].'.jpg' ?>" class="profile-img" id="profile-img"><br>
-			<h2><? echo $_SESSION['username'] ?></h2>
+			<img src="<?php echo 'img_company/'.$_SESSION['username'].'.jpg' ?>" class="profile-img" id="profile-img"><br>
+			<h2><?php echo $_SESSION['username'] ?></h2>
 		</div>
 
 		<a href="#staff-info"><div class="list">個人資訊</div></a><hr>
@@ -159,7 +159,7 @@ if(!isset($_SESSION['username']) || $_SESSION['level'] != 1) { header("Location:
 		<h1>上傳圖片<i class="fa fa-times login-exit" id="upload-close"></i></h1>
 		<p class="login-hint">您可以更新一張代表系上的照片</p>
 
-		<img src="<? echo 'img_company/'.$_SESSION['username'].'.jpg' ?>" class="upload-img-max">
+		<img src="<?php echo 'img_company/'.$_SESSION['username'].'.jpg' ?>" class="upload-img-max">
 		<form id="upload_form" enctype="multipart/form-data" method="post">
 		 <input type="file" name="file1" id="file1"  class="btn-submit" accept="image/*"> <p id="status"></p>
 		

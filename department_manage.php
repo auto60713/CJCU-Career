@@ -1,5 +1,5 @@
-<? session_start();
-if(!isset($_SESSION['username']) || $_SESSION['level'] != 5) { header("Location: home.php"); exit; }
+<?php session_start();
+if(!isset($_SESSION['username']) || $_SESSION['level'] != 5) { header("Location: index.php"); exit; }
 ?>
 <!doctype html>
 <html>
@@ -73,7 +73,7 @@ if(!isset($_SESSION['username']) || $_SESSION['level'] != 5) { header("Location:
 
 				case 4:
 				tpe = 'post';
-				para = {level: <? echo "'".$_SESSION['level']."'"; ?>,username: <? echo "'".$_SESSION['username']."'"; ?>};
+				para = {level: <?php echo "'".$_SESSION['level']."'"; ?>,username: <?php echo "'".$_SESSION['username']."'"; ?>};
 				url = "notice.php";	
 				break;
 
@@ -120,8 +120,8 @@ if(!isset($_SESSION['username']) || $_SESSION['level'] != 5) { header("Location:
 	<div id="" class="left-box" >
 
 		<div class="profile-box">
-			<img src="<? echo 'img_company/'.$_SESSION['username'].'.jpg' ?>" class="profile-img" id="profile-img">
-			<h2><? echo $_SESSION['username'] ?></h2>
+			<img src="<?php echo 'img_company/'.$_SESSION['username'].'.jpg' ?>" class="profile-img" id="profile-img">
+			<h2><?php echo $_SESSION['username'] ?></h2>
 		</div>
 
 		<a href="#department-info"><div class="list">系所資訊</div></a><hr>
@@ -153,8 +153,8 @@ if(!isset($_SESSION['username']) || $_SESSION['level'] != 5) { header("Location:
 		<h1>上傳圖片<i class="fa fa-times login-exit" id="upload-close"></i></h1>
 		<p class="login-hint">您可以更新一張代表系上的照片</p>
 
-		<img src="<? echo 'img_company/'.$_SESSION['username'].'.jpg' ?>" class="upload-img-max">
-		<img src="<? echo 'img_company/'.$_SESSION['username'].'.jpg' ?>" class="upload-img-min">
+		<img src="<?php echo 'img_company/'.$_SESSION['username'].'.jpg' ?>" class="upload-img-max">
+		<img src="<?php echo 'img_company/'.$_SESSION['username'].'.jpg' ?>" class="upload-img-min">
 		<form id="upload_form" enctype="multipart/form-data" method="post">
 		 <input type="file" name="file1" id="file1"  class="btn-submit" accept="image/*"> <p id="status"></p>
 		

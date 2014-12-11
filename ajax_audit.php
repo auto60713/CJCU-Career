@@ -1,7 +1,7 @@
-<?
-/*
-本程式為管理員對於 工作 或 公司 進行審查後，修改審查紀錄
-*/
+<?php
+
+//本程式為管理員對於 工作 或 公司 進行審查後，修改審查紀錄
+
 
 session_start(); 
 session_write_close();
@@ -9,11 +9,16 @@ session_write_close();
 // 審核頁面  身分驗證
 include('cjcuweb_lib.php');
 
+if(isset($_SESSION['level']){
 if($_SESSION['level']!=$level_staff){
 	echo "0-1"; 
 	exit; 
 }
-
+}
+else{
+	echo "0-1"; 
+	exit; 
+}
 
 //data: {censored:c, obj_id:obj_id, type:t, msg:m},
 include("sqlsrv_connect.php");

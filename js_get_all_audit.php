@@ -1,4 +1,4 @@
-<?
+<?php
 // $ch 為審核狀況
 // 藉由本程式過濾出 不同審核狀況的清單
 function  get_all_audit($ch){

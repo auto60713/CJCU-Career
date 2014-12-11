@@ -1,4 +1,4 @@
-<? session_start(); 
+<?php session_start(); 
 if(!isset($_SESSION['username'])) { echo 'No permission!'; exit; }
 ?>
 
@@ -6,7 +6,7 @@ if(!isset($_SESSION['username'])) { echo 'No permission!'; exit; }
 <html>
 <head>
 	<script></script>
-	<script><? include_once("js_audit_detail.php"); echo_audit_detail_array($_SESSION['username'],0); ?></script>
+	<script><?php include_once("js_audit_detail.php"); echo_audit_detail_array($_SESSION['username'],0); ?></script>
 	<script src="lib/jquery.validate.js"></script>
 </head>
 <style type="text/css">
@@ -34,7 +34,7 @@ label.error{
 <script>
 	$(function(){
 
-		<?  //公司的基本資料
+		<?php  //公司的基本資料
 		    include_once("js_detail.php"); echo_company_detail($_SESSION['username']); 
 		?>
 
@@ -113,7 +113,7 @@ label.error{
 			$('div[tabtoggle="workedit2"]:not(div[tabtoggle="workedit2"]:eq('+index+'))').addClass('workedit-content-hide');
 		});
 
-		tabgroup[<?  echo (int)$_GET['page']; ?>].click();
+		tabgroup[<?php  echo (int)$_GET['page']; ?>].click();
 
 	});
 
@@ -127,7 +127,7 @@ label.error{
     $("#zone_name").append($("<option>").attr("value", company_zone_array_id[i]).text(company_zone_array[i]));
 
     //js_company_detail.php取得公司類型與位置
-    <? echo_company_type_and_zone($_SESSION['username']); ?>
+    <?php echo_company_type_and_zone($_SESSION['username']); ?>
     $("#company_type").val(company_type);
 	$("#zone_name").val(company_zone);
 	

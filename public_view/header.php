@@ -1,7 +1,7 @@
-<? 
+<?php
 session_start();
-$lev = $_SESSION['level'];
-$user = $_SESSION['username'];
+if(isset($_SESSION['level']) $lev = $_SESSION['level'];
+if(isset($_SESSION['username']) $user = $_SESSION['username'];
 
 
 //抓取資料庫 此username的用戶名稱
@@ -162,7 +162,7 @@ function echo_data($user,$lev){
 
 	</div>
 	<div class="sub4"> 
-	<? echo_data($user,$lev)	 ?>  
+	<?php echo_data($user,$lev)	 ?>  
 	</div>
 
 <!-- light box -->

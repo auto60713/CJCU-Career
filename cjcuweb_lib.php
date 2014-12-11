@@ -1,4 +1,4 @@
-<?
+<?php
 
 	// 各種身分的權限值
     $level_department = 5;

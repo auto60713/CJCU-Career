@@ -1,4 +1,4 @@
-<? session_start(); 
+<?php session_start(); 
 include_once('cjcuweb_lib.php');
 include_once('sqlsrv_connect.php');
 // 檢查該工作是否屬於該公司
@@ -58,7 +58,7 @@ function isCompanyWork($conn,$companyid,$workid){
 
 </body>
 
-<script><? include_once("js_audit_detail.php"); echo_audit_detail_array($_POST['workid'],1); ?></script>
+<script><?php include_once("js_audit_detail.php"); echo_audit_detail_array($_POST['workid'],1); ?></script>
 <script>
 
 	$(function(){
@@ -67,7 +67,7 @@ function isCompanyWork($conn,$companyid,$workid){
 		$.ajax({
 		  type: 'POST',
 		  url: 'ajax_work_edit.php',
-		  data:{mode:0,workid:<?  echo (int)$_POST['workid']; ?>},
+		  data:{mode:0,workid:<?php  echo (int)$_POST['workid']; ?>},
 		  success: function (data) { 
             var remove_array = JSON.parse(data);
 
@@ -83,7 +83,7 @@ function isCompanyWork($conn,$companyid,$workid){
 		  type: 'get',
 		  url: 'work_add.php',
 		  async:false,
-		  data: {mode:'edit',workid:  <?  echo (int)$_POST['workid']; ?> },
+		  data: {mode:'edit',workid:  <?php  echo (int)$_POST['workid']; ?> },
 		  success: function (data) { $('#workedit-content-edit').html(data) ;  }
 		});
 
@@ -91,7 +91,7 @@ function isCompanyWork($conn,$companyid,$workid){
 		$.ajax({
 		  type: 'get',
 		  url: 'work_detail_apply.php',
-		  data: {workid:  <?  echo (int)$_POST['workid']; ?> },
+		  data: {workid:  <?php  echo (int)$_POST['workid']; ?> },
 		  success: function (data) { $('#workedit-content-apply').html(data) ;  }
 		});
 
@@ -99,7 +99,7 @@ function isCompanyWork($conn,$companyid,$workid){
 		$.ajax({
 		  type: 'POST',
 		  url: 'ajax_work_edit.php',
-		  data:{mode:3,workid:<?  echo (int)$_POST['workid']; ?>},
+		  data:{mode:3,workid:<?php  echo (int)$_POST['workid']; ?>},
 		  success: function (data) { 
             var work_divbtn_array = JSON.parse(data);
             //幾個array:幾個按鈕 , divbtn_id:按鈕的ID , divbtn_text:按鈕的內容
@@ -164,7 +164,7 @@ function isCompanyWork($conn,$companyid,$workid){
 				$.ajax({
 					url: 'ajax_audit_again.php',
 					type: 'post',
-					data: {objid:<?  echo (int)$_POST['workid']; ?>},
+					data: {objid:<?php echo (int)$_POST['workid']; ?>},
 				})
 				.done(function(data) {
 					if(data!='0') {
@@ -206,7 +206,7 @@ function isCompanyWork($conn,$companyid,$workid){
 				break;
 			}
 		});
-		tabgroup[<?  echo (int)$_POST['page']; ?>].click();
+		tabgroup[<?php echo (int)$_POST['page']; ?>].click();
 
 
 
@@ -217,7 +217,7 @@ function isCompanyWork($conn,$companyid,$workid){
 		    	$.ajax({
 			     	type:"POST",
 			     	url: "ajax_work_edit.php",
-			     	data:{mode:1,workid:<? echo (int)$_POST['workid']; ?>},
+			     	data:{mode:1,workid:<?php echo (int)$_POST['workid']; ?>},
                     success: function (data) { 
           
                     	$('#workedit-content-start').text(data);
@@ -234,7 +234,7 @@ function isCompanyWork($conn,$companyid,$workid){
 		    	$.ajax({
 			     	type:"POST",
 			     	url: "ajax_work_edit.php",
-			     	data:{mode:2,workid:<? echo (int)$_POST['workid']; ?>},
+			     	data:{mode:2,workid:<?php echo (int)$_POST['workid']; ?>},
                     success: function (data) { 
           
                     	$('#workedit-content-start').text(data);
@@ -250,7 +250,7 @@ function isCompanyWork($conn,$companyid,$workid){
 			$.ajax({
 			    type:"POST",
 			    url: "ajax_echo_name.php",
-			    data:{mode:'work',workid:<? echo (int)$_POST['workid']; ?>},
+			    data:{mode:'work',workid:<?php echo (int)$_POST['workid']; ?>},
                 success: function (data) { //上括號
                 if(data != 0){
                 var work_name=data;
@@ -260,7 +260,7 @@ function isCompanyWork($conn,$companyid,$workid){
 		    	    $.ajax({
 			         	type:"POST",
 			         	url: "delete.php",
-			         	data:{mode:0,workid:<? echo (int)$_POST['workid']; ?>,workname:work_name},
+			         	data:{mode:0,workid:<?php echo (int)$_POST['workid']; ?>,workname:work_name},
                         success: function (data2) { 
                         	if(data2 != 0){
                         		alert('刪除成功');

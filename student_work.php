@@ -1,6 +1,6 @@
-<? session_start(); ?>
+<?php session_start(); ?>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<?
+<?php
 if(isset($_SESSION['username'])) $userid = $_SESSION['username']; 
 else{echo "您無權訪問該頁面!"; exit;} 
 ?>
@@ -9,7 +9,7 @@ else{echo "您無權訪問該頁面!"; exit;}
 <html>
 <head>
 	<meta charset="UTF-8">
-    <script><? include_once('js_work_list.php'); echo_student_apply_list_array($userid);  ?>
+    <script><?php include_once('js_work_list.php'); echo_student_apply_list_array($userid);  ?>
 
     $(function(){
     	

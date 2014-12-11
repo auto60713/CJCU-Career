@@ -1,4 +1,5 @@
-<?session_start(); 
+<?php
+session_start(); 
 //管理員的處理事項 
 
 if($_SESSION['level']!=1) { echo "No permission"; exit; }

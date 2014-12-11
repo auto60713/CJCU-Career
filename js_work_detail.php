@@ -1,4 +1,4 @@
-<?
+<?php
 $GLOBALS['cust_company'] ='';
 
 

@@ -1,4 +1,4 @@
-<?
+<?php
 include("sqlsrv_connect.php");
 
 // output work type and id array

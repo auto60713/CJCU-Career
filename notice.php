@@ -1,4 +1,4 @@
-<?
+<?php
 session_start();
 
 if(!isset($_SESSION['username'])){
@@ -14,7 +14,7 @@ $usr = $_SESSION['username'];
 <html>
 <head>
 	<link rel="stylesheet" type="text/css" href="css/notice.css?v=2">
-	<script><? include_once("js_get_all_notify.php");  get_all_notify($usr,$lev); ?></script>
+	<script><?php include_once("js_get_all_notify.php");  get_all_notify($usr,$lev); ?></script>
 	<script>
 
 	var ctu = true;
@@ -68,7 +68,7 @@ $usr = $_SESSION['username'];
 		 ajax =  $.ajax({
                type:"POST",
                dataType:"json",
-               data: {level:<? echo '"'.$lev.'"'; ?>,username:<? echo '"'.$usr.'"'; ?>},      
+               data: {level:<?php echo '"'.$lev.'"'; ?>,username:<?php echo '"'.$usr.'"'; ?>},      
                url:"ajax_get_new_msg.php",
                beforeSend: function( xhr ) {
 				    console.log('sent request in long polling');

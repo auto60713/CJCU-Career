@@ -1,6 +1,6 @@
-<? session_start();?>
+<?php session_start();?>
 <meta charset="UTF-8">
-<?
+<?php
 
 include_once("sqlsrv_connect.php");
 include_once("cjcuweb_lib.php");

@@ -1,6 +1,13 @@
-<? session_start(); 
+<?php session_start(); 
 include_once('cjcuweb_lib.php');
-if($_SESSION['level']!=$level_staff){echo "No permission"; exit; }
+if(isset($_SESSION['level']){
+if($_SESSION['level']!=$level_staff){
+	echo "No permission"; exit; 
+}
+}
+else{
+	echo "No permission"; exit; 
+}
 ?>
 
 <!doctype html>
@@ -9,7 +16,7 @@ if($_SESSION['level']!=$level_staff){echo "No permission"; exit; }
 	<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="css/work_detail_edit.css?v=0">
 	<script>
-	<? include_once("js_get_all_audit.php");  
+	<?php include_once("js_get_all_audit.php");  
 	get_all_audit(0); 
 	get_all_audit(3); ?>
 	</script>
@@ -203,7 +210,7 @@ if($_SESSION['level']!=$level_staff){echo "No permission"; exit; }
 			$('div[tabtoggle="workedit2"]').removeClass('workedit-content-hide');
 			$('div[tabtoggle="workedit2"]:not(div[tabtoggle="workedit2"]:eq('+index+'))').addClass('workedit-content-hide');
 		});
-		tabgroup[<?  echo (int)$_GET['page']; ?>].click();
+		tabgroup[<?php echo (int)$_GET['page']; ?>].click();
 
 	});
 	

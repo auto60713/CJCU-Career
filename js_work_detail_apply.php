@@ -1,4 +1,4 @@
-<?
+<?php
 /* 應徵者列表轉成JS Array */
 function echo_work_apply_list_array($workid){
 

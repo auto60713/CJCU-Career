@@ -1,18 +1,23 @@
-<?
+<?php
 
 session_start(); 
 session_write_close();
 
 include('cjcuweb_lib.php');
 
+if(!isset($_SESSION['level']){
 if($_SESSION['level']!=$level_company){
 	echo "0"; 
 	exit; 
 }
+}
+else{
+	echo "0"; 
+	exit; 
+}
 
-/*
-	[注意!]這隻程式尚未做身分驗證，之後再補上
-*/
+	//[注意!]這隻程式尚未做身分驗證，之後再補上
+
 
 include("sqlsrv_connect.php");
 

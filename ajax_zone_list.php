@@ -1,4 +1,4 @@
-<?
+<?php
 include("sqlsrv_connect.php");
 $params = array(trim($_POST['zone']));
 $options =  array("Scrollable" => SQLSRV_CURSOR_KEYSET);

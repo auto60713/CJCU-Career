@@ -1,4 +1,4 @@
-<? session_start(); 
+<?php session_start(); 
 if(isset($_SESSION['username'])) $teacher_no = $_SESSION['username']; 
 else{echo "No permission!"; exit;
 } 
@@ -26,7 +26,7 @@ else{echo "No permission!"; exit;
 </body>
 
 <script>
-<? include_once('js_match_list.php'); 
+<?php include_once('js_match_list.php'); 
     echo_match_teacher_array($teacher_no);
 ?>
 

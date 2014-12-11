@@ -1,4 +1,4 @@
-<? session_start(); 
+<?php session_start(); 
 include_once("sqlsrv_connect.php");
 include_once("cjcuweb_lib.php");
 

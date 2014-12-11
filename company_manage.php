@@ -1,4 +1,4 @@
-<? session_start(); 
+<?php session_start(); 
 if(!isset($_SESSION['username']) || $_SESSION['level'] != 4) { header("Location: home.php"); exit; }
 ?>
 <!doctype html>
@@ -48,14 +48,14 @@ if(!isset($_SESSION['username']) || $_SESSION['level'] != 4) { header("Location:
 				// company info page 0
 				case '0-0':
 				tpe = 'get';
-				para = { companyid: <? echo "\"".$_SESSION['username']."\"" ?> ,page:0 };
+				para = { companyid: <?php echo "\"".$_SESSION['username']."\"" ?> ,page:0 };
 				url = "company_detail_edit.php";
 				break;
 
 				// company info page 1
 				case '0-1':
 				tpe = 'get';
-				para = { companyid: <? echo "\"".$_SESSION['username']."\"" ?> ,page:1 };
+				para = { companyid: <?php echo "\"".$_SESSION['username']."\"" ?> ,page:1 };
 				url = "company_detail_edit.php";
 				break;
 
@@ -74,7 +74,7 @@ if(!isset($_SESSION['username']) || $_SESSION['level'] != 4) { header("Location:
 				// notice
 				case 3:
 				tpe = 'post';
-				para = {level: <? echo "'".$_SESSION['level']."'"; ?>,username: <? echo "'".$_SESSION['username']."'"; ?>};
+				para = {level: <?php echo "'".$_SESSION['level']."'"; ?>,username: <?php echo "'".$_SESSION['username']."'"; ?>};
 				url = "notice.php";	
 				break;
 
@@ -107,7 +107,7 @@ if(!isset($_SESSION['username']) || $_SESSION['level'] != 4) { header("Location:
 
 
             //依照公司審核通過與否 後端傳來的資料不同
-            <? include_once("company_manage_apply.php"); censored_check(); ?>
+            <?php include_once("company_manage_apply.php"); censored_check(); ?>
 
 
 	});
@@ -125,8 +125,8 @@ if(!isset($_SESSION['username']) || $_SESSION['level'] != 4) { header("Location:
 	<div id="" class="left-box" >
 
 		<div class="profile-box">
-			<img src="<? echo 'img_company/'.$_SESSION['username'].'.jpg' ?>" class="profile-img" id="profile-img"><br>
-			<h2><? echo $_SESSION['username'] ?></h2>
+			<img src="<?php echo 'img_company/'.$_SESSION['username'].'.jpg' ?>" class="profile-img" id="profile-img"><br>
+			<h2><?php echo $_SESSION['username'] ?></h2>
 		</div>
 
 		<a href="#company-info-0"><div class="list">公司資訊</div></a><hr>
@@ -158,7 +158,7 @@ if(!isset($_SESSION['username']) || $_SESSION['level'] != 4) { header("Location:
 		<h1>上傳公司圖片<i class="fa fa-times login-exit" id="upload-close"></i></h1>
 		<p class="login-hint">您可以更新一張代表公司行號的照片</p>
 
-		<img src="<? echo 'img_company/'.$_SESSION['username'].'.jpg' ?>" class="upload-img-max">
+		<img src="<?php echo 'img_company/'.$_SESSION['username'].'.jpg' ?>" class="upload-img-max">
 		<form id="upload_form" enctype="multipart/form-data" method="post">
 		 <input type="file" name="file1" id="file1"  class="btn-submit" accept="image/*">
 		

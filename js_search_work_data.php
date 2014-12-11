@@ -1,4 +1,4 @@
-<?
+<?php
 function echo_work_sub_data(){
 
 include("sqlsrv_connect.php");

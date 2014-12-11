@@ -1,4 +1,4 @@
-<? session_start(); 
+<?php session_start(); 
 include('cjcuweb_lib.php');
 if(!isset($_SESSION['username']) || $_SESSION['level'] != $level_student) {
  	echo "<br>No permission";
@@ -34,7 +34,7 @@ if(!isset($_SESSION['username']) || $_SESSION['level'] != $level_student) {
 <body>
 <script>
 
-<?  //後端傳來個人資料
+<?php  //後端傳來個人資料
     include_once("js_detail.php"); echo_student_detail($_SESSION['username']); 
 ?>
 
