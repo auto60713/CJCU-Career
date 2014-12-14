@@ -36,6 +36,10 @@ switch($_POST['mode']){
       match_stu_array($_POST['workid']);
   break;
 
+  case 6://打實習分數
+      set_work_score($_POST['no'],$_POST['score']);
+  break;
+
 }
 
 
@@ -200,6 +204,20 @@ $stmt = sqlsrv_query($conn, $sql, $para);
     }
 
 
+}
+
+
+
+//打實習分數
+function set_work_score($no,$score){
+  include_once("sqlsrv_connect.php");
+
+
+  $sql  = "update line_up set score=(?) where no=?"; 
+
+  if( sqlsrv_query($conn, $sql, array((int)$score,(int)$no)) ) echo '1';     
+  else echo '操作失敗!';
+    
 }
 
 

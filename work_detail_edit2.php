@@ -36,7 +36,7 @@ function isCompanyWork($conn,$companyid,$workid){
 <div class="workedit-content" id='workedit-content'>
 
 	<!-- 該工作的資料編輯，AJAX別的畫面 -->
-	<div id='workedit-content-edit' class="" tabtoggle='workedit2'></div>
+	<div id='workedit-content-edit' class="workedit-content-hide" tabtoggle='workedit2'></div>
 	<!-- 該工作的應徵學生列表，AJAX別的畫面 -->
 	<div id='workedit-content-apply' class="workedit-content-hide" tabtoggle='workedit2'></div>
 	<!-- 該工作應徵結束 -->
@@ -105,7 +105,7 @@ function isCompanyWork($conn,$companyid,$workid){
             //幾個array:幾個按鈕 , divbtn_id:按鈕的ID , divbtn_text:按鈕的內容
             for(var i=0;i<work_divbtn_array.length;i++){
             var work_divbtn = $('<a>').attr('id',work_divbtn_array[i].divbtn_id).addClass('work-divbtn').text(work_divbtn_array[i].divbtn_text);
-		  	$('#workedit-content-start').append(work_divbtn).append($('<br>'));  
+		  	$('#workedit-content-start').append(work_divbtn,$('<br>'));  
 		    }
 		  }
 		});
@@ -146,12 +146,11 @@ function isCompanyWork($conn,$companyid,$workid){
 				statustxt2 = (audit_array[i].censored==1)? ' 審核通過': ' 審核不通過',
 				time = $('<span>').addClass('company-audit-time').text(audit_array[i].time.split(' ')[0]),
 				icon = $('<i>').addClass(icontxt2),
-				censored = $('<span>').addClass('company-audit-censored').append(icon).append(statustxt2),
+				censored = $('<span>').addClass('company-audit-censored').append(icon,statustxt2),
 				msg = $('<span>').addClass('company-audit-msg').text(audit_array[i].msg),
 				vialink = $('<a>').attr('target','_blank').attr('href', 'department-'+audit_array[i].staff_no).text(audit_array[i].staff_no),
-				via = $('<span>').addClass('company-audit-via').append('審核者：').append(vialink),
-				all = $('<div>').addClass('company-audit-list').append(time).append(censored)
-				.append(msg).append(via);
+				via = $('<span>').addClass('company-audit-via').append('審核者：',vialink),
+				all = $('<div>').addClass('company-audit-list').append(time,censored,msg,via);
 				audit_history_container.append(all);
 		}
 
@@ -175,7 +174,7 @@ function isCompanyWork($conn,$companyid,$workid){
 
 			});
 
-		$('.company-audit-status').append(icon).append(statustxt).css('color', color);
+		$('.company-audit-status').append(icon,statustxt).css('color', color);
 		if(work_detail_array.check==2) $('.company-audit-status').append(again_btn);
 		if(work_detail_array.check==3) $('.company-audit-status').append(again_txt);
 

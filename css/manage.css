@@ -96,16 +96,15 @@ form[id='detail'] input[type='text']{
 
 
 .btn-copy-work{
-	background-color: #DDD;
 	padding-left: 10px;
 	padding-right: 10px;
 	height: 30px;
+	margin-left: 20px;
 	margin-bottom: 10px;
-	border:none;
 }
-.btn-copy-work:hover{
-	cursor: pointer;
-	background-color: #EEE;
+.work-add-submit{
+	margin-top: 20px;
+	width: 120px;
 }
 
 .listbox-copy-work{

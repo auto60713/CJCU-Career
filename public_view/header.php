@@ -1,7 +1,7 @@
 <?php
 session_start();
-if(isset($_SESSION['level']) $lev = $_SESSION['level'];
-if(isset($_SESSION['username']) $user = $_SESSION['username'];
+if(isset($_SESSION['level'])) $lev = $_SESSION['level'];
+if(isset($_SESSION['username'])) $user = $_SESSION['username'];
 
 
 //抓取資料庫 此username的用戶名稱

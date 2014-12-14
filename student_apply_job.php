@@ -23,7 +23,7 @@ else error_return($work_id);
 }
 
 // 無權訪問本頁面
-else{header("Location: home.php"); exit;}
+else{header("Location: index.php"); exit;}
 
 function error_return($work_id){
 	

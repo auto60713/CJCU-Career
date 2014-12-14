@@ -1,5 +1,5 @@
 <?php session_start(); 
-if(!isset($_SESSION['username']) || $_SESSION['level'] != 4) { header("Location: home.php"); exit; }
+if(!isset($_SESSION['username']) || $_SESSION['level'] != 4) { header("Location: index.php"); exit; }
 ?>
 <!doctype html>
 <html>

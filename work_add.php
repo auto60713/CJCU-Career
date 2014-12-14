@@ -84,8 +84,6 @@ form{
     padding-top: 5px;
     padding-bottom: 5px;
 }
-
-
 </style>
 </head>
 <body>
@@ -191,7 +189,7 @@ form{
 	if($_GET['mode']=='edit') echo "<input type='hidden' name='work-id' value=".$_GET['workid'].">";
 ?>
 
-<input type="submit" name="button" value="確定" />
+<input class="work-add-submit" type="submit" name="button" value="確定" />
 </form>
 
 

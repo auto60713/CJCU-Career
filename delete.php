@@ -29,6 +29,10 @@ switch($_POST['mode']){
   case 1:
       delete_lineup($_POST['workid']);
   break;
+
+  case 2:
+      delete_work_time($_POST['no']);
+  break;
 }
 
 
@@ -102,6 +106,23 @@ include("sqlsrv_connect.php");
 
 }
 
+
+//取消工讀單項目
+function delete_work_time($no){
+
+include("sqlsrv_connect.php");
+
+    $sql = "DELETE FROM work_time WHERE no = ?";
+    $stmt = sqlsrv_query($conn, $sql, array($no));
+
+    if($stmt) {
+        sqlsrv_free_stmt($stmt);
+        echo "1";
+    }
+    else die(print_r( sqlsrv_errors(), true));
+
+
+}
 
 
 

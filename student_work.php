@@ -41,13 +41,14 @@ else{
 		    		tit = $('<h1>').addClass('work-tit').append(tita),
 		    		company = $('<div>').addClass('manage-company-herf').append("發布自 ",companyherf),
 		    		hint = $('<p>').addClass('work-hint').append((work_list_array[i]['zone']) +'  '+ work_list_array[i]['prop']),
-		    		wtime = "",//$('<a>').attr('href', '#work'+work_list_array[i]['wid']).text('工讀單'),
+		    		wtime = $('<a>').attr('href', '#work'+work_list_array[i]['wid']).text('工讀單'),
 
 		    		hint2 = $('<p>').attr({
 		    		    workid : work_list_array[i]['wid'],
 		    			audit : work_list_array[i]['ch']
 		    		}).addClass('check-lightbox'),
-                    teacher = $('<a>').text('負責老師 '+work_list_array[i]['tea_name']),
+                    teacher = $('<p>').text('負責老師 '+work_list_array[i]['tea_name']),
+                    score = $('<p>').text('實習分數 '+work_list_array[i]['score']),
 
 		    		// 移動到LightBox內 pass = $('<div>').attr('workid', work_list_array[i]['wid']).addClass('pass-req').text("要求再審核"),
 		    	    statustxt = $('<span>').addClass('nocheck').text('已要求重新再審！'),
@@ -66,7 +67,7 @@ else{
 			    		case 5: check_status='完成工作!'; hint2.addClass('sta5 yescheck').text(check_status); break;
 		    		}
 
-		        	subbox3.append($('<br>'),teacher);
+		        	subbox3.append($('<br>'),teacher,score);
 		    		var mainbox = $('<div>').addClass('work-list-box').append(subbox1).append(subbox2).append(subbox3);
 		    		
 		    		//Show 出該工作詳細的歷史應徵審查紀錄

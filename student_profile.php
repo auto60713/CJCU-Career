@@ -1,4 +1,13 @@
-<?php session_start(); ?>
+<?php session_start(); 
+include('cjcuweb_lib.php');
+if($_SESSION['level'] == $level_student){
+	if(trim($_SESSION['username']) != $_GET['userid']){
+
+    echo "<br>No permission";
+ 	exit; 
+	}
+}
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,15 +37,7 @@
 
         $('#es_name').text(student_profile_array['es_name']);
 
-
-        switch(student_profile_array['sd_class'].trim()) {
-        case '1':var sd_class='A';break;
-        case '2':var sd_class='B';break;
-        case '3':var sd_class='C';break;
-        case '4':var sd_class='D';break;
-        case '5':var sd_class='E';break;
-         } 
-        $('#dm_data').text(student_profile_array['dm_name']+student_profile_array['sd_grade']+sd_class);
+        $('#dm_data').text(student_profile_array['dm_name']+student_profile_array['sd_grade']+student_profile_array['cla_name']);
         $('#sd_syear').text(student_profile_array['sd_syear']);
 
         $('#sd_addr').text(student_profile_array['sd_addr']);

@@ -10,7 +10,7 @@ if($_GET["stu_no"]) echo_student_detail($_GET["stu_no"]);
 function echo_student_profile($stu_no){
 include("sqlsrv_connect.php");
 
-	$sql = "select sd_stud_no sd_no,sd_stud_name sd_name,sd_birthday,es_system_name es_name,dm_dep_short_name dm_name,sd_grade_now sd_grade,sd_class_no sd_class,sd_entrance_syear sd_syear,sd_contact_addr sd_addr,sd_cell_phone sd_phone "
+	$sql = "select sd_stud_no sd_no,sd_stud_name sd_name,sd_birthday,es_system_name es_name,dm_dep_short_name dm_name,sd_grade_now sd_grade,cla_class_name cla_name,sd_entrance_syear sd_syear,sd_contact_addr sd_addr,sd_cell_phone sd_phone "
 		  ."from career_student_data where sd_stud_no=?";
 	
 	$stmt = sqlsrv_query($conn, $sql, array($stu_no));

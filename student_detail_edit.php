@@ -1,10 +1,9 @@
 <?php session_start(); 
 include('cjcuweb_lib.php');
-if(!isset($_SESSION['username']) || $_SESSION['level'] != $level_student) {
- 	echo "<br>No permission";
+if($_SESSION['username'] != $_GET['userid']) {
+	echo "<br>No permission";
  	exit; 
 }
-
 ?>
 
 <!doctype html>
@@ -35,7 +34,7 @@ if(!isset($_SESSION['username']) || $_SESSION['level'] != $level_student) {
 <script>
 
 <?php  //後端傳來個人資料
-    include_once("js_detail.php"); echo_student_detail($_SESSION['username']); 
+    include_once("js_detail.php"); echo_student_detail($_GET['userid']); 
 ?>
 
     var column_name = ["學號","在學狀態","中文名","英文名","學制代碼","系所代碼","目前年級","班級代碼","入學年","學制名稱","學制簡稱","系所簡稱","系所英文","班級名稱","生日","家電話","手機","電子信箱","郵遞區號","地址"],

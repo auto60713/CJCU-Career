@@ -56,7 +56,7 @@ function isCompanyWork($conn,$companyid,$workid){
     			.append($('<p>').addClass('work-hint').append(doca)),
     			subbox3 = $('<div>').addClass('sub-box2');
 
-    			subbox3.on('click', {arr:work_apply_list_array[i]} ,function(event) {
+    			auditbtn.on('click', {arr:work_apply_list_array[i]} ,function(event) {
 					//event.data.arr['user_id']
 
 						$('.staff-apply-form').remove();
@@ -89,11 +89,21 @@ function isCompanyWork($conn,$companyid,$workid){
 
 				switch(work_apply_list_array[i]['check']) {
 					case 0:case 3:
-						subbox3.append(auditbtn);break;
+						subbox3.append(auditbtn);
+					break;
 					case 1:
-						subbox3.append($('<div>').addClass('isapply').text('已錄取'));break;
+						subbox3.append($('<div>').addClass('isapply').text('已錄取'));
+					break;
 					case 2:
-						subbox3.append($('<div>').addClass('isnotapply').text('不錄取'));break;	
+						subbox3.append($('<div>').addClass('isnotapply').text('不錄取'));
+					break;	
+					case 4:
+					    var work_time_link = $('<a>').attr({href:"student_work_time.php?studid="+work_apply_list_array[i]['user_id']+"&workid="+work_apply_list_array[i]['work_id']+"&view=1",target:"_blank"}).text("工作日誌"),
+					        text = $('<p>').text("學生的實習分數："+work_apply_list_array[i]['score']+"分"),
+					        score = $('<input>').addClass('score').attr({type:"text",placeholder:"打分數",name:work_apply_list_array[i]['user_id']}),
+					        submit = $('<button>').attr({type:"button",name:"score_btn","no":work_apply_list_array[i]['no'],value:work_apply_list_array[i]['user_id']}).text("確定");
+						subbox3.append(work_time_link,text,score,submit);
+					break;	
 				}	
 			var mainbox = $('<div>').addClass('work-list-box').append(subbox1).append(subbox2).append(subbox3);
 				body.append(mainbox);
@@ -128,6 +138,20 @@ function isCompanyWork($conn,$companyid,$workid){
 			});
 
     	}
+
+    $( "button[name=score_btn]" ).click(function() {
+        //打分數
+        var stud_id = $(this).val(),
+            line_no = $(this).attr('no'),
+            score_val = $('input[name='+stud_id+']').val();
+        $.ajax({
+          type: 'POST',
+          url: 'ajax_work_edit.php',
+          data: {mode:6,no:line_no,score:score_val},
+          success: function (data) { if(data==1) location.reload(); }
+        });
+      
+    });
 
 
     	

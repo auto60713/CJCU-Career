@@ -6,8 +6,8 @@ include_once("cjcuweb_lib.php");
 
 //取得登入者的ID跟LEVEL權限
 
-if(isset($_SESSION['username']) $userid = $_SESSION['username'];
-if(isset($_SESSION['level']) $userlevel = $_SESSION['level'];
+if(isset($_SESSION['username'])) $userid = $_SESSION['username'];
+if(isset($_SESSION['level'])) $userlevel = $_SESSION['level'];
 
 //檢查目前登入者的LEVEL (驗證用)
 	switch ($userlevel) {

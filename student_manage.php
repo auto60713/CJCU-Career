@@ -1,5 +1,6 @@
 <?php session_start();
-if(!isset($_SESSION['username']) || $_SESSION['level'] != 3) { header("Location: home.php"); exit; }
+if(!isset($_SESSION['username']) || $_SESSION['level'] != 3) { header("Location: index.php"); exit; }
+else{$stud_id = trim($_SESSION['username']);}
 ?>
 <!doctype html>
 <html>
@@ -42,7 +43,7 @@ if(!isset($_SESSION['username']) || $_SESSION['level'] != 3) { header("Location:
 				// student info
 				case 0:
 				tpe = 'get';
-				para = { userid: <?php echo "\"".$_SESSION['username']."\"" ?> };
+				para = { userid: <?php echo "\"".$stud_id."\"" ?> };
 				url = "student_detail_edit.php";
 				break;
 				// 學生應徵的工作
@@ -62,7 +63,7 @@ if(!isset($_SESSION['username']) || $_SESSION['level'] != 3) { header("Location:
 				case 3:
 				tpe = 'get';
 				var wid = location.hash.replace( /^#work/, '' );
-				para = {workid:wid};
+				para = {studid:<?php echo "\"".$stud_id."\"" ?>,workid:wid};
 				url = "student_work_time.php";	
 				var goback = $('<a>').attr({href:'#student-applywork',id:'gobackbtn'}).append($('<i>').addClass('fa fa-reply').append(' '));
 				break;
@@ -87,7 +88,7 @@ if(!isset($_SESSION['username']) || $_SESSION['level'] != 3) { header("Location:
 
 		
 		<?php	//load data
-		    include_once("js_detail.php"); echo_student_profile($_SESSION['username']); 
+		    include_once("js_detail.php"); echo_student_profile($stud_id); 
 		?>
 
         $("#profile-img").attr("src",'http://esrdoc.cjcu.edu.tw/esr_photo/'+student_profile_array['sd_syear'].trim()+'/'+student_profile_array['sd_no'].trim()+'.jpg');

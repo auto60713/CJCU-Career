@@ -83,4 +83,31 @@ function return_work_detail_array($work_id){
 
 
 
+//該工作的工讀單
+function echo_work_time_array($work_id){
+
+include("sqlsrv_connect.php");
+
+$sql = "select no,date,day,time,matter,hour from work_time where work_id=? and stud_id=?";
+
+$para = array($work_id,$_SESSION['username']);
+$stmt = sqlsrv_query($conn, $sql, $para);
+
+
+if($stmt) {
+
+    $work_time_array = array();
+
+	while( $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC) ) {
+		
+		$work_time_array[] = $row;
+	}
+
+	echo "var work_time_array = ". json_encode($work_time_array) . ";";	
+}
+else die(print_r( sqlsrv_errors(), true));
+
+}
+
+
 ?>

@@ -5,7 +5,9 @@ function echo_work_apply_list_array($workid){
 include("sqlsrv_connect.php");
 
 $para = array($workid);
-$sql = "select l.user_id,[check],u.sd_stud_name name,u.sd_entrance_syear sd_syear,u.sd_dep_no depno,u.dm_dep_short_name depname from line_up l,career_student_data u where l.work_id=? and l.user_id= u.sd_stud_no";
+$sql = "select l.no,l.user_id,l.work_id,l.score,[check],u.sd_stud_name name,u.sd_entrance_syear sd_syear,u.sd_dep_no depno,u.dm_dep_short_name depname 
+from line_up l,career_student_data u 
+where l.work_id=? and l.user_id= u.sd_stud_no";
 $stmt = sqlsrv_query($conn, $sql, $para);
 
 $work_apply_list_array= array();
