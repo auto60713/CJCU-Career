@@ -54,20 +54,7 @@
 		    }
 		}
 
-		<?php
-			if($_GET['companyid']==$_SESSION['userid']){
-				echo "isCompany();";
-			}
-		?>
-
-		function isCompany(){
-			$('#profile-btn-edit').show();
-			$('.profile-pic').mouseenter(function(event) {
-			$('.profile-pic-change').fadeIn(100);
-			}).mouseleave(function(event) {
-				$('.profile-pic-change').fadeOut(100);
-			});
-		}
+	
 
 	});
 	</script>

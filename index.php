@@ -85,10 +85,10 @@
     <!-- 快速搜尋 -->
 	<div class="rush-search">
 		<a href="inner_3.php" class="<?php if(count($_GET)==0) echo "rush-searching"; ?>">最新工作</a>
-		<a href="inner_3.php?mode=search&io=1" class="<?php if($_GET['io']=='1') echo "rush-searching"; ?>">校內工作</a>
-		<a href="inner_3.php?mode=search&prop=2" class="<?php if($_GET['prop']=='2') echo "rush-searching"; ?>">正職</a>
-		<a href="inner_3.php?mode=search&prop=1" class="<?php if($_GET['prop']=='1') echo "rush-searching"; ?>">工讀</a>	
-		<a href="inner_3.php?mode=search&prop=3" class="<?php if($_GET['prop']=='3') echo "rush-searching"; ?>">實習</a>		
+		<a href="inner_3.php?mode=search&io=1" class="<?php if(isset($_GET['io']))if($_GET['io']=='1') echo "rush-searching"; ?>">校內工作</a>
+		<a href="inner_3.php?mode=search&prop=2" class="<?php if(isset($_GET['prop']))if($_GET['prop']=='2') echo "rush-searching"; ?>">正職</a>
+		<a href="inner_3.php?mode=search&prop=1" class="<?php if(isset($_GET['prop']))if($_GET['prop']=='1') echo "rush-searching"; ?>">工讀</a>	
+		<a href="inner_3.php?mode=search&prop=3" class="<?php if(isset($_GET['prop']))if($_GET['prop']=='3') echo "rush-searching"; ?>">實習</a>		
 	</div>
 
 	<!-- 列表 -->

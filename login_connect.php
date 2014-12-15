@@ -43,7 +43,7 @@ function school_login($conn,$userid,$pw){
         // 資料表查無帳號 , 沒有輸入
         if(count($row) != 0 && $userid != null && $pw != null){
 
-            $_SESSION['username'] = $row[sd_stud_no];
+            $_SESSION['username'] = $row['sd_stud_no'];
             $_SESSION['level'] = 3;
 
             login_echo(1);
@@ -68,7 +68,7 @@ function teacher_login($conn,$userid,$pw){
         // 資料表查無帳號 , 沒有輸入
         if(count($row) != 0 && $userid != null && $pw != null){
 
-            $_SESSION['username'] = $row[user_no];
+            $_SESSION['username'] = $row['user_no'];
             $_SESSION['level'] = 2;
 
             login_echo(1);

@@ -58,7 +58,7 @@ function remove_page($workid){
   if($stmt) $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC);
   else die(print_r( sqlsrv_errors(), true));
 
-  switch($row[check]){
+  switch($row['check']){
 
   case 0: case 2: case 3: //第一階段
       echo json_encode(array(array('#workedit-content-apply','#page-apply'),array('#workedit-content-start','#page-start')));
@@ -87,11 +87,11 @@ function echo_work_divbtn_array($workid){
   else die(print_r( sqlsrv_errors(), true));
 
  //幾個array:幾個按鈕 , divbtn_id:按鈕的ID , divbtn_text:按鈕的內容
-switch($row[work_prop_id]){
+switch($row['work_prop_id']){
 
   case 3:  //實習
 
-          switch($row[check]){
+          switch($row['check']){
 
           case 1:  //應徵中
               echo json_encode(array(array('divbtn_id'=>'divbtn-start','divbtn_text'=>'開始實習')));
@@ -129,7 +129,7 @@ function work_state_change($workid,$check){
           break;
 
           case 5:  
-              switch($row[work_prop_id]){
+              switch($row['work_prop_id']){
 
               case 3:  //實習
                   $text = '完成實習!';

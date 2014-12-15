@@ -84,13 +84,13 @@ function return_work_detail_array($work_id){
 
 
 //該工作的工讀單
-function echo_work_time_array($work_id){
+function echo_work_time_array($work_id,$stud_id){
 
 include("sqlsrv_connect.php");
 
 $sql = "select no,date,day,time,matter,hour from work_time where work_id=? and stud_id=?";
 
-$para = array($work_id,$_SESSION['username']);
+$para = array($work_id,$stud_id);
 $stmt = sqlsrv_query($conn, $sql, $para);
 
 

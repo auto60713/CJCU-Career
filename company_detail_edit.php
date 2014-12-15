@@ -5,7 +5,6 @@ if(!isset($_SESSION['username'])) { echo 'No permission!'; exit; }
 <!doctype html>
 <html>
 <head>
-	<script></script>
 	<script><?php include_once("js_audit_detail.php"); echo_audit_detail_array($_SESSION['username'],0); ?></script>
 	<script src="lib/jquery.validate.js"></script>
 </head>

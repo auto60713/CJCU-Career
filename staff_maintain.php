@@ -1,6 +1,6 @@
 <?php
 session_start(); 
-if(isset($_SESSION['level']){
+if(isset($_SESSION['level'])){
     if($_SESSION['level']!=1){ 
     	echo "No permission"; exit; 
     }
@@ -28,7 +28,7 @@ else{
 			$('div[tabtoggle="workedit2"]').removeClass('workedit-content-hide');
 			$('div[tabtoggle="workedit2"]:not(div[tabtoggle="workedit2"]:eq('+index+'))').addClass('workedit-content-hide');
 		});
-		tabgroup[<?  echo (int)$_GET['page']; ?>].click();
+		tabgroup[0].click();
 
 	});
 

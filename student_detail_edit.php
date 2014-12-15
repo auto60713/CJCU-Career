@@ -1,6 +1,6 @@
 <?php session_start(); 
 include('cjcuweb_lib.php');
-if($_SESSION['username'] != $_GET['userid']) {
+if(trim($_SESSION['username']) != $_GET['userid']) {
 	echo "<br>No permission";
  	exit; 
 }

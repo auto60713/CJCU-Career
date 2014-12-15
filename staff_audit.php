@@ -1,6 +1,6 @@
 <?php session_start(); 
 include_once('cjcuweb_lib.php');
-if(isset($_SESSION['level']){
+if(isset($_SESSION['level'])){
 if($_SESSION['level']!=$level_staff){
 	echo "No permission"; exit; 
 }
@@ -13,7 +13,7 @@ else{
 <!doctype html>
 <html>
 <head>
-	<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+	<link href="font-awesome/css/font-awesome.css" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="css/work_detail_edit.css?v=0">
 	<script>
 	<?php include_once("js_get_all_audit.php");  

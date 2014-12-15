@@ -1,8 +1,9 @@
 <?php
 session_start();
 if(isset($_SESSION['level'])) $lev = $_SESSION['level'];
+else $lev= '';
 if(isset($_SESSION['username'])) $user = $_SESSION['username'];
-
+else $user ='';
 
 //抓取資料庫 此username的用戶名稱
 function echo_username($user,$mod){
@@ -16,7 +17,7 @@ else if ($mod == "stu") $sql = "SELECT sd_stud_name username FROM career_student
         $stmt = sqlsrv_query( $conn, $sql ,array($user));
 
         while( $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC) ) {
-        if ($row[username]!='') $GLOBALS['header_name'] = $row[username];
+        if ($row['username']!='') $GLOBALS['header_name'] = $row['username'];
         else { $GLOBALS['header_name'] = $user; }
         
         }
@@ -29,7 +30,7 @@ function echo_data($user,$lev){
 
 	include_once("../cjcuweb_lib.php");
 
-	if(isset ($user)){
+	if($user!=''){
 
 		echo '<span><a href="logout.php">登出</a></span>';
 

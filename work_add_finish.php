@@ -1,12 +1,13 @@
-<?php
-session_start(); 
+<?php  session_start(); 
+header("Content-Type:text/html; charset=utf-8");
+
 include_once("cjcuweb_lib.php");
 // 立刻驗證登入身分，防止駭客繞過登入
 if(isset ($_SESSION['username'])){
 	$company_id = $_SESSION['username'];
 }
 else{ //重定向瀏覽器 且 後續代碼不會被執行 
-header("Location: home.php");
+header("Location: index.php");
 exit;
 }
 
@@ -38,7 +39,8 @@ switch ($_SESSION['level']) {
 
 $name =  trim($_POST['name']);
 $work_type = trim($_POST['work_type_list2']);
-$match_dep = trim($_POST['match_dep']);
+if(isset($_POST['match_dep']))$match_dep = trim($_POST['match_dep']);
+else $match_dep = "";
 $year1 = trim($_POST['year1']);
 $month1 = trim($_POST['month1']);
 $date1 = trim($_POST['date1']);
@@ -55,17 +57,18 @@ $zone_id = trim($_POST['zone_name']);
 $recruitment_no = trim($_POST['recruitment_no']);
 $address = trim($_POST['address']);
 $phone = trim($_POST['phone']);
-$pay = trim($_POST['pay']);
-$detail = trim($_POST['detail']);
+if(isset($_POST['pay']))$pay = trim($_POST['pay']);
+else $pay = "";
+if(isset($_POST['detail']))$detail = trim($_POST['detail']);
+else $detail = "";
 
 //廠商代PO
 if( $_POST['instead_com']!=null ) { $company_id = trim($_POST['instead_com']); $publisher = 1; }
 
 if( !isset($name) || !isset($work_type)  || !isset($year1) || !isset($month1) || !isset($date1) || !isset($hour1) || !isset($minute1) 
-	|| !isset($work_prop) || !isset($isoutside) || !isset($zone_name) || !isset($address) || !isset($year2) || !isset($month2) || !isset($date2) 
+	|| !isset($work_prop) || !isset($isoutside) || !isset($zone_id) || !isset($address) || !isset($year2) || !isset($month2) || !isset($date2) 
 	|| !isset($hour2)  || !isset($minute2) || !isset($recruitment_no) || $zone_id==0){
-	echo "輸入資料有誤!!!!";
-	echo '<meta http-equiv=REFRESH CONTENT=1;url=add_work.php>';
+	echo "Enter the details are incorrect!!";
 	exit;
 
 }else{
@@ -83,11 +86,6 @@ if( !isset($name) || !isset($work_type)  || !isset($year1) || !isset($month1) ||
 		echo '新增成功! 跳轉中，請稍候...';
 		echo '<meta http-equiv=REFRESH CONTENT=1;url='.$href.'_manage.php#'.$href.'-work>';
 	}
-	else{
-		echo '新增失敗! 請連管理員...';
-		echo '<meta http-equiv=REFRESH CONTENT=1;url='.$href.'_manage.php>';
-	}
+	else die(print_r( sqlsrv_errors(), true));
 }
 ?>
-
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />

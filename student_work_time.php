@@ -82,7 +82,7 @@ $(function(){
     <?php  //load data
 		include_once("js_detail.php"); echo_student_profile($_GET['studid']); 
         include_once("js_work_detail.php"); echo_work_detail_array($_GET['workid']);
-                                            echo_work_time_array($_GET['workid']);
+                                            echo_work_time_array($_GET['workid'],$_GET['studid']);
 	?>
 
     var list_time = parseInt(work_detail_array['start_date'].split("-")[0])-1911;

@@ -9,7 +9,7 @@ session_write_close();
 // 審核頁面  身分驗證
 include('cjcuweb_lib.php');
 
-if(isset($_SESSION['level']){
+if(isset($_SESSION['level'])){
 if($_SESSION['level']!=$level_staff){
 	echo "0-1"; 
 	exit; 

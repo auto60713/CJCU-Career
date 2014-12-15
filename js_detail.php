@@ -2,7 +2,7 @@
 
 /* SQL語法裡面應該要盡量使用別名 不然輸出JSON欄位都被人猜光光*/
 
-if($_GET["stu_no"]) echo_student_detail($_GET["stu_no"]);
+if(isset($_GET["stu_no"])) echo_student_detail($_GET["stu_no"]);
 
 /* to profile -------------------------   */
 
@@ -104,8 +104,8 @@ include("sqlsrv_connect.php");
 
 	else die(print_r( sqlsrv_errors(), true));
 
-    echo "var company_type = ".$row[type].";";
-    echo "var company_zone = ".$row[zone_id].";";
+    echo "var company_type = ".$row['type'].";";
+    echo "var company_zone = ".$row['zone_id'].";";
 }
 
 

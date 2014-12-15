@@ -13,7 +13,7 @@ function censored_check(){
     $row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC);
     
         // 如果該公司申請通過
-        if($row[censored] == 1){
+        if($row['censored'] == 1){
 
         $hreftag = '<a href="#company-addwork"><div class="list">新增工作</div></a><hr>';
         $hreftag.= '<a href="#company-work"><div class="list">管理工作</div></a><hr>';
@@ -21,7 +21,7 @@ function censored_check(){
         echo "$('.left-box').append('".$hreftag."');\n";
         }
         // 沒通過
-        else if($row[censored] == 3){
+        else if($row['censored'] == 3){
 
         
         }

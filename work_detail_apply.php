@@ -98,10 +98,10 @@ function isCompanyWork($conn,$companyid,$workid){
 						subbox3.append($('<div>').addClass('isnotapply').text('不錄取'));
 					break;	
 					case 4:
-					    var work_time_link = $('<a>').attr({href:"student_work_time.php?studid="+work_apply_list_array[i]['user_id']+"&workid="+work_apply_list_array[i]['work_id']+"&view=1",target:"_blank"}).text("工作日誌"),
+					    var work_time_link = $('<a>').attr({href:"student_work_time.php?studid="+work_apply_list_array[i]['user_id'].trim()+"&workid="+work_apply_list_array[i]['work_id']+"&view=1",target:"_blank"}).text("工作日誌"),
 					        text = $('<p>').text("學生的實習分數："+work_apply_list_array[i]['score']+"分"),
-					        score = $('<input>').addClass('score').attr({type:"text",placeholder:"打分數",name:work_apply_list_array[i]['user_id']}),
-					        submit = $('<button>').attr({type:"button",name:"score_btn","no":work_apply_list_array[i]['no'],value:work_apply_list_array[i]['user_id']}).text("確定");
+					        score = $('<input>').addClass('score').attr({type:"text",placeholder:"打分數",name:work_apply_list_array[i]['user_id'].trim()}),
+					        submit = $('<button>').attr({type:"button",name:"score_btn","no":work_apply_list_array[i]['no'],value:work_apply_list_array[i]['user_id'].trim()}).text("確定");
 						subbox3.append(work_time_link,text,score,submit);
 					break;	
 				}	

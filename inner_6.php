@@ -91,7 +91,8 @@
 
 
 <script>
-    <?php echo 'var article_id = "'.$_GET["article_id"].'";'?>
+var article_id = "";
+    <?php if(isset($_GET["article_id"])) echo 'var article_id = "'.$_GET["article_id"].'";'?>
 
       
         //文章選單
@@ -109,7 +110,7 @@
 
 
             var this_page=1,min=0,max=5;
-            <?php if($_GET[page]) echo "this_page=".$_GET[page].";min=(".$_GET[page]."-1)*5;max=((".$_GET[page]."-1)*5)+5;"; ?>
+            <?php if(isset($_GET['page'])) echo "this_page=".$_GET['page'].";min=(".$_GET['page']."-1)*5;max=((".$_GET['page']."-1)*5)+5;"; ?>
            
             
              //文章資訊

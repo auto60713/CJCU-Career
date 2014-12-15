@@ -42,7 +42,7 @@ function echo_work_name($workid){
   if($stmt) $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC);
   else{echo 0;}
 
-  echo $row[name];
+  echo $row['name'];
 }
 
 function echo_company_name($comid){
@@ -55,7 +55,7 @@ function echo_company_name($comid){
   if($stmt) $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC);
   else{echo 0;}
 
-  echo $row[name];
+  echo $row['name'];
 }
 
 function echo_department_name($depno){
@@ -68,7 +68,7 @@ function echo_department_name($depno){
   if($stmt) $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC);
   else{echo 0;}
 
-  echo $row[name];
+  echo $row['name'];
 }
 
 
