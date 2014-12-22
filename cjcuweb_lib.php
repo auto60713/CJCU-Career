@@ -1,6 +1,7 @@
 <?php
 
 	// 各種身分的權限值
+    $level_company_sta = 6;
     $level_department = 5;
 	$level_company = 4;
 	$level_student = 3;

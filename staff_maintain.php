@@ -33,6 +33,18 @@ else{
 	});
 
 	</script>
+	<style type="text/css">
+	    .dep-list{
+            margin-top: 30px;
+	    }
+	    .dep-list-tb{
+            margin-left: 5px;
+	    }
+        .dep-list-tb th,.dep-list-tb td{
+        	text-align: center;
+            padding-right: 20px;
+        }
+	</style>
 
 </head>
 
@@ -75,11 +87,35 @@ else{
         <tr><td>密碼預設</td><td><input type="text" name="dep_pw" value="1234" disabled></td></tr>
         </table>
         <button type="button" onclick="add_department()">送出</button>
+        <div class="dep-list">
+            <table class="dep-list-tb">
+            	<h2>目前已建立的系所</h2>
+            	<tr><th>帳號</th><th>密碼</th><th>中文名</th></tr>
+            </table>
+        </div>
 	</div>
 </div>
 
 </body>
 <script type="text/javascript">
+<?php
+    include_once('js_match_list.php'); echo_dep_list(); 
+?>
+
+        var body = $('.dep-list-tb');
+        if(dep_list.length == 0){body.append("目前沒有任何系所");}
+        else{
+		    for(var i=0;i<dep_list.length;i++){
+
+		    	var no = $('<td>').text(dep_list[i]['no']),
+		        	pw = $('<td>').text(dep_list[i]['pw']),
+		        	ch_name = $('<td>').text(dep_list[i]['ch_name']),
+		    		tr = $('<tr>').append(no,pw,ch_name);
+		    		body.append(tr);
+		    }
+		}
+
+
 
 function echo_work_name(workid) {
 

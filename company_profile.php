@@ -30,7 +30,7 @@
 		$('title , #profile-name').text(company_detail_array['ch_name']);
 		$('#ch_name').text(company_detail_array['ch_name']);
 		$('#en_name').text(company_detail_array['en_name']);
-		$('#boss').text(company_detail_array['name']);
+		$('#boss').text(company_detail_array['boss_name']);
 		$('#unicode').text(company_detail_array['uni_num']);
 
 		$('#budget').text(company_detail_array['budget']);
@@ -38,7 +38,7 @@
 		$('#phone').text(company_detail_array['phone']);
 		$('#email').text(company_detail_array['email']);
 		$('#fax').text(company_detail_array['fax']);
-		$('#address').text(company_detail_array['zonename']+" "+company_detail_array['address']);
+		$('#address').text(company_detail_array['zone_name']+" "+company_detail_array['address']);
 		$('#cptype').text(company_detail_array['typename']);
 		$('#cpurl').append($('<a>').attr('href',company_detail_array['url']).text(company_detail_array['url']));
 		$('#introduction').text(company_detail_array['introduction']);

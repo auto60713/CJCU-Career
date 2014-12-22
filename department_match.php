@@ -23,9 +23,10 @@ else{echo "No permission!"; exit;
 	<!-- 實習列表 -->
 	<div id='workedit-content-match-list' class="" tabtoggle='workedit2'>
     <select id="search-typefilter">
-	    <option value='0' selected="selected">顯示全部</option>
-	    <option value='1' >實習中</option>
-	    <option value='2' >實習結束</option>
+	    <option value='-1' selected="selected">顯示全部</option>
+	    <option value='1' >應徵中</option>
+	    <option value='4' >實習中</option>
+	    <option value='5' >實習完成</option>
     </select>
     <input type='text' placeholder='搜尋工作名稱' id='search-txt'>
 	</div>
@@ -64,7 +65,7 @@ else{echo "No permission!"; exit;
 				break;
 			}
 		});
-		tabgroup[<?php echo (int)$_POST['page']; ?>].click();
+		tabgroup[0].click();
 
 
 
@@ -103,11 +104,10 @@ else{echo "No permission!"; exit;
 	    }
 
 //選擇老師
-        var match_btn = $('div.match-btn'),
-            tea_name = $( "#match-sel option:selected" ).text(),
-            tea_no = $( "select#match-sel" ).val();
-
+        var match_btn = $('div.match-btn');
 		match_btn.on( "click", function() {
+			var tea_name = $( "#match-sel option:selected" ).text(),
+                tea_no = $( "select#match-sel" ).val();
 		    if (confirm ('此實習的負責老師決定為 "'+tea_name+'"')){
 
 		    	var line_no = $(this).attr('id'),
@@ -177,7 +177,7 @@ else{echo "No permission!"; exit;
 		                  async: false
 		                });
 
-                var state = $('<a>').addClass('work-ch-pass').text(state_val);
+                var state = $('<a>').addClass('work-ch-pass sta'+match_list_array[i]['state']).text(state_val);
 
                    
 
@@ -191,8 +191,44 @@ else{echo "No permission!"; exit;
 		    }
 	    }
 
+//快速篩選
+        $('#search-typefilter').on('change', function(event) {
+		    resort_work();
+		});
 
+        $('#search-txt').on('input', function(event) {
+		  	resort_work();
+		});
 
+        function resort_work(){
+
+		  	var txt = $('#search-txt').val();
+		  	var search_val = $('#search-typefilter').val();
+
+		  	$('.work-list-box').removeClass('hide-work');
+
+		        var is_null = 1; $("#search-echo").text('');
+		  		$('.work-list-box').each(function(index, el) {
+	          	if(search_val==-1){
+	                $('.work-list-box').removeClass('hide-work'); is_null=0;
+	          	}
+	          	else{
+	          		var match_check = $(this).find('.sub-box2 a').attr('class');
+	          		if(match_check.indexOf('sta'+search_val) >= 0){ $(this).removeClass('hide-work'); is_null=0; }
+	          		else{ $(this).addClass('hide-work'); }
+			    }
+	         	});
+	         	if(is_null==1) $("#search-echo").text('沒有工作符合條件');
+
+		  		if(txt!=''){
+		  			$('.work-list-box').each(function(index, el) {
+		  			var tit_txt = $(this).find('.work-tit a').text().toLowerCase();
+		  			var search_txt = txt.toLowerCase();
+		  			if(tit_txt.match(search_txt)==null) $(this).addClass('hide-work');
+		  			});
+		  		}
+
+		  }
 
 
 

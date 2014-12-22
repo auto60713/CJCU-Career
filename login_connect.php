@@ -124,7 +124,7 @@ function department_login($conn,$userid,$pw,$level_department){
         if(count($row) != 0 && $userid != null && $pw != null && (trim($row[1])) == $pw){
 
             //職涯發展組
-            if(trim($row[0]) == 'CIA'){
+            if(trim($row[2]) == 3){
                 $_SESSION['username'] = $userid;
                 $_SESSION['level']  = 1;
 

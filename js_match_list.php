@@ -120,4 +120,33 @@ else die(print_r( sqlsrv_errors(), true));
 }
 
 
+
+//列出所有已建立的系所單位
+function echo_dep_list(){
+
+include("sqlsrv_connect.php");
+
+$sql = "select * from department where sort = 1";
+
+$para = array();
+$stmt = sqlsrv_query($conn, $sql, $para);
+
+
+if($stmt) {
+
+    $dep_list = array();
+
+	while( $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC) ) 
+    {
+		$dep_list[] = $row;
+	}
+
+	echo "var dep_list = ". json_encode($dep_list) . ";";	
+}
+else die(print_r( sqlsrv_errors(), true));
+
+}
+
+
+
 ?>
