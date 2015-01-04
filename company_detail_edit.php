@@ -58,7 +58,7 @@ label.error{
 				audit_history_container.append(all);
 		}
 
-		//<i class="fa fa-check"></i> 通過
+		var icontxt="",statustxt="",color="";
 		switch(company_detail_array.censored) {
 			case 0:
 				icontxt ='fa fa-minus-square-o';
@@ -125,7 +125,7 @@ label.error{
     for(var i=0;i<company_zone_array.length;i++)
     $("#zone_name").append($("<option>").attr("value", company_zone_array_id[i]).text(company_zone_array[i]));
 
-    //js_company_detail.php取得公司類型與位置
+    //js_detail.php取得公司類型與位置
     <?php echo_company_type_and_zone($_SESSION['username']); ?>
     $("#company_type").val(company_type);
 	$("#zone_name").val(company_zone);

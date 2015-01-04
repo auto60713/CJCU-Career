@@ -5,9 +5,10 @@ function echo_line_up_array($dep_no){
 
 include("sqlsrv_connect.php");
 
+$dep_no = "%".$dep_no."%";
 $sql = "select u.sd_stud_no userid,u.sd_stud_name username,w.id wid,w.name wname,c.id comid,c.ch_name comname,l.no line_no
  from line_up l,career_student_data u,work w,company c
- where l.[check]IN(1,4) and l.match_no is NULL and u.sd_dep_no=? and l.user_id=u.sd_stud_no and w.id=l.work_id and c.id=w.company_id";
+ where l.[check]IN(1,4) and l.match_no is NULL and u.sd_dep_no LIKE ? and l.user_id=u.sd_stud_no and w.id=l.work_id and c.id=w.company_id";
 
 $para = array($dep_no);
 $stmt = sqlsrv_query($conn, $sql, $para);
@@ -65,9 +66,10 @@ function echo_match_list_array($dep_no){
 
 include("sqlsrv_connect.php");
 
+$dep_no = "%".$dep_no."%";
 $sql = "SELECT w.id workid,w.name workname,w.[check] state,c.id comid,c.ch_name comname 
 FROM work w,company c
-WHERE (w.match_dep=? OR w.match_dep='all') AND (w.[check]=1 OR w.[check]>3) AND c.id=w.company_id 
+WHERE (w.match_dep LIKE ? OR w.match_dep LIKE '%all%') AND (w.[check]=1 OR w.[check]>3) AND c.id=w.company_id 
 ORDER BY workid DESC";
 
 $para = array($dep_no);
@@ -142,6 +144,60 @@ if($stmt) {
 	}
 
 	echo "var dep_list = ". json_encode($dep_list) . ";";	
+}
+else die(print_r( sqlsrv_errors(), true));
+
+}
+
+
+//列出所有已建立的廠商
+function echo_com_list(){
+
+include("sqlsrv_connect.php");
+
+$sql = "select id,ch_name name from company where censored=1";
+
+$para = array();
+$stmt = sqlsrv_query($conn, $sql, $para);
+
+
+if($stmt) {
+
+    $all_company = array();
+
+	while( $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC) ) 
+    {
+		$all_company[] = $row;
+	}
+
+	echo "var all_company = ". json_encode($all_company) . ";";	
+}
+else die(print_r( sqlsrv_errors(), true));
+
+}
+
+
+//列出該公司的管理員
+function echo_com_staff_list($com_id){
+
+include("sqlsrv_connect.php");
+
+$sql = "select id,ch_name name,phone,email from company where boss_name = ? and censored = 5";
+
+$para = array($com_id);
+$stmt = sqlsrv_query($conn, $sql, $para);
+
+
+if($stmt) {
+
+    $com_staff_list = array();
+
+	while( $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC) ) 
+    {
+		$com_staff_list[] = $row;
+	}
+
+	echo "var com_staff_list = ". json_encode($com_staff_list) . ";";	
 }
 else die(print_r( sqlsrv_errors(), true));
 

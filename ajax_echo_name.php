@@ -16,6 +16,10 @@ switch($_POST['mode']){
         echo_company_name($_POST['comid']);
   break;
 
+  case 'com-msg'://查詢公司的聯絡方式
+        echo_company_msg($_POST['id']);
+  break;
+
   case 'dep'://查詢系所的中文名稱
         echo_department_name($_POST['depno']);
   break;
@@ -69,6 +73,19 @@ function echo_department_name($depno){
   else{echo 0;}
 
   echo $row['name'];
+}
+
+
+function echo_company_msg($id){
+  include_once("sqlsrv_connect.php");
+
+
+  $sql = "select phone,address from company where id =?"; 
+  $stmt = sqlsrv_query($conn, $sql, array($id));
+
+  if($stmt) $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC);
+
+  echo $row['phone'].'&&'.$row['address'];
 }
 
 

@@ -41,7 +41,7 @@ else{
 		    		tit = $('<h1>').addClass('work-tit').append(tita),
 		    		company = $('<div>').addClass('manage-company-herf').append("發布自 ",companyherf),
 		    		hint = $('<p>').addClass('work-hint').append((work_list_array[i]['zone']) +'  '+ work_list_array[i]['prop']),
-		    		wtime = $('<a>').attr('href', '#work'+work_list_array[i]['wid']).text('工讀單'),
+		    		wtime = $('<a>').attr('href', 'student_manage.php#work'+work_list_array[i]['wid']).text('工讀單'),
 
 		    		hint2 = $('<p>').attr({
 		    		    workid : work_list_array[i]['wid'],

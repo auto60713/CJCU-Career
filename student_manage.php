@@ -11,10 +11,13 @@ else{$stud_id = trim($_SESSION['username']);}
 	<link rel="stylesheet" type="text/css" href="css/manage.css">
 	<link rel="stylesheet" type="text/css" href="css/work_detail_edit.css">
 	<link rel="stylesheet" type="text/css" href="css/profile.css">
-	<link href="font-awesome/css/font-awesome.min.css" rel="stylesheet">
-	<script src="js/jquery.js"></script>
-	<script src="js/jquery.hashchange.min.js"></script>
-	<script src="js/upload_img.js"></script>
+	<link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
+	<link rel="stylesheet" href="http://code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
+    <link rel="stylesheet" type="text/css" href="css/jquery.timepicker.css" />
+	<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+	<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+	<script type="text/javascript" src="js/jquery.hashchange.min.js"></script>
+	<script type="text/javascript" src="js/upload_img.js"></script>
 	<script>
 	$(function(){
 
@@ -68,13 +71,14 @@ else{$stud_id = trim($_SESSION['username']);}
 				var goback = $('<a>').attr({href:'#student-applywork',id:'gobackbtn'}).append($('<i>').addClass('fa fa-reply').append(' '));
 				break;
 			}
+
 			$.ajax({
 			  type: tpe,
 			  url: url,
 			  data: para,
 			  success: function (data) { $('#contailer-box').html(data) ;  }
 			});
-		
+		    
 
             $('#right-box-title').text($('.list:eq('+idx+')').text());
             if(idx==3){

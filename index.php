@@ -148,7 +148,7 @@
 <!-- 頁尾訊息 -->
 <div id="footer">
 	<div class="footer_text">
-		© 2014 長大職涯網 Inc. 長榮大學 職涯發展組
+		Copyright © 2014 長榮大學職涯發展組 保留一切權利。
 	</div>
 </div>
 

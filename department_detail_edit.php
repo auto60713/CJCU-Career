@@ -22,6 +22,9 @@ form{
     padding-top: 5px;
     padding-bottom: 5px;
 }
+textarea {
+   resize: none;
+}
 </style>
 <body>
 <script>
@@ -29,15 +32,18 @@ form{
 
 		var detail_column = "",idx = 0;
 		//column_name array必須優化成json格式 不然目前依賴index順序
-		var column_name = ["帳號","中文名稱","英文名稱","電話","傳真","負責人","信箱","辦公室","簡介","網站連結"];
+		var column_name = ["帳號","中文名稱","英文名稱","電話","傳真","負責人","電子信箱","辦公室","簡介","網站連結"];
 
 		for(var key in department_detail_array){
 
 			detail_column+="<tr><td class='td1'>"+column_name[idx]+"</td>";
 
             //不可修改的資料 背後PHP不要POST
-			if(key == "no"){
+			if(key == "no"||key == "ch_name"||key == "en_name"){
                 detail_column+="<td class='td2'><input type='text' name ='"+key+"' value='"+department_detail_array[key]+"' disabled='disabled'></td></tr>";
+			}
+			else if(key == "introduction"){
+                detail_column+="<td class='td2'><textarea rows='3' cols='30' name='"+key+"'>"+department_detail_array[key]+"</textarea></td></tr>";
 			}
 		    else{
                 detail_column+="<td class='td2'><input type='text' name ='"+key+"' value='"+department_detail_array[key]+"'></td></tr>";

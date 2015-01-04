@@ -47,11 +47,11 @@ else{echo "No permission!"; exit;
 		    	}
 		    	
 		    	var img = $('<i>').addClass('fa fa-book fa-3x').addClass('work-img'),
-		    		
 		    		tita = $('<a>').attr('href', '#work'+work_list_array[i]['wid']+"-0").text(work_list_array[i]['wname']),
+		    		profile = $('<a>').attr({'href':'work-'+work_list_array[i]['wid'],'Target':'_blank'}).text('預覽工作資料'),
 		    		tit = $('<h1>').addClass('work-tit').append(tita),
 		    		hint = $('<p>').addClass('work-hint')
-		    		.append(work_list_array[i]['name']+'<br>'+ (work_list_array[i]['isout']=='0'?'校外 ':'校內 ')+ work_list_array[i]['propname'] +'<br>'+ work_list_array[i]['date']),
+		    		.append(profile,'<br>'+ (work_list_array[i]['isout']=='0'?'校外 ':'校內 ')+ work_list_array[i]['propname'] +'<br>'+ work_list_array[i]['date']),
 		    		hint2 = $('<p>').append('應徵人數：'+work_list_array[i]['apply_count']+'<br>'+'通過/上限：'+ work_list_array[i]['check_count']+'/'+ work_list_array[i]['rno'] ),
 		    		
 		    		ch = $('<p>').addClass(chclass).attr('id', 'chstatus').text(chtxt),

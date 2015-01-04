@@ -2,11 +2,11 @@
 session_start(); 
 include_once("cjcuweb_lib.php");
 // 立刻驗證登入身分，防止駭客繞過登入
-if(isset ($_SESSION['username']) && $_SESSION['level']==$level_company){
+if(isset ($_SESSION['username'])){
 	$company_id = $_SESSION['username'];
 }
 else{ //重定向瀏覽器 且 後續代碼不會被執行 
-header("Location: home.php");
+header("Location: index.php");
 exit;
 }
 ?>
@@ -17,20 +17,12 @@ include("sqlsrv_connect.php");
 // 取得所有表單資料並防止注入
 $name =  trim($_POST['name']);
 $work_type = (int)trim($_POST['work_type_list2']);
-$year1 = trim($_POST['year1']);
-$month1 = trim($_POST['month1']);
-$date1 = trim($_POST['date1']);
-$hour1 = trim($_POST['hour1']);
-$minute1 = trim($_POST['minute1']);
-$year2 = trim($_POST['year2']);
-$month2 = trim($_POST['month2']);
-$date2 = trim($_POST['date2']);
-$hour2 = trim($_POST['hour2']);
-$minute2 = trim($_POST['minute2']);
 $work_prop = (int)trim($_POST['work_prop']);
 $isoutside = (int)trim($_POST['isoutside']);
 $zone_id = (int)trim($_POST['zone_name']);
 $recruitment_no = (int)trim($_POST['recruitment_no']);
+$bg_date = trim($_POST['bg_date']);
+$ed_date = trim($_POST['ed_date']);
 $address = trim($_POST['address']);
 $phone = trim($_POST['phone']);
 $pay = trim($_POST['pay']);
@@ -47,18 +39,14 @@ function isCompanyWork($conn,$companyid,$workid){
 	if($row[0]==$companyid) return true;
 	else return false;
 }
-if( !isset($name) || !isset($work_type)  || !isset($year1) || !isset($month1) || !isset($date1) || !isset($hour1)  
-	|| !isset($minute1) || !isset($work_prop) || !isset($zone_name) || !isset($address) || !isset($isoutside) || !isset($year2) 
-	|| !isset($month2) || !isset($date2) || !isset($hour2)  || !isset($minute2) || !isset($recruitment_no) || $zone_id==0){
-	echo "HAKER!!!!";
-	echo '<meta http-equiv=REFRESH CONTENT=1;url=add_work.php>';
+if( !isset($name) || !isset($work_type)  || !isset($work_prop) || !isset($address) || !isset($isoutside) || !isset($recruitment_no) || $zone_id==0){
+	echo "Enter the details are incorrect!!!";
 	exit;
 }else{
-	//datetime format  1970-01-01 00:00:00
-	$start_date = $year1."-".$month1."-".$date1." ".$hour1.":".$minute1.":00";
-	$end_date = $year2."-".$month2."-".$date2." ".$hour2.":".$minute2.":00";
 
-	$params = array($name,$work_type,$start_date,$end_date,$work_prop,$isoutside,$zone_id,$address,$phone,$pay,$recruitment_no,$detail,$workid);
+
+
+	$params = array($name,$work_type,$bg_date,$ed_date,$work_prop,$isoutside,$zone_id,$address,$phone,$pay,$recruitment_no,$detail,$workid);
 
 	$sql = "update work 
 			set name=?,work_type_id=?,start_date=?,end_date=?,
@@ -70,11 +58,11 @@ if( !isset($name) || !isset($work_type)  || !isset($year1) || !isset($month1) ||
 
 	if($result){
 		echo '更新成功! 跳轉中，請稍候...';
-		echo '<meta http-equiv=REFRESH CONTENT=1;url=company_manage.php#work'.$workid.'>';
+		echo '<meta http-equiv=REFRESH CONTENT=1;url=company_manage.php#work'.$workid.'-0>';
 	}
 	else{
-		echo '更新失敗! 跳轉中，請稍候...';
-		echo '<meta http-equiv=REFRESH CONTENT=1;url=company_manage.php#work'.$workid.'>';
+		echo '更新失敗! 請聯絡管理員';
+		exit;
 	}
 }
 ?>

@@ -9,21 +9,26 @@ else if($_GET['workid']==null) { echo "錯誤的操作!"; exit; }
 <head>
     <title>工讀單</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <script src="js/jquery.js"></script>
+    <script>
+    window.jQuery || document.write('<script src="http://code.jquery.com/jquery-1.11.0.min.js"><\/script>')
+    </script>
+    <script type="text/javascript" src="js/jquery-ui.js"></script>
+    <script type="text/javascript" src="js/jquery.timepicker.js"></script>
+
 </head>
 <style type="text/css">
 .column{
 	display: inline;
 }
-table{
+#work_time_list{
 	margin-bottom: 20px;
 }
-td{
+#work_time_list td{
 	min-width: 40px;
 	text-align: center;
 	overflow: hidden;
 }
-td input{
+#work_time_list td input{
 	width: 100%;
 }
 .input{
@@ -37,10 +42,13 @@ td input{
 .delet-tb{
     border: 0px solid black;
 }
-
+div.ui-datepicker,.ui-timepicker-wrapper{
+ font-size:10px;
+}
 </style>
 <body>
-    <div class="work_time_detail">
+    <h5 id="loading">資料載入中請稍後...</h5>
+    <div class="work_time_detail" style="display:none;">
         <form method="post" action="student_work_time_req.php">
     	<table id="work_time_list" border="2">
             <tr>
@@ -54,20 +62,20 @@ td input{
             </tr>
 
             <tr class="header">
-            	<td>日期(月/日)</td><td>星期</td><td>起迄時間</td><td colspan="2">服務內容</td><td>時數</td>
+            	<td>日期</td><td>星期</td><td>開始時間</td><td colspan="2">服務內容</td><td>時數</td>
             </tr>
             <tr class="key-in">
 
-                <input type="hidden" name="work_id" value="<?php echo $_GET['workid']; ?>">
-            	<td><input type="text" val="" name="work_date" placeholder="n/m"/></td>
-            	<td><input type="text" val="" name="work_day" placeholder="一"/></td>
-            	<td><input type="text" val="" name="work_time" placeholder="00:00~00:00"/></td>
-    <td colspan="2"><input type="text" val="" name="work_matter" placeholder="請輸入"/></td>
-            	<td><input type="text" val="" name="work_hour" placeholder="0"/></td>
-                
-            </tr>
-        </table> 
 
+                <input type="hidden" name="work_id" value="<?php echo $_GET['workid']; ?>">
+                <td><input type="text" val="" name="work_date" id="work_date" placeholder="選擇日期"/></td>
+                <td><input type="text" val="" name="work_day" id="work_day" placeholder="" disabled="disabled"/></td>
+                <td><input type="text" val="" name="work_time" id="work_time" placeholder="選擇時間"/></td>
+    <td colspan="2"><input type="text" val="" name="work_matter" placeholder="請輸入"/></td>
+                <td><input type="text" val="" name="work_hour" placeholder="0"/></td>
+
+            </tr>
+        </table>
     	<input type="submit" name="button" value="新增一筆紀錄" />　　
         <input type="button" name="button" id="view" value="預覽">
         <input type="button" name="button" id="back" value="上一頁">
@@ -76,6 +84,12 @@ td input{
 </body>
 
 <script>
+$( document ).ready(function() {
+    $( "#loading" ).remove();
+    $( ".work_time_detail" ).fadeIn();
+
+});
+
 $(function(){	
 
     
@@ -85,6 +99,40 @@ $(function(){
                                             echo_work_time_array($_GET['workid'],$_GET['studid']);
 	?>
 
+    $( "#work_date" ).on('focus', function(){
+        $(this).datepicker({
+            dateFormat: 'yy-mm-dd'
+        });
+    });
+
+    $( "#work_date" ).change(function() {
+        var date = $(this).datepicker('getDate');
+        switch(date.getUTCDay()) {
+        case 0:
+            var day="一";
+        break;
+        case 1:
+            var day="二";
+        break;
+        case 2:
+            var day="三";
+        break;
+        case 3:
+            var day="四";
+        break;
+        case 4:
+            var day="五";
+        break;
+        case 5:
+            var day="六";
+        break;
+        case 6:
+            var day="日";
+        break;
+        } 
+        $( "#work_day" ).val( day );
+    });
+
     var list_time = parseInt(work_detail_array['start_date'].split("-")[0])-1911;
     $('#stu_class').text(student_profile_array['dm_name']+student_profile_array['sd_grade']+student_profile_array['cla_name']);
     $('#stu_name').text(student_profile_array['sd_name']);
@@ -92,6 +140,16 @@ $(function(){
         
     $('#list_name').text(work_detail_array['name']);
     $('#list_time').text(list_time);
+
+   
+    //時間API
+    $('#work_time').timepicker({ 
+        'timeFormat': 'H:i',
+        'step': 60,
+        'minTime': '6:00',
+        'maxTime': '23:00',
+    });
+    
 
     for(var i=0;i<work_time_array.length;i++){
 
@@ -104,9 +162,8 @@ $(function(){
         delet = $('<td>').addClass('delet-tb').append(delet_btn),
         tr = $('<tr>').addClass('detail').append(work_date,work_day,work_time,work_matter,work_hour,delet);
 
-        $('#work_time_list').append(tr);
+        $(tr).insertBefore( '.key-in' );
     }
-
 
     $( "#view" ).click(function() {
         window.open("student_work_time.php?studid="+<?php echo "\"".$_GET['studid']."\"" ?>+"&workid="+<?php echo $_GET['workid'];?>+"&view=1");
@@ -138,4 +195,5 @@ $(function(){
     }
 });
 </script>
+
 </html>

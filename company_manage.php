@@ -11,9 +11,11 @@ if(!isset($_SESSION['username']) || $_SESSION['level'] != 4) { header("Location:
 	<link rel="stylesheet" type="text/css" href="css/work_detail_edit.css">
 	<link rel="stylesheet" type="text/css" href="css/company_worK_apply_list.css">
 	<link rel="stylesheet" type="text/css" href="css/profile.css">
-	<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="http://code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
 	<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 	<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    <script src="js/jquery-ui.js"></script>
 	<script src="js/jquery.hashchange.min.js"></script>
 	<script src="js/upload_img.js"></script>
 	<script>
@@ -30,8 +32,9 @@ if(!isset($_SESSION['username']) || $_SESSION['level'] != 4) { header("Location:
 			case 'company-info-1': doajax('0-1');break;
 			case 'company-addwork':doajax(1);break;
 			case 'company-work':doajax(2);break;
-			case 'company-notice':doajax(3);break;
-			default:doajax(4);
+			case 'company-staff':doajax(3);break;
+			case 'company-notice':doajax(4);break;
+			default:doajax(5);
 			}
 
 		});
@@ -65,21 +68,32 @@ if(!isset($_SESSION['username']) || $_SESSION['level'] != 4) { header("Location:
 				para = {mode:'add'};
 				url = "work_add.php";
 				break;
+				
 				// manage work
 				case 2:
 				tpe = 'get';
 				para = {};
 				url = "work_list.php";
 				break;
-				// notice
+
+				// staff manage
 				case 3:
+				tpe = 'post';
+				para = {};
+				url = "company_staff.php";	
+				break;
+
+				// notice
+				case 4:
 				tpe = 'post';
 				para = {level: <?php echo "'".$_SESSION['level']."'"; ?>,username: <?php echo "'".$_SESSION['username']."'"; ?>};
 				url = "notice.php";	
 				break;
 
+				
+
 				// work-detail
-				case 4:
+				case 5:
 				tpe = 'post';
 				var wid = location.hash.replace( /^#work/, '' ).split("-");
 				para = {workid:wid[0],page:wid[1]};
@@ -96,7 +110,7 @@ if(!isset($_SESSION['username']) || $_SESSION['level'] != 4) { header("Location:
 			});
 
 			if(idx=='0-0'||idx=='0-1') idx=0;
-			if(idx==4) idx=2;
+			if(idx==5) idx=2;
 			
 			$('.list').removeClass('list-active');
 			$('.list:eq('+idx+')').addClass('list-active');
@@ -129,7 +143,7 @@ if(!isset($_SESSION['username']) || $_SESSION['level'] != 4) { header("Location:
 			<h2><?php echo $_SESSION['username'] ?></h2>
 		</div>
 
-		<a href="#company-info-0"><div class="list">公司資訊</div></a><hr>
+    	<a href="#company-info-0"><div class="list">公司資訊</div></a><hr>
     <!--由後端傳來
 		<a href="#company-addwork"><div class="list">新增工作</div></a><hr>
 		<a href="#company-work"><div class="list">管理工作</div></a><hr>

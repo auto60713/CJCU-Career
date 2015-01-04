@@ -29,7 +29,7 @@ $stmt = sqlsrv_query($conn, $sql, array($_SESSION['username']));
     if($stmt) $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC);
     else die(print_r( sqlsrv_errors(), true));
 
-    if(trim($row[pw])!=$old_pw) {echo "密碼錯誤，請重試。";  exit();}
+    if(trim($row['pw'])!=$old_pw) {echo "密碼錯誤，請重試。";  exit();}
 
     if( sqlsrv_query($conn, $sql2, array($new_pw)) ) echo "success";
        

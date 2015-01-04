@@ -17,6 +17,9 @@ if( !isCompanyWork($conn,$_SESSION['username'],$_GET['workid'])){
 
 // 是否為該公司的工作
 function isCompanyWork($conn,$companyid,$workid){
+//工作負責人轉換
+if (preg_match("/-/i", $companyid)) $companyid = strstr($companyid,'-',true);
+
 	$sql = "select company_id from work where id=?";
 	$params = array($workid);
 	$options =  array( "Scrollable" => SQLSRV_CURSOR_KEYSET );

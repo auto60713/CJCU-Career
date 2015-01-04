@@ -4,6 +4,8 @@ include_once('cjcuweb_lib.php');
 
 // 由於 ajax 請求 json 資料，須從後端檢查是否登入與其身分為學生，才可以執行 echo_apply_audit_array()
 $userid = $_SESSION['username'];
+//工作負責人轉換
+if (preg_match("/-/i", $userid)) $userid = strstr($userid,'-',true);
 $level = $_SESSION['level'];
 session_write_close();
 

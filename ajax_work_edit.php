@@ -40,6 +40,10 @@ switch($_POST['mode']){
       set_work_score($_POST['no'],$_POST['score']);
   break;
 
+  case 7://新增管理員
+      add_com_staff($_POST['sid'],$_POST['spw'],$_POST['sname'],$_POST['sphone'],$_POST['semail']);
+  break;
+
 }
 
 
@@ -64,10 +68,10 @@ function remove_page($workid){
       echo json_encode(array(array('#workedit-content-apply','#page-apply'),array('#workedit-content-start','#page-start')));
   break;
   case 1: case 4://第二階段
-      echo json_encode(array(array('#workedit-content-edit','#page-edit')));
+      echo json_encode(array());
   break;
   case 5: //第三階段
-      echo json_encode(array(array('#workedit-content-edit','#page-edit'),array('#workedit-content-start','#page-start')));
+      echo json_encode(array(array('#workedit-content-start','#page-start')));
   break;
 
   }
@@ -219,6 +223,31 @@ function set_work_score($no,$score){
   else echo '操作失敗!';
     
 }
+
+//新增管理員
+function add_com_staff($id,$pw,$name,$phone,$email){
+  include_once("sqlsrv_connect.php");
+
+    $id = $_SESSION['username']."-".$id;
+    $pw = md5($pw);
+    $sql = "INSERT INTO company (id,pw,ch_name,phone,email,boss_name,censored) VALUES (?, ?, ?, ?, ?, ?, ?)";
+    $params = array($id,$pw,$name,$phone,$email,$_SESSION['username'],5);
+  
+    $stmt = sqlsrv_query( $conn, $sql, $params);
+    if( $stmt === false ) {
+
+        echo 'Database write error';
+        die( console.log('PHP:'.sqlsrv_errors())  );
+    }
+    else{ echo 1;}
+   
+
+    
+}
+
+
+
+
 
 
 

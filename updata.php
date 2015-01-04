@@ -14,7 +14,7 @@ if(isset($_SESSION['level'])) $userlevel = $_SESSION['level'];
 
 
         case 5:case 1: //系所
-	        $params = array($_POST['ch_name'],$_POST['en_name'],$_POST['phone'],$_POST['fax'],$_POST['name'],$_POST['email']);
+	        $params = array($_POST['phone'],$_POST['fax'],$_POST['name'],$_POST['email']);
 	        array_push($params,$_POST['address'],$_POST['introduction'],$_POST['url']);
 	        department_updata($userid,$params);
 	    break;
@@ -41,7 +41,7 @@ function department_updata($userid,$params)
 	{
 		include_once("sqlsrv_connect.php");
 		
-		$sql  = "update department set ch_name=(?), en_name=(?), phone=(?), fax=(?), name=(?), email=(?), address=(?), introduction=(?), url=(?) where no ='".$userid."'"; 
+		$sql  = "update department set phone=(?), fax=(?), name=(?), email=(?), address=(?), introduction=(?), url=(?) where no ='".$userid."'"; 
         
         if( sqlsrv_query($conn, $sql, $params) )
         {

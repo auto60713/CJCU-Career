@@ -4,7 +4,7 @@ include("sqlsrv_connect.php");
 
 
 $options =  array("Scrollable" => SQLSRV_CURSOR_KEYSET);
-$params = array($id);
+$params = array();
 $sql = "select no,ch_name name from department WHERE sort=1";
 $result = sqlsrv_query($conn, $sql, $params , $options );
 if($result){

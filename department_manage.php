@@ -11,9 +11,11 @@ if(!isset($_SESSION['username']) || $_SESSION['level'] != 5) { header("Location:
 	<link rel="stylesheet" type="text/css" href="css/work_detail_edit.css">
 	<link rel="stylesheet" type="text/css" href="css/company_worK_apply_list.css">
 	<link rel="stylesheet" type="text/css" href="css/profile.css">
-	<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+	<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+	<link rel="stylesheet" href="http://code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
 	<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 	<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+	<script src="http://code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
 	<script src="js/jquery.hashchange.min.js"></script>
 	<script src="js/upload_img.js"></script>
 	<script>
@@ -127,7 +129,7 @@ if(!isset($_SESSION['username']) || $_SESSION['level'] != 5) { header("Location:
 		<a href="#department-info"><div class="list">系所資訊</div></a><hr>
 		<a href="#department-addwork"><div class="list">新增工作</div></a><hr>
 		<a href="#department-work"><div class="list">系上工作</div></a><hr>
-		<a href="#department-match"><div class="list">系上實習</div></a><hr>
+		<a href="#department-match"><div class="list">實習管理</div></a><hr>
 		<a href="#department-notice"><div class="list">通知</div></a><hr>
 
 	</div>

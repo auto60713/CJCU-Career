@@ -129,7 +129,7 @@ a:hover{
 }
 
 .hidden{
-    visibility:hidden;
+    display:none;
 }
 
 .form{

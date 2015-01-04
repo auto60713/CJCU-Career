@@ -58,6 +58,8 @@ else {echo "var search_log_cont = '沒有工作符合搜尋條件!';";}
 function echo_work_manage_list_array($companyid){
 
 	include("sqlsrv_connect.php");
+	//轉換工作負責人
+	if (preg_match("/-/i", $companyid)) $companyid = strstr($companyid,'-',true);
 	$para = array($companyid);
 
 	$sql = "select w.id wid,w.name wname,z.name zname,w.is_outside isout,p.name propname,[recruitment _no] rno,w.date date,t.name,w.[check] ch
@@ -135,6 +137,24 @@ function echo_student_apply_list_array($userid){
 		else die(print_r( sqlsrv_errors(), true));
 
 }
+
+
+//在學生profile上列出完成的工作
+function profile_work_list($stu_no){
+
+	include("sqlsrv_connect.php");
+	$para = array($stu_no);
+
+	$sql = "select w.name wname,c.ch_name cname from line_up l,work w,company c where l.user_id=? and l.[check]=5 and w.id=l.work_id and c.id=w.company_id";
+	$stmt = sqlsrv_query($conn, $sql, $para);
+	$profile_work_list = array();
+
+	if($stmt) while( $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC) ) $profile_work_list[] = $row;
+	else die(print_r( sqlsrv_errors(), true));
+
+	echo "var profile_work_list = ". json_encode($profile_work_list) . ";";	
+}	
+
 
 
 

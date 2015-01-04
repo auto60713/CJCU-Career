@@ -8,16 +8,6 @@ include("sqlsrv_connect.php");
 $options =  array("Scrollable" => SQLSRV_CURSOR_KEYSET);
 
 
-// 取得目前時間
-$year_array = array();
-$year = (int)date("Y"); 
-$year_array[] = $year;
-$year_array[] = $year++;
-$year_array[] = $year++;
-echo "var year_array = ". json_encode($year_array) . ";\n";
-
-
-
 // 取得"工作類型"資料表
 $work_type = array();
 $work_type_id = array();

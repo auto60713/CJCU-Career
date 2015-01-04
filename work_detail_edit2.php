@@ -8,6 +8,8 @@ exit();
 }
 
 function isCompanyWork($conn,$companyid,$workid){
+//工作負責人轉換
+if (preg_match("/-/i", $companyid)) $companyid = strstr($companyid,'-',true);
 
 	$sql = "select company_id from work where id=?";
 	$params = array($workid);

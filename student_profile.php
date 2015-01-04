@@ -27,6 +27,7 @@ if($_SESSION['level'] == $level_student){
         
 		<?php  //load data
 		    include_once("js_detail.php"); echo_student_profile($_GET['userid']); 
+		    include_once("js_work_list.php"); profile_work_list($_GET['userid']); 
 		?>
 
         $(".profile-pic-img").attr("src",'http://esrdoc.cjcu.edu.tw/esr_photo/'+student_profile_array['sd_syear'].trim()+'/'+student_profile_array['sd_no'].trim()+'.jpg');
@@ -43,6 +44,16 @@ if($_SESSION['level'] == $level_student){
         $('#sd_addr').text(student_profile_array['sd_addr']);
         $('#sd_phone').text(student_profile_array['sd_phone']);
 
+        if(profile_work_list.length == 0) $('#work_list').append($('<p>').text("沒有工作紀錄"));
+        else{
+		    for(var i=0;i<profile_work_list.length;i++){
+
+		    	var cname = $('<a>').text(profile_work_list[i]['cname']),
+		    	    wname = $('<a>').text(profile_work_list[i]['wname']);
+		    	
+		    		$('#work_list').append($('<p>').text(cname,'    ',wname));
+		    }
+		}
 
 	});
 	</script>
@@ -81,7 +92,8 @@ if($_SESSION['level'] == $level_student){
 	<p><span class="profile-span-title">電話</span><span id="sd_phone"></span></p>
 
 	<br><hr><br>
-
+    <h3>工作經歷</h3>
+	<div id="work_list"></div>
 
 </div>
 
@@ -89,7 +101,7 @@ if($_SESSION['level'] == $level_student){
 <div class="profile-boxright">
 
 <div class="profile-boxinner"><h2>電子履歷</h2>
-尚未開放
+ <p>尚未開放</p>
 </div>
 
 </div>

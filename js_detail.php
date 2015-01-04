@@ -17,6 +17,8 @@ include("sqlsrv_connect.php");
 	if($stmt) $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC); 
 	else die(print_r( sqlsrv_errors(), true));
 
+    array_walk($row, 'trim_value');
+
     echo "var student_profile_array = ". json_encode($row) . ";\n";
 
 }
@@ -31,6 +33,8 @@ include_once("sqlsrv_connect.php");
 	$stmt = sqlsrv_query($conn, $sql, array($id));
 	if($stmt) $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC); 
 	else die(print_r( sqlsrv_errors(), true));
+
+    array_walk($row, 'trim_value');
 
     echo "var staff_profile_array = ". json_encode($row) . ";\n";
 
@@ -48,6 +52,8 @@ include("sqlsrv_connect.php");
 	$stmt = sqlsrv_query($conn, $sql, array($dep_no));
 	if($stmt) $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC); 
 	else die(print_r( sqlsrv_errors(), true));
+
+    array_walk($row, 'trim_value');
 
     echo "var department_profile_array = ". json_encode($row) . ";";
 }
@@ -69,6 +75,8 @@ include_once("sqlsrv_connect.php");
 	if($stmt) $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC); 
 	else die(print_r( sqlsrv_errors(), true));
 
+    array_walk($row, 'trim_value');
+
     echo "var user_detail_array = ". json_encode($row) . ";\n";
 
 }
@@ -78,6 +86,8 @@ include_once("sqlsrv_connect.php");
 function echo_company_detail($com_id){
 
 include("sqlsrv_connect.php");
+//工作負責人轉換
+if (preg_match("/-/i", $com_id)) $com_id = strstr($com_id,'-',true);
 
     $sql = "select c.ch_name,c.en_name,c.phone,c.fax,c.email,c.uni_num,c.boss_name,t.name typename,z.name zone_name,c.address,c.staff_num,c.budget,c.url,c.introduction,c.censored "
 	      ."from company c,zone z,company_type t "
@@ -87,22 +97,27 @@ include("sqlsrv_connect.php");
 	if($stmt) $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC); 
 	else die(print_r( sqlsrv_errors(), true));
 
+    array_walk($row, 'trim_value');
+
     echo "var company_detail_array = ". json_encode($row) . ";";
 }
 
 /* 公司的位置跟類型 */
-function echo_company_type_and_zone($work_id){
+function echo_company_type_and_zone($com_id){
 include("sqlsrv_connect.php");
+//工作負責人轉換
+if (preg_match("/-/i", $com_id)) $com_id = strstr($com_id,'-',true);
 
 // 取出公司類型編號 (因為detail_array是直接取得typename)
     $sql = "select type,zone_id "
 	      ."from company "
 	      ."where id= ?";
 
-	$stmt = sqlsrv_query($conn, $sql, array($work_id));
+	$stmt = sqlsrv_query($conn, $sql, array($com_id));
 	if($stmt) $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC); 
-
 	else die(print_r( sqlsrv_errors(), true));
+
+    array_walk($row, 'trim_value');
 
     echo "var company_type = ".$row['type'].";";
     echo "var company_zone = ".$row['zone_id'].";";
@@ -124,6 +139,8 @@ include_once("sqlsrv_connect.php");
 	if($stmt) $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC); 
 	else die(print_r( sqlsrv_errors(), true));
 
+    array_walk($row, 'trim_value');
+
     echo "var department_detail_array = ". json_encode($row) . ";\n";
 
 }
@@ -139,6 +156,8 @@ include_once("sqlsrv_connect.php");
 	$stmt = sqlsrv_query($conn, $sql, array($user_no));
 	if($stmt) $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC); 
 	else die(print_r( sqlsrv_errors(), true));
+
+    array_walk($row, 'trim_value');
 
     echo "var staff_detail_array = ". json_encode($row) . ";\n";
 
@@ -164,8 +183,18 @@ else if(($pub == 2)){
 	if($stmt) $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC); 
 	else die(print_r( sqlsrv_errors(), true));
 
+    array_walk($row, 'trim_value');
+    
     //發布者
     echo "var publisher_detail_array = ". json_encode($row) . ";";
+}
+
+
+
+//去空白
+function trim_value(&$value) 
+{ 
+    $value = trim($value); 
 }
 
 

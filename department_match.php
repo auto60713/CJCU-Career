@@ -83,7 +83,7 @@ else{echo "No permission!"; exit;
 		    		com_herf = $('<a>').attr({'target':'_blank','href':'company-'+line_up_array[i]['comid']}).text(line_up_array[i]['comname']),
 		    		detil = $('<div>').addClass('manage-company-herf').append(work_herf,' 發布自 ',com_herf),
 		   
-                    match_btn = $('<div>').attr('id',line_up_array[i]['line_no']).addClass('match-btn btn').text("媒合老師"),
+                    match_btn = $('<button>').attr('id',line_up_array[i]['line_no']).addClass('match-btn btn').text("媒合老師"),
 
 		    		subbox1 = $('<div>').addClass('sub-box').append(img),
 	                subbox2 = $('<div>').addClass('sub-box').append(stu).append(detil),
@@ -104,7 +104,7 @@ else{echo "No permission!"; exit;
 	    }
 
 //選擇老師
-        var match_btn = $('div.match-btn');
+        var match_btn = $('button.match-btn');
 		match_btn.on( "click", function() {
 			var tea_name = $( "#match-sel option:selected" ).text(),
                 tea_no = $( "select#match-sel" ).val();

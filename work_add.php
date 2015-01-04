@@ -40,6 +40,8 @@ exit;
 
 // 是否為該公司的工作
 function isCompanyWork($conn,$companyid,$workid){
+//工作負責人轉換
+if (preg_match("/-/i", $companyid)) $companyid = strstr($companyid,'-',true);
 
 	$sql = "select company_id from work where id=?";
 	$params = array($workid);
@@ -59,7 +61,7 @@ function isCompanyWork($conn,$companyid,$workid){
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <style type="text/css">
 
-.match_dep,.instead{
+.match_dep,.match_dep_tag_box,.instead{
 	display: none;
 }
 .instead td{
@@ -84,18 +86,36 @@ form{
     padding-top: 5px;
     padding-bottom: 5px;
 }
+
+div.ui-datepicker{
+ font-size:10px;
+}
+.match_dep_tag{
+	cursor: pointer;
+	font-size: 10px;
+	display: inline;
+	margin-right:2px;
+	padding: 2px 5px;
+	width: auto;
+	background-color: #408080;
+	color: #FFFFFF;
+	border-radius: 2px;
+}
+.match_dep_tag:hover{
+	background-color: #67B4B4;
+}
 </style>
 </head>
 <body>
 
-<button id="btn-copy-work" class="btn-copy-work"><i class="fa fa-files-o"></i> 從現有工作複製</button>
+<button id="btn-copy-work" class="btn-copy-work hidden"><i class="fa fa-files-o"></i> 從現有工作複製</button>
 <button id="btn-instead-work" class="btn-copy-work hidden"><i class="fa fa-files-o"></i> 廠商代PO</button>
 
 <form name="work" id="work_edit_form" method="post" action="work_add_finish.php">
 <table>
 <tr class="instead">
-	<td class='td1'>請輸入廠商帳號</td>
-	<td><input type="text" name="instead_com"/></td>
+	<td class='td1'>選擇廠商：</td>
+	<td><select name="instead_com" id="instead_com"><option>請選擇</option></select></td>
 </tr>
 
 <tr>
@@ -113,28 +133,20 @@ form{
 
 <tr>
 	<td class='td1'>開始日期：</td>
-	<td><select name="year1" id="year1"></select>年
-		<select name="month1" id="month1"></select>月
-		<select name="date1" id="date1"></select>日
-		<select name="hour1" id="hour1"></select>時 
-		<select name="minute1" id="minute1"></select>分
-	</td>
+	<td><input type="text" id="bg_date" name="bg_date" placeholder="選擇時間"></td>
 </tr>
 
 <tr>
 	<td class='td1'>截止日期：</td>
-	<td><select name="year2" id="year2"></select>年
-		<select name="month2" id="month2"></select>月
-		<select name="date2" id="date2"></select>日
-		<select name="hour2" id="hour2"></select>時
-		<select name="minute2" id="minute2"></select>分
-	</td>
+	<td><input type="text" id="ed_date" name="ed_date" placeholder="選擇時間"></td>
 </tr>
 
 <tr>
 	<td class='td1'>工作性質：</td>
 	<td><select name="work_prop" id="work_prop"></select>
-        <div class="match_dep">請選擇系所<select name="match_dep" id="dep_list"></select></div>
+        <div class="match_dep">請選擇發佈的系所<select name="match_dep" id="dep_list"></select></div>
+        <div class="match_dep_tag_box"></div>
+        <input type="hidden" name="match_dep_set" id="match_dep_set"/>
 	</td>
 </tr>
 
@@ -146,7 +158,7 @@ form{
 </tr>
 
 <tr>
-	<td class='td1'>工作地點：</td>
+	<td class='td1'>工作區域：</td>
 	<td><select name="zone" id="zone"></select> 
 		<select name="zone_name" id="zone_name"></select>
 	</td>
@@ -166,7 +178,7 @@ form{
 </tr>
 
 <tr>
-	<td class='td1'>連絡電話：</td>
+	<td class='td1'>聯絡電話：</td>
 	<td><input type="text" name="phone" id="phone"/> 
 		<label><input type="checkbox" id="phone_same" >同<?php echo $who ?>電話</label>
 		<?php echo '<input type="hidden" name="hidden_phone" id="hidden_phone" value="'.$company_phone.'"/>';?>
@@ -175,7 +187,7 @@ form{
   
 <tr>
 	<td class='td1'>薪資待遇：</td>
-	<td><input type="pay" name="pay" id='pay'/>(可填 時薪,月薪 或 面議)</td>
+	<td><input type="pay" name="pay" id='pay' placeholder="時薪,月薪 或 面議"/></td>
 </tr>
 
 <tr>
@@ -201,40 +213,29 @@ form{
 	// php load some help data for js array
 	include_once("js_search_work_data.php"); echo_work_sub_data();
 	include_once('js_work_list.php'); echo_work_manage_list_array($_SESSION['username']);
+	include_once('js_match_list.php'); echo_com_list();
 	// if it's edit mode and load init data to js array
 	if($_GET['mode']=='edit'){
 	include_once('js_work_detail.php');
 	echo_work_detail_edit_array($conn,$_GET['workid']);
 	}
 	//應該要做一個回傳身分的ajax
-	if( $_SESSION['level'] != 4 ) echo '$( "#btn-instead-work" ).removeClass( "hidden" );';
+	if( $_SESSION['level'] != 4 ) echo '$( "#btn-instead-work" ).fadeIn();';
 
 	?> 
 	
 	$(function(){
 
-		// 生成年 
-		for(var i=0;i<year_array.length;i++)
-		$("#year1,#year2").append($("<option></option>").attr("value", year_array[i]).text(year_array[i]));
-		//生成 月
-		for(var i=1;i<=12;i++)
-		$("#month1,#month2").append($("<option></option>").attr("value", i).text(i));
-		// 生成 天
-		for(var i=1;i<=31;i++)
-		$("#date1,#date2").append($("<option></option>").attr("value", i).text(i));
-		// 生成 時
-		for(var i=0;i<=23;i++)
-		$("#hour1,#hour2").append($("<option></option>").attr("value", i).text(i));
-		// 生成 分
-		for(var i=0;i<=59;i++)
-		$("#minute1,#minute2").append($("<option></option>").attr("value", i).text(i));
-		
+	
 		// 生成工作位置基本資料
 		$("#zone").append($("<option></option>").attr("value", 0).text("國內"));
 		$("#zone").append($("<option></option>").attr("value", 1).text("國外"));
 
 		// 生成工作位置細目
 		change_zone_list();
+
+		//日曆API
+		$('#bg_date,#ed_date').datepicker({dateFormat: 'yy-mm-dd'});
 		
 		// 生成工作類型
 		for(var i=0;i<work_type.length;i++)
@@ -243,25 +244,6 @@ form{
 		// 生成 工作性質
 		for(var i=0;i<work_prop.length;i++)
 		$("#work_prop").append($("<option></option>").attr("value", work_prop_id[i]).text(work_prop[i]));
-
-		// 改變月份重新生成天數
-		$("#month1").change(function() {
-			//清空日期
-			$("#date1 option").remove();
-			var m = $(this).val;
-			var d = (m==1 || m==3 || m==5 || m==7  || m==8  || m==10 || m==12)?31:30;
-			for(var i=1;i<=d;i++) $("#date1").append($("<option>").attr("value", i).text(i));
-		});
-		$("#month2").change(function() {
-			//清空日期
-			$("#date2 option").remove();
-			var m = $(this).val;
-			var d = (m==1 || m==3 || m==5 || m==7  || m==8  || m==10 || m==12)?31:30;
-			for(var i=1;i<=d;i++) $("#date2").append($("<option>").attr("value", i).text(i));
-		});
-
-
-
 
 		// 工作類型第一層 改變時，用ajax列出 第二層 工作類型細目
 		$('#work_type').change(function() {
@@ -300,14 +282,40 @@ form{
             $( ".instead" ).fadeIn();
         });
 
+        //列出所有廠商
+		for(var i=0;i<all_company.length;i++){
 
+			var op = $('<option>').val(all_company[i]['id']).text(all_company[i]['name']);
+		    		
+			$('#instead_com').append(op);
+		}
 		
+        //自動填入該廠商的聯絡地址跟電話
+		$('#instead_com').change(function() {
+			var id=$(this).val();
+			$.ajax({
+			type:"POST",
+			async:false, 
+			url:"ajax_echo_name.php",
+			data:{mode:"com-msg",id:id},
+			success:function(data){ 
+                $('#phone').val(data.split("&&")[0]);	
+                $('#address').val(data.split("&&")[1]);
+		    },
+			error: function(){alert("網路連線出現錯誤!");}
+			});
+		});
+		
+
+
+
 		// 如果工作是實習 列出所有系所
 		$('#work_prop').change(function() {
 			var id=$(this).val();
-			$("#dep_list option").remove();
+			$("#dep_list option,.match_dep_tag_box div").remove();
 			if(id==3) {
-            $( ".match_dep" ).fadeIn();
+			$( ".match_dep_tag_box" ).append($('<div>').attr( "id", "all" ).addClass("match_dep_tag").text("不限"));
+            $( ".match_dep,.match_dep_tag_box" ).fadeIn();
 			$.ajax({
 			    type:"POST",
 			    async:false, 
@@ -318,9 +326,34 @@ form{
 			});
 
 			}
-			else{$( ".match_dep" ).fadeOut();}
+			else{$( ".match_dep,.match_dep_tag_box" ).fadeOut();}
 		});
+		//選擇多個系所
+        $( "#dep_list" ).change(function() {
+            var id=$( "#dep_list" ).val();
+            if(id=="all") $('.match_dep_tag').remove();
+            else $('#'+id+',#all').remove();
 
+            var name=$( "#dep_list option:selected" ).text(),
+                tag = $('<div>').attr( "id", id ).addClass("match_dep_tag").text(name);
+
+                $( ".match_dep_tag_box" ).append(tag);
+        });
+        //刪除系所TAG
+        $('.match_dep_tag').live('click', function() {
+            $(this).remove();
+        });
+        //submit時TAG轉成字串
+        $( "#work_edit_form" ).submit(function( event ) {
+      
+            var text = "";
+            for (i = 0; i < $('.match_dep_tag').length; i++) {
+                text += $( ".match_dep_tag:eq( "+i+" )" ).attr('id') + ",";
+            }
+            $( "#match_dep_set" ).val(text);
+        return;
+        //event.preventDefault();
+        });
 
 
 		// 工作地點改變時，用AJAX列出地點細目
@@ -409,8 +442,9 @@ form{
 		   編輯模模式...................................................................
 		// .............................................................................*/
 
-		<?php  if($_GET['mode']=='edit') 
-		echo 'setInit(work_detail_array,false); $("#btn-copy-work").remove();' ?>
+		<?php  if($_GET['mode']=='edit') echo 'setInit(work_detail_array,false);';
+               else { echo '$("#btn-copy-work").fadeIn();'; }
+		 ?>
 
 		function setInit(work_detail_array,is_copy_mode){
 
@@ -452,39 +486,9 @@ form{
 			});
 			
 
-			var start_date = work_detail_array['start_date'].split(" ");
-			var date = start_date[0].split("-");
-			var time = start_date[1].split(":");
-			var y = parseInt(date[0]);
-			var m = parseInt(date[1]);
-			var d = parseInt(date[2]);
-			var hh = parseInt(time[0]);
-			var mm = parseInt(time[1]);
-			
-			$('#year1').val(y);
-			$('#month1').val(m);
-			$('#date1').val(d);
-			$('#hour1').val(hh);
-			$('#minute1').val(mm);
-
-
-			var start_date = work_detail_array['end_date'].split(" ");
-			var date = start_date[0].split("-");
-			var time = start_date[1].split(":");
-			var y = parseInt(date[0]);
-			var m = parseInt(date[1]);
-			var d = parseInt(date[2]);
-			var hh = parseInt(time[0]);
-			var mm = parseInt(time[1]);
-
-			$('#year2').val(y);
-			$('#month2').val(m);
-			$('#date2').val(d);
-			$('#hour2').val(hh);
-			$('#minute2').val(mm);
-
-
 			$('#work_prop').val(work_detail_array['prop']); 
+			$('#bg_date').val(work_detail_array['start_date'].split(" ")[0]); 
+			$('#ed_date').val(work_detail_array['end_date'].split(" ")[0]); 
 			$('input[type="radio"][value="'+work_detail_array['is_outside']+'"]').attr('checked', 'true');
 			$('#zone').val(work_detail_array['zone']);
 			$('#zone_name').val(work_detail_array['zone_id']);
@@ -506,6 +510,8 @@ $(document).ready(function() {
             rules: { 
                 name:            { required:true,maxlength:20 },
                 work_type_list2: { required:true },
+                bg_date:         { required:true },
+                ed_date:         { required:true },
                 zone_name:       { required:true },
                 recruitment_no:  { required:true,maxlength:3,digits:true },
                 address:         { required:true,maxlength:40 },
