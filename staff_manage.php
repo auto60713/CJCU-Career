@@ -22,7 +22,8 @@ if(!isset($_SESSION['username']) || $_SESSION['level'] != 1) { header("Location:
 	$(function(){
 
 		$('#view-header').load('public_view/header.php');
-
+		$("#menu").load('public_view/menu.html');
+	    $("#footer").load('public_view/footer.html');
 
 		$(window).hashchange( function(){
 
@@ -124,7 +125,8 @@ if(!isset($_SESSION['username']) || $_SESSION['level'] != 1) { header("Location:
 
 <body>
 <div id="view-header"></div>
-
+<!-- 菜單 -->
+<div id="menu"></div>
 
 <div class="b-space div-align overfix">
 
@@ -132,7 +134,6 @@ if(!isset($_SESSION['username']) || $_SESSION['level'] != 1) { header("Location:
 		
 		<div class="profile-box">
 			<img src="<?php echo 'img_company/'.$_SESSION['username'].'.jpg' ?>" class="profile-img" id="profile-img"><br>
-			<h2><?php echo $_SESSION['username'] ?></h2>
 		</div>
 
 		<a href="#staff-info"><div class="list">個人資訊</div></a><hr>
@@ -173,6 +174,8 @@ if(!isset($_SESSION['username']) || $_SESSION['level'] != 1) { header("Location:
 	</div> 
 </div>
 
+<!-- 頁尾訊息 -->
+<div id="footer"></div>
 
 </body>
 </html>

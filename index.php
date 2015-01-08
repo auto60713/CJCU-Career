@@ -23,6 +23,7 @@
 		});
 
 		$("#menu").load('public_view/menu.html');
+		$("#footer").load('public_view/footer.html');
 
     })
 	</script>
@@ -146,11 +147,7 @@
 
 
 <!-- 頁尾訊息 -->
-<div id="footer">
-	<div class="footer_text">
-		Copyright © 2014 長榮大學職涯發展組 保留一切權利。
-	</div>
-</div>
+<div id="footer"></div>
 
 
 </body>

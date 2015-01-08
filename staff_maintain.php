@@ -35,13 +35,14 @@ else{
 	</script>
 	<style type="text/css">
 	    th{
-	    	border-bottom: 2px solid #000000;
+	    	border-bottom: 2px solid #424242;
 	    }
 	    .all-list,#add_dep_btn{
             margin-top: 30px;
 	    }
-        .all-list-tb th{
-        	font-style: normal;
+        .all-list-tb th,.all-list-tb td{
+        	text-align: left;
+        	font-weight: normal;
             padding-right: 50px;
         }
         .space{
@@ -51,6 +52,10 @@ else{
         #add_dep_btn:hover{
             color: #0080C0;
             cursor: pointer;
+        }
+        .ps{
+        	font-size: 9px;
+        	color: #808080;
         }
 
 	</style>
@@ -71,11 +76,11 @@ else{
     <!--工作-->
 	<div tabtoggle='workedit2' class="work_page">
 
-        <a>搜尋工作</a><input type="text" name="search_work_name" value="">
+        <a>搜尋工作</a><input type="text" name="search_work_name" value=""><a class="ps">(打完後字按下tab即搜尋)</a>
         <div class="all-list">
             <table id="work_table" class="all-list-tb">
-            	<h3>工作列表</h3>
-            	<tr><th>編號</th><th>發佈廠商</th><th>工作名稱</th><th>類型</th></tr>
+            	<h3>工作列表(僅維護工讀,正職。實習各系所負責)</h3>
+            	<tr><th>編號</th><th>發佈廠商</th><th>工作名稱</th><th>類型</th><th>狀態</th></tr>
             	<tr class="space"></tr>
             </table>
         </div>
@@ -84,7 +89,7 @@ else{
     <!--公司-->
 	<div tabtoggle='workedit2' class="com_page workedit-content-hide">
 
-        <a>搜尋廠商</a><input type="text" name="search_com_name" value="">
+        <a>搜尋廠商</a><input type="text" name="search_com_name" value=""><a class="ps">(打完後字按下tab即搜尋)</a>
         <div class="all-list">
             <table id="com_table" class="all-list-tb">
             	<h3>廠商列表</h3>
@@ -98,8 +103,9 @@ else{
 	<div tabtoggle='workedit2' class="dep_page workedit-content-hide">
         
 
-        <a>搜尋系所</a><input type="text" name="search_dep_name" value="">
+        <a>搜尋系所</a><input type="text" name="search_dep_name" value=""><a class="ps">(打完後字按下tab即搜尋)</a>
 
+    <div class="all-list">
         <h3>新增系所</h3>
         <table>
             <tr><td style="width:140px">請輸入系所帳號</td><td><input type="text" name="dep_id" value=""></td></tr>
@@ -107,12 +113,12 @@ else{
             <tr><td>密碼預設</td><td><input type="text" name="dep_pw" value="1234" disabled></td></tr>
         </table>
         <button type="button" onclick="add_department()">新增</button>
-
+    </div>
 
         <div class="all-list">
             <table id="dep_table" class="all-list-tb">
-            	<h3>系所列表</h3>
-            	<tr><th>帳號</th><th>密碼</th><th>中文名稱</th></tr>
+            	<h3>系所列表(依照帳號排列)</h3>
+            	<tr><th>序號</th><th>帳號</th><th>密碼</th><th>中文名稱</th></tr>
             	<tr class="space"></tr>
             </table>
         </div>
@@ -122,36 +128,79 @@ else{
 </body>
 <script type="text/javascript">
 <?php
-    include_once('js_match_list.php'); echo_com_list(); 
-    include_once('js_match_list.php'); echo_dep_list(); 
+    include_once('js_match_list.php'); echo_com_list(); echo_dep_list();
+    include_once('js_work_list.php'); staff_maintain_work();
 ?>
 
-        var body = $('#com_table');
-        if(all_company.length == 0){body.text("目前沒有任何廠商");}
+        var body = $('#work_table');
+        if(staff_maintain_work.length == 0){body.html("目前沒有任何工作");}
+        else{
+		    for(var i=0;i<staff_maintain_work.length;i++){
+
+		    	var w_id = $('<td>').text(staff_maintain_work[i]['id']),
+		    	    w_link = $('<a>').attr('href', '#work'+staff_maintain_work[i]['id']+'-0').text(staff_maintain_work[i]['name']),
+		        	work = $('<td>').html(w_link),
+		        	com_link = $('<a>').attr('target','_blank').attr('href', 'company-'+staff_maintain_work[i]['com_id']).text(staff_maintain_work[i]['com_name']),
+		        	com = $('<td>').html(com_link),
+		        	prop = $('<td>').text(staff_maintain_work[i]['prop']);
+
+switch(staff_maintain_work[i]['check']) {
+    case 1:
+        var check_name = "應徵中";
+    break;
+    case 4:
+        var check_name = "工作中";
+    break;
+    case 5:
+        var check_name = "工作已完成";
+    break;
+} 
+		        var	check = $('<td>').text(check_name);
+		    	var	tr = $('<tr>').addClass('work-data').append(w_id,com,work,prop,check);
+
+
+		    		body.append(tr);
+		    }
+		}
+
+
+        body = $('#com_table');
+        if(all_company.length == 0){body.html("目前沒有任何廠商");}
         else{
 		    for(var i=0;i<all_company.length;i++){
 
 		    	var id = $('<td>').text(all_company[i]['id']),
-		        	ch_name = $('<td>').text(all_company[i]['name']),
-		    		tr = $('<tr>').addClass('com-data').append(id,ch_name);
+		        	link3 = $('<a>').attr('target','_blank').attr('href', 'company-'+all_company[i]['id']).text(all_company[i]['name']),
+		        	name3 = $('<td>').html(link3),
+		    		tr = $('<tr>').addClass('com-data').append(id,name3);
 		    		body.append(tr);
 		    }
 		}
 
         body = $('#dep_table');
-        if(dep_list.length == 0){body.text("目前沒有任何系所");}
+        if(dep_list.length == 0){body.html("目前沒有任何系所");}
         else{
 		    for(var i=0;i<dep_list.length;i++){
 
-		    	var no = $('<td>').text(dep_list[i]['no']),
+		    	var sort = $('<td>').text(i),
+		         	no = $('<td>').text(dep_list[i]['no']),
 		        	pw = $('<td>').text(dep_list[i]['pw']),
-		        	ch_name = $('<td>').text(dep_list[i]['ch_name']),
-		    		tr = $('<tr>').addClass('dep-data').append(no,pw,ch_name);
+		        	link2 = $('<a>').attr('target','_blank').attr('href', 'department-'+dep_list[i]['no']).text(dep_list[i]['ch_name']),
+		        	name2 = $('<td>').append(link2),
+		    		tr = $('<tr>').addClass('dep-data').append(sort,no,pw,name2);
 		    		body.append(tr);
 		    }
 		}
 
-
+        //搜尋工作
+		$('input:text[name=search_work_name]').change(function() {
+			var id = $(this).val();
+			if(id!=""){
+			$( ".work-data" ).hide();
+		    $( "tr:contains('"+id+"')" ).fadeIn();
+		    }
+		    else{ $( ".work-data" ).fadeIn(); }
+		});
         //搜尋廠商
 		$('input:text[name=search_com_name]').change(function() {
 			var id = $(this).val();

@@ -3,13 +3,13 @@ session_start();
 include_once("cjcuweb_lib.php");
 
 // 防止駭客繞過登入
-if(isset ($_SESSION['username']) && $_SESSION['level'] == $level_company|$level_teacher){
+if(isset ($_SESSION['username'])){
 
 	// 取得公司電話與地址
 	include_once("sqlsrv_connect.php");
 
 	if($_SESSION['level']==4) {$sql = "select address,phone from company where id=?"; $who = '公司';}
-	else if($_SESSION['level']==5|1) {$sql = "select address,phone from department where no=?"; $who = '系所';}
+	else if($_SESSION['level']==5||$_SESSION['level']==1) {$sql = "select address,phone from department where no=?"; $who = '單位';}
 	$params = array($_SESSION['username']);
 	$options =  array( "Scrollable" => SQLSRV_CURSOR_KEYSET );
 	$result = sqlsrv_query($conn,$sql,$params,$options);
@@ -21,10 +21,12 @@ if(isset ($_SESSION['username']) && $_SESSION['level'] == $level_company|$level_
 
 	// 編輯模式,檢查該工作是否為其公司,否則顯示錯誤
 	if($_GET['mode']=='edit'){
-		
+			
 		if(!isCompanyWork($conn,$_SESSION['username'],$_GET['workid'])){
-			echo '你沒有權限訪問改頁面!!';
-			exit();
+			if($_SESSION['level']!=$level_staff&&$_SESSION['level']!=$level_department){
+			    echo 'No permission!';
+			    exit();
+			}
 		}
 
 	}
@@ -33,7 +35,7 @@ if(isset ($_SESSION['username']) && $_SESSION['level'] == $level_company|$level_
 }
 else{
 //重定向瀏覽器 且 後續代碼不會被執行 
-header("Location: login.php"); 
+header("Location: index.php"); 
 exit;
 }
 
@@ -115,7 +117,7 @@ div.ui-datepicker{
 <table>
 <tr class="instead">
 	<td class='td1'>選擇廠商：</td>
-	<td><select name="instead_com" id="instead_com"><option>請選擇</option></select></td>
+	<td><select name="instead_com" id="instead_com"><option value="0">請選擇</option></select></td>
 </tr>
 
 <tr>
@@ -132,13 +134,10 @@ div.ui-datepicker{
 </tr>
 
 <tr>
-	<td class='td1'>開始日期：</td>
-	<td><input type="text" id="bg_date" name="bg_date" placeholder="選擇時間"></td>
-</tr>
-
-<tr>
-	<td class='td1'>截止日期：</td>
-	<td><input type="text" id="ed_date" name="ed_date" placeholder="選擇時間"></td>
+	<td class='td1'>工作日期：</td>
+	<td><input type="text" id="bg_date" name="bg_date" placeholder="選擇時間"><b style="margin:0px 5px;">到</b>
+		<input type="text" id="ed_date" name="ed_date" placeholder="選擇時間">
+	</td>
 </tr>
 
 <tr>
@@ -187,7 +186,13 @@ div.ui-datepicker{
   
 <tr>
 	<td class='td1'>薪資待遇：</td>
-	<td><input type="pay" name="pay" id='pay' placeholder="時薪,月薪 或 面議"/></td>
+	<td><select id="pay_way">
+		    <option value="1">時薪</option>
+		    <option value="2">月薪</option>
+		    <option value="3">面議</option>
+	    </select>
+		<input type="pay" name="pay" id='pay' placeholder="請輸入數字,面議則留白"/>
+	</td>
 </tr>
 
 <tr>
@@ -279,7 +284,11 @@ div.ui-datepicker{
 
         //廠商代PO
         $( "#btn-instead-work" ).click(function() {
-            $( ".instead" ).fadeIn();
+        	if($( ".instead" ).is(":visible")) {
+        		$( ".instead" ).fadeOut();
+                $( "#instead_com" ).val(0);
+            }
+            else $( ".instead" ).fadeIn();
         });
 
         //列出所有廠商
@@ -345,7 +354,12 @@ div.ui-datepicker{
         });
         //submit時TAG轉成字串
         $( "#work_edit_form" ).submit(function( event ) {
-      
+
+            var pay_way = $("#pay_way option:selected").text(),
+                pay = $( "#pay" ).val();
+
+            $( "#pay" ).val(pay_way+pay);
+
             var text = "";
             for (i = 0; i < $('.match_dep_tag').length; i++) {
                 text += $( ".match_dep_tag:eq( "+i+" )" ).attr('id') + ",";
@@ -510,7 +524,6 @@ $(document).ready(function() {
             rules: { 
                 name:            { required:true,maxlength:20 },
                 work_type_list2: { required:true },
-                bg_date:         { required:true },
                 ed_date:         { required:true },
                 zone_name:       { required:true },
                 recruitment_no:  { required:true,maxlength:3,digits:true },

@@ -75,13 +75,12 @@ if(isset($_SESSION['username'])) $user_id = $_SESSION['username'];
 
 
 		$('title, #name').text(work_detail_array['name']);
-		$('#date').text(work_detail_array['date'].split(" ")[0]);
+		$('#date').text("發佈時間："+work_detail_array['date'].split(" ")[0]);
 		$('#prop').text( (work_detail_array['is_outside']=='0'?'校外':'校內')+' '+ work_detail_array['popname']);
 		$('#type').text(work_detail_array['typeone']+" > "+work_detail_array['typetwo']+" > "+work_detail_array['typethree']);
 		$('#rno').text(work_detail_array['recruitment _no']);
 		$('#pay').text(work_detail_array['pay']);
-		$('#start_date').text(work_detail_array['start_date'].split(" ")[0]);
-		$('#end_date').text(work_detail_array['end_date'].split(" ")[0]);
+		$('#work_date').text(work_detail_array['start_date'].split(" ")[0]+" ~ "+work_detail_array['end_date'].split(" ")[0]);
 		$('#phone').text(work_detail_array['phone']);
 		$('#address').text(work_detail_array['address']);
 		$('#detail').text(work_detail_array['detail']);
@@ -155,33 +154,33 @@ else if(work_detail_array['pub'] ==2){
 
 
 <div class="profile-boxleft">
-<h1><span id="name"></span><span id="ch"></span><!-- <a id="profile-btn-edit" href="">修改</a> --></h1>
+<h1><span id="name"></span><span id="ch"></span></h1>
 <br>
 <span id="date"></span>
 <br>
 <br>
+<h3>工作內容</h3>
+<span id="detail"></span><br>
+<br><hr><br>
 
+<h3>工作資訊</h3>
 <p><span class="profile-span-title">類型</span><span id="type"></span></p>
 <p><span class="profile-span-title">性質</span><span id="prop"></span></p>
 <p><span class="profile-span-title">招募人數</span><span id="rno"></span></p>
 <p><span class="profile-span-title">待遇</span><span id="pay"></span></p>
 <br><hr><br>
 
-<h3>招募時間</h3>
-<p><span class="profile-span-title">開始時間</span><span id="start_date"></span></p>
-<p><span class="profile-span-title">結束時間</span><span id="end_date"></span></p>
-
-
+<h3>工作時間</h3>
+<p>
+	<span class="profile-span-title">日期</span><span id="work_date"></span>
+</p>
 <br><hr><br>
 
 <h3>聯絡方式</h3>
 <p><span class="profile-span-title">電話</span><span id="phone"></span></p>
 <p><span class="profile-span-title">地址</span><span id="address"></span></p>
 
-<br><hr><br>
 
-<h3>詳細內容</h3>
-<span id="detail"></span><br>
 
 </div>
 

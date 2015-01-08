@@ -156,6 +156,22 @@ function profile_work_list($stu_no){
 }	
 
 
+//管理員僅維護 工讀,正職
+function staff_maintain_work(){
+
+	include("sqlsrv_connect.php");
+	$para = array();
+
+	$sql = "select w.id,w.name,c.id com_id,c.ch_name com_name,wp.name prop,w.[check] from work w,company c,work_prop wp where w.work_prop_id IN (1,2) and w.[check] IN (1,4,5) and c.id=w.company_id and wp.id=w.work_prop_id";
+	$stmt = sqlsrv_query($conn, $sql, $para);
+	$staff_maintain_work = array();
+
+	if($stmt) while( $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC) ) $staff_maintain_work[] = $row;
+	else die(print_r( sqlsrv_errors(), true));
+
+	echo "var staff_maintain_work = ". json_encode($staff_maintain_work) . ";";	
+}	
+
 
 
 

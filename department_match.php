@@ -11,6 +11,11 @@ else{echo "No permission!"; exit;
 	<link rel="stylesheet" type="text/css" href="css/work_detail_edit.css?v=3">
 	
 </head>
+<style type="text/css">
+.work-img:hover{
+    color:#0080C0;
+}
+</style>
 <body>
 	
 <div class="workedit-tabbox">
@@ -67,6 +72,70 @@ else{echo "No permission!"; exit;
 		});
 		tabgroup[0].click();
 
+//載入該系上的實習列表
+        var body = $('#workedit-content-match-list');
+
+        if(match_list_array.length == 0){body.html("目前系上沒有任何實習");}
+        else{
+		    for(var i=0;i<match_list_array.length;i++){
+
+		    	var img = $('<i>').addClass('fa fa-inbox fa-3x').addClass('work-img'),
+		    	    work_profile = $('<a>').attr({'title':'檢視Profile','target':'_blank','href':'work-'+match_list_array[i]['workid']}).append(img),
+		    		work_herf = $('<a>').attr({'title':'修改工作資料','href':'#work'+match_list_array[i]['workid']+'-0'}).text(match_list_array[i]['workname']),
+		    		work = $('<h1>').addClass('work-tit').append(work_herf),
+		    		com_herf = $('<a>').attr({'target':'_blank','href':'company-'+match_list_array[i]['comid']}).text(match_list_array[i]['comname']),
+		    		detil = $('<div>').addClass('manage-company-herf').append('發布自 ',com_herf),
+                    stu = $('<div>').addClass('manage-company-herf');
+
+                    switch(match_list_array[i]['state']) {
+                        case 1:
+                            var state_val = "應徵中";
+                            break;
+                        case 4:
+                            var state_val = "實習中";
+                            break;
+                        case 5:
+                            var state_val = "實習完成";
+                            break;
+                    } 
+
+                    //該實習所錄取的學生
+                        var msg='實習學生 : 負責老師 》',stu_link='';
+		                $.ajax({
+		                  type: 'POST',
+		                  url: 'ajax_work_edit.php',
+		                  data:{mode:5,workid:match_list_array[i]['workid']},
+		                  success: function (data) { 
+                            var stu_array = JSON.parse(data);
+                            if(stu_array.length == 0) {msg = '尚未有學生錄取'; stu.append(msg);}
+                            else{
+
+                            	stu.append(msg);
+                              for(var i=0;i<stu_array.length;i++){
+                              	if (stu_array[i]['tid'] == null) stu_array[i]['tid'] = '(未配對)';
+                                var stu_link = $('<a>').attr({'target':'_blank','href':'student-'+stu_array[i]['stuid']}).text(stu_array[i]['stuname'].trim()),
+                                    tea_link = $('<a>').text(stu_array[i]['tid']);
+                                
+                                stu.append(stu_link,' : ',tea_link,' , ');
+		                      }
+		                    }
+		                  },
+		                  async: false
+		                });
+
+                var state = $('<a>').addClass('work-ch-pass sta'+match_list_array[i]['state']).text(state_val);
+
+                   
+
+		    	var	subbox1 = $('<div>').addClass('sub-box').append(work_profile),
+	                subbox2 = $('<div>').addClass('sub-box').append(work).append(detil).append(stu),
+		    		subbox3 = $('<div>').addClass('sub-box2').append('狀態： ',state),
+
+		    		mainbox = $('<div>').addClass('work-list-box').append(subbox1).append(subbox2).append(subbox3);
+		    		
+		    		body.append(mainbox);
+		    }
+	    }
 
 
 //載入該系上的需要媒合的實習
@@ -127,69 +196,6 @@ else{echo "No permission!"; exit;
 		});
 
 
-//載入該系上的實習列表
-        var body = $('#workedit-content-match-list');
-
-        if(match_list_array.length == 0){body.html("目前系上沒有任何實習");}
-        else{
-		    for(var i=0;i<match_list_array.length;i++){
-
-		    	var img = $('<i>').addClass('fa fa-inbox fa-3x').addClass('work-img'),
-		    		work_herf = $('<a>').attr({'target':'_blank','href':'work-'+match_list_array[i]['workid']}).text(match_list_array[i]['workname']),
-		    		work = $('<h1>').addClass('work-tit').append(work_herf),
-		    		com_herf = $('<a>').attr({'target':'_blank','href':'company-'+match_list_array[i]['comid']}).text(match_list_array[i]['comname']),
-		    		detil = $('<div>').addClass('manage-company-herf').append('發布自 ',com_herf),
-                    stu = $('<div>').addClass('manage-company-herf');
-
-                    switch(match_list_array[i]['state']) {
-                        case 1:
-                            var state_val = "應徵中";
-                            break;
-                        case 4:
-                            var state_val = "實習中";
-                            break;
-                        case 5:
-                            var state_val = "實習完成";
-                            break;
-                    } 
-
-                    //該實習所錄取的學生
-                        var msg='實習學生 : 負責老師 》',stu_link='';
-		                $.ajax({
-		                  type: 'POST',
-		                  url: 'ajax_work_edit.php',
-		                  data:{mode:5,workid:match_list_array[i]['workid']},
-		                  success: function (data) { 
-                            var stu_array = JSON.parse(data);
-                            if(stu_array.length == 0) {msg = '尚未有學生錄取'; stu.append(msg);}
-                            else{
-
-                            	stu.append(msg);
-                              for(var i=0;i<stu_array.length;i++){
-                              	if (stu_array[i]['tid'] == null) stu_array[i]['tid'] = '(未配對)';
-                                var stu_link = $('<a>').attr({'target':'_blank','href':'student-'+stu_array[i]['stuid']}).text(stu_array[i]['stuname'].trim()),
-                                    tea_link = $('<a>').text(stu_array[i]['tid']);
-                                
-                                stu.append(stu_link,' : ',tea_link,' , ');
-		                      }
-		                    }
-		                  },
-		                  async: false
-		                });
-
-                var state = $('<a>').addClass('work-ch-pass sta'+match_list_array[i]['state']).text(state_val);
-
-                   
-
-		    	var	subbox1 = $('<div>').addClass('sub-box').append(img),
-	                subbox2 = $('<div>').addClass('sub-box').append(work).append(detil).append(stu),
-		    		subbox3 = $('<div>').addClass('sub-box2').append('狀態： ',state),
-
-		    		mainbox = $('<div>').addClass('work-list-box').append(subbox1).append(subbox2).append(subbox3);
-		    		
-		    		body.append(mainbox);
-		    }
-	    }
 
 //快速篩選
         $('#search-typefilter').on('change', function(event) {

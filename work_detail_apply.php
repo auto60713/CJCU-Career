@@ -3,17 +3,14 @@
 include("cjcuweb_lib.php");
 include("sqlsrv_connect.php");
 
+$checkVars = array($level_staff,$level_department);
+if(!isset($_SESSION['username'])||(!isCompanyWork($conn,$_SESSION['username'],$_GET['workid']) && !in_array($_SESSION['level'], $checkVars))) {
 
-if(isset($_SESSION['username'])) $company_id = $_SESSION['username']; 
-else{
 	echo "No permission!"; 
 	exit;
-} 
-
-if( !isCompanyWork($conn,$_SESSION['username'],$_GET['workid'])){
-	echo 'No permission!';
-	exit;
 }
+else $company_id = $_SESSION['username']; 
+
 
 // 是否為該公司的工作
 function isCompanyWork($conn,$companyid,$workid){

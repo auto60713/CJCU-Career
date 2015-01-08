@@ -1,4 +1,7 @@
-<?php session_start(); ?>
+<?php session_start(); 
+$filename = 'img_company/'.$_GET['companyid'].'.jpg';
+if (!file_exists($filename)) $filename = 'img_company/default.png';
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -71,7 +74,7 @@
 <div class="profile-boxleft">
 <h2>關於 <a id="profile-btn-edit" href="company_manage.php">修改</a> </h2>
 <div class="profile-pic">
-	<img class="profile-pic-img" src="<?php echo 'img_company/'.$_GET['companyid'].'.jpg' ; ?>">
+	<img class="profile-pic-img" src="<?php echo $filename; ?>">
 </div>
 
 <h3>系所資訊</h3>

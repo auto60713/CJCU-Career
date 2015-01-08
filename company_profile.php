@@ -1,4 +1,7 @@
-<?php session_start(); ?>
+<?php session_start(); 
+$filename = 'img_company/'.$_GET['companyid'].'.jpg';
+if (!file_exists($filename)) $filename = 'img_company/default.png';
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,10 +34,10 @@
 		$('#ch_name').text(company_detail_array['ch_name']);
 		$('#en_name').text(company_detail_array['en_name']);
 		$('#boss').text(company_detail_array['boss_name']);
-		$('#unicode').text(company_detail_array['uni_num']);
-
-		$('#budget').text(company_detail_array['budget']);
 		$('#stuffnum').text(company_detail_array['staff_num']);
+		//$('#unicode').text(company_detail_array['uni_num']);
+		//$('#budget').text(company_detail_array['budget']);
+
 		$('#phone').text(company_detail_array['phone']);
 		$('#email').text(company_detail_array['email']);
 		$('#fax').text(company_detail_array['fax']);
@@ -75,15 +78,14 @@
 <div class="profile-boxleft">
 <h2>關於 <a id="profile-btn-edit" href="company_manage.php">修改</a> </h2>
 <div class="profile-pic">
-	<img class="profile-pic-img" src="<?php echo 'img_company/'.$_GET['companyid'].'.jpg' ; ?>">
+	<img class="profile-pic-img" src="<?php echo $filename; ?>">
 </div>
 
 <h3>公司資訊</h3>
 <p><span class="profile-span-title">中文名稱</span><span id="ch_name"></span></p>
 <p><span class="profile-span-title">英文名稱</span><span id="en_name"></span></p>
+<p><span class="profile-span-title">公司類型</span><span id="cptype"></span></p>
 <p><span class="profile-span-title">負責人</span><span id="boss"></span></p>
-<p><span class="profile-span-title">統一編號</span><span id="unicode"></span></p>
-<p><span class="profile-span-title">資本額</span><span id="budget"></span></p>
 <p><span class="profile-span-title">員工數</span><span id="stuffnum"></span></p>
 <br><hr><br>
 
@@ -95,15 +97,7 @@
 <br><hr><br>
 
 
-<h3>公司類型</h3>
-
-<p><span id="cptype"></span></p>
-
-<br><hr><br>
-
-
 <h3>相關連結</h3>
-
 <p><span class="profile-span-title">公司網站</span><span id="cpurl"></span></p>
 
 

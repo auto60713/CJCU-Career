@@ -1,4 +1,7 @@
-<?php session_start(); ?>
+<?php session_start(); 
+$filename = 'img_company/'.$_GET['companyid'].'.jpg';
+if (!file_exists($filename)) $filename = 'img_company/default.png';
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -41,7 +44,7 @@
 <div class="profile-boxleft">
 	<h2>關於</h2>
 	<div class="profile-pic">
-	<img class="profile-pic-img" src="<?php echo '../img_user/'.$_GET['userid'].'.jpg' ; ?>">
+	<img class="profile-pic-img" src="<?php echo $filename; ?>">
     </div>
 
 	<!-- 以下欄位皆為參考學生系統之欄位所建 -->

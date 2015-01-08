@@ -128,7 +128,7 @@ function echo_dep_list(){
 
 include("sqlsrv_connect.php");
 
-$sql = "select * from department where sort = 1";
+$sql = "select * from department where sort = 1 ORDER BY no";
 
 $para = array();
 $stmt = sqlsrv_query($conn, $sql, $para);
@@ -155,7 +155,7 @@ function echo_com_list(){
 
 include("sqlsrv_connect.php");
 
-$sql = "select id,ch_name name from company where censored=1";
+$sql = "select id,ch_name name from company where censored=1 ORDER BY ch_name";
 
 $para = array();
 $stmt = sqlsrv_query($conn, $sql, $para);

@@ -1,5 +1,7 @@
 <?php session_start(); 
 if(!isset($_SESSION['username']) || $_SESSION['level'] != 4) { header("Location: index.php"); exit; }
+$filename = 'img_company/'.$_SESSION['username'].'.jpg';
+if (!file_exists($filename)) $filename = 'img_company/default.png';
 ?>
 <!doctype html>
 <html>
@@ -22,7 +24,10 @@ if(!isset($_SESSION['username']) || $_SESSION['level'] != 4) { header("Location:
 	$(function(){
 
 		$('#view-header').load('public_view/header.php');
+		$("#menu").load('public_view/menu.html');
+	    $("#footer").load('public_view/footer.html');
 
+	    
 		$(window).hashchange( function(){
 
 			ctu=false;
@@ -132,15 +137,15 @@ if(!isset($_SESSION['username']) || $_SESSION['level'] != 4) { header("Location:
 
 <body>
 <div id="view-header"></div>
-
+<!-- 菜單 -->
+<div id="menu"></div>
 
 <div class="b-space div-align overfix">
 
 	<div id="" class="left-box" >
 
 		<div class="profile-box">
-			<img src="<?php echo 'img_company/'.$_SESSION['username'].'.jpg' ?>" class="profile-img" id="profile-img"><br>
-			<h2><?php echo $_SESSION['username'] ?></h2>
+			<img src="<?php echo $filename; ?>" class="profile-img" id="profile-img"><br>
 		</div>
 
     	<a href="#company-info-0"><div class="list">公司資訊</div></a><hr>
@@ -185,7 +190,8 @@ if(!isset($_SESSION['username']) || $_SESSION['level'] != 4) { header("Location:
 	</div> 
 </div>
 
+<!-- 頁尾訊息 -->
+<div id="footer"></div>
 
 </body>
-
 </html>

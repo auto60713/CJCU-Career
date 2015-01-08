@@ -15,7 +15,7 @@ hr{
 
 .b-space{
 	width: 80%;
-	margin-bottom: 100px;
+	margin-bottom: 40px;
 }
 
 
@@ -42,6 +42,7 @@ hr{
 	background-color: #FFF;
 	float: left;
 	width: 67%;
+	min-height: 600px;
 }
 
 .list{

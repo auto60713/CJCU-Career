@@ -1,5 +1,5 @@
 <?php session_start();
-if(!isset($_SESSION['username']) || $_SESSION['level'] != 2) { header("Location: home.php"); exit; }
+if(!isset($_SESSION['username']) || $_SESSION['level'] != 2) { header("Location: index.php"); exit; }
 ?>
 <!doctype html>
 <html>
@@ -18,7 +18,8 @@ if(!isset($_SESSION['username']) || $_SESSION['level'] != 2) { header("Location:
 	$(function(){
 
 		$('#view-header').load('public_view/header.php');
-
+		$("#menu").load('public_view/menu.html');
+	    $("#footer").load('public_view/footer.html');
 
 		$(window).hashchange( function(){
 			ctu=false;
@@ -77,13 +78,12 @@ if(!isset($_SESSION['username']) || $_SESSION['level'] != 2) { header("Location:
 
 <body>
 <div id="view-header"></div>
-
+<!-- 菜單 -->
+<div id="menu"></div>
 
 <div class="b-space div-align overfix">
 
 	<div id="" class="left-box" >
-		<h2><?php echo $_SESSION['username'] ?></h2><br><br><hr>
-
 		<a href="#teacher-info"><div class="list">個人資訊</div></a><hr>
 	    <a href="#teacher-match"><div class="list">實習列表</div></a><hr>
 	</div>
@@ -99,8 +99,8 @@ if(!isset($_SESSION['username']) || $_SESSION['level'] != 2) { header("Location:
 	
 </div>
 
-
+<!-- 頁尾訊息 -->
+<div id="footer"></div>
 
 </body>
-
 </html>

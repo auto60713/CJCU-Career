@@ -55,7 +55,7 @@ if(isset($_POST['detail']))$detail = trim($_POST['detail']);
 else $detail = "";
 
 //廠商代PO
-if( $_POST['instead_com']!=null ) { $company_id = trim($_POST['instead_com']); $publisher = 1; }
+if( $_POST['instead_com']!=0 ) { $company_id = trim($_POST['instead_com']); $publisher = 1; }
 
 if( !isset($name) || !isset($work_type) || !isset($work_prop) || !isset($isoutside) || !isset($zone_id) || !isset($address) || !isset($recruitment_no) || $zone_id==0){
 	echo "Enter the details are incorrect!!";

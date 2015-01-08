@@ -22,6 +22,8 @@ else{$stud_id = trim($_SESSION['username']);}
 	$(function(){
 
 		$('#view-header').load('public_view/header.php');
+		$("#menu").load('public_view/menu.html');
+	    $("#footer").load('public_view/footer.html');
 
 		$(window).hashchange( function(){
 
@@ -105,7 +107,8 @@ else{$stud_id = trim($_SESSION['username']);}
 
 <body>
 <div id="view-header"></div>
-
+<!-- 菜單 -->
+<div id="menu"></div>
 
 <div class="b-space div-align overfix">
 
@@ -113,7 +116,6 @@ else{$stud_id = trim($_SESSION['username']);}
 
 		<div class="profile-box">
 			<img src="" id="profile-img" class="profile-img-stu"><br>
-			<h2></h2>
 		</div>
 
 		<a href="#student-info"><div class="list">個人資訊</div></a><hr>
@@ -133,28 +135,9 @@ else{$stud_id = trim($_SESSION['username']);}
 
 
 
-<!-- upload image
+<!-- 頁尾訊息 -->
+<div id="footer"></div>
 
-<div class="staff-apply-form" id="upload-profile-lightbox"> 
-	
-	<div class="staff-apply-box"> 
-		
-		<h1>上傳照片<i class="fa fa-times login-exit" id="upload-close"></i></h1>
-		<p class="login-hint">您可以更新一張代表您的照片</p>
-
-		<img src="" class="upload-img-max">
-		<img src="" class="upload-img-min">
-		<form id="upload_form" enctype="multipart/form-data" method="post">
-		 <input type="file" name="file1" id="file1"  class="btn-submit" accept="image/*">
-		
-		</form>
-		 <p id="status"></p>
-		 <button class=" btn-submit2" id="upload-btn-close">關閉</button>
-
-	</div> 
-</div>
-
- -->
 
 </body>
 </html>

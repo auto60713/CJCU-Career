@@ -1,5 +1,7 @@
 <?php session_start();
 if(!isset($_SESSION['username']) || $_SESSION['level'] != 5) { header("Location: index.php"); exit; }
+$filename = 'img_company/'.$_SESSION['username'].'.jpg';
+if (!file_exists($filename)) $filename = 'img_company/default.png';
 ?>
 <!doctype html>
 <html>
@@ -22,7 +24,10 @@ if(!isset($_SESSION['username']) || $_SESSION['level'] != 5) { header("Location:
 	$(function(){
 
 		$('#view-header').load('public_view/header.php');
+		$("#menu").load('public_view/menu.html');
+	    $("#footer").load('public_view/footer.html');
 
+	    
 		$(window).hashchange( function(){
 
 		  	var loc = location.hash.replace( /^#/, '' );
@@ -115,20 +120,20 @@ if(!isset($_SESSION['username']) || $_SESSION['level'] != 5) { header("Location:
 
 <body>
 <div id="view-header"></div>
-
+<!-- 菜單 -->
+<div id="menu"></div>
 
 <div class="b-space div-align overhidden">
 
 	<div id="" class="left-box" >
 
 		<div class="profile-box">
-			<img src="<?php echo 'img_company/'.$_SESSION['username'].'.jpg' ?>" class="profile-img" id="profile-img">
-			<h2><?php echo $_SESSION['username'] ?></h2>
+			<img src="<?php echo $filename; ?>" class="profile-img" id="profile-img">
 		</div>
 
 		<a href="#department-info"><div class="list">系所資訊</div></a><hr>
 		<a href="#department-addwork"><div class="list">新增工作</div></a><hr>
-		<a href="#department-work"><div class="list">系上工作</div></a><hr>
+		<a href="#department-work"><div class="list">我發佈的工作</div></a><hr>
 		<a href="#department-match"><div class="list">實習管理</div></a><hr>
 		<a href="#department-notice"><div class="list">通知</div></a><hr>
 
@@ -169,8 +174,8 @@ if(!isset($_SESSION['username']) || $_SESSION['level'] != 5) { header("Location:
 </div>
 
 
-
+<!-- 頁尾訊息 -->
+<div id="footer"></div>
 
 </body>
-
 </html>
