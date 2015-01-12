@@ -8,7 +8,7 @@ if(!isset($_SESSION['username'])) { echo 'No permission!'; exit; }
 
 </head>
 <style type="text/css">
-table.input,h3{
+h3{
 	margin-top: 30px;
 }
 table.com-staff-list tr td{
@@ -67,10 +67,6 @@ function add_com_staff(){
 		
 </script>
 <body>
-	<p>你可以新增公司的工作負責人來幫忙管理工作，<br>
-       並且一樣從廠商入口登入。
-	</p>
-
     <table class="input">
         <tr><td style="width:140px">新增帳號</td><td><input type="text" name="com_sid" value=""></td></tr>
         <tr><td>密碼</td><td><input type="text" name="com_spw" value=""></td></tr>

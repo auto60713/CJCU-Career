@@ -67,8 +67,7 @@ else{
 				lintext = 'work';
 				titname = data.wname;
 			var	href = $('<a>').attr("href", "/cjcuweb/company-"+data.comid).attr("target", "_blank"),
-				eyes = $('<i>').addClass('fa fa-eye');
-				overview = href.addClass('staff-audit-overview').append(eyes,"發布自 "+data.comname);
+				overview = href.addClass('staff-audit-overview').append("發布自 "+data.comname);
 			}
 			var 
 			icon = $('<i>').addClass(icontype),

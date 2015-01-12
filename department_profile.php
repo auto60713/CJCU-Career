@@ -80,7 +80,7 @@ if (!file_exists($filename)) $filename = 'img_company/default.png';
 <h3>系所資訊</h3>
 <p><span class="profile-span-title">中文名稱</span><span id="ch_name"></span></p>
 <p><span class="profile-span-title">英文名稱</span><span id="en_name"></span></p>
-<p><span class="profile-span-title">負責人</span><span id="name"></span></p>
+<p><span class="profile-span-title">系主任</span><span id="name"></span></p>
 <br><hr><br>
 
 <h3>聯絡方式</h3>

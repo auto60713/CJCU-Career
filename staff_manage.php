@@ -35,6 +35,7 @@ if(!isset($_SESSION['username']) || $_SESSION['level'] != 1) { header("Location:
 			case 'staff-addwork':doajax(2);break;
 			case 'staff-work':doajax(3);break;
 			case 'staff-maintain':doajax(4);break;
+			case 'explanation':doajax(12);break;
 
 			default:doajax(10);
 			}
@@ -98,7 +99,13 @@ if(!isset($_SESSION['username']) || $_SESSION['level'] != 1) { header("Location:
 				url = "work_detail_edit2.php";	
 				var goback = $('<a>').attr({href:'#staff-work',id:'gobackbtn'}).append($('<i>').addClass('fa fa-reply').append(' '));
 				break;
-	
+
+			// 操作說明
+				case 12:
+				tpe = 'post';
+				para = {mode:'staff'};
+				url = "explanation.php";	
+				break;
 			}
 
 			$.ajax({
@@ -108,6 +115,10 @@ if(!isset($_SESSION['username']) || $_SESSION['level'] != 1) { header("Location:
 			  success: function (data) { $('#contailer-box').html(data) ;  }
 			});
 
+
+
+			if(idx==10) idx=3;
+			else if(idx==12) idx=5;
 			
 			$('.list').removeClass('list-active');
 			$('.list:eq('+idx+')').addClass('list-active');
@@ -136,12 +147,12 @@ if(!isset($_SESSION['username']) || $_SESSION['level'] != 1) { header("Location:
 			<img src="<?php echo 'img_company/'.$_SESSION['username'].'.jpg' ?>" class="profile-img" id="profile-img"><br>
 		</div>
 
-		<a href="#staff-info"><div class="list">個人資訊</div></a><hr>
-		<a href="#staff-audit0"><div class="list">審核</div></a><hr>
+		<a href="#staff-info"><div class="list">基本資訊</div></a><hr>
+		<a href="#staff-audit0"><div class="list">審核工作與公司</div></a><hr>
 		<a href="#staff-addwork"><div class="list">新增工作</div></a><hr>
 		<a href="#staff-work"><div class="list">我發佈的工作</div></a><hr>
 		<a href="#staff-maintain"><div class="list">維護</div></a><hr>
-
+		<a href="#explanation"><div class="list">操作說明</div></a><hr>
 	</div>
 
 	<div id="" class="right-box">

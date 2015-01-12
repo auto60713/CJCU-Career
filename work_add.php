@@ -111,7 +111,7 @@ div.ui-datepicker{
 <body>
 
 <button id="btn-copy-work" class="btn-copy-work hidden"><i class="fa fa-files-o"></i> 從現有工作複製</button>
-<button id="btn-instead-work" class="btn-copy-work hidden"><i class="fa fa-files-o"></i> 廠商代PO</button>
+<button id="btn-instead-work" class="btn-copy-work hidden"><i class="fa fa-files-o"></i> 幫廠商代發</button>
 
 <form name="work" id="work_edit_form" method="post" action="work_add_finish.php">
 <table>
@@ -169,7 +169,7 @@ div.ui-datepicker{
 </tr>
 
 <tr>
-	<td class='td1'>聯絡地址：</td>
+	<td class='td1'>工作地址：</td>
 	<td><input type="text" name="address" id="address"/> 
 		<label><input type="checkbox" id="address_same" >同<?php echo $who ?>地址</label> 
 		<?php echo '<input type="hidden" name="hidden_address" id="hidden_address" value="'.$company_address.'"/>';?>
@@ -197,7 +197,7 @@ div.ui-datepicker{
 
 <tr>
 	<td class='td1'>工作內容：</td>
-	<td><textarea name="detail" cols="45" rows="5" id='detail'></textarea></td> 
+	<td><textarea name="detail" cols="45" rows="5" placeholder="有特殊技能需求也可在此補充" id='detail'></textarea></td> 
 </tr>
 
 </table>
@@ -285,7 +285,7 @@ div.ui-datepicker{
         //廠商代PO
         $( "#btn-instead-work" ).click(function() {
         	if($( ".instead" ).is(":visible")) {
-        		$( ".instead" ).fadeOut();
+        		$( ".instead" ).hide();
                 $( "#instead_com" ).val(0);
             }
             else $( ".instead" ).fadeIn();

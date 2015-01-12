@@ -37,6 +37,7 @@ if (!file_exists($filename)) $filename = 'img_company/default.png';
 			case 'department-work':doajax(2);break;
 			case 'department-match':doajax(3);break;
 			case 'department-notice':doajax(4);break;
+			case 'explanation':doajax(12);break;
 
 			default:doajax(10);
 
@@ -84,13 +85,18 @@ if (!file_exists($filename)) $filename = 'img_company/default.png';
 				url = "notice.php";	
 				break;
 
-				// work-detail
 				case 10:
 				tpe = 'post';
 				var wid = location.hash.replace( /^#work/, '' ).split("-");
 				para = {workid:wid[0],page:wid[1]};
 				url = "work_detail_edit2.php";	
 				var goback = $('<a>').attr({href:'#dapartment-work',id:'gobackbtn'}).append($('<i>').addClass('fa fa-reply').append(' '));
+				break;
+
+				case 12:
+				tpe = 'post';
+				para = {mode:'dep'};
+				url = "explanation.php";	
 				break;
 			}
 
@@ -101,8 +107,8 @@ if (!file_exists($filename)) $filename = 'img_company/default.png';
 			  success: function (data) { $('#contailer-box').html(data) ;  }
 			});
 
-			if(idx=='0-0'||idx=='0-1') idx=0;
-
+			if(idx==10) idx=2;
+			else if(idx==12) idx=5;
 			
 			$('.list').removeClass('list-active');
 			$('.list:eq('+idx+')').addClass('list-active');
@@ -136,7 +142,7 @@ if (!file_exists($filename)) $filename = 'img_company/default.png';
 		<a href="#department-work"><div class="list">我發佈的工作</div></a><hr>
 		<a href="#department-match"><div class="list">實習管理</div></a><hr>
 		<a href="#department-notice"><div class="list">通知</div></a><hr>
-
+		<a href="#explanation"><div class="list">操作說明</div></a><hr>
 	</div>
 
 

@@ -109,7 +109,6 @@ else{echo "No permission!"; exit;
 </head>
 <body>
 <div id='search-box'>
-
 <select id="search-typefilter">
 	<option value='-1' selected="selected">顯示全部</option>
 	<option value='0' >僅顯示未審核</option>

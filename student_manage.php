@@ -32,7 +32,9 @@ else{$stud_id = trim($_SESSION['username']);}
 			case 'student-info':case'':doajax(0);break;
 			case 'student-applywork':doajax(1);break;
 			case 'student-notice':doajax(2);break;
-			default:doajax(3);
+			case 'explanation':doajax(12);break;
+
+			default:doajax(5);
 			}
 
 		});
@@ -65,12 +67,18 @@ else{$stud_id = trim($_SESSION['username']);}
 				break;
 
 				// 工讀單
-				case 3:
+				case 5:
 				tpe = 'get';
 				var wid = location.hash.replace( /^#work/, '' );
 				para = {studid:<?php echo "\"".$stud_id."\"" ?>,workid:wid};
 				url = "student_work_time.php";	
 				var goback = $('<a>').attr({href:'#student-applywork',id:'gobackbtn'}).append($('<i>').addClass('fa fa-reply').append(' '));
+				break;
+
+				case 12:
+				tpe = 'post';
+				para = {mode:'stu'};
+				url = "explanation.php";	
 				break;
 			}
 
@@ -81,12 +89,14 @@ else{$stud_id = trim($_SESSION['username']);}
 			  success: function (data) { $('#contailer-box').html(data) ;  }
 			});
 		    
-
+            if(idx==12) idx=3;
             $('#right-box-title').text($('.list:eq('+idx+')').text());
-            if(idx==3){
+            if(idx==5){
             	$('#right-box-title').text('工讀單');
             	idx=1;
             }
+            
+
             $('.list').removeClass('list-active');
             $('.list:eq('+idx+')').addClass('list-active');
 				
@@ -121,6 +131,7 @@ else{$stud_id = trim($_SESSION['username']);}
 		<a href="#student-info"><div class="list">個人資訊</div></a><hr>
 		<a href="#student-applywork"><div class="list">我的應徵</div></a><hr>
 		<a href="#student-notice"><div class="list">通知</div></a><hr>
+		<a href="#explanation"><div class="list">操作說明</div></a><hr>
 	</div>
 
 

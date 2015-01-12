@@ -39,6 +39,7 @@ if (!file_exists($filename)) $filename = 'img_company/default.png';
 			case 'company-work':doajax(2);break;
 			case 'company-staff':doajax(3);break;
 			case 'company-notice':doajax(4);break;
+			case 'explanation':doajax(12);break;
 			default:doajax(5);
 			}
 
@@ -105,6 +106,13 @@ if (!file_exists($filename)) $filename = 'img_company/default.png';
 				url = "work_detail_edit2.php";	
 				var goback = $('<a>').attr({href:'#company-work',id:'gobackbtn'}).append($('<i>').addClass('fa fa-reply').append(' '));
 				break;
+
+				// 操作說明
+				case 12:
+				tpe = 'post';
+				para = {mode:'com'};
+				url = "explanation.php";	
+				break;
 			}
 
 			$.ajax({
@@ -115,7 +123,8 @@ if (!file_exists($filename)) $filename = 'img_company/default.png';
 			});
 
 			if(idx=='0-0'||idx=='0-1') idx=0;
-			if(idx==5) idx=2;
+			else if(idx==5) idx=2;
+			else if(idx==12) idx=5;
 			
 			$('.list').removeClass('list-active');
 			$('.list:eq('+idx+')').addClass('list-active');

@@ -43,10 +43,11 @@ if(trim($_SESSION['username']) != $_GET['userid']) {
 		
 		for(var key in user_detail_array){
 
+			if(idx==0||idx==2||idx==3||idx==6||idx==8||idx==9||idx==11||idx==12||idx==13||idx==14||idx==15||idx==16||idx==17||idx==19){
 			detail_column+="<tr><td class='td1'>"+column_name[idx]+"</td>";
-
             detail_column+="<td class='td2'>"+user_detail_array[key]+"</td></tr>";
-		    
+		    }
+
 			idx++;
 		}	
 

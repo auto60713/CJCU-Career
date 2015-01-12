@@ -18,6 +18,7 @@ function censored_check(){
         $hreftag.= '<a href="#company-work"><div class="list">管理工作</div></a><hr>';
         $hreftag.= '<a href="#company-staff"><div class="list">工作負責人</div></a><hr>';
         $hreftag.= '<a href="#company-notice"><div class="list">通知</div></a><hr>';
+        $hreftag.= '<a href="#explanation"><div class="list">操作說明</div></a><hr>';
         echo "$('.left-box').append('".$hreftag."');\n";
         }
         // 工作負責人

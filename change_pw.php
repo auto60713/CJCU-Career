@@ -5,7 +5,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>求助</title>
+	<title>密碼修改</title>
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 	<link rel="stylesheet" type="text/css" href="css/home.css">
 	<link href="font-awesome/css/font-awesome.min.css" rel="stylesheet">
@@ -14,7 +14,7 @@
 	<script src="lib/jquery.validate.js"></script>
 	<style type="text/css">
 	    .fix-position{
-	    	margin-top: 5%;
+	    	margin-top: 4%;
 	    	padding: 30px;
 	    	margin-right: auto;
 	    	margin-left: auto;
@@ -51,6 +51,19 @@
 	    }
         .fail{
             background-color: #FF8080;
+        }
+        #commentForm{
+        	margin-top: 15px;
+        }
+
+        .title{
+        	font-size: 30px;
+        	font-weight: bold;
+        	margin-right: 10px;
+        }
+        .sign{
+        	font-size: 13px;
+        	color: #626262;
         }
 	</style>
 	<script>
@@ -113,9 +126,9 @@
 <div class="container margin-top20"><div class="fix-position">
 
     <div class="apply-echo success"></div><div class="apply-echo fail"></div>
-    <h1>修改密碼</h1>
+    <span class="title">修改密碼</span><span class="sign">密碼長度限制20個字元以內</span>
 
-    <table id="commentForm">                                                        
+    <table id="commentForm">                            
         <tr><td>舊密碼：</td>            <td><input type="password" name="old_pw" id="old_pw"/></td></tr>
         <tr><td>新密碼：</td>            <td><input type="password" name="new_pw" id="new_pw"/></td></tr>
         <tr><td>再輸入一次新密碼：</td>  <td><input type="password" name="new_pw2" id="new_pw2"/></td></tr>

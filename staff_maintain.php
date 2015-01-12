@@ -35,7 +35,7 @@ else{
 	</script>
 	<style type="text/css">
 	    th{
-	    	border-bottom: 2px solid #424242;
+	    	/*border-bottom: 2px solid #424242;*/
 	    }
 	    .all-list,#add_dep_btn{
             margin-top: 30px;

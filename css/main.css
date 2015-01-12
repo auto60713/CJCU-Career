@@ -10,7 +10,7 @@ body{
     height: 100%;
 }
 body{
-    background: #E1F0F6; 
+    background: #E2F1F4; 
 }
 
 a{
@@ -98,7 +98,7 @@ a:hover{
   	background-color: #ffffff;
 	display: inline-block;
 	vertical-align: middle;
-	margin-top: 150px;
+	margin-top: 10%;
 	padding: 15px;
 }
 

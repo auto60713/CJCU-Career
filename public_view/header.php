@@ -37,20 +37,17 @@ function echo_data($user,$lev){
 		if( $lev == $level_company) {
             echo_username($user,'com');
             echo '<span><a href="change_pw.php">修改密碼</a></span>';
-            echo '<span id="header-notice"><a href="company_manage.php#company-notice">通知</a></span>';
 			echo '<span><a href="company_manage.php">管理</a></span>';
 			echo '<span class="username"><a href="company-'.$user.'">'.$GLOBALS['header_name'].'</a></span>';
 		}
 		else if( $lev == $level_department) {
             echo_username($user,'dep');
             echo '<span><a href="change_pw.php">修改密碼</a></span>';
-            echo '<span id="header-notice"><a href="department_manage.php#department-notice">通知</a></span>';
             echo '<span><a href="department_manage.php">管理</a></span>';
 			echo '<span class="username"><a href="department-'.$user.'">'.$GLOBALS['header_name'].'</a></span>';
 		}
 		else if( $lev == $level_student){
             echo_username($user,'stu');
-            echo '<span id="header-notice"><a href="student_manage.php#student-notice">通知</a></span>';
             echo '<span><a href="student_manage.php">管理</a></span>';
 			echo '<span class="username"><a href="student-'.$user.'">'.$GLOBALS['header_name'].'</a></span>';
 		}
@@ -76,14 +73,13 @@ function echo_data($user,$lev){
 ?>
 
 
-<html>
-<body>
+
 <div id="header" class="div-align">
 <script>
 
 	$(function(){
 
-		//polling();
+/*
 		function polling(){
 			$.ajax({
 			url: 'ajax_get_news_num.php',
@@ -94,11 +90,9 @@ function echo_data($user,$lev){
 				console.log('Get News Num:',d);
 				$('.header-notice-num').remove();
 				
-
 				if(d!='0')
 					$('#header-notice a').append($('<span>').addClass('header-notice-num').html(d));
-				//else
-					//$('#header-notice a').append($('<span>').addClass('header-notice-num').text(data));
+			
 			});
 			setTimeout(function(){ polling();},5000);
 		}
@@ -106,26 +100,32 @@ function echo_data($user,$lev){
 		$('#header-notice').click(function(event) {
 			$('.header-notice-num').remove();
 		});
-
+*/
 
 
 		$('#login-btn').on('click', function(){
-       		 $( "#login-lightbox" ).css( "display", "block" ); 
+       		 $( "#login-lightbox" ).show(); 
     	});
 
    		$( "#login-exit" ).click(function() {
-        	$( "#login-lightbox" ).css( "display", "none" ); 
+        	$( "#login-lightbox" ).hide(); 
         	$('.error_echo').text("").css({lineHeight:"0px",opacity:0});
     	});
 
+        //按下enter 即submit
+        $(document).bind('keydown',function(event){
+
+            if($( "#login-lightbox" ).is(":visible")) if(event.keyCode==13) $( ".btn-submit-login" ).click();
+        });
+
     	//登入ajax
     	$( ".btn-submit-login" ).click(function() {
+
     		var sel = $("select[name=sel]").val(),
     		    id  = $("input:text[name=id]").val(),
     		    pw  = $("input:password[name=pw]").val();
 
-
-    	//判斷欄位是否為空
+    	    //判斷欄位是否為空
 			if(id==""){
 				$('.error_echo').text("請輸入帳號").animate({lineHeight:"40px",opacity:1}, 200); 
 			}
@@ -143,10 +143,9 @@ function echo_data($user,$lev){
 		           
 		          }
 		        });
-
 			}
-		
 	    });
+
 	
 	});
 </script>
@@ -194,8 +193,3 @@ function echo_data($user,$lev){
 </div>
 
 </div>
-
-
-
-</body>
-</html>
