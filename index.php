@@ -9,7 +9,6 @@
 	<link href="font-awesome/css/font-awesome.min.css" rel="stylesheet">
 	<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 	<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-    <!-- <script type="text/javascript" src="js/full_height.js"></script> -->
 	<script>
 	$(function(){ 	
 
@@ -28,11 +27,10 @@
     })
 	</script>
 
-    <!-- Insert to your webpage before the </head> -->
+    <!-- 
     <script src="slider/sliderengine/initslider-1.js"></script>
     <script src="slider/sliderengine/amazingslider.js"></script>
-
-    <!-- End of head section HTML codes -->
+    -->
     
 </head>
 
@@ -180,12 +178,12 @@
 			
 
 
-			box2.append(work_name).append(work_recr).append(work_date);
+			box2.append(work_name,work_recr,work_date);
 			box3.append(work_zone);
 			box4.append(work_propn);
 
-
-			div_work.append(img).append(box2).append(box3).append(box4);
+            //div_work.append(img)
+			div_work.append(img,box2,box3,box4);
 			a_link.append(div_work);
 			box.append(a_link);
 
@@ -200,7 +198,7 @@
 
 
 
-        
+        /*
         //校內新聞
         $.ajax({
 		  type: 'POST',
@@ -277,5 +275,6 @@
             }
 		  }
 		});
+        */
 </script>
 </html>

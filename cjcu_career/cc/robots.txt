@@ -1,3 +1,0 @@
-# 此為內部使用系統，別收錄我！
-user-agent: * 
-disallow: / 

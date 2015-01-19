@@ -1,5 +1,0 @@
-<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed'); ?>
-
-ERROR - 2014-11-28 00:31:32 --> Severity: Warning  --> require(../phpMailer/class.phpmailer.php) [<a href='function.require'>function.require</a>]: failed to open stream: No such file or directory C:\Program Files (x86)\VertrigoServ\www\cjcu_career\cc\kogi\modules\order\controllers\content.php 360
-ERROR - 2014-11-28 00:35:05 --> Severity: Warning  --> require() [<a href='function.require'>function.require</a>]: http:// wrapper is disabled in the server configuration by allow_url_include=0 C:\Program Files (x86)\VertrigoServ\www\cjcu_career\cc\kogi\modules\order\controllers\content.php 360
-ERROR - 2014-11-28 00:35:05 --> Severity: Warning  --> require(http://127.0.0.1/cjcu_career/cc/assets/phpMailer/class.phpmailer.php) [<a href='function.require'>function.require</a>]: failed to open stream: no suitable wrapper could be found C:\Program Files (x86)\VertrigoServ\www\cjcu_career\cc\kogi\modules\order\controllers\content.php 360
