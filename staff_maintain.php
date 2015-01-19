@@ -43,7 +43,7 @@ else{
         .all-list-tb th,.all-list-tb td{
         	text-align: left;
         	font-weight: normal;
-            padding-right: 50px;
+            padding-right: 30px;
         }
         .space{
         	height: 10px;
@@ -56,6 +56,9 @@ else{
         .ps{
         	font-size: 9px;
         	color: #808080;
+        }
+        .dep-id{
+        	width: 70px;
         }
 
 	</style>
@@ -183,11 +186,12 @@ switch(staff_maintain_work[i]['check']) {
 		    for(var i=0;i<dep_list.length;i++){
 
 		    	var sort = $('<td>').text(i),
-		         	no = $('<td>').text(dep_list[i]['no']),
+		    	    no = $('<input>').attr({'type':'text','name':'dep'+dep_list[i]['id'],'value':dep_list[i]['no'].trim()}).addClass('dep-id'),
+		         	no_td = $('<td>').append(no),
 		        	pw = $('<td>').text(dep_list[i]['pw']),
 		        	link2 = $('<a>').attr('target','_blank').attr('href', 'department-'+dep_list[i]['no']).text(dep_list[i]['ch_name']),
 		        	name2 = $('<td>').append(link2),
-		    		tr = $('<tr>').addClass('dep-data').append(sort,no,pw,name2);
+		    		tr = $('<tr>').addClass('dep-data').append(sort,no_td,pw,name2);
 		    		body.append(tr);
 		    }
 		}
@@ -220,7 +224,22 @@ switch(staff_maintain_work[i]['check']) {
 		    else{ $( ".dep-data" ).fadeIn(); }
 		});
 
-   
+        //更改系所帳號
+		$('input.dep-id').change(function() {
+			var id = $(this).attr('name').split("p")[1],
+			    new_no = $(this).val();
+
+			$.ajax({
+			type:"POST",
+			url: "ajax_maintain.php",
+			data:{mode:3,id:id,no:new_no},
+              success: function (data) { 
+                  alert(data);
+              }
+		    });    	
+
+
+		});
 
 
 function echo_work_name(workid) {

@@ -148,7 +148,7 @@ td{
 	    <table>
             <tr><td valign="top">工作：點選工作名稱可以直接管理該工作。</td></tr>
             <tr><td valign="top">廠商：列出目前駐進的廠商。</td></tr>
-            <tr><td valign="top">系所：列出目前建立的系所帳號與密碼。</td></tr>
+            <tr><td valign="top">系所：列出目前建立的系所帳號與密碼，帳號可直接修改。</td></tr>
 	    </table>
  
 

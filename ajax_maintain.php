@@ -20,6 +20,10 @@ switch($_POST['mode']){
       add_department($_POST['depid'],$_POST['depname']);
   break;
 
+  case 3://系所改帳號
+      dep_no_updata($_POST['id'],$_POST['no']);
+  break;
+
 }
 
 
@@ -59,7 +63,15 @@ function add_department($dep_no,$dep_name){
 }
 
 
+function dep_no_updata($id,$no){
 
+  include_once("sqlsrv_connect.php");
+
+  $sql = "update department set no=(?) where id=?"; 
+
+  if( sqlsrv_query($conn, $sql, array($no,$id)) ) echo '已經儲存修改';     
+
+}
     
 
 ?>
