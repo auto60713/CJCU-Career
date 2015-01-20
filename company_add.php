@@ -11,14 +11,7 @@
 <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet">
 <script type="text/javascript">
 
-    $.ajax({
-					url:  'public_view/header.php',
-					type: 'POST',
-					data: {},
-					success: function(data) {
-                        $('#view-header').html(data);
-                    }
-	});
+    $('#view-header').load('public_view/header.php');
 
 
 	$(function(){

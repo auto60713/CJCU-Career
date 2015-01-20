@@ -60,6 +60,9 @@ else{
         .dep-id{
         	width: 70px;
         }
+        .search_sign{
+        	margin:0px 5px;
+        }
 
 	</style>
 
@@ -79,7 +82,7 @@ else{
     <!--工作-->
 	<div tabtoggle='workedit2' class="work_page">
 
-        <a>搜尋工作</a><input type="text" name="search_work_name" value=""><a class="ps">(打完後字按下tab即搜尋)</a>
+        <a>搜尋工作名稱</a><input type="text" name="search_work_name" value="" class="search_sign"><a class="ps">(打完後字按下tab即搜尋)</a>
         <div class="all-list">
             <table id="work_table" class="all-list-tb">
             	<h3>工作列表(僅維護工讀,正職。實習各系所負責)</h3>
@@ -92,7 +95,7 @@ else{
     <!--公司-->
 	<div tabtoggle='workedit2' class="com_page workedit-content-hide">
 
-        <a>搜尋廠商</a><input type="text" name="search_com_name" value=""><a class="ps">(打完後字按下tab即搜尋)</a>
+        <a>搜尋廠商名稱</a><input type="text" name="search_com_name" value="" class="search_sign"><a class="ps">(打完後字按下tab即搜尋)</a>
         <div class="all-list">
             <table id="com_table" class="all-list-tb">
             	<h3>廠商列表</h3>
@@ -106,7 +109,7 @@ else{
 	<div tabtoggle='workedit2' class="dep_page workedit-content-hide">
         
 
-        <a>搜尋系所</a><input type="text" name="search_dep_name" value=""><a class="ps">(打完後字按下tab即搜尋)</a>
+        <a>搜尋系所名稱</a><input type="text" name="search_dep_name" value="" class="search_sign"><a class="ps">(打完後字按下tab即搜尋)</a>
 
     <div class="all-list">
         <h3>新增系所</h3>
@@ -147,17 +150,18 @@ else{
 		        	com = $('<td>').html(com_link),
 		        	prop = $('<td>').text(staff_maintain_work[i]['prop']);
 
-switch(staff_maintain_work[i]['check']) {
-    case 1:
-        var check_name = "應徵中";
-    break;
-    case 4:
-        var check_name = "工作中";
-    break;
-    case 5:
-        var check_name = "工作已完成";
-    break;
-} 
+                    switch(staff_maintain_work[i]['check']) {
+                        case 1:
+                            var check_name = "應徵中";
+                        break;
+                        case 4:
+                            var check_name = "工作中";
+                        break;
+                        case 5:
+                            var check_name = "工作已完成";
+                        break;
+                    } 
+
 		        var	check = $('<td>').text(check_name);
 		    	var	tr = $('<tr>').addClass('work-data').append(w_id,com,work,prop,check);
 
@@ -185,44 +189,49 @@ switch(staff_maintain_work[i]['check']) {
         else{
 		    for(var i=0;i<dep_list.length;i++){
 
-		    	var sort = $('<td>').text(i),
-		    	    no = $('<input>').attr({'type':'text','name':'dep'+dep_list[i]['id'],'value':dep_list[i]['no'].trim()}).addClass('dep-id'),
-		         	no_td = $('<td>').append(no),
-		        	pw = $('<td>').text(dep_list[i]['pw']),
-		        	link2 = $('<a>').attr('target','_blank').attr('href', 'department-'+dep_list[i]['no']).text(dep_list[i]['ch_name']),
-		        	name2 = $('<td>').append(link2),
-		    		tr = $('<tr>').addClass('dep-data').append(sort,no_td,pw,name2);
-		    		body.append(tr);
+		    	dep_table_append_data(body,dep_list[i])
 		    }
 		}
 
-        //搜尋工作
-		$('input:text[name=search_work_name]').change(function() {
+
+function dep_table_append_data(body,params) {
+
+		var sort = $('<td>').text(i+1),
+		    no = $('<input>').attr({'type':'text','name':'dep'+params['id'],'value':params['no'].trim()}).addClass('dep-id'),
+		    no_td = $('<td>').append(no),
+		    pw = $('<td>').text(params['pw']),
+		    link2 = $('<a>').attr('target','_blank').attr('href', 'department-'+params['no']).text(params['ch_name']),
+		    name2 = $('<td>').append(link2),
+		    delet_btn = $('<button>').attr({'type':'button','dep_no':params['id'],'dep_name':params['ch_name']}).addClass('dep-delete-btn').text('刪除'),
+            delet = $('<td>').append(delet_btn),
+
+		    tr = $('<tr>').addClass('dep-data').append(sort,no_td,pw,name2,delet);
+		    body.append(tr);
+}
+
+
+        //搜尋名稱
+		$('.search_sign').change(function() {
+
+			switch( $(this).attr("name") ) {
+                case "search_work_name":
+                    var data_type = ".work-data"; break;
+
+                case "search_com_name":
+                    var data_type = ".com-data"; break;
+
+                case "search_dep_name":
+                    var data_type = ".dep-data"; break;
+            } 
+
 			var id = $(this).val();
 			if(id!=""){
-			$( ".work-data" ).hide();
+			$( data_type ).hide();
 		    $( "tr:contains('"+id+"')" ).fadeIn();
 		    }
-		    else{ $( ".work-data" ).fadeIn(); }
+		    else{ $( data_type ).fadeIn(); }
 		});
-        //搜尋廠商
-		$('input:text[name=search_com_name]').change(function() {
-			var id = $(this).val();
-			if(id!=""){
-			$( ".com-data" ).hide();
-		    $( "tr:contains('"+id+"')" ).fadeIn();
-		    }
-		    else{ $( ".com-data" ).fadeIn(); }
-		});
-        //搜尋系所
-		$('input:text[name=search_dep_name]').change(function() {
-			var id = $(this).val();
-			if(id!=""){
-			$( ".dep-data" ).hide();
-		    $( "tr:contains('"+id+"')" ).fadeIn();
-		    }
-		    else{ $( ".dep-data" ).fadeIn(); }
-		});
+       
 
         //更改系所帳號
 		$('input.dep-id').change(function() {
@@ -242,72 +251,36 @@ switch(staff_maintain_work[i]['check']) {
 		});
 
 
-function echo_work_name(workid) {
+        //刪除系所
+        $( ".dep-delete-btn" ).click(function() {
 
-		$.ajax({
-			type:"POST",
-			url: "ajax_echo_name.php",
-			data:{mode:'work',workid:workid},
-              success: function (data) { 
-                  if(data != 0) return data;
-              }
-		});    	
-}
+            var dep_no   = $( this ).attr('dep_no'),
+                dep_name = $( this ).attr('dep_name');
 
+            if (confirm ("確定要刪除系所 '"+dep_name+"' ?")){
 
-//關閉工作
-function close_work() {
+		        $.ajax({
+		        	type:"POST",
+		        	url: "ajax_maintain.php",
+		        	data:{mode:4,id:dep_no},
+                      success: function (data) { 
+                      	if(data == 'Success'){
+                      	  
+		                  $( "tr:contains('"+dep_name+"')" ).fadeOut();
+                      	}
+		        	    else alert(data);
+		        	  }
+		        });    	
 
-	var workid = $('input:text[name=close_work_id]').val();
-	var workname = echo_work_name(workid);
+	        }
+        });
 
-	if (confirm ("確定要關閉工作「"+workname+"」?")){
-
-		$.ajax({
-			type:"POST",
-			url: "ajax_maintain.php",
-			data:{mode:0,workid:workid},
-              success: function (data) { 
-              	if(data == 'Success'){
-              	   var log = $('<h4>').addClass('log').text("已經關閉工作「"+workname+"」了");
-              	   $('.work_page').append(log);
-              	}
-			    else alert(data);
-			  }
-		});    	
-
-	}
-}
-
-//關閉公司
-function close_company() {
-
-	var comid = $('input:text[name=close_com_id]').val();
-	if (confirm ("確定要關閉公司 "+comid+" ?")){
-
-		$.ajax({
-			type:"POST",
-			url: "ajax_maintain.php",
-			data:{mode:1,comid:comid},
-              success: function (data) { 
-              	if(data == 'Success'){
-              	   var log = $('<h4>').addClass('log').text("已經關閉公司"+comid+"了");
-              	   $('.com_page').append(log);
-              	}
-			    else alert(data);
-			  }
-		});    	
-
-	}
-}
- 
 
 //新增系所
 function add_department() {
 
 	var dep_id = $('input:text[name=dep_id]').val();
 	var dep_name = $('input:text[name=dep_name]').val();
-	if (confirm ("確定要新增系所 "+dep_name+" ?")){
 
 		$.ajax({
 			type:"POST",
@@ -315,14 +288,14 @@ function add_department() {
 			data:{mode:2,depid:dep_id,depname:dep_name},
               success: function (data) { 
               	if(data == 'Success'){
-              	   var log = $('<h4>').addClass('log').text("已經新增系所'"+dep_name+"'了");
-              	   $('.dep_page').append(log);
+
+               var dep_list = [{"id":"N/A","no":dep_id,"pw":1234,"ch_name":dep_name}];
+              	   body = $('#dep_table');
+              	   dep_table_append_data(body,dep_list[0]);
               	}
-			    else alert(data);
+			    else alert('新增失敗');
 			  }
 		});    	
-
-	}
 }
 
 

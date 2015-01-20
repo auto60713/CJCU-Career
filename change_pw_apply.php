@@ -31,7 +31,11 @@ $stmt = sqlsrv_query($conn, $sql, array($_SESSION['username']));
 
     if(trim($row['pw'])!=$old_pw) {echo "密碼錯誤，請重試。";  exit();}
 
-    if( sqlsrv_query($conn, $sql2, array($new_pw)) ) echo "success";
+    if( sqlsrv_query($conn, $sql2, array($new_pw)) ) {
+        echo "success";
+        session_destroy();
+
+    }
        
 
 

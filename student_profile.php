@@ -22,7 +22,8 @@ if($_SESSION['level'] == $level_student){
 	$(function(){
 
 		$('#view-header').load('public_view/header.php #header');
-
+        $("#menu").load('public_view/menu.html');
+	    $("#footer").load('public_view/footer.html');
 		
         
 		<?php  //load data
@@ -64,6 +65,8 @@ if($_SESSION['level'] == $level_student){
 
 
 <div id="view-header"></div>
+<div id="menu"></div>
+
 
 <div class="b-space div-align">
 
@@ -84,7 +87,7 @@ if($_SESSION['level'] == $level_student){
 	<h3>學校資訊</h3>
     <p><span class="profile-span-title">學制</span><span id="es_name"></span></p>
 	<p><span class="profile-span-title">系所班級</span><span id="dm_data"></span></p>
-    <p><span class="profile-span-title">使用配當</span><span id="sd_syear"></span></p>
+    <p><span class="profile-span-title">入學年</span><span id="sd_syear"></span></p>
 
     <br><hr><br>
 	<h3>聯絡資訊</h3>
@@ -114,6 +117,6 @@ if($_SESSION['level'] == $level_student){
 
 
 </div>
-
+<div id="footer"></div>
 </body>
 </html>

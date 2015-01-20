@@ -140,7 +140,7 @@ if($stmt) {
 
 	while( $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC) ) 
     {
-		$dep_list[] = $row;
+		$dep_list[] = array_map('trim',$row);
 	}
 
 	echo "var dep_list = ". json_encode($dep_list) . ";";	

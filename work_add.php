@@ -225,7 +225,7 @@ div.ui-datepicker{
 	echo_work_detail_edit_array($conn,$_GET['workid']);
 	}
 	//應該要做一個回傳身分的ajax
-	if( $_SESSION['level'] != 4 ) echo '$( "#btn-instead-work" ).fadeIn();';
+	if( $_SESSION['level'] != 4 ) echo '$( "#btn-instead-work" ).show();';
 
 	?> 
 	
@@ -457,7 +457,7 @@ div.ui-datepicker{
 		// .............................................................................*/
 
 		<?php  if($_GET['mode']=='edit') echo 'setInit(work_detail_array,false);';
-               else { echo '$("#btn-copy-work").fadeIn();'; }
+               else { echo '$("#btn-copy-work").show();'; }
 		 ?>
 
 		function setInit(work_detail_array,is_copy_mode){

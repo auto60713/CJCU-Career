@@ -12,15 +12,7 @@
 	<script>
 	$(function(){ 	
 
-		$.ajax({
-					url:  'public_view/header.php',
-					type: 'POST',
-					data: {},
-					success: function(data) {
-                        $('#view-header').html(data);
-                    }
-		});
-
+		$('#view-header').load('public_view/header.php');
 		$("#menu").load('public_view/menu.html');
 		$("#footer").load('public_view/footer.html');
 

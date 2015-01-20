@@ -365,20 +365,22 @@
 	width: 110px;
 }
 .company-audit-via{
+	float: right;
 	color: #888;
 	font-size: 14px;
 	text-align: center;
+	margin-right: 10px;
 }
 .company-audit-status{
 	margin-bottom: 30px;
 }
 .company-audit-censored{
-	width:120px;
+	width:80px;
 	color: #636363;
 }
 .company-audit-msg{
 	color: #333;
-	width: 275px;
+
 	overflow: hidden;
 	word-break:break-all;
 	

@@ -58,26 +58,27 @@ label.error{
 				audit_history_container.append(all);
 		}
 
-		var icontxt="",statustxt="",color="";
-		switch(company_detail_array.censored) {
+        var color = "";
+		switch(  parseInt( company_detail_array.censored.trim() )  ) {
 			case 0:
 				icontxt ='fa fa-minus-square-o';
 				statustxt = ' 未審核';
 				color = '#555';
-				break;
+			break;
 			case 1:
 				icontxt ='fa fa-check';
 				statustxt = ' 通過';
 				color = '#339933';
-				break;
+			break;
 			case 2 :case 3:
 				icontxt ='fa fa-times';
 				statustxt = ' 不通過';
 				color = '#CC3333';
-				break;
+			break;
 
 		}		
-			var icon = icon = $('<i>').addClass(icontxt),
+
+		var icon = icon = $('<i>').addClass(icontxt),
 			again_txt = $('<span>').addClass('company-audit-again-txt').text('已要求再次審核！'),
 			again_btn = $('<input>').addClass('company-audit-again').attr({
 				value: '請求再次審核',
@@ -98,9 +99,10 @@ label.error{
 
 			});
 
-		$('.company-audit-status').append(icon).append(statustxt).css('color', color);
+        $('.company-audit-status').append(icon).append(statustxt).css('color', color);
 		if(company_detail_array.censored==2) $('.company-audit-status').append(again_btn);
 		if(company_detail_array.censored==3) $('.company-audit-status').append(again_txt);
+		
 
 		// TAB control
 		var tabgroup = $('div[tabtoggle="workedit1"]');

@@ -89,10 +89,10 @@ function company_login($conn,$userid,$pw,$level_company){
     $result  = sqlsrv_query( $conn , $sql , $params , $options );
     if( $result ){
 
-	$row = sqlsrv_fetch_array($result, SQLSRV_FETCH_NUMERIC);
+	$row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC);
 	
 	    // 資料表查無帳號 , 沒有輸入或密碼不符
-	    if(count($row) != 0 && $userid != null && $pw != null && $row[1] == md5($pw)){
+	    if(count($row) != 0 && $userid != null && $pw != null && $row['pw'] == md5($pw)){
 
             $_SESSION['username'] = $userid;
             $_SESSION['level'] = $level_company;
@@ -117,14 +117,14 @@ function department_login($conn,$userid,$pw,$level_department){
     $result  = sqlsrv_query( $conn , $sql , $params , $options );
     if( $result ){
 
-    $row = sqlsrv_fetch_array($result, SQLSRV_FETCH_NUMERIC);
+    $row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC);
     
         // 資料表查無帳號 , 沒有輸入或密碼不符
 
-        if(count($row) != 0 && $userid != null && $pw != null && (trim($row[1])) == $pw){
+        if(count($row) != 0 && $userid != null && $pw != null && (trim($row['pw'])) == $pw){
 
             //職涯發展組
-            if(trim($row[2]) == 3){
+            if(trim($row['sort']) == 3){
                 $_SESSION['username'] = $userid;
                 $_SESSION['level']  = 1;
 

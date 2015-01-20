@@ -64,14 +64,9 @@ if(isset($_SESSION['username'])) $user_id = $_SESSION['username'];
 
 	$(function(){	
 
-		$.ajax({
-			url:  'public_view/header.php',
-			type: 'POST',
-			data: {},
-			success: function(data) {
-                $('#view-header').html(data);
-            }
-		});
+		$('#view-header').load('public_view/header.php');
+		$("#menu").load('public_view/menu.html');
+	    $("#footer").load('public_view/footer.html');
 
 
 		$('title, #name').text(work_detail_array['name']);
@@ -149,9 +144,11 @@ else if(work_detail_array['pub'] ==2){
 
 <body>
 <div id="view-header"></div><br>
+<div id="menu"></div>
+
 
 <div class="b-space div-align overfix">
-
+<div class="profile-content overfix">
 
 <div class="profile-boxleft">
 <h1><span id="name"></span><span id="ch"></span></h1>
@@ -214,8 +211,10 @@ else if(work_detail_array['pub'] ==2){
 
 
 </div>
+</div>
 
-
+<!-- 頁尾訊息 -->
+<div id="footer"></div>
 
 </body>
 </html>

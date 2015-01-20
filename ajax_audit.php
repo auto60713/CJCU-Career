@@ -82,7 +82,7 @@ else{
 		      'sender_level'=>  $_SESSION['level'],
 		      'recv_id'=>       $recvid,
 		      'recv_level'=>    $level_company,
-		      'msg'=>           '您'.$recvtxt.'<b>「'.$obj_name.'」</b>，已被審核<b>'.$chtxt.'</b>，請前往查看。',
+		      'msg'=>           '您'.$recvtxt.'<b>「'.$obj_name.'」</b>，已被審核<b>'.$chtxt.'</b>。',
 		      'icon'=>          $icon
 		);
 		if(!send_msg($arr)){

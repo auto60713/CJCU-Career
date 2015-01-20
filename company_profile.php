@@ -18,14 +18,9 @@ if (!file_exists($filename)) $filename = 'img_company/default.png';
 	<script> 
 	$(function(){
 
-		$.ajax({
-			url:  'public_view/header.php',
-			type: 'POST',
-			data: {},
-			success: function(data) {
-                $('#view-header').html(data);
-            }
-		});
+		$('#view-header').load('public_view/header.php');
+		$("#menu").load('public_view/menu.html');
+	    $("#footer").load('public_view/footer.html');
 		
 		$('.profile-pic-change, #profile-btn-edit').hide();
 
@@ -68,11 +63,10 @@ if (!file_exists($filename)) $filename = 'img_company/default.png';
 
 
 <div id="view-header"></div>
+<div id="menu"></div>
+
 
 <div class="b-space div-align">
-
-
-
 
 <div class="profile-content overfix">
 <div class="profile-boxleft">
@@ -124,7 +118,8 @@ if (!file_exists($filename)) $filename = 'img_company/default.png';
 </div>
 
 
-
+<!-- 頁尾訊息 -->
+<div id="footer"></div>
 
 </body>
 </html>

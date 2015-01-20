@@ -24,8 +24,27 @@ switch($_POST['mode']){
       dep_no_updata($_POST['id'],$_POST['no']);
   break;
 
+  case 4://刪除系所
+      dep_delete($_POST['id']);
+  break;
 }
 
+
+function dep_delete($id){
+
+include("sqlsrv_connect.php");
+
+    $sql = "DELETE FROM department WHERE id = ?";
+    $stmt = sqlsrv_query($conn, $sql, array($id));
+
+    if($stmt) {
+        sqlsrv_free_stmt($stmt);
+        echo "Success";
+    }
+    else die(print_r( sqlsrv_errors(), true));
+
+
+}
 
 
 

@@ -1,6 +1,4 @@
-<?php session_start(); 
-
-?>
+<?php session_start(); ?>
 <!doctype html>
 <html>
 <head>
@@ -69,15 +67,7 @@
 	<script>
 	$(function(){ 	
 
-		$.ajax({
-					url:  'public_view/header.php',
-					type: 'POST',
-					data: {},
-					success: function(data) {
-                        $('#view-header').html(data);
-                    }
-		});
-
+		$('#view-header').load('public_view/header.php');
 
 
 		$( ".submit-btn" ).click(function() {
@@ -98,9 +88,7 @@
 					data: {old_pw:old_pw,new_pw:new_pw},
 					success: function(data) {
                         if(data=="success") { 
-                        	$(".fail").css( "display", "none" ); 
-                        	$(".success").fadeIn().text('修改成功');
-                        	$("input").val('');
+                        	document.location.href="logout.php?mode=1";
                         }
 	                    else{
 	                    	$(".success").css( "display", "none" ); 

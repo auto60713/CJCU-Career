@@ -1,5 +1,14 @@
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>唉唷</title>
+</head>
+
+<body>
+
 <?php
 session_start();
+header('Content-Type: text/html; charset=utf8');
 
 //本程式為學生欲申請應徵工作 由 AJAX 執行的程式
 
@@ -38,3 +47,6 @@ function success_return(){
 
 }
 ?>
+
+</body>
+</html>

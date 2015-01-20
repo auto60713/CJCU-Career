@@ -39,7 +39,7 @@ textarea {
 			detail_column+="<tr><td class='td1'>"+column_name[idx]+"</td>";
 
             //不可修改的資料 背後PHP不要POST
-			if(key == "no"||key == "ch_name"||key == "en_name"){
+			if(key == "no"){
                 detail_column+="<td class='td2'><input type='text' name ='"+key+"' value='"+department_detail_array[key]+"' disabled='disabled'></td></tr>";
 			}
 			else if(key == "introduction"){

@@ -53,24 +53,18 @@
 	<script>
 	$(function(){ 	
 
-		$.ajax({
-					url:  'public_view/header.php',
-					type: 'POST',
-					data: {},
-					success: function(data) {
-                        $('#view-header').html(data);
-                    }
-		});
+		$('#view-header').load('public_view/header.php');
 
 
 		$( ".submit-btn" ).click(function() {
 
-			var mail_val = $('#input-mail').val();
+			var mail_address = $('#input-mail').val();
+			$(".success").fadeIn().text('資料處理中..');
 
 			$.ajax({
-					url:  'forgotpwd_apply.php',
+					url:  'send_email.php',
 					type: 'POST',
-					data: {email:mail_val},
+					data: {mode:1,mail_address:mail_address},
 					success: function(data) {
                         if(data=="success") { 
                         	$(".fail").css( "display", "none" ); 
@@ -78,7 +72,7 @@
                         }
 	                    else{
 	                    	$(".success").css( "display", "none" ); 
-	                    	$(".fail").fadeIn().text(data);
+	                    	$(".fail").fadeIn().html(data);
 	                    }
                     }
 		    });

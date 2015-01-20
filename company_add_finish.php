@@ -62,6 +62,11 @@ else{
 
         echo '註冊成功! 登入中...';
 		echo '<meta http-equiv=REFRESH CONTENT=1;url=index.php>';
+
+        //寄信給管理員
+        include_once("send_email.php"); 
+        send_email("komicabot@gmail.com","長大職涯網有新的廠商註冊「".$ch_name."」需要審核","<h1><a href='http://localhost/cjcuweb/staff_manage.php#staff-audit0'>前往查看</a></h1>");
+    
         }
 	
 	}
