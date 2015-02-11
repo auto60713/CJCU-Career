@@ -25,7 +25,7 @@ $bg_date = trim($_POST['bg_date']);
 $ed_date = trim($_POST['ed_date']);
 $address = trim($_POST['address']);
 $phone = trim($_POST['phone']);
-$pay = trim($_POST['pay']);
+$pay = trim($_POST['pay_data']);
 $detail = trim($_POST['detail']);
 $workid = trim($_POST['work-id']);
 // 驗證該工作是否為目前登入的公司所有,如果是才給予繼續

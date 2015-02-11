@@ -144,14 +144,14 @@ if(!isset($_SESSION['username']) || $_SESSION['level'] != 1) { header("Location:
 	<div class="left-box" >
 		
 		<div class="profile-box">
-			<img src="<?php echo 'img_company/'.$_SESSION['username'].'.jpg' ?>" class="profile-img" id="profile-img"><br>
+			<img src="<?php echo 'img_department/'.$_SESSION['username'].'.jpg' ?>" class="profile-img" id="profile-img"><br>
 		</div>
 
 		<a href="#staff-info"><div class="list">基本資訊</div></a><hr>
 		<a href="#staff-audit0"><div class="list">審核工作與公司</div></a><hr>
 		<a href="#staff-addwork"><div class="list">新增工作</div></a><hr>
 		<a href="#staff-work"><div class="list">我發佈的工作</div></a><hr>
-		<a href="#staff-maintain"><div class="list">維護</div></a><hr>
+		<a href="#staff-maintain"><div class="list">維護與查詢</div></a><hr>
 		<a href="#explanation"><div class="list">操作說明</div></a><hr>
 	</div>
 
@@ -173,7 +173,7 @@ if(!isset($_SESSION['username']) || $_SESSION['level'] != 1) { header("Location:
 		<h1>上傳圖片<i class="fa fa-times login-exit" id="upload-close"></i></h1>
 		<p class="login-hint">您可以更新一張代表系上的照片</p>
 
-		<img src="<?php echo 'img_company/'.$_SESSION['username'].'.jpg' ?>" class="upload-img-max">
+		<img src="<?php echo 'img_department/'.$_SESSION['username'].'.jpg' ?>" class="upload-img-max">
 		<form id="upload_form" enctype="multipart/form-data" method="post">
 		 <input type="file" name="file1" id="file1"  class="btn-submit" accept="image/*"> <p id="status"></p>
 		

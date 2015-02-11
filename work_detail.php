@@ -74,11 +74,11 @@ if(isset($_SESSION['username'])) $user_id = $_SESSION['username'];
 		$('#prop').text( (work_detail_array['is_outside']=='0'?'校外':'校內')+' '+ work_detail_array['popname']);
 		$('#type').text(work_detail_array['typeone']+" > "+work_detail_array['typetwo']+" > "+work_detail_array['typethree']);
 		$('#rno').text(work_detail_array['recruitment _no']);
-		$('#pay').text(work_detail_array['pay']);
+		$('#pay').text(work_detail_array['pay'].split("-")[0] + work_detail_array['pay'].split("-")[1]);
 		$('#work_date').text(work_detail_array['start_date'].split(" ")[0]+" ~ "+work_detail_array['end_date'].split(" ")[0]);
 		$('#phone').text(work_detail_array['phone']);
 		$('#address').text(work_detail_array['address']);
-		$('#detail').text(work_detail_array['detail']);
+		$('#detail').html(work_detail_array['detail']);
 
         //優化UI避免與應徵工作混淆
         switch(work_detail_array['check']) {
@@ -143,7 +143,7 @@ else if(work_detail_array['pub'] ==2){
 
 
 <body>
-<div id="view-header"></div><br>
+<div id="view-header"></div>
 <div id="menu"></div>
 
 
@@ -156,9 +156,6 @@ else if(work_detail_array['pub'] ==2){
 <span id="date"></span>
 <br>
 <br>
-<h3>工作內容</h3>
-<span id="detail"></span><br>
-<br><hr><br>
 
 <h3>工作資訊</h3>
 <p><span class="profile-span-title">類型</span><span id="type"></span></p>
@@ -176,6 +173,10 @@ else if(work_detail_array['pub'] ==2){
 <h3>聯絡方式</h3>
 <p><span class="profile-span-title">電話</span><span id="phone"></span></p>
 <p><span class="profile-span-title">地址</span><span id="address"></span></p>
+<br><hr><br>
+
+<h3>工作說明</h3>
+<div id="detail"></div>
 
 
 

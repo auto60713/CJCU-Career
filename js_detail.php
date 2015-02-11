@@ -45,7 +45,7 @@ include_once("sqlsrv_connect.php");
 function echo_department_profile($dep_no){
 include("sqlsrv_connect.php");
 
-    $sql = "select ch_name,en_name,phone,fax,name,email,address,introduction,url "
+    $sql = "select ch_name,en_name,phone,fax,name,contact,email,address,introduction,url "
 	      ."from department "
 	      ."where no= ?";
 
@@ -55,9 +55,31 @@ include("sqlsrv_connect.php");
 
     array_walk($row, 'trim_value');
 
+    $row['introduction'] = preg_replace("/\r\n|\r/", "<br>", $row['introduction']);
     echo "var department_profile_array = ". json_encode($row) . ";";
 }
 
+
+/* 公司 */
+function echo_company_profile($com_id){
+
+include("sqlsrv_connect.php");
+//工作負責人轉換
+if (preg_match("/-/i", $com_id)) $com_id = strstr($com_id,'-',true);
+
+    $sql = "select c.ch_name,c.en_name,c.phone,c.fax,c.email,c.uni_num,c.boss_name,c.contact,t.name typename,z.name zone_name,c.address,c.staff_num,c.budget,c.url,c.introduction,c.censored "
+	      ."from company c,zone z,company_type t "
+	      ."where c.id= ? and c.type=t.id and c.zone_id=z.id";
+
+	$stmt = sqlsrv_query($conn, $sql, array($com_id));
+	if($stmt) $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC); 
+	else die(print_r( sqlsrv_errors(), true));
+
+    array_walk($row, 'trim_value');
+    
+    $row['introduction'] = preg_replace("/\r\n|\r/", "<br>", $row['introduction']);
+    echo "var company_detail_array = ". json_encode($row) . ";";
+}
 
 
 
@@ -82,14 +104,14 @@ include_once("sqlsrv_connect.php");
 }
 
 
-/* 公司+pofile */
+/* 公司 */
 function echo_company_detail($com_id){
 
 include("sqlsrv_connect.php");
 //工作負責人轉換
 if (preg_match("/-/i", $com_id)) $com_id = strstr($com_id,'-',true);
 
-    $sql = "select c.ch_name,c.en_name,c.phone,c.fax,c.email,c.uni_num,c.boss_name,t.name typename,z.name zone_name,c.address,c.staff_num,c.budget,c.url,c.introduction,c.censored "
+    $sql = "select c.ch_name,c.en_name,c.phone,c.fax,c.email,c.uni_num,c.boss_name,c.contact,t.name typename,z.name zone_name,c.address,c.staff_num,c.budget,c.url,c.introduction,c.censored "
 	      ."from company c,zone z,company_type t "
 	      ."where c.id= ? and c.type=t.id and c.zone_id=z.id";
 
@@ -131,7 +153,7 @@ if (preg_match("/-/i", $com_id)) $com_id = strstr($com_id,'-',true);
 function echo_department_detail($dep_no){
 include_once("sqlsrv_connect.php");
 
-	$sql = "select no,ch_name,en_name,phone,fax,name,email,address,introduction,url "
+	$sql = "select no,ch_name,en_name,phone,fax,name,contact,email,address,introduction,url "
 	      ."from department "
 	      ."where no= ?";
 	

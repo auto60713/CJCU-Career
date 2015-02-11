@@ -19,10 +19,10 @@
     })
 	</script>
 
-    <!-- 
+
     <script src="slider/sliderengine/initslider-1.js"></script>
     <script src="slider/sliderengine/amazingslider.js"></script>
-    -->
+
     
 </head>
 
@@ -158,24 +158,43 @@
 			box3 = $('<div>').addClass('work-box').addClass('box-loc'),
 			box4 = $('<div>').addClass('work-box').addClass('box-pop'),
 
-			img = $('<img>').addClass('box-img').attr('src', 'img_company/'+work_list_array[i].cid+'.jpg'),
 			a_link = $('<a>').attr({href:'work-'+work_list_array[i].wid}),
 			div_work = $('<div>').addClass('work'),
 
 			work_name = $('<h1>').text(work_list_array[i].wname),
 			work_zone = $('<p>').text(work_list_array[i].zname).prepend($('<i>').addClass('fa fa-map-marker')),
 			work_propn = $('<p>').text(((work_list_array[i].isout=='0')?'校外 ':'校內 ') + work_list_array[i].propname),
-			work_recr = $('<p>').addClass('num').text('需求 '+ work_list_array[i].rno +' 人'),
-			work_date = $('<p>').addClass('date').text('開始招募'+work_list_array[i].date.split(' ')[0]);
-			
+			work_recr = $('<p>').addClass('num').text('需求 '+ work_list_array[i].rno +' 人');
 
-
-			box2.append(work_name,work_recr,work_date);
+			box2.append(work_name,work_recr);
 			box3.append(work_zone);
 			box4.append(work_propn);
 
-            //div_work.append(img)
-			div_work.append(img,box2,box3,box4);
+		//發布公司
+        $.ajax({
+          type: 'POST',
+          async: false,
+          url: 'ajax_echo_name.php',
+          data:{mode:"cnd",work_pub:work_list_array[i].pub,comid:work_list_array[i].cid},
+          success: function (data) { 
+              work_com = $('<p>').addClass('date').text(data);
+              box2.append(work_com);
+          }
+        });
+
+        //公司頭像
+        $.ajax({
+          type: 'POST',
+          async: false,
+          url: 'ajax_echo_name.php',
+          data:{mode:"img",pub:work_list_array[i].pub,id:work_list_array[i].cid},
+          success: function (data) { 
+              img = $('<img>').addClass('box-img').attr('src', data);
+              div_work.append(img);
+          }
+        });
+
+			div_work.append(box2,box3,box4);
 			a_link.append(div_work);
 			box.append(a_link);
 
@@ -190,7 +209,7 @@
 
 
 
-        /*
+        
         //校內新聞
         $.ajax({
 		  type: 'POST',
@@ -267,6 +286,6 @@
             }
 		  }
 		});
-        */
+        
 </script>
 </html>

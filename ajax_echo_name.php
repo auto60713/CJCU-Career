@@ -12,12 +12,14 @@ switch($_POST['mode']){
        echo_work_name($_POST['workid']);
   break;
 
-  case 'com'://查詢公司的中文名稱
-        echo_company_name($_POST['comid']);
-  break;
-
   case 'com-msg'://查詢公司的聯絡方式
         echo_company_msg($_POST['id']);
+  break;
+  
+
+//=========================================
+  case 'com'://查詢公司的中文名稱
+        echo_company_name($_POST['comid']);
   break;
 
   case 'dep'://查詢系所的中文名稱
@@ -28,7 +30,12 @@ switch($_POST['mode']){
         if($_POST['work_pub']==1) echo_company_name($_POST['comid']);
         else if($_POST['work_pub']==2) echo_department_name($_POST['comid']);
   break;
+//=========================================
 
+
+  case 'img'://查詢該廠商的頭像
+       echo_img_file($_POST['pub'],$_POST['id']);
+  break;
 }
 
 
@@ -89,5 +96,19 @@ function echo_company_msg($id){
 }
 
 
+
+
+
+
+function echo_img_file($pub,$id){
+
+  if(trim($pub) == "1") $pub = "company";
+  else if(trim($pub) == "2") $pub = "department";
+
+  $filename = 'img_'.$pub.'/'.trim($id).'.jpg';
+  if (!file_exists($filename)) $filename = 'img_company/default.png';
+
+  echo $filename;
+}
 
 ?>

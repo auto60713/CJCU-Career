@@ -102,6 +102,9 @@
 
 	<div class="submit-btn">傳送電子郵件</div>
 
+	<br>
+	<span>或是請洽詢職涯發展組電話06-2785123分機1821~1823</span>
+
 
 </div></div>
 </div>

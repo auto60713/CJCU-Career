@@ -7,13 +7,13 @@ if (!file_exists($filename)) $filename = 'img_company/default.png';
 <head>
 	<meta charset="UTF-8">
 	<title></title>
-	<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+	<link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 	<link rel="stylesheet" type="text/css" href="css/manage.css">
 	<link rel="stylesheet" type="text/css" href="css/profile.css">
 	<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 	<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-	<script><?php include_once("js_detail.php");	echo_company_detail($_GET['companyid']); 	?></script>
+	<script><?php include_once("js_detail.php");	echo_company_profile($_GET['companyid']); 	?></script>
 	<script><?php include_once('js_work_list.php'); echo_pass_work_array($_GET['companyid']);  ?></script>
 	<script> 
 	$(function(){
@@ -29,9 +29,9 @@ if (!file_exists($filename)) $filename = 'img_company/default.png';
 		$('#ch_name').text(company_detail_array['ch_name']);
 		$('#en_name').text(company_detail_array['en_name']);
 		$('#boss').text(company_detail_array['boss_name']);
+		$('#contact').text(company_detail_array['contact']);
 		$('#stuffnum').text(company_detail_array['staff_num']);
-		//$('#unicode').text(company_detail_array['uni_num']);
-		//$('#budget').text(company_detail_array['budget']);
+
 
 		$('#phone').text(company_detail_array['phone']);
 		$('#email').text(company_detail_array['email']);
@@ -39,7 +39,7 @@ if (!file_exists($filename)) $filename = 'img_company/default.png';
 		$('#address').text(company_detail_array['zone_name']+" "+company_detail_array['address']);
 		$('#cptype').text(company_detail_array['typename']);
 		$('#cpurl').append($('<a>').attr({'target':'_blank','href':company_detail_array['url']}).text(company_detail_array['url']));
-		$('#introduction').text(company_detail_array['introduction']);
+		$('#introduction').html(company_detail_array['introduction']);
 
 		var listbox = $('#profile-worklist');
 		if(pass_work_array.length == 0){listbox.append("目前沒有職缺");}
@@ -80,6 +80,7 @@ if (!file_exists($filename)) $filename = 'img_company/default.png';
 <p><span class="profile-span-title">英文名稱</span><span id="en_name"></span></p>
 <p><span class="profile-span-title">公司類型</span><span id="cptype"></span></p>
 <p><span class="profile-span-title">負責人</span><span id="boss"></span></p>
+<p><span class="profile-span-title">聯絡人</span><span id="contact"></span></p>
 <p><span class="profile-span-title">員工數</span><span id="stuffnum"></span></p>
 <br><hr><br>
 
@@ -100,7 +101,7 @@ if (!file_exists($filename)) $filename = 'img_company/default.png';
 <div class="profile-boxright">
 
 <div class="profile-boxinner"><h2>簡介</h2>
-<span id="introduction"></span>
+<div id="introduction"></div>
 </div>
 
 <div class="profile-boxinner" id="profile-worklist">

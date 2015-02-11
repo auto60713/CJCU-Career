@@ -14,16 +14,9 @@
 	<script>
 	$(function(){ 	
 
-		$.ajax({
-					url:  'public_view/header.php',
-					type: 'POST',
-					data: {},
-					success: function(data) {
-                        $('#view-header').html(data);
-                    }
-		});
-
-        $("#menu").load('public_view/menu.html');
+		$('#view-header').load('public_view/header.php');
+    $("#menu").load('public_view/menu.html');
+    $("#footer").load('public_view/footer.html');
 
 	})
 	</script>
@@ -112,11 +105,7 @@
 
 
 <!-- 頁尾訊息 -->
-<div id="footer">
-	<div class="footer_text">
-		© 2014 長大職涯網 Inc. 長榮大學 職涯發展組
-	</div>
-</div>
+<div id="footer"></div>
 
 
 </body>
@@ -128,7 +117,7 @@
 <script>
     <?php
     //後端傳來的工作資料
-    include_once('js_work_list.php'); echo_work_list_array(200); 
+    include_once('js_work_list.php'); echo_work_list_array(20); 
 
     //後端傳來"進階搜尋項目"的資料
     include_once("js_search_work_data.php"); echo_work_sub_data();
@@ -144,24 +133,43 @@
             box3 = $('<div>').addClass('work-box').addClass('box-loc'),
             box4 = $('<div>').addClass('work-box').addClass('box-pop'),
 
-            img = $('<img>').addClass('box-img').attr('src', 'img_company/'+work_list_array[i].cid+'.jpg'),
             a_link = $('<a>').attr({href:'work-'+work_list_array[i].wid}),
             div_work = $('<div>').addClass('work'),
 
             work_name = $('<h1>').text(work_list_array[i].wname),
             work_zone = $('<p>').text(work_list_array[i].zname).prepend($('<i>').addClass('fa fa-map-marker')),
             work_propn = $('<p>').text(((work_list_array[i].isout=='0')?'校外 ':'校內 ') + work_list_array[i].propname),
-            work_recr = $('<p>').addClass('num').text('需求 '+ work_list_array[i].rno +' 人'),
-            work_date = $('<p>').addClass('date').text('開始招募'+work_list_array[i].date.split(' ')[0]);
-            
+            work_recr = $('<p>').addClass('num').text('需求 '+ work_list_array[i].rno +' 人');
 
-
-            box2.append(work_name).append(work_recr).append(work_date);
+            box2.append(work_name,work_recr);
             box3.append(work_zone);
             box4.append(work_propn);
 
+        //發布公司
+        $.ajax({
+          type: 'POST',
+          async: false,
+          url: 'ajax_echo_name.php',
+          data:{mode:"cnd",work_pub:work_list_array[i].pub,comid:work_list_array[i].cid},
+          success: function (data) { 
+              work_com = $('<p>').addClass('date').text(data);
+              box2.append(work_com);
+          }
+        });
 
-            div_work.append(img).append(box2).append(box3).append(box4);
+        //公司頭像
+        $.ajax({
+          type: 'POST',
+          async: false,
+          url: 'ajax_echo_name.php',
+          data:{mode:"img",pub:work_list_array[i].pub,id:work_list_array[i].cid},
+          success: function (data) { 
+              img = $('<img>').addClass('box-img').attr('src', data);
+              div_work.append(img);
+          }
+        });
+
+            div_work.append(box2,box3,box4);
             a_link.append(div_work);
             box.append(a_link);
 

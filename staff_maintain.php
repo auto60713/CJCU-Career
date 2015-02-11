@@ -13,7 +13,7 @@ else{
 <!doctype html>
 <html>
 <head>
-	<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+	<link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="css/work_detail_edit.css?v=0">
 	<script>
 
@@ -41,9 +41,15 @@ else{
             margin-top: 30px;
 	    }
         .all-list-tb th,.all-list-tb td{
+
+            text-overflow: ellipsis;
+            white-space: nowrap;
+
         	text-align: left;
         	font-weight: normal;
             padding-right: 30px;
+            max-width: 240px;
+            overflow: hidden;
         }
         .space{
         	height: 10px;
@@ -63,6 +69,9 @@ else{
         .search_sign{
         	margin:0px 5px;
         }
+        .com-name-limit{
+            max-width: 150px;
+        }
 
 	</style>
 
@@ -74,6 +83,7 @@ else{
 	<div class="sub-tab tab-active" tabtoggle='workedit1'><i class="fa fa-user tab-img"></i> 工作</div>
 	<div class="sub-tab" tabtoggle='workedit1'><i class="fa fa-building-o tab-img"></i> 廠商</div>
 	<div class="sub-tab" tabtoggle='workedit1'><i class="fa fa-book tab-img"></i> 系所</div>
+    <div class="sub-tab" tabtoggle='workedit1'><i class="fa fa-book tab-img"></i> 單位</div>
 </div>
 
 
@@ -86,7 +96,7 @@ else{
         <div class="all-list">
             <table id="work_table" class="all-list-tb">
             	<h3>工作列表(僅維護工讀,正職。實習各系所負責)</h3>
-            	<tr><th>編號</th><th>發佈廠商</th><th>工作名稱</th><th>類型</th><th>狀態</th></tr>
+            	<tr><th>序號</th><th>發佈廠商</th><th>工作名稱</th><th>類型</th><th>狀態</th></tr>
             	<tr class="space"></tr>
             </table>
         </div>
@@ -95,11 +105,24 @@ else{
     <!--公司-->
 	<div tabtoggle='workedit2' class="com_page workedit-content-hide">
 
+        
+
         <a>搜尋廠商名稱</a><input type="text" name="search_com_name" value="" class="search_sign"><a class="ps">(打完後字按下tab即搜尋)</a>
+        
+        <div class="all-list">
+        <h3>新增廠商</h3>
+        <table>
+            <tr><td style="width:140px">請輸入廠商帳號</td><td><input type="text" name="com_id" value=""></td></tr>
+            <tr><td>廠商中文名稱</td><td><input type="text" name="com_name" value=""></td></tr>
+            <tr><td>密碼預設</td><td><input type="text" name="com_pw" value="1234" disabled></td></tr>
+        </table>
+        <button type="button" onclick="add_company()">新增</button>
+        </div>
+
         <div class="all-list">
             <table id="com_table" class="all-list-tb">
             	<h3>廠商列表</h3>
-            	<tr><th>帳號</th><th>中文名稱</th></tr>
+            	<tr><th>序號</th><th>帳號</th><th>密碼</th><th>中文名稱</th></tr>
             	<tr class="space"></tr>
             </table>
         </div>
@@ -111,30 +134,55 @@ else{
 
         <a>搜尋系所名稱</a><input type="text" name="search_dep_name" value="" class="search_sign"><a class="ps">(打完後字按下tab即搜尋)</a>
 
-    <div class="all-list">
-        <h3>新增系所</h3>
-        <table>
-            <tr><td style="width:140px">請輸入系所帳號</td><td><input type="text" name="dep_id" value=""></td></tr>
-            <tr><td>系所中文名稱</td><td><input type="text" name="dep_name" value=""></td></tr>
-            <tr><td>密碼預設</td><td><input type="text" name="dep_pw" value="1234" disabled></td></tr>
-        </table>
-        <button type="button" onclick="add_department()">新增</button>
-    </div>
+        <div class="all-list">
+            <h3>新增系所</h3>
+            <table>
+                <tr><td style="width:140px">請輸入系所帳號</td><td><input type="text" name="dep_id" value=""></td></tr>
+                <tr><td>系所中文名稱</td><td><input type="text" name="dep_name" value=""></td></tr>
+                <tr><td>密碼預設</td><td><input type="text" name="dep_pw" value="1234" disabled></td></tr>
+            </table>
+            <button type="button" onclick="add_department()">新增</button>
+        </div>
 
         <div class="all-list">
             <table id="dep_table" class="all-list-tb">
-            	<h3>系所列表(依照帳號排列)</h3>
+            	<h3>系所列表(依照帳號字母排列)</h3>
             	<tr><th>序號</th><th>帳號</th><th>密碼</th><th>中文名稱</th></tr>
             	<tr class="space"></tr>
             </table>
         </div>
 	</div>
+
+    <!--單位-->
+    <div tabtoggle='workedit2' class="com_page workedit-content-hide">
+
+        <a>搜尋單位名稱</a><input type="text" name="search_dep2_name" value="" class="search_sign"><a class="ps">(打完後字按下tab即搜尋)</a>
+
+        <div class="all-list">
+            <h3>新增單位</h3>
+            <table>
+                <tr><td style="width:140px">請輸入單位帳號</td><td><input type="text" name="dep2_id" value=""></td></tr>
+                <tr><td>單位中文名稱</td><td><input type="text" name="dep2_name" value=""></td></tr>
+                <tr><td>密碼預設</td><td><input type="text" name="dep2_pw" value="1234" disabled></td></tr>
+            </table>
+            <button type="button" onclick="add_department2()">新增</button>
+        </div>
+
+        <div class="all-list">
+            <table id="dep2_table" class="all-list-tb">
+                <h3>單位列表(依照帳號字母排列)</h3>
+                <tr><th>序號</th><th>帳號</th><th>密碼</th><th>中文名稱</th></tr>
+                <tr class="space"></tr>
+            </table>
+        </div>
+    </div>
+
 </div>
 
 </body>
 <script type="text/javascript">
 <?php
-    include_once('js_match_list.php'); echo_com_list(); echo_dep_list();
+    include_once('js_match_list.php'); echo_com_list(); echo_dep_list(); echo_dep2_list();
     include_once('js_work_list.php'); staff_maintain_work();
 ?>
 
@@ -143,11 +191,11 @@ else{
         else{
 		    for(var i=0;i<staff_maintain_work.length;i++){
 
-		    	var w_id = $('<td>').text(staff_maintain_work[i]['id']),
+		    	var w_id = $('<td>').text(i+1),
 		    	    w_link = $('<a>').attr('href', '#work'+staff_maintain_work[i]['id']+'-0').text(staff_maintain_work[i]['name']),
 		        	work = $('<td>').html(w_link),
 		        	com_link = $('<a>').attr('target','_blank').attr('href', 'company-'+staff_maintain_work[i]['com_id']).text(staff_maintain_work[i]['com_name']),
-		        	com = $('<td>').html(com_link),
+		        	com = $('<td>').addClass('com-name-limit').html(com_link),
 		        	prop = $('<td>').text(staff_maintain_work[i]['prop']);
 
                     switch(staff_maintain_work[i]['check']) {
@@ -170,33 +218,48 @@ else{
 		    }
 		}
 
-
         body = $('#com_table');
         if(all_company.length == 0){body.html("目前沒有任何廠商");}
         else{
 		    for(var i=0;i<all_company.length;i++){
 
-		    	var id = $('<td>').text(all_company[i]['id']),
-		        	link3 = $('<a>').attr('target','_blank').attr('href', 'company-'+all_company[i]['id']).text(all_company[i]['name']),
-		        	name3 = $('<td>').html(link3),
-		    		tr = $('<tr>').addClass('com-data').append(id,name3);
-		    		body.append(tr);
+		    	com_table_append_data(body,all_company[i])
 		    }
 		}
 
         body = $('#dep_table');
         if(dep_list.length == 0){body.html("目前沒有任何系所");}
         else{
-		    for(var i=0;i<dep_list.length;i++){
+            for(var i=0;i<dep_list.length;i++){
 
-		    	dep_table_append_data(body,dep_list[i])
+                dep_table_append_data(body,dep_list[i])
+            }
+        }
+
+        body = $('#dep2_table');
+        if(dep2_list.length == 0){body.html("目前沒有任何單位");}
+        else{
+		    for(var i=0;i<dep2_list.length;i++){
+
+		    	dep_table_append_data(body,dep2_list[i])
 		    }
 		}
 
+//動態新增一筆廠商資料(前端)
+function com_table_append_data(body,params) {
 
+        var sort = $('<td>').text(i+1),
+                    id = $('<td>').text(params['id']),
+                    pw3 = $('<td>').text(params['pw']),
+                    link3 = $('<a>').attr('target','_blank').attr('href', 'company-'+params['id']).text(params['name']),
+                    name3 = $('<td>').html(link3),
+                    tr = $('<tr>').addClass('com-data').append(sort,id,pw3,name3);
+                    body.append(tr);
+}
+//動態新增一筆系所資料(前端)
 function dep_table_append_data(body,params) {
 
-		var sort = $('<td>').text(i+1),
+		var number = $('<td>').text(i+1),
 		    no = $('<input>').attr({'type':'text','name':'dep'+params['id'],'value':params['no'].trim()}).addClass('dep-id'),
 		    no_td = $('<td>').append(no),
 		    pw = $('<td>').text(params['pw']),
@@ -205,7 +268,7 @@ function dep_table_append_data(body,params) {
 		    delet_btn = $('<button>').attr({'type':'button','dep_no':params['id'],'dep_name':params['ch_name']}).addClass('dep-delete-btn').text('刪除'),
             delet = $('<td>').append(delet_btn),
 
-		    tr = $('<tr>').addClass('dep-data').append(sort,no_td,pw,name2,delet);
+		    tr = $('<tr>').addClass('dep-data').append(number,no_td,pw,name2,delet);
 		    body.append(tr);
 }
 
@@ -221,6 +284,9 @@ function dep_table_append_data(body,params) {
                     var data_type = ".com-data"; break;
 
                 case "search_dep_name":
+                    var data_type = ".dep-data"; break;
+
+                case "search_dep2_name":
                     var data_type = ".dep-data"; break;
             } 
 
@@ -257,7 +323,7 @@ function dep_table_append_data(body,params) {
             var dep_no   = $( this ).attr('dep_no'),
                 dep_name = $( this ).attr('dep_name');
 
-            if (confirm ("確定要刪除系所 '"+dep_name+"' ?")){
+            if (confirm ("確定要刪除 '"+dep_name+"' ?")){
 
 		        $.ajax({
 		        	type:"POST",
@@ -275,7 +341,30 @@ function dep_table_append_data(body,params) {
 	        }
         });
 
+//新增廠商
+function add_company() {
 
+    var com_id = $('input:text[name=com_id]').val();
+    var com_name = $('input:text[name=com_name]').val();
+
+        $.ajax({
+            type:"POST",
+            url: "ajax_maintain.php",
+            data:{mode:5,comid:com_id,comname:com_name},
+              success: function (data) { 
+                if(data == 'Success'){
+
+               var com_list = [{"id":com_id,"pw":1234,"name":com_name}];
+                   body = $('#com_table');
+                   com_table_append_data(body,com_list[0]);
+                }
+                else alert(data);
+              }
+        });   
+
+    $('input:text[name=com_id]').val('');
+    $('input:text[name=com_name]').val('');
+}
 //新增系所
 function add_department() {
 
@@ -291,11 +380,38 @@ function add_department() {
 
                var dep_list = [{"id":"N/A","no":dep_id,"pw":1234,"ch_name":dep_name}];
               	   body = $('#dep_table');
-              	   dep_table_append_data(body,dep_list[0]);
+              	   dep_table_append_data(body,dep_list[0],1);
               	}
-			    else alert('新增失敗');
+			    else alert(data);
 			  }
-		});    	
+		});
+
+    $('input:text[name=dep_id]').val('');
+    $('input:text[name=dep_name]').val('');
+}
+//新增單位
+function add_department2() {
+
+    var dep2_id = $('input:text[name=dep2_id]').val();
+    var dep2_name = $('input:text[name=dep2_name]').val();
+
+        $.ajax({
+            type:"POST",
+            url: "ajax_maintain.php",
+            data:{mode:22,dep2id:dep2_id,dep2name:dep2_name},
+              success: function (data) { 
+                if(data == 'Success'){
+
+               var dep2_list = [{"id":"N/A","no":dep2_id,"pw":1234,"ch_name":dep2_name}];
+                   body = $('#dep2_table');
+                   dep_table_append_data(body,dep2_list[0],2);
+                }
+                else alert(data);
+              }
+        });
+
+    $('input:text[name=dep2_id]').val('');
+    $('input:text[name=dep2_name]').val('');
 }
 
 

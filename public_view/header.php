@@ -53,8 +53,7 @@ function echo_data($user,$lev){
 		}
 		else if( $lev == $level_staff){
             echo_username($user,'dep');
-            echo '<span><a href="change_pw.php">修改密碼</a></span>';
-            echo '<span><a href="company_add.php">新增廠商</a></span>';
+            echo '<span><a href="change_pw.php">修改自己的密碼</a></span>';
 			echo '<span><a href="staff_manage.php">管理</a></span>';
 			echo '<span class="username"><a href="department-'.$user.'">'.$GLOBALS['header_name'].'</a></span>';
 		}
@@ -138,6 +137,7 @@ function echo_data($user,$lev){
 		          url: 'login_connect.php',
 		          data:{sel:sel,id:id,pw:pw},
 		          success: function (data){ 
+
                       if(data==1) location.reload();
                       else $('.error_echo').text("身分或帳號密碼錯誤").animate({lineHeight:"40px",opacity:1}, 200); 
 		           
@@ -193,3 +193,30 @@ function echo_data($user,$lev){
 </div>
 
 </div>
+<style type="text/css">
+#capsalert{
+	position: relative;
+	margin-left: 5px;
+    top: -3px;
+	color: #808080;
+	font-size: 13px;
+}
+</style>
+<script type="text/javascript">
+$(document).ready(function(){
+
+
+            $('input[name="pw"]').keypress(function(e) { 
+                var s = String.fromCharCode( e.which );
+
+                if((s.toUpperCase() === s && s.toLowerCase() !== s && !e.shiftKey) ||
+                   (s.toUpperCase() !== s && s.toLowerCase() === s && e.shiftKey)){
+                    if($('#capsalert').length < 1) $(this).after('<a id="capsalert">大寫鎖定</a>');
+                } else {
+                    if($('#capsalert').length > 0 ) $('#capsalert').remove();
+                }
+            });
+
+
+});
+</script>

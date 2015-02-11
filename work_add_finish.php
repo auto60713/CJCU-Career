@@ -49,7 +49,7 @@ $zone_id = trim($_POST['zone_name']);
 $recruitment_no = trim($_POST['recruitment_no']);
 $address = trim($_POST['address']);
 $phone = trim($_POST['phone']);
-if(isset($_POST['pay']))$pay = trim($_POST['pay']);
+if(isset($_POST['pay_data']))$pay = trim($_POST['pay_data']);
 else $pay = "";
 if(isset($_POST['detail']))$detail = trim($_POST['detail']);
 else $detail = "";
@@ -69,8 +69,13 @@ if( !isset($name) || !isset($work_type) || !isset($work_prop) || !isset($isoutsi
     $params = array($name,$publisher,$company_id,$work_prop,$match_dep,$work_type,$bg_date,$ed_date,$isoutside,$zone_id,$address,$phone,$pay,$recruitment_no,$detail,$check);
 	$result = sqlsrv_query($conn, $sql, $params);
 	if($result){
-		echo '新增成功! 跳轉中，請稍候...';
+		echo '新增成功! 跳轉中，請稍候...'.$_POST['instead_com'];
 		echo '<meta http-equiv=REFRESH CONTENT=1;url='.$href.'_manage.php#'.$href.'-work>';
+
+        //寄信給管理員
+        include_once("send_email.php"); 
+        send_email("career@mail.cjcu.edu.tw","長大職涯網有新的工作「".$name."」需要審核","<h1><a href='http://210.70.167.98/cjcuweb/staff_manage.php#staff-audit0'>前往查看</a></h1>");
+    
 	}
 	else die(print_r( sqlsrv_errors(), true));
 }

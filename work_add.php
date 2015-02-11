@@ -191,7 +191,8 @@ div.ui-datepicker{
 		    <option value="2">月薪</option>
 		    <option value="3">面議</option>
 	    </select>
-		<input type="pay" name="pay" id='pay' placeholder="請輸入數字,面議則留白"/>
+		<input type="text" name="pay_val" id='pay_val' placeholder="請輸入數字,面議則留白"/>
+		<input type="hidden" name="pay_data" id='pay_data' val=""/>
 	</td>
 </tr>
 
@@ -356,9 +357,9 @@ div.ui-datepicker{
         $( "#work_edit_form" ).submit(function( event ) {
 
             var pay_way = $("#pay_way option:selected").text(),
-                pay = $( "#pay" ).val();
+                pay_val = $("#pay_val").val();
 
-            $( "#pay" ).val(pay_way+pay);
+            $( "#pay_data" ).val(pay_way+"-"+pay_val);
 
             var text = "";
             for (i = 0; i < $('.match_dep_tag').length; i++) {
@@ -509,7 +510,7 @@ div.ui-datepicker{
 			$('#recruitment_no').val(parseInt(work_detail_array['rno']));
 			$('#address').val(work_detail_array['address']);
 			$('#phone').val(work_detail_array['phone']);
-			$('#pay').val(work_detail_array['pay']);
+			$('#pay_val').val(work_detail_array['pay'].split("-")[1]);
 			$('#detail').val(work_detail_array['detail']);
 		}
 
@@ -522,14 +523,13 @@ $(document).ready(function() {
 
         $("#work_edit_form").validate({ 
             rules: { 
-                name:            { required:true,maxlength:20 },
+                name:            { required:true },
                 work_type_list2: { required:true },
                 ed_date:         { required:true },
                 zone_name:       { required:true },
-                recruitment_no:  { required:true,maxlength:3,digits:true },
-                address:         { required:true,maxlength:40 },
-                phone:           { required:true,maxlength:14 },
-                detail:          { maxlength:80 }
+                recruitment_no:  { required:true,digits:true },
+                address:         { required:true },
+                phone:           { required:true },
             }
         }); 
 

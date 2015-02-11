@@ -89,8 +89,11 @@ max-height: 150px;
 	word-break:break-all;
 }
 .profile-span-right{
+	text-overflow: ellipsis;
+    white-space: nowrap;
+
 	float: right;
-	max-width: 60%;
+	max-width: 65%;
 	display: inline-block;
 	white-space:nowrap;
 	overflow: hidden;

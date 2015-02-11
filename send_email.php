@@ -19,7 +19,7 @@ switch($mode){
 
         if($row['email']==null) {echo "很抱歉，我們的記錄中沒有該電子郵件地址，請重試。";  exit();}
 
-        send_email($row['email'],"請妥善保管您的帳號密碼","<h1><a href='localhost/cjcuweb/change_pw.php?id=".$row['id']."&pw=".$row['pw']."'>前往修改密碼</a></h1>");
+        send_email($row['email'],"請妥善保管您的帳號密碼","<h2>帳號：".$row['id']."</h2><h2>密碼：".$row['pw']."</h2>");
     break;
 
     case 2://新廠商申請需要審核
@@ -37,8 +37,8 @@ switch($mode){
 function send_email($mail_address,$mail_title,$mail_cont){
 
 //請設定管理員的gmail帳號密碼
-$staff_id = "komicabot@gmail.com";
-$staff_pw = "xup6ai4u83";
+$staff_id = "cjcu.department.career@gmail.com";
+$staff_pw = "career1820";
 
 require("phpmailer/class.phpmailer.php");
 

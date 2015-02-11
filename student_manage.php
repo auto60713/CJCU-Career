@@ -130,7 +130,7 @@ else{$stud_id = trim($_SESSION['username']);}
 
 		<a href="#student-info"><div class="list">個人資訊</div></a><hr>
 		<a href="#student-applywork"><div class="list">我的應徵</div></a><hr>
-		<a href="#student-notice"><div class="list">通知</div></a><hr>
+		<a href="#student-notice"><div class="list">系統紀錄</div></a><hr>
 		<a href="#explanation"><div class="list">操作說明</div></a><hr>
 	</div>
 

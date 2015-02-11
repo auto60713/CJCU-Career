@@ -10,11 +10,12 @@
 <link rel="stylesheet" type="text/css" href="css/main.css">
 <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet">
 <script type="text/javascript">
-
-    $('#view-header').load('public_view/header.php');
-
-
 	$(function(){
+
+
+		$('#view-header').load('public_view/header.php');
+		$("#menu").load('public_view/menu.html');
+		$("#footer").load('public_view/footer.html');
 
 	    $("#zone").append($("<option></option>").attr("value", 0).text("國內"));
 		$("#zone").append($("<option></option>").attr("value", 1).text("國外"));
@@ -89,6 +90,8 @@ label.error{
 
 <body>
 <div id="view-header"></div>
+<div id="menu"></div>
+
 
 <div id="cont" class="register">
 
@@ -104,24 +107,25 @@ label.error{
 <tr><td>公司名稱(英文)：</td>   <td><input type="text" name="en_name"/></td></tr>
 <tr><td>公司電話*：</td>        <td><input type="text" name="phone"/></td></tr>
 <tr><td>傳真：</td>             <td><input type="text" name="fax"/></td></tr>
-<tr><td>Email*：</td>           <td><input type="text" name="email"/></td></tr>
-<tr><td>統一編號*：</td>        <td><input type="text" name="uni_num"/></td></tr>
-<tr><td>負責人姓名*：</td>      <td><input type="text" name="boss_name" /></td></tr>
+<tr><td>Email：</td>           <td><input type="text" name="email"/></td></tr>
+<tr><td>統一編號：</td>        <td><input type="text" name="uni_num"/></td></tr>
+<tr><td>負責人*：</td>      <td><input type="text" name="boss_name" /></td></tr>
+<tr><td>聯絡人*：</td>      <td><input type="text" name="contact" /></td></tr>
 <tr><td>公司行業類型 :</td>     <td><select name="type" id="company_type"></select></td></tr>
 
-<tr><td>公司地點：</td>         <td><select name="zone" id="zone"></select>  
+<tr><td>公司地區：</td>         <td><select name="zone" id="zone"></select>  
 			                        <select name="zone_name" id="zone_name"></select></td></tr>
 <tr><td>公司地址*：</td>        <td><input type="text" name="address"/></td></tr>
-<tr><td>員工人數*：</td>        <td><input type="text" name="staff_num"/></td></tr>
+<tr><td>員工人數：</td>         <td><input type="text" name="staff_num"/></td></tr>
 <tr><td>公司資本額：</td>       <td><input type="text" name="budget"/></td></tr>
 <tr><td>公司網址：</td>         <td><input type="text" name="url" class="url"/></td></tr>
+<tr><td>公司簡介：</td>         <td><textarea name="introduction" cols="45" rows="5"></textarea></td></tr>
 </table>
 
-公司簡介：<br><textarea name="introduction" cols="45" rows="5"></textarea> <br>
+
 <br><br>
 
 <input type="submit" name="button" value="確定" />　　
-<input type="button" value="取消" onclick=""/>
 </form>
 
 
@@ -133,22 +137,21 @@ $(document).ready(function() {
 
         $("#commentForm").validate({ 
             rules: { 
-                //id:      { required:true,rangelength:[4,20] },
-                pw:      { required:true,rangelength:[4,20] },
+              
+                pw:      { required:true,rangelength:[4,30] },
                 pw2:     { required:true,equalTo:"#pw" },
-                ch_name: { required:true,maxlength:20 },
-                en_name: { maxlength:20 },
-                phone:   { required:true,maxlength:12 },
-                fax:     { maxlength:12 },
-                email:   { required:true,email:true },
-                uni_num: { required:true,rangelength:[8,8],digits:true },
-                boss_name:    { required:true,maxlength:12 },
-                zone_name:    { required:true },
-                address:      { required:true,maxlength:40 },
-                staff_num:    { required:true,digits:true },
+                ch_name: { required:true,maxlength:50 },
+                en_name: { maxlength:50 },
+                phone:   { required:true,maxlength:30 },
+                fax:     { maxlength:30 },
+                email:   { email:true },
+                uni_num: { rangelength:[8,8],digits:true },
+                boss_name:    { required:true },
+                contact:      { required:true },
+                address:      { required:true },
+                staff_num:    { digits:true },
                 budget:       { digits:true },
-                url:          { url:true },
-                introduction: { maxlength:80 }
+                url:          { url:true }
             }
         }); 
 
@@ -188,6 +191,9 @@ $(document).ready(function() {
 
 
 </script>
+
+<div id="footer"></div>
+
 </body>
 </html>
 

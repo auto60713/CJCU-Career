@@ -32,7 +32,7 @@ textarea {
 
 		var detail_column = "",idx = 0;
 		//column_name array必須優化成json格式 不然目前依賴index順序
-		var column_name = ["帳號","中文名稱","英文名稱","電話","傳真","系主任","電子信箱","辦公室","簡介","網站連結"];
+		var column_name = ["帳號","中文名稱","英文名稱","電話","傳真","負責人","聯絡人","電子信箱","辦公室","簡介","網站連結"];
 
 		for(var key in department_detail_array){
 

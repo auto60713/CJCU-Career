@@ -14,8 +14,8 @@ switch ($_SESSION['level']) {
     break;
     
     case 4://廠商改密碼
-        $old_pw = md5(trim($_POST['old_pw']));
-        $new_pw = md5(trim($_POST['new_pw']));
+        $old_pw = trim($_POST['old_pw']);
+        $new_pw = trim($_POST['new_pw']);
 
         $sql = "select id,pw,ch_name name from company where id =?"; 
         $sql2 = "update company set pw=(?) where id ='".$_SESSION['username']."'"; 

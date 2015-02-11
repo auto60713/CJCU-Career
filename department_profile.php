@@ -1,6 +1,6 @@
 <?php session_start(); 
-$filename = 'img_company/'.$_GET['companyid'].'.jpg';
-if (!file_exists($filename)) $filename = 'img_company/default.png';
+$filename = 'img_department/'.$_GET['companyid'].'.jpg';
+if (!file_exists($filename)) $filename = 'img_department/default.png';
 ?>
 <!DOCTYPE html>
 <html>
@@ -18,14 +18,7 @@ if (!file_exists($filename)) $filename = 'img_company/default.png';
 	<script> 
 	$(function(){
 
-		$.ajax({
-			url:  'public_view/header.php',
-			type: 'POST',
-			data: {},
-			success: function(data) {
-                $('#view-header').html(data);
-            }
-		});
+		$('#view-header').load('public_view/header.php');
 		
 		$('.profile-pic-change, #profile-btn-edit').hide();
 
@@ -34,13 +27,14 @@ if (!file_exists($filename)) $filename = 'img_company/default.png';
 		$('#ch_name').text(department_profile_array['ch_name']);
 		$('#en_name').text(department_profile_array['en_name']);
 		$('#name').text(department_profile_array['name']);
+        $('#contact').text(department_profile_array['contact']);
 
 		$('#phone').text(department_profile_array['phone']);
 		$('#email').text(department_profile_array['email']);
 		$('#fax').text(department_profile_array['fax']);
 		$('#address').text(department_profile_array['address']);
 		$('#url').append($('<a>').attr('href',department_profile_array['url']).attr('target','_blank').text(department_profile_array['url']));
-		$('#introduction').text(department_profile_array['introduction']);
+		$('#introduction').html(department_profile_array['introduction']);
 
 		var listbox = $('#profile-worklist');
 		if(pass_work_array.length==0) listbox.append("目前沒有應徵");
@@ -80,7 +74,8 @@ if (!file_exists($filename)) $filename = 'img_company/default.png';
 <h3>系所資訊</h3>
 <p><span class="profile-span-title">中文名稱</span><span id="ch_name"></span></p>
 <p><span class="profile-span-title">英文名稱</span><span id="en_name"></span></p>
-<p><span class="profile-span-title">系主任</span><span id="name"></span></p>
+<p><span class="profile-span-title">負責人</span><span id="name"></span></p>
+<p><span class="profile-span-title">聯絡人</span><span id="contact"></span></p>
 <br><hr><br>
 
 <h3>聯絡方式</h3>
@@ -98,7 +93,7 @@ if (!file_exists($filename)) $filename = 'img_company/default.png';
 <!-- 其他資訊(右側) -->
 <div class="profile-boxright">
 <div class="profile-boxinner"><h2>簡介</h2>
-<span id="introduction"></span>
+<div id="introduction"></div>
 </div>
 
 <div class="profile-boxinner" id="profile-worklist">

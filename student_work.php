@@ -59,10 +59,10 @@ else{
 		    		var check_status='';
 		    		switch(work_list_array[i]['ch']) {
 		    			//老師說要正名
-			    		case 0: check_status='公司審核中'; hint2.addClass('sta0 onecheck').text(check_status); break;
+			    		case 0: check_status='審核中(點我查看)'; hint2.addClass('sta0 onecheck').text(check_status); break;
 			    		case 1: check_status='已錄取!'; hint2.addClass('sta1 yescheck').text(check_status); break;
-			    case 22:case 2: check_status='應徵失敗..(查看原因)'; hint2.addClass('sta2 nocheck').text(check_status); break;
-			    		case 3: check_status='應徵失敗..(查看原因)'; hint2.addClass('sta2 nocheck').text(check_status); subbox3.append(statustxt);break;
+			    case 22:case 2: check_status='應徵失敗..(點我查看原因)'; hint2.addClass('sta2 nocheck').text(check_status); break;
+			    		case 3: check_status='應徵失敗..(點我查看原因)'; hint2.addClass('sta2 nocheck').text(check_status); subbox3.append(statustxt);break;
 			    		case 4: check_status='實習中'; hint2.addClass('sta4 yescheck').text(check_status); break;
 			    		case 5: check_status='完成工作!'; hint2.addClass('sta5 yescheck').text(check_status); break;
 		    		}
@@ -84,8 +84,8 @@ else{
 		    			var check_status_box = $('#student-audit-current-status').removeClass('yescheck').removeClass('nocheck');
 		    			var c_status ='';
                         // 取消應徵   要求再審
-		    	    	var delete_lu = $('<div>').attr('luid', workid).addClass('delete-lu').text("取消應徵"),
-                            pass = $('<div>').attr('workid', workid).addClass('pass-req').text("要求再審核");
+		    	    	var delete_lu = $('<button>').attr('luid', workid).addClass('delete-lu').text("取消應徵"),
+                            pass = $('<button>').attr('workid', workid).addClass('pass-req').text("要求再審核");
 
 
                         // 工作對學生的狀態意義
@@ -148,17 +148,15 @@ else{
 						    });
 				    	});
 
+		    			//從後端拉紀錄回來(json格式)
+                        $.ajax({
+                          type: 'POST',
+                          async: false,
+                          url: 'js_audit_detail.php',
+                          data: {workid: workid},
+                          success: function (data) { 
 
-
-			    		// 從後端拉紀錄回來(json格式)
-		    			$.ajax({
-		    				url: 'js_audit_detail.php',
-		    				type: 'post',
-		    				dataType: 'json',
-		    				data: {workid: workid},
-		    			})
-		    			.done(function (data) {
-		    				
+                         	var data = JSON.parse(data);
 							for(var i=0;i<data.length;i++){
 								var time = $('<span>').addClass('student-audit-htime').text(data[i].time.split(' ')[0]),
 									iconcalss = (data[i].censored==1)? 'fa fa-check':'fa fa-times',
@@ -168,8 +166,8 @@ else{
 									list = $('<div>').addClass('student-audit-list').append(time).append(hstatus).append(msg);
 								historybox.append(list);
 							}
-
-		    			 });
+                          }
+                        });
 
 		    			// show the light box
 		    			$('#student-audit-lightbox').fadeIn(100);
@@ -251,7 +249,7 @@ else{
 				<!--<div class="pass-req">要求再審核</div>-->
 				<span id="student-audit-again"></span>
 			</div>
-			<p class="login-hint">歷史紀錄：</p>
+			<p class="login-hint">審核訊息：</p>
 			<div class="student-audit-history" id="student-audit-history"></div>
 		</div>
 	</div> 

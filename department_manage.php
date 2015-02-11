@@ -1,7 +1,7 @@
 <?php session_start();
 if(!isset($_SESSION['username']) || $_SESSION['level'] != 5) { header("Location: index.php"); exit; }
-$filename = 'img_company/'.$_SESSION['username'].'.jpg';
-if (!file_exists($filename)) $filename = 'img_company/default.png';
+$filename = 'img_department/'.$_SESSION['username'].'.jpg';
+if (!file_exists($filename)) $filename = 'img_department/default.png';
 ?>
 <!doctype html>
 <html>
@@ -141,7 +141,7 @@ if (!file_exists($filename)) $filename = 'img_company/default.png';
 		<a href="#department-addwork"><div class="list">新增工作</div></a><hr>
 		<a href="#department-work"><div class="list">我發佈的工作</div></a><hr>
 		<a href="#department-match"><div class="list">實習管理</div></a><hr>
-		<a href="#department-notice"><div class="list">通知</div></a><hr>
+		<a href="#department-notice"><div class="list">系統紀錄</div></a><hr>
 		<a href="#explanation"><div class="list">操作說明</div></a><hr>
 	</div>
 
@@ -166,8 +166,8 @@ if (!file_exists($filename)) $filename = 'img_company/default.png';
 		<h1>上傳圖片<i class="fa fa-times login-exit" id="upload-close"></i></h1>
 		<p class="login-hint">您可以更新一張代表系上的照片</p>
 
-		<img src="<?php echo 'img_company/'.$_SESSION['username'].'.jpg' ?>" class="upload-img-max">
-		<img src="<?php echo 'img_company/'.$_SESSION['username'].'.jpg' ?>" class="upload-img-min">
+		<img src="<?php echo 'img_department/'.$_SESSION['username'].'.jpg' ?>" class="upload-img-max">
+		<img src="<?php echo 'img_department/'.$_SESSION['username'].'.jpg' ?>" class="upload-img-min">
 		<form id="upload_form" enctype="multipart/form-data" method="post">
 		 <input type="file" name="file1" id="file1"  class="btn-submit" accept="image/*"> <p id="status"></p>
 		

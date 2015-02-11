@@ -4,13 +4,13 @@ session_start();
 include_once("cjcuweb_lib.php");
 
 
-if($_SESSION['level'] == $level_company||$_SESSION['level'] == $level_department)
-	$dir = "img_company/";
-else
-	$dir = "img_user/";
+if($_SESSION['level'] == $level_company) $dir = "img_company/";
+else if($_SESSION['level'] == $level_department||$_SESSION['level'] == $level_staff) $dir = "img_department/";
+else $dir = "img_user/";
+
 
 if(!isset($_SESSION['level'])){
-	echo "NO LOGin"; exit();
+	echo "No permission!"; exit();
 }
 
 $rename = $dir.$_SESSION['username'].'.jpg';

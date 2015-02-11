@@ -1,7 +1,8 @@
-<?php session_start(); 
+<?php 
+/*
 include_once('cjcuweb_lib.php');
 include_once('sqlsrv_connect.php');
-// 檢查該工作是否屬於該公司
+//檢查該工作是否屬於該公司
 $checkVars = array($level_staff,$level_department);
 if(!isCompanyWork($conn,$_SESSION['username'],$_POST['workid'])&& !in_array($_SESSION['level'], $checkVars)){
 	
@@ -20,6 +21,7 @@ if (preg_match("/-/i", $companyid)) $companyid = strstr($companyid,'-',true);
 	if($row[0]==$companyid) return true;
 	else return false;
 }
+*/
 ?>
 
 <!doctype html>
@@ -31,7 +33,7 @@ if (preg_match("/-/i", $companyid)) $companyid = strstr($companyid,'-',true);
 	
 <div class="workedit-tabbox">
 	<div id="page-edit" class="sub-tab tab-active" tabtoggle='workedit1'><i class="fa fa-pencil tab-img"></i> 編輯</div>
-	<div id="page-apply" class="sub-tab" tabtoggle='workedit1'><i class="fa fa-user tab-img"></i> 應徵</div>
+	<div id="page-apply" class="sub-tab" tabtoggle='workedit1'><i class="fa fa-user tab-img"></i> 審核</div>
 	<div id="page-start" class="sub-tab" tabtoggle='workedit1'><i class="fa fa-bullhorn tab-img"></i> 執行</div>
 	<div id="page-audit" class="sub-tab" tabtoggle='workedit1'><i class="fa fa-check tab-img"></i> 狀態</div>
 	<div id="page-set" class="sub-tab" tabtoggle='workedit1'><i class="fa fa-cog tab-img"></i> 刪除</div>

@@ -123,7 +123,7 @@ else die(print_r( sqlsrv_errors(), true));
 
 
 
-//列出所有已建立的系所單位
+//列出所有已建立的系所
 function echo_dep_list(){
 
 include("sqlsrv_connect.php");
@@ -149,13 +149,39 @@ else die(print_r( sqlsrv_errors(), true));
 
 }
 
+//列出所有已建立的單位
+function echo_dep2_list(){
+
+include("sqlsrv_connect.php");
+
+$sql = "select * from department where sort = 2 ORDER BY no";
+
+$para = array();
+$stmt = sqlsrv_query($conn, $sql, $para);
+
+
+if($stmt) {
+
+    $dep2_list = array();
+
+	while( $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC) ) 
+    {
+		$dep2_list[] = array_map('trim',$row);
+	}
+
+	echo "var dep2_list = ". json_encode($dep2_list) . ";";	
+}
+else die(print_r( sqlsrv_errors(), true));
+
+}
+
 
 //列出所有已建立的廠商
 function echo_com_list(){
 
 include("sqlsrv_connect.php");
 
-$sql = "select id,ch_name name from company where censored=1 ORDER BY ch_name";
+$sql = "select id,pw,ch_name name from company where censored=1 ORDER BY ch_name";
 
 $para = array();
 $stmt = sqlsrv_query($conn, $sql, $para);

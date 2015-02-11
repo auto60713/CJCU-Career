@@ -9,8 +9,8 @@ include("sqlsrv_connect.php");
 
 $para = array();
 
-$sql = "select TOP ".$work_length." w.company_id cid, w.id wid,w.name wname,z.name zname,w.is_outside isout,p.name propname,[recruitment _no] rno,w.date date
- from work w,zone z,work_prop p
+$sql = "select TOP ".$work_length." w.company_id cid, w.id wid,w.name wname,w.publisher pub,z.name zname,w.is_outside isout,p.name propname,[recruitment _no] rno,w.date date
+ from work w,zone z,work_prop p 
  where w.zone_id = z.id and work_prop_id = p.id and w.[check] = 1";
 //check=1 只秀出通過審核的工作
 
@@ -162,7 +162,7 @@ function staff_maintain_work(){
 	include("sqlsrv_connect.php");
 	$para = array();
 
-	$sql = "select w.id,w.name,c.id com_id,c.ch_name com_name,wp.name prop,w.[check] from work w,company c,work_prop wp where w.work_prop_id IN (1,2) and w.[check] IN (1,4,5) and c.id=w.company_id and wp.id=w.work_prop_id";
+	$sql = "select w.id,w.name,c.id com_id,c.ch_name com_name,wp.name prop,w.[check] from work w,company c,work_prop wp where w.publisher=1 and w.work_prop_id IN (1,2) and w.[check] IN (1,4,5) and c.id=w.company_id and wp.id=w.work_prop_id";
 	$stmt = sqlsrv_query($conn, $sql, $para);
 	$staff_maintain_work = array();
 

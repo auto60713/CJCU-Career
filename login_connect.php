@@ -92,7 +92,7 @@ function company_login($conn,$userid,$pw,$level_company){
 	$row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC);
 	
 	    // 資料表查無帳號 , 沒有輸入或密碼不符
-	    if(count($row) != 0 && $userid != null && $pw != null && $row['pw'] == md5($pw)){
+	    if(count($row) != 0 && $userid != null && $pw != null && trim($row['pw']) == $pw){
 
             $_SESSION['username'] = $userid;
             $_SESSION['level'] = $level_company;
@@ -102,7 +102,7 @@ function company_login($conn,$userid,$pw,$level_company){
         
 	    else{
 
-	    	login_echo(0);
+	    	echo (count($row)." ".trim($row['pw'])." ".$pw);
 	    }
 	
     }

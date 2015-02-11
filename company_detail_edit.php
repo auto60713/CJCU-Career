@@ -156,13 +156,14 @@ label.error{
         <tr><td class='td1'>英文名稱：</td>     <td class='td2'><input type="text" name="en_name"/></td></tr>
         <tr><td class='td1'>公司電話*：</td>    <td class='td2'><input type="text" name="phone"/></td></tr>
         <tr><td class='td1'>傳真：</td>         <td class='td2'><input type="text" name="fax"/></td></tr>
-        <tr><td class='td1'>Email*：</td>       <td class='td2'><input type="text" name="email"/></td></tr>
-        <tr><td class='td1'>統一編號*：</td>    <td class='td2'><input type="text" name="uni_num"/></td></tr>
+        <tr><td class='td1'>Email：</td>       <td class='td2'><input type="text" name="email"/></td></tr>
+        <tr><td class='td1'>統一編號：</td>     <td class='td2'><input type="text" name="uni_num"/></td></tr>
         <tr><td class='td1'>負責人*：</td>      <td class='td2'><input type="text" name="boss_name" /></td></tr>
+        <tr><td class='td1'>聯絡人*：</td>      <td class='td2'><input type="text" name="contact" /></td></tr>
         <tr><td class='td1'>行業類型 :</td>     <td class='td2'><select name="type" id="company_type"></select></td></tr>
         <tr><td class='td1'>地點：</td>         <td class='td2'><select name="zone_name" id="zone_name"></select></td></tr>
         <tr><td class='td1'>公司地址*：</td>    <td class='td2'><input type="text" name="address"/></td></tr>
-        <tr><td class='td1'>員工人數*：</td>    <td class='td2'><input type="text" name="staff_num"/></td></tr>
+        <tr><td class='td1'>員工人數：</td>     <td class='td2'><input type="text" name="staff_num"/></td></tr>
         <tr><td class='td1'>資本額：</td>       <td class='td2'><input type="text" name="budget"/></td></tr>
         <tr><td class='td1'>網址：</td>         <td class='td2'><input type="text" name="url" class="url"/></td></tr>
         <tr><td class='td1'>簡介：</td>         <td class='td2'><textarea name="introduction" cols="45" rows="5"></textarea></td></tr>
@@ -197,19 +198,18 @@ $(document).ready(function() {
 
         $("#detail").validate({ 
             rules: { 
-                ch_name: { required:true,maxlength:20 },
-                en_name: { maxlength:20 },
-                phone:   { required:true,maxlength:12 },
-                fax:     { maxlength:12 },
-                email:   { required:true,email:true },
-                uni_num: { required:true,rangelength:[8,8],digits:true },
-                boss_name:    { required:true,maxlength:12 },
-                zone_name:    { required:true },
-                address:      { required:true,maxlength:40 },
-                staff_num:    { required:true,digits:true },
+                ch_name: { required:true,maxlength:50 },
+                en_name: { maxlength:50 },
+                phone:   { required:true,maxlength:30 },
+                fax:     { maxlength:30 },
+                email:   { email:true },
+                uni_num: { rangelength:[8,8],digits:true },
+                boss_name:    { required:true },
+                contact:      { required:true },
+                address:      { required:true },
+                staff_num:    { digits:true },
                 budget:       { digits:true },
-                url:          { url:true },
-                introduction: { maxlength:80 }
+                url:          { url:true }
             }
         }); 
 

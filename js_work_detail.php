@@ -3,16 +3,13 @@ $GLOBALS['cust_company'] ='';
 
 
 
-//???
+//work_profile
 function echo_work_detail_array($work_id){
 
 include("sqlsrv_connect.php");
 include_once("cjcuweb_lib.php");
 
-// id name date *company_id [work_type_id] start_date end_date [work_prop_id] is_outside 
-// [zone_id] address phone pay recruitment _no detail check 
 
-// GOD SQL query
 $sql = "declare @h int;set @h = (select work_type_id from work where id=?);
 		declare @i int;set @i = (select c.parent_no from work_type c where c.id=@h);
 	  	declare @j int;set @j = (select b.parent_no from work_type b where b.id=@i);	  
@@ -25,6 +22,7 @@ $sql = "declare @h int;set @h = (select work_type_id from work where id=?);
 $stmt = sqlsrv_query($conn, $sql, array($work_id,$work_id));
 if($stmt) $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC); 
 else die(print_r( sqlsrv_errors(), true));
+$row['detail'] = preg_replace("/\r\n|\r/", "<br>", $row['detail']);
 echo "var work_detail_array = ". json_encode($row) . ";";
 $GLOBALS['cust_company'] = $row['company_id'];
 $GLOBALS['publisher'] = $row['pub'];

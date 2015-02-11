@@ -130,7 +130,7 @@ else{
 				tbox = $('<h1>').append(icon).append(' '+tit).css('font-size', '28px').attr({id:'obj-tit'}),
 				close = $('<i>').addClass('fa fa-times').addClass('staff-apply-box-close'),
 				span = $('<span>').text('審核說明：'),
-				t = $('<textarea>').attr({id: 'staff-audit-apply-msg',placeholder:'選填'}),
+				t = $('<textarea>').attr({id: 'staff-audit-apply-msg'}).text("感謝您的參與，該項目已被審核通過。"),
 				ok = $('<input>').attr({id: 'staff-audit-apply-ok', type: 'button',value :'通過'}).on('click', function(event) {
 					submit_audit(true);
 				}),
