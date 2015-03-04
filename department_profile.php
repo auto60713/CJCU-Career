@@ -7,18 +7,19 @@ if (!file_exists($filename)) $filename = 'img_department/default.png';
 <head>
 	<meta charset="UTF-8">
 	<title></title>
-	<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="font-awesome/css/font-awesome.css">
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 	<link rel="stylesheet" type="text/css" href="css/manage.css">
 	<link rel="stylesheet" type="text/css" href="css/profile.css">
-	<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-	<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+	<script src="js/jquery.js"></script>
 	<script><?php include_once("js_detail.php");	echo_department_profile($_GET['companyid']); ?></script>
 	<script><?php include_once('js_work_list.php'); echo_pass_work_array($_GET['companyid']);  ?></script>
 	<script> 
 	$(function(){
 
 		$('#view-header').load('public_view/header.php');
+		$("#menu").load('public_view/menu.html');
+		$("#footer").load('public_view/footer.html');
 		
 		$('.profile-pic-change, #profile-btn-edit').hide();
 
@@ -56,11 +57,10 @@ if (!file_exists($filename)) $filename = 'img_department/default.png';
 
 
 <div id="view-header"></div>
+<div id="menu"></div>
+
 
 <div class="b-space div-align">
-
-
-
 
 <div class="profile-content overfix">
 	
@@ -102,10 +102,8 @@ if (!file_exists($filename)) $filename = 'img_department/default.png';
 </div>
 
 </div>
-
-
-
 </div>
 
+<div id="footer"></div>
 </body>
 </html>

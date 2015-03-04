@@ -1,7 +1,7 @@
 <?php session_start(); 
 include_once("cjcuweb_lib.php");
 
-if(isset($_GET['workid'])) $work_id=$_GET['workid']; else{header("Location: home.php"); exit;}
+if(isset($_GET['workid'])) $work_id=$_GET['workid']; else{header("Location: index.php"); exit;}
 if(isset($_SESSION['username'])) $user_id = $_SESSION['username'];
 ?>
 
@@ -10,7 +10,8 @@ if(isset($_SESSION['username'])) $user_id = $_SESSION['username'];
 <head>
 	<meta charset="UTF-8">
 	<title></title>
-	<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+	<script src="js/jquery.js"></script>
+	<link href="font-awesome/css/font-awesome.css" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 	<link rel="stylesheet" type="text/css" href="css/manage.css">
 	<link rel="stylesheet" type="text/css" href="css/profile.css">
@@ -41,9 +42,6 @@ if(isset($_SESSION['username'])) $user_id = $_SESSION['username'];
 		background-color: #E0184A;
 	}
 	</style>
-	<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-	<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-
 	<script>
 
 	<?php

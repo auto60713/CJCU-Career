@@ -13,11 +13,10 @@ if (!file_exists($filename)) $filename = 'img_department/default.png';
 	<link rel="stylesheet" type="text/css" href="css/work_detail_edit.css">
 	<link rel="stylesheet" type="text/css" href="css/company_worK_apply_list.css">
 	<link rel="stylesheet" type="text/css" href="css/profile.css">
-	<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+	<link rel="stylesheet" type="text/css" href="font-awesome/css/font-awesome.css">
 	<link rel="stylesheet" href="http://code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
-	<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-	<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 	<script src="http://code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+	<script src="js/jquery.js"></script>
 	<script src="js/jquery.hashchange.min.js"></script>
 	<script src="js/upload_img.js"></script>
 	<script>

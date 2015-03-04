@@ -10,8 +10,7 @@ if (!file_exists($filename)) $filename = 'img_company/default.png';
 	<link rel="stylesheet" type="text/css" href="../css/main.css">
 	<link rel="stylesheet" type="text/css" href="../css/manage.css">
 	<link rel="stylesheet" type="text/css" href="../css/profile.css">
-	<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-	<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+	<script src="js/jquery.js"></script>
 	<script><?php include_once("js_detail.php"); echo_staff_profile($_GET['userid']); ?></script>
 	<script> 
 	$(function(){

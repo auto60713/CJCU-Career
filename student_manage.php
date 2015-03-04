@@ -11,11 +11,10 @@ else{$stud_id = trim($_SESSION['username']);}
 	<link rel="stylesheet" type="text/css" href="css/manage.css">
 	<link rel="stylesheet" type="text/css" href="css/work_detail_edit.css">
 	<link rel="stylesheet" type="text/css" href="css/profile.css">
-	<link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
-	<link rel="stylesheet" href="http://code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
+	<link rel="stylesheet" type="text/css" href="font-awesome/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="http://code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
     <link rel="stylesheet" type="text/css" href="css/jquery.timepicker.css" />
-	<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-	<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+	<script type="text/javascript" src="js/jquery.js"></script>
 	<script type="text/javascript" src="js/jquery.hashchange.min.js"></script>
 	<script type="text/javascript" src="js/upload_img.js"></script>
 	<script>

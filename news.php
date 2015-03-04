@@ -8,22 +8,14 @@
 
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 	<link rel="stylesheet" type="text/css" href="css/home.css">
-	<link href="font-awesome/css/font-awesome.min.css" rel="stylesheet">
-	<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-	<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="font-awesome/css/font-awesome.min.css">
+  <script src="js/jquery.js"></script>
 	<script>
 	$(function(){ 	
 
-		$.ajax({
-					url:  'public_view/header.php',
-					type: 'POST',
-					data: {},
-					success: function(data) {
-                        $('#view-header').html(data);
-                    }
-		});
-
-        $("#menu").load('public_view/menu.html');
+		$('#view-header').load('public_view/header.php');
+    $("#menu").load('public_view/menu.html');
+    $("#footer").load('public_view/footer.html');
 
 	})
 	</script>
@@ -62,7 +54,7 @@
 </div>
 
 <!-- 右區塊 -->
-<div id="inner4_area_2" class="area_box2"><h1 id="area_title">職場高手</h1>
+<div id="inner4_area_2" class="area_box2"><h1 id="area_title"></h1>
 
     <!-- 載入五筆 -->
 
@@ -78,11 +70,7 @@
 
 
 <!-- 頁尾訊息 -->
-<div id="footer">
-	<div class="footer_text">
-		© 2014 長大職涯網 Inc. 長榮大學 職涯發展組
-	</div>
-</div>
+<div id="footer"></div>
 
 
 </body>
@@ -93,13 +81,14 @@
 <script>
 var article_id = "";
     <?php if(isset($_GET["article_id"])) echo 'var article_id = "'.$_GET["article_id"].'";'?>
-
+var type_id = "";
+    <?php if(isset($_GET["type"])) echo 'var type_id = "'.$_GET["type"].'";'?>
        
 
         //文章選單
         $.ajax({
           type: 'POST',
-          url: 'cjcu_career/cc/index.php/news/lists/2',
+          url: 'cjcu_career/cc/index.php/news/lists/'+type_id,
           data:{},
           success: function (data) { 
 
@@ -129,6 +118,7 @@ var article_id = "";
             }
             else{
               //右邊邊第一篇
+
             $('.news_title').prepend(article_array[min].title);  
             $('.news_time').html(article_array[min].created_date.split(" ")[0]);  
             $('.news_cont').html(article_array[min].content);  
@@ -136,10 +126,25 @@ var article_id = "";
           }
         });
 
+    //此文章分類
+    $.ajax({
+        type: 'POST',
+        url: 'cjcu_career/cc/index.php/catalog/index',
+        data:{},
+        success: function (data) { 
+
+            if(data!=null||data!="false") var data = JSON.parse(data);
+            else var data = 0;
+            
+            var type_val = location.search.split('type=')[1].split('&')[0];
+            $('#area_title').html(data[type_val-1].catalog);  
+        }
+    });
+
 
             var page_num=1+Math.floor(article_array.length/5);
             for (var i = 1; i <= page_num; i++) {
-                page = $('<a>').addClass('point'+i).attr("href",'inner_5.php?page='+i).text(i);
+                page = $('<a>').addClass('point'+i).attr("href",'news.php?type='+type_id+'&page='+i).text(i);
                 $('.page_ctrl').append(page);
             }
             $('.point'+this_page ).addClass('this_page');
@@ -149,7 +154,7 @@ var article_id = "";
                 var time  = $('<p>').addClass('list_time').text(article_array[i].created_date.split(" ")[0]),
                     title = $('<p>').addClass('list_title').text(article_array[i].title),
                     nevin = $('<div>').addClass('list_cont').html(article_array[i].content),
-                    link  = $('<a>').attr("href",'inner_5.php?article_id='+article_array[i].id).append(time,title,nevin), 
+                    link  = $('<a>').attr("href",'news.php?type='+type_id+'&article_id='+article_array[i].id).append(time,title,nevin), 
                     work  = $('<div>').addClass('list_one').append(link);
 
                 $('#inner4_area_2').append(work);

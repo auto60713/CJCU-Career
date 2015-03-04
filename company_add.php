@@ -3,9 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>長大職涯網-廠商註冊</title>
-
-<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+<script src="js/jquery.js"></script>
 <script src="lib/jquery.validate.js"></script>
 <link rel="stylesheet" type="text/css" href="css/main.css">
 <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet">

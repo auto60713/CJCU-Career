@@ -33,25 +33,59 @@
 
 </style>
 
-<ul class="div-align">
+<ul class="div-align" id="menu_bar">
+    <!--
     <li><a href="index.php">首頁</a></li>
-    <li><a href="inner_2.php">焦點新聞</a></li>
-    <li><a href="inner_3.php">工作列表</a></li>
-    <li><a href="inner_4.php">校內新聞</a></li>
-    <li><a href="inner_5.php">職場高手</a></li>
-    <li><a href="inner_6.php">職場動態</a></li>
-    <li><a href="inner_7.php">職場萬花筒</a></li>
+    <li><a href="work_page.php">工作列表</a></li>
     <li><a href="http://www.career.com.tw/exam/cjcu/online_exam_login.asp">CPAS測驗</a></li>
     <li><a href="cjcu_career/cc/index.php">校友平台</a></li>
+    -->
 </ul>
 
 <script type="text/javascript">
 
-    //此頁面名稱
-    var html_name = location.pathname.split('/').slice(-1)[0];
+    //後端所有文章分類
+    $.ajax({
+        type: 'POST',
+        url: 'cjcu_career/cc/index.php/catalog/index',
+        data:{},
+        async: false,
+        success: function (data) { 
 
-    //改變菜單的型態
-    $( "a[href='"+html_name+"']" ).parent("li").addClass( "this_html" );
-    $( "a[href='"+html_name+"']" ).attr("href","#");
+            $( "#menu_bar" ).append($('<li>').append($('<a>').attr('href','index.php').text("首頁")));
+            $( "#menu_bar" ).append($('<li>').append($('<a>').attr('href','work_page.php').text("工作列表")));
+
+
+            if(data!=null||data!="false") var data = JSON.parse(data);
+            else var data = 0;
+            
+            for(var i=0;i<data.length;i++){
+
+                var link = $('<a>').attr('href','news.php?type='+data[i].id).text(data[i].catalog),
+                    li   = $('<li>').append(link);
+                    $( "#menu_bar" ).append(li);
+            }
+
+            $( "#menu_bar" ).append($('<li>').append($('<a>').attr('href','http://www.career.com.tw/exam/cjcu/online_exam_login.asp').text("CPAS測驗")));
+            $( "#menu_bar" ).append($('<li>').append($('<a>').attr('href','cjcu_career/cc/index.php').text("校友平台")));
+
+        }
+    });
+
+    //分析網頁名稱
+if(location.pathname.indexOf("index.php") == -1){
+
+    if(location.pathname.indexOf("news.php") == -1){
+        naaaame = location.pathname.split("cjcuweb/")[1].split('?')[0];
+    }
+    else{
+
+    var type_val = location.search.split('type=')[1].split('&')[0];
+        naaaame = "news.php?type="+type_val;
+    }
+    $('#menu_bar a[href*="'+naaaame+'"]').parent("li").addClass( "this_html" );
+    $('#menu_bar a[href*="'+naaaame+'"]').attr("href","#");
+}
+
 
 </script>

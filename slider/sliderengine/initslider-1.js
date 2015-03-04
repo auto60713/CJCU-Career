@@ -7,9 +7,9 @@ jQuery(document).ready(function(){
           url: 'cjcu_career/cc/index.php/news',
           data:{},
           success: function (data) { 
-            article_array = JSON.parse(data);
-          }
-        });
+            
+            if(data!=null||data!="false") var article_array = JSON.parse(data);
+            else var article_array = 0;
 
             for (var i = 0; i < article_array.length; i++) { 
           
@@ -25,6 +25,10 @@ jQuery(document).ready(function(){
                 $('.amazingslider-slides').append(li);
                 $('.amazingslider-thumbnails').append(li2);
             }
+          }
+        });
+
+            
 
 
     var scripts = document.getElementsByTagName("script");

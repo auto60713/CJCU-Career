@@ -8,9 +8,8 @@
 
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 	<link rel="stylesheet" type="text/css" href="css/home.css">
-	<link href="font-awesome/css/font-awesome.min.css" rel="stylesheet">
-	<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-	<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="font-awesome/css/font-awesome.css">
+  <script src="js/jquery.js"></script>
 	<script>
 	$(function(){ 	
 
@@ -48,10 +47,10 @@
     <!-- 快速搜尋 -->
     <div class="rush-search">
         <a href="?" class="<?php if(count($_GET)==0) echo "rush-searching"; ?>">最新工作</a>
-        <a href="inner_3.php?mode=search&io=1" class="<?php if(isset($_GET['io']))if($_GET['io']=='1') echo "rush-searching"; ?>">校內工作</a>
-        <a href="inner_3.php?mode=search&prop=2" class="<?php if(isset($_GET['prop']))if($_GET['prop']=='2') echo "rush-searching"; ?>">正職</a>
-        <a href="inner_3.php?mode=search&prop=1" class="<?php if(isset($_GET['prop']))if($_GET['prop']=='1') echo "rush-searching"; ?>">工讀</a>  
-        <a href="inner_3.php?mode=search&prop=3" class="<?php if(isset($_GET['prop']))if($_GET['prop']=='3') echo "rush-searching"; ?>">實習</a>      
+        <a href="work_page.php?mode=search&io=1" class="<?php if(isset($_GET['io']))if($_GET['io']=='1') echo "rush-searching"; ?>">校內工作</a>
+        <a href="work_page.php?mode=search&prop=2" class="<?php if(isset($_GET['prop']))if($_GET['prop']=='2') echo "rush-searching"; ?>">正職</a>
+        <a href="work_page.php?mode=search&prop=1" class="<?php if(isset($_GET['prop']))if($_GET['prop']=='1') echo "rush-searching"; ?>">工讀</a>  
+        <a href="work_page.php?mode=search&prop=3" class="<?php if(isset($_GET['prop']))if($_GET['prop']=='3') echo "rush-searching"; ?>">實習</a>      
     </div>
 
     <!-- 列表 -->

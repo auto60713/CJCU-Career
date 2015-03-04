@@ -10,9 +10,8 @@ if(!isset($_SESSION['username']) || $_SESSION['level'] != 2) { header("Location:
 	<link rel="stylesheet" type="text/css" href="css/manage.css">
 	<link rel="stylesheet" type="text/css" href="css/work_detail_edit.css">
 	<link rel="stylesheet" type="text/css" href="css/company_worK_apply_list.css">
-	<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
-	<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-	<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="font-awesome/css/font-awesome.css">
+	<script src="js/jquery.js"></script>
 	<script src="js/jquery.hashchange.min.js"></script>
 	<script>
 	$(function(){

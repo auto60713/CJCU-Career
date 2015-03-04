@@ -6,9 +6,8 @@
 	<title>長大職涯網</title>
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 	<link rel="stylesheet" type="text/css" href="css/home.css">
-	<link href="font-awesome/css/font-awesome.min.css" rel="stylesheet">
-	<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-	<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="font-awesome/css/font-awesome.css">
+	<script src="js/jquery.js"></script>
 	<script>
 	$(function(){ 	
 
@@ -75,21 +74,21 @@
 
     <!-- 快速搜尋 -->
 	<div class="rush-search">
-		<a href="inner_3.php" class="<?php if(count($_GET)==0) echo "rush-searching"; ?>">最新工作</a>
-		<a href="inner_3.php?mode=search&io=1" class="<?php if(isset($_GET['io']))if($_GET['io']=='1') echo "rush-searching"; ?>">校內工作</a>
-		<a href="inner_3.php?mode=search&prop=2" class="<?php if(isset($_GET['prop']))if($_GET['prop']=='2') echo "rush-searching"; ?>">正職</a>
-		<a href="inner_3.php?mode=search&prop=1" class="<?php if(isset($_GET['prop']))if($_GET['prop']=='1') echo "rush-searching"; ?>">工讀</a>	
-		<a href="inner_3.php?mode=search&prop=3" class="<?php if(isset($_GET['prop']))if($_GET['prop']=='3') echo "rush-searching"; ?>">實習</a>		
+		<a href="work_page.php" class="<?php if(count($_GET)==0) echo "rush-searching"; ?>">最新工作</a>
+		<a href="work_page.php?mode=search&io=1" class="<?php if(isset($_GET['io']))if($_GET['io']=='1') echo "rush-searching"; ?>">校內工作</a>
+		<a href="work_page.php?mode=search&prop=2" class="<?php if(isset($_GET['prop']))if($_GET['prop']=='2') echo "rush-searching"; ?>">正職</a>
+		<a href="work_page.php?mode=search&prop=1" class="<?php if(isset($_GET['prop']))if($_GET['prop']=='1') echo "rush-searching"; ?>">工讀</a>	
+		<a href="work_page.php?mode=search&prop=3" class="<?php if(isset($_GET['prop']))if($_GET['prop']=='3') echo "rush-searching"; ?>">實習</a>		
 	</div>
 
 	<!-- 列表 -->
 	<div id="home-work-list-box"></div>
-	<a class="more-link" href="inner_3.php">更多..</a>
+	<a class="more-link" href="work_page.php">更多..</a>
 </div>
 
 
 <!-- 校內新聞 -->
-<div id="area2_2" class="area_box"><h1 id="area_title">校內新聞</h1>
+<div id="area2_2" class="area_box"><h1 id="area_title">職場新聞</h1>
 	<a href="http://www.pop.com.tw/prnc/epaper/main.php"><p class="link">長榮電子報</p></a>
     
 		<!-- 載入資料 4篇-->
@@ -216,7 +215,8 @@
 		  url: 'cjcu_career/cc/index.php/news/lists/1',
 		  data:{},
 		  success: function (data) { 
-            var article_array = JSON.parse(data);
+            if(data!=null||data!="false") var article_array = JSON.parse(data);
+            else var article_array = 0;
 
             for (var i = 0; i < article_array.length; i++) { if (i==3) break;
           
@@ -240,7 +240,8 @@
 		  url: 'cjcu_career/cc/index.php/news/lists/2',
 		  data:{},
 		  success: function (data) { 
-            var article_array = JSON.parse(data);
+            if(data!=null||data!="false") var article_array = JSON.parse(data);
+            else var article_array = 0;
 
             $('.a3-1').attr("src","cjcu_career/cc/product_img/"+article_array[0].pic);
 		  	$('.master-title').text(article_array[0].title);  
@@ -254,7 +255,8 @@
 		  url: 'cjcu_career/cc/index.php/news/lists/3',
 		  data:{},
 		  success: function (data) { 
-            var article_array = JSON.parse(data);
+            if(data!=null||data!="false") var article_array = JSON.parse(data);
+            else var article_array = 0;
 
             $('.a3-2').attr("src","cjcu_career/cc/product_img/"+article_array[0].pic);
 
@@ -273,7 +275,8 @@
 		  url: 'cjcu_career/cc/index.php/news/lists/4',
 		  data:{},
 		  success: function (data) { 
-            var article_array = JSON.parse(data);
+            if(data!=null||data!="false") var article_array = JSON.parse(data);
+            else var article_array = 0;
 
             $('.a3-3').attr("src","cjcu_career/cc/product_img/"+article_array[0].pic);
 

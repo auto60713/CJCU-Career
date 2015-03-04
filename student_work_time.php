@@ -7,7 +7,7 @@ else if($_GET['workid']==null) { echo "錯誤的操作!"; exit; }
 <!doctype html>
 <html>
 <head>
-    <title>工讀單</title>
+    <title></title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <script>
     window.jQuery || document.write('<script src="http://code.jquery.com/jquery-1.11.0.min.js"><\/script>')
@@ -45,6 +45,9 @@ else if($_GET['workid']==null) { echo "錯誤的操作!"; exit; }
 div.ui-datepicker,.ui-timepicker-wrapper{
  font-size:10px;
 }
+.total-hour{
+    margin-right: 30px;
+}
 </style>
 <body>
     <h5 id="loading">資料載入中請稍後...</h5>
@@ -58,7 +61,7 @@ div.ui-datepicker,.ui-timepicker-wrapper{
             </tr>
             <tr>
             	<td>工作名稱</td>    <td colspan="2" class="input" id="list_name"></td>
-            	<td>服務年</td>   <td colspan="2" class="input" id="list_time"></td>
+            	<td>服務學年</td>   <td colspan="2" class="input" id="list_time"></td>
             </tr>
 
             <tr class="header">
@@ -69,13 +72,18 @@ div.ui-datepicker,.ui-timepicker-wrapper{
 
                 <input type="hidden" name="work_id" value="<?php echo $_GET['workid']; ?>">
                 <td><input type="text" val="" name="work_date" id="work_date" placeholder="選擇日期"/></td>
-                <td><input type="text" val="" name="work_day" id="work_day" placeholder="" disabled="disabled"/></td>
+                <td><input type="text" val="" name="work_day" id="work_day" placeholder="自動產生"/></td>
                 <td><input type="text" val="" name="work_time" id="work_time" placeholder="選擇時間"/></td>
     <td colspan="2"><input type="text" val="" name="work_matter" placeholder="請輸入"/></td>
                 <td><input type="text" val="" name="work_hour" placeholder="0"/></td>
 
             </tr>
         </table>
+
+        <div>
+        <span class="total-hour">總時數：</span> <span class="total-pay">總時薪</span>
+        </div><br>
+
     	<input type="submit" name="button" value="新增一筆紀錄" />　　
         <input type="button" name="button" id="view" value="預覽">
         <input type="button" name="button" id="back" value="上一頁">
@@ -135,7 +143,7 @@ $(function(){
 
     var list_time = parseInt(work_detail_array['start_date'].split("-")[0])-1911;
     $('#stu_class').text(student_profile_array['dm_name']+student_profile_array['sd_grade']+student_profile_array['cla_name']);
-    $('#stu_name').text(student_profile_array['sd_name']);
+    $('#stu_name').text(student_profile_array['sd_name']);$('title').text(student_profile_array['sd_name']+'的工讀單');
 	$('#stu_no').text(student_profile_array['sd_no']);
         
     $('#list_name').text(work_detail_array['name']);
@@ -147,7 +155,7 @@ $(function(){
         'timeFormat': 'H:i',
         'step': 60,
         'minTime': '6:00',
-        'maxTime': '23:00',
+        'maxTime': '21:00',
     });
     
 
@@ -157,13 +165,25 @@ $(function(){
         work_day = $('<td>').text(work_time_array[i]['day']),
         work_time = $('<td>').text(work_time_array[i]['time']),
         work_matter = $('<td>').text(work_time_array[i]['matter']).attr("colspan","2"),
-        work_hour = $('<td>').text(work_time_array[i]['hour']),
+        work_hour = $('<td>').text(work_time_array[i]['hour']).addClass('work-hour'),
         delet_btn = $('<button>').attr({type:"button",name:"delet_btn",value:work_time_array[i]['no']}).text("刪除"),
         delet = $('<td>').addClass('delet-tb').append(delet_btn),
         tr = $('<tr>').addClass('detail').append(work_date,work_day,work_time,work_matter,work_hour,delet);
 
         $(tr).insertBefore( '.key-in' );
     }
+
+
+    var total_hour = 0,now_hour_pay = 120;
+    for(i=0;i<$( ".work-hour" ).length;i++){
+
+        total_hour += parseInt($( ".work-hour:eq("+i+")" ).text());
+    }
+    $( ".total-hour" ).append(total_hour+'小時'); 
+    $( ".total-pay" ).append('('+now_hour_pay+'/hr)：'+total_hour*now_hour_pay+'新台幣');
+
+
+
 
     $( "#view" ).click(function() {
         window.open("student_work_time.php?studid="+<?php echo "\"".$_GET['studid']."\"" ?>+"&workid="+<?php echo $_GET['workid'];?>+"&view=1");

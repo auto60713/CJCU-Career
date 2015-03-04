@@ -11,8 +11,7 @@ if (!file_exists($filename)) $filename = 'img_company/default.png';
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 	<link rel="stylesheet" type="text/css" href="css/manage.css">
 	<link rel="stylesheet" type="text/css" href="css/profile.css">
-	<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-	<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+	<script src="js/jquery.js"></script>
 	<script><?php include_once("js_detail.php");	echo_company_profile($_GET['companyid']); 	?></script>
 	<script><?php include_once('js_work_list.php'); echo_pass_work_array($_GET['companyid']);  ?></script>
 	<script> 
