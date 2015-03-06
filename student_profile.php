@@ -16,7 +16,8 @@ if($_SESSION['level'] == $level_student){
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 	<link rel="stylesheet" type="text/css" href="css/manage.css">
 	<link rel="stylesheet" type="text/css" href="css/profile.css">
-	<script src="js/jquery.js"></script>
+	<script src="js/jquery-min.js"></script>
+    <script src="js/jquery-migrate-min.js"></script>
 	<script> 
 	$(function(){
 

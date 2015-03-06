@@ -60,7 +60,7 @@ $usr = $_SESSION['username'];
 		
 
 		var ajax;
-		getMsg_longpolling();
+		//getMsg_longpolling();
 		
 		//use long polling to get new msg every 3 sec
 		function getMsg_longpolling(){

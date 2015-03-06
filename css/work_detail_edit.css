@@ -406,12 +406,7 @@
 /* work_detail_edit2 特殊動作按鈕 */
 .work-divbtn{
     font-size:16px;
-    padding: 5px 10px;
-    background-color: #991133;
-    color: #FFFFFF;
 }
 .work-divbtn:hover{
 	cursor: pointer;
-	background-color: #D21746;
-	color: #FFFFFF;
 }

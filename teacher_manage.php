@@ -11,7 +11,8 @@ if(!isset($_SESSION['username']) || $_SESSION['level'] != 2) { header("Location:
 	<link rel="stylesheet" type="text/css" href="css/work_detail_edit.css">
 	<link rel="stylesheet" type="text/css" href="css/company_worK_apply_list.css">
 	<link rel="stylesheet" type="text/css" href="font-awesome/css/font-awesome.css">
-	<script src="js/jquery.js"></script>
+	<script src="js/jquery-min.js"></script>
+    <script src="js/jquery-migrate-min.js"></script>
 	<script src="js/jquery.hashchange.min.js"></script>
 	<script>
 	$(function(){

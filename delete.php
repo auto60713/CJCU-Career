@@ -48,11 +48,11 @@ include("sqlsrv_connect.php");
 	$stmt = sqlsrv_query($conn, $sql, array($workid));
 	$row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC );
 
-	if($_SESSION['username'] == $row[company_id]){
+	if($_SESSION['username'] == $row['company_id']){
 
         //廠商留紀錄
         $sql = "INSERT INTO msg(recv,mcontent,icon) values(?,?,?)";
-        $para = array($row[company_id],'您已刪除工作「<b>'.$workname.'</b>」','fa fa-times');
+        $para = array($row['company_id'],'您已刪除工作「<b>'.$workname.'</b>」','fa fa-times');
         sqlsrv_query($conn, $sql, $para);
 
         //刪除
@@ -68,7 +68,7 @@ include("sqlsrv_connect.php");
             if($stmt) while( $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC) ){
                 //通知那些應徵者
                 $sql3 = "INSERT INTO msg(recv,mcontent,icon) values(?,?,?)";
-                $para = array($row[user_id],'你所應徵的工作「<b>'.$workname.'</b>」已被原廠商刪除','fa fa-times');
+                $para = array($row['user_id'],'你所應徵的工作「<b>'.$workname.'</b>」已被原廠商刪除','fa fa-times');
                 sqlsrv_query($conn, $sql3, $para);
                
             }

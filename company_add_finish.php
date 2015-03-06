@@ -1,5 +1,10 @@
 <?php session_start(); ?>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<html>
+<head>
+    <title>廠商註冊</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</head>
+<body>
 <?php
 
 include("sqlsrv_connect.php");
@@ -32,9 +37,9 @@ else $introduction = "";
 $doc = "";
 
 
-if(empty($id)||empty($pw)||empty($ch_name)||empty($phone)||empty($email)||empty($boss_name)||empty($contact)||empty($address)){
-	echo '資料有缺失!';
-    echo '<meta http-equiv=REFRESH CONTENT=1;url=add_company.php>';
+if(empty($id)||empty($pw)||empty($ch_name)||empty($phone)||empty($boss_name)||empty($contact)||empty($address)){
+    echo '<p>資料有缺失!</p>';
+    echo '<br><a href="company_add.php">確認</a>';
 }
 else{
 
@@ -62,17 +67,21 @@ else{
         $_SESSION['username'] = $id;
         $_SESSION['level'] = 4;
 
-        echo '註冊成功! 登入中...';
-		echo '<meta http-equiv=REFRESH CONTENT=1;url=index.php>';
+        echo '<script>';
+        echo 'alert("註冊成功! 歡迎您的使用! 自動登入中...");';
+        echo 'document.location.href="index.php";';
+        echo '</script>';
 
         //寄信給管理員
         include_once("send_email.php"); 
         send_email("career@mail.cjcu.edu.tw","長大職涯網有新的廠商註冊「".$ch_name."」需要審核","<h1><a href='http://210.70.167.98/cjcuweb/staff_manage.php#staff-audit0'>前往查看</a></h1>");
     
         }
-	
-	}
+    
+    }
 
 }
 
 ?>
+</body>
+</html>

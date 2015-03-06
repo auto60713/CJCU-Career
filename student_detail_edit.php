@@ -10,8 +10,6 @@ if(trim($_SESSION['username']) != $_GET['userid']) {
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-	<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 </head>
 <style type="text/css">
 #detail_column{

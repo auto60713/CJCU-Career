@@ -7,8 +7,9 @@
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 	<link rel="stylesheet" type="text/css" href="css/home.css">
 	<link href="font-awesome/css/font-awesome.min.css" rel="stylesheet">
-	<script type="text/javascript" src="js/jquery.js"></script>
-	<script type="text/javascript" src="js/full_height.js"></script>
+	<script src="js/jquery-min.js"></script>
+    <script src="js/jquery-migrate-min.js"></script>
+	<script src="js/full_height.js"></script>
 	<style type="text/css">
 	    .fix-position{
 	    	margin-top: 5%;

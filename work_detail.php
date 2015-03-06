@@ -10,7 +10,8 @@ if(isset($_SESSION['username'])) $user_id = $_SESSION['username'];
 <head>
 	<meta charset="UTF-8">
 	<title></title>
-	<script src="js/jquery.js"></script>
+	<script src="js/jquery-min.js"></script>
+    <script src="js/jquery-migrate-min.js"></script>
 	<link href="font-awesome/css/font-awesome.css" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 	<link rel="stylesheet" type="text/css" href="css/manage.css">

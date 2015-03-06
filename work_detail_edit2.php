@@ -1,4 +1,4 @@
-<?php 
+<?php session_start();
 /*
 include_once('cjcuweb_lib.php');
 include_once('sqlsrv_connect.php');
@@ -56,7 +56,7 @@ if (preg_match("/-/i", $companyid)) $companyid = strstr($companyid,'-',true);
 	</div>
 	<!-- 工作刪除 -->
 	<div id='workedit-content-set' class="workedit-content-hide" tabtoggle='workedit2'>	
-	    <a id="divbtn-delete" class="work-divbtn">刪除工作</a>
+	    <button type="button" id="divbtn-delete" class="work-divbtn">刪除工作</button> 
 	</div>
 
 
@@ -248,7 +248,7 @@ if (preg_match("/-/i", $companyid)) $companyid = strstr($companyid,'-',true);
 		    }
 		});
         //刪除工作
-        var work_delete = $('a#divbtn-delete');
+        var work_delete = $('button#divbtn-delete');
 		work_delete.click(function(event) {
 
             //查詢該工作名字

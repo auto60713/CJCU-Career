@@ -7,7 +7,8 @@
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 	<link rel="stylesheet" type="text/css" href="css/home.css">
 	<link rel="stylesheet" type="text/css" href="font-awesome/css/font-awesome.css">
-	<script src="js/jquery.js"></script>
+	<script src="js/jquery-min.js"></script>
+    <script src="js/jquery-migrate-min.js"></script>
 	<script>
 	$(function(){ 	
 

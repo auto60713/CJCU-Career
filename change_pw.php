@@ -7,7 +7,8 @@
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 	<link rel="stylesheet" type="text/css" href="css/home.css">
 	<link href="font-awesome/css/font-awesome.min.css" rel="stylesheet">
-	<script src="js/jquery.js"></script>
+	<script src="js/jquery-min.js"></script>
+    <script src="js/jquery-migrate-min.js"></script>
 	<script src="lib/jquery.validate.js"></script>
 	<style type="text/css">
 	    .fix-position{

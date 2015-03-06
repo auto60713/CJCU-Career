@@ -1,10 +1,18 @@
-<?php  session_start(); 
+<?php  session_start(); ?>
+<html>
+<head>
+    <title>長大職涯網</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<body>
+
+<?php
 header("Content-Type:text/html; charset=utf-8");
 
 include_once("cjcuweb_lib.php");
 // 立刻驗證登入身分，防止駭客繞過登入
 if(isset ($_SESSION['username'])){
-	$company_id = $_SESSION['username'];
+    $company_id = $_SESSION['username'];
 }
 else{ //重定向瀏覽器 且 後續代碼不會被執行 
 header("Location: index.php");
@@ -58,25 +66,31 @@ else $detail = "";
 if( $_POST['instead_com']!=0 ) { $company_id = trim($_POST['instead_com']); $publisher = 1; }
 
 if( !isset($name) || !isset($work_type) || !isset($work_prop) || !isset($isoutside) || !isset($zone_id) || !isset($address) || !isset($recruitment_no) || $zone_id==0){
-	echo "Enter the details are incorrect!!";
-	exit;
+    echo "Enter the details are incorrect!!";
+    exit;
 
 }else{
 
     include("sqlsrv_connect.php");
 
-	$sql = "INSERT INTO work(name,publisher,company_id,work_prop_id,match_dep,work_type_id,start_date,end_date,is_outside,zone_id,address,phone,pay,[recruitment _no],detail,[check]) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+    $sql = "INSERT INTO work(name,publisher,company_id,work_prop_id,match_dep,work_type_id,start_date,end_date,is_outside,zone_id,address,phone,pay,[recruitment _no],detail,[check]) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
     $params = array($name,$publisher,$company_id,$work_prop,$match_dep,$work_type,$bg_date,$ed_date,$isoutside,$zone_id,$address,$phone,$pay,$recruitment_no,$detail,$check);
-	$result = sqlsrv_query($conn, $sql, $params);
-	if($result){
-		echo '新增成功! 跳轉中，請稍候...'.$_POST['instead_com'];
-		echo '<meta http-equiv=REFRESH CONTENT=1;url='.$href.'_manage.php#'.$href.'-work>';
+    $result = sqlsrv_query($conn, $sql, $params);
+    if($result){
 
+        echo '<script>alert("工作新增成功! 請等待校方審核.."); document.location.href="'.$href.'_manage.php#'.$href.'-work";</script>';
+
+    if($_SESSION['level'] == 4){
         //寄信給管理員
         include_once("send_email.php"); 
         send_email("career@mail.cjcu.edu.tw","長大職涯網有新的工作「".$name."」需要審核","<h1><a href='http://210.70.167.98/cjcuweb/staff_manage.php#staff-audit0'>前往查看</a></h1>");
-    
-	}
-	else die(print_r( sqlsrv_errors(), true));
+    }
+    }
+    else die(print_r( sqlsrv_errors(), true));
 }
 ?>
+
+
+
+</body>
+</html>
