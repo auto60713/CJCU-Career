@@ -74,6 +74,7 @@ if(isset($_SESSION['username'])) $user_id = $_SESSION['username'];
 		$('#type').text(work_detail_array['typeone']+" > "+work_detail_array['typetwo']+" > "+work_detail_array['typethree']);
 		$('#rno').text(work_detail_array['recruitment _no']);
 		$('#pay').text(work_detail_array['pay'].split("-")[0] + work_detail_array['pay'].split("-")[1]);
+		$('#recruited_date').text(work_detail_array['recruited_date'].split(" ")[0]);
 		$('#work_date').text(work_detail_array['start_date'].split(" ")[0]+" ~ "+work_detail_array['end_date'].split(" ")[0]);
 		$('#phone').text(work_detail_array['phone']);
 		$('#address').text(work_detail_array['address']);
@@ -84,8 +85,8 @@ if(isset($_SESSION['username'])) $user_id = $_SESSION['username'];
 
 	        case 0: $('#ch').text('等待審核').css('color', '#444'); break;
 		    case 1: $('#ch').text('正在招募').css('color', '#339933'); break;
-		    case 3: case 2: $('#ch').text('停止招募').css('color', '#CF6363'); break;   
-		    case 4: $('#ch').text('實習中').css('color', '#339933'); break;
+		    case 3: case 2: case 4:$('#ch').text('停止招募').css('color', '#CF6363'); break;   
+            case 5: $('#ch').text('工作已完成').css('color', '#339933'); break;
         }
 
 		<?php
@@ -126,7 +127,7 @@ if(work_detail_array['pub'] ==1){
     var pub_type_name = "關於公司",pub_type = "company";
 }
 else if(work_detail_array['pub'] ==2){
-    var pub_type_name = "關於系所",pub_type = "department";
+    var pub_type_name = "關於單位",pub_type = "department";
 }
         $('#about_work h2').text(pub_type_name);
 		$('#pub_name').append($('<a>').attr({'target':'_blank','href':pub_type+'-'+publisher_detail_array['id']}).text(publisher_detail_array['name']));
@@ -163,10 +164,9 @@ else if(work_detail_array['pub'] ==2){
 <p><span class="profile-span-title">待遇</span><span id="pay"></span></p>
 <br><hr><br>
 
-<h3>工作時間</h3>
-<p>
-	<span class="profile-span-title">日期</span><span id="work_date"></span>
-</p>
+<h3>日期</h3>
+<p><span class="profile-span-title">結束應徵</span><span id="recruited_date"></span></p>
+<p><span class="profile-span-title">工作時間</span><span id="work_date"></span></p>
 <br><hr><br>
 
 <h3>聯絡方式</h3>
@@ -205,7 +205,7 @@ else if(work_detail_array['pub'] ==2){
 
 </div>
 
-<div class="profile-boxinner" id="other_work"><h2>公司職缺</h2></div>
+<div class="profile-boxinner" id="other_work"><h2>其他職缺</h2></div>
 
 </div>
 

@@ -12,6 +12,10 @@ switch($_POST['mode']){
        echo_work_name($_POST['workid']);
   break;
 
+  case 'work-prop'://查詢工作的分類
+       echo_work_prop($_POST['workid']);
+  break;
+
   case 'com-msg'://查詢公司的聯絡方式
         echo_company_msg($_POST['id']);
   break;
@@ -55,6 +59,20 @@ function echo_work_name($workid){
 
   echo $row['name'];
 }
+
+function echo_work_prop($workid){
+  include_once("sqlsrv_connect.php");
+
+
+  $sql = "select work_prop_id from work where id =?"; 
+  $stmt = sqlsrv_query($conn, $sql, array($workid));
+
+  if($stmt) $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC);
+  else{echo 0;}
+
+  echo $row['work_prop_id'];
+}
+
 
 function echo_company_name($comid){
   include_once("sqlsrv_connect.php");

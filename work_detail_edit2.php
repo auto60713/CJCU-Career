@@ -32,8 +32,9 @@ if (preg_match("/-/i", $companyid)) $companyid = strstr($companyid,'-',true);
 <body>
 	
 <div class="workedit-tabbox">
+	<div id="page_view" class="sub-tab"><i class="fa fa-desktop tab-img"></i> 預覽</div>
 	<div id="page-edit" class="sub-tab tab-active" tabtoggle='workedit1'><i class="fa fa-pencil tab-img"></i> 編輯</div>
-	<div id="page-apply" class="sub-tab" tabtoggle='workedit1'><i class="fa fa-user tab-img"></i> 審核</div>
+	<div id="page-apply" class="sub-tab" tabtoggle='workedit1'><i class="fa fa-user tab-img"></i> 應徵</div>
 	<div id="page-start" class="sub-tab" tabtoggle='workedit1'><i class="fa fa-bullhorn tab-img"></i> 執行</div>
 	<div id="page-audit" class="sub-tab" tabtoggle='workedit1'><i class="fa fa-check tab-img"></i> 狀態</div>
 	<div id="page-set" class="sub-tab" tabtoggle='workedit1'><i class="fa fa-cog tab-img"></i> 刪除</div>
@@ -110,8 +111,9 @@ if (preg_match("/-/i", $companyid)) $companyid = strstr($companyid,'-',true);
             var work_divbtn_array = JSON.parse(data);
             //幾個array:幾個按鈕 , divbtn_id:按鈕的ID , divbtn_text:按鈕的內容
             for(var i=0;i<work_divbtn_array.length;i++){
-            var work_divbtn = $('<a>').attr('id',work_divbtn_array[i].divbtn_id).addClass('work-divbtn').text(work_divbtn_array[i].divbtn_text);
-		  	$('#workedit-content-start').append(work_divbtn,$('<br>'));  
+            var work_divbtn = $('<button>').attr('id',work_divbtn_array[i].divbtn_id).addClass('work-divbtn').text(work_divbtn_array[i].divbtn_text),
+		  	    divbtn_explain = $('<span>').addClass('divbtn-explain').text(work_divbtn_array[i].divbtn_explain);
+		  	$('#workedit-content-start').append(work_divbtn,divbtn_explain,$('<br>'));  
 		    }
 		  }
 		});
@@ -139,7 +141,7 @@ if (preg_match("/-/i", $companyid)) $companyid = strstr($companyid,'-',true);
 				break;
 			case 5:
 				icontxt ='fa fa-check';
-				statustxt = ' 工作結束';
+				statustxt = ' 結束應徵(完成實習)';
 				color = '#339933';
 				break;
 		}
@@ -213,16 +215,19 @@ if (preg_match("/-/i", $companyid)) $companyid = strstr($companyid,'-',true);
 		});
 		tabgroup[<?php echo (int)$_POST['page']; ?>].click();
 
+        $( "#page_view" ).click(function() {
+            window.open("work-"+<?php echo (int)$_POST['workid']; ?>);
+        });
 
-
-        //開始實習
-		$(document).on( "click",'a#divbtn-start', function() {
-		    if (confirm ("要結束應徵開始實習嗎?")){
+        //開始工作
+		$(document).on( "click",'button#divbtn-start', function() {
+		var btn_text = $('button#divbtn-start').text();
+		    if (confirm ("要停止應徵並"+btn_text+"嗎?")){
 
 		    	$.ajax({
 			     	type:"POST",
 			     	url: "ajax_work_edit.php",
-			     	data:{mode:1,workid:<?php echo (int)$_POST['workid']; ?>},
+			     	data:{mode:1,workid:<?php echo (int)$_POST['workid']; ?>,check:4},
                     success: function (data) { 
           
                     	$('#workedit-content-start').text(data);
@@ -230,16 +235,16 @@ if (preg_match("/-/i", $companyid)) $companyid = strstr($companyid,'-',true);
 			    });
 		    }
 		});
-		//完成實習(結束應徵)
-		$(document).on( "click",'a#divbtn-end', function() {
-		var btn_text = $('a#divbtn-end').text();
+		//完成工作
+		$(document).on( "click",'button#divbtn-end', function() {
+		    btn_text = $('button#divbtn-end').text();
 
 		    if (confirm ("確定要"+btn_text+"?")){
 
 		    	$.ajax({
 			     	type:"POST",
 			     	url: "ajax_work_edit.php",
-			     	data:{mode:2,workid:<?php echo (int)$_POST['workid']; ?>},
+			     	data:{mode:1,workid:<?php echo (int)$_POST['workid']; ?>,check:5},
                     success: function (data) { 
           
                     	$('#workedit-content-start').text(data);

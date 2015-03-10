@@ -93,7 +93,16 @@ form[id='detail'] input[type='text']{
 	background-color: #EEE;
 }
 
-
+.audit-exit{
+	position: absolute;
+    left: 67%;
+    margin-top: 5px; 
+    color: #888;
+}
+.audit-exit:hover{
+	cursor: pointer;
+	color: #222;
+}
 
 .btn-copy-work{
 	padding-left: 10px;
@@ -161,7 +170,11 @@ form[id='detail'] input[type='text']{
 
 }
 
-
+.divbtn-explain{
+	color: #9797AA;
+	font-size: 13px;
+	margin-left: 10px;
+}
 
 
 /* 學生manage */

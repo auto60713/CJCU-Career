@@ -15,12 +15,8 @@ switch($_POST['mode']){
       remove_page($_POST['workid']);
   break;
 
-  case 1://開始實習
-      work_state_change($_POST['workid'],4);
-  break;
-
-  case 2://完成實習,結束應徵
-      work_state_change($_POST['workid'],5);
+  case 1://改變工作的狀態(結束應徵)
+      work_state_change($_POST['workid'],$_POST['check']);
   break;
 
   case 3://回傳可執行的動作
@@ -90,29 +86,25 @@ function echo_work_divbtn_array($workid){
   if($stmt) $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC);
   else die(print_r( sqlsrv_errors(), true));
 
- //幾個array:幾個按鈕 , divbtn_id:按鈕的ID , divbtn_text:按鈕的內容
-switch($row['work_prop_id']){
+  //幾個array:幾個按鈕 , divbtn_id:按鈕的ID , divbtn_text:按鈕的內容 , divbtn_explain:按鈕的說明
 
-  case 3:  //實習
+  switch($row['work_prop_id']){
 
-          switch($row['check']){
+      case 3:  $work_prop = "實習";   
+      break;
+      default: $work_prop = "工作";
+  }
+  switch($row['check']){
 
-          case 1:  //應徵中
-              echo json_encode(array(array('divbtn_id'=>'divbtn-start','divbtn_text'=>'開始實習')));
-          break;
+    case 1:  //應徵中 > 工作中
+        echo json_encode(array(array('divbtn_id'=>'divbtn-start','divbtn_text'=>'開始'.$work_prop,'divbtn_explain'=>'接下來的階段您可以管理應徵者的工作日誌或直接完成工作')));
+    break;
+    case 4:  //工作中 > 完成工作
+        echo json_encode(array(array('divbtn_id'=>'divbtn-end','divbtn_text'=>'完成'.$work_prop,'divbtn_explain'=>'')));
+    break;
 
-          case 4:  //實習中
-              echo json_encode(array(array('divbtn_id'=>'divbtn-end','divbtn_text'=>'完成實習')));
-          break;
-
-          default: echo json_encode(0);
-          }
-  break;
-
-  default: //工讀
-      echo json_encode(array(array('divbtn_id'=>'divbtn-end','divbtn_text'=>'結束應徵')));
-
-}
+    default: echo json_encode(0);
+  }
 
 }
 
@@ -129,7 +121,17 @@ function work_state_change($workid,$check){
     switch($check){
 
           case 4: 
-              $text = '結束應徵並開始實習!';
+             
+              switch($row['work_prop_id']){
+
+              case 3:  //實習
+                  $text = '結束應徵並開始實習!';
+              break;
+                      
+              default:
+                  $text = '結束應徵並實行工讀!';
+              }
+
           break;
 
           case 5:  

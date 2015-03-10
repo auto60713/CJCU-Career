@@ -219,7 +219,7 @@
 
 .staff-apply-box{
 	padding: 20px;
-	margin-top: 5%;
+	margin-top: 10%;
 	text-align: left;
 	display: inline-block;
 	width: 30%;
@@ -227,14 +227,8 @@
 	background-color: rgba(255,255,255,1);
 }
 .staff-apply-box-close{
-
-	display: block;
-	position: relative;
-	z-index: 3;
-	left:95%;
-	right: 0;
-	top: -10px;
-	font-size: 30px;
+    position: relative;
+    left: 55%; 
 	color: #AAA;
 }
 .staff-apply-box-close:hover{
@@ -369,7 +363,7 @@
 	margin-bottom: 30px;
 }
 .company-audit-censored{
-	width:80px;
+
 	color: #636363;
 }
 .company-audit-msg{

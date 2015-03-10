@@ -193,15 +193,14 @@ a:hover{
 	font-size: 14px;
 }
 
+
 .login-exit{
 	float: right;
-    margin-left: 20px;
+    margin-right: 0px;
     color: #888;
 }
 .login-exit:hover{
 	cursor: pointer;
 	color: #222;
 }
-
-
 

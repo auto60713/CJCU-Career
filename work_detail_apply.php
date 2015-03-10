@@ -39,7 +39,10 @@ if (preg_match("/-/i", $companyid)) $companyid = strstr($companyid,'-',true);
     	var body = $('#company-work-list-container');
 
     	// 如果有人應徵，清空列表區域，準備顯示
-    	if(work_apply_list_array.length>0) body.html('');
+    	if(work_apply_list_array.length>0) {
+    		body.html('');
+    		if(work_apply_list_array[0]['check'] == 5) $('.what-is-list').text("工讀學生列表");
+        }
 
     	for(var i=0;i<work_apply_list_array.length;i++){
 
@@ -48,12 +51,12 @@ if (preg_match("/-/i", $companyid)) $companyid = strstr($companyid,'-',true);
     			tita = $('<a>').attr({'target':'_blank','href':'student-'+work_apply_list_array[i]['user_id']}).text(work_apply_list_array[i]['name']),
     			doca = $('<a>').attr({'target':'_blank','href':'department-'+work_apply_list_array[i]['depno']}).append(work_apply_list_array[i]['depname']),
 
-    			gear = $('<i>').addClass('fa fa-cog'),
-    			auditbtn = $('<button>').addClass('staff-audit-btn2').append(gear).append(' 審核'),
+    		
+    			auditbtn = $('<button>').addClass('staff-audit-btn2').append(' 審核'),
 
     			subbox1 = $('<div>').addClass('sub-box').append(wimg),
     			subbox2 = $('<div>').addClass('sub-box').append($('<h1>').addClass('work-tit').append(tita))
-    			.append($('<p>').addClass('work-hint').append(doca)),
+    			.append($('<p>').addClass('work-hint').append(" 就讀於 ",doca)),
     			subbox3 = $('<div>').addClass('sub-box2');
 
     			auditbtn.on('click', {arr:work_apply_list_array[i]} ,function(event) {
@@ -62,9 +65,9 @@ if (preg_match("/-/i", $companyid)) $companyid = strstr($companyid,'-',true);
 						$('.staff-apply-form').remove();
 
 						var hidden1 = $('<input>').attr({value: event.data.arr['user_id'], type:'hidden', id:'hidden_id'}),
-							icon = $('<i>').addClass('fa fa-user'),
-							tbox = $('<h1>').append(icon).append(' '+event.data.arr['user_id']).css('font-size', '28px'),
+							icon = $('<i>').addClass('fa fa-pencil-square-o'),
 							close = $('<i>').addClass('fa fa-times').addClass('staff-apply-box-close'),
+							tbox = $('<h1>').append(icon).append(' '+event.data.arr['user_id']).css('font-size', '28px').append(close),
 							span = $('<span>').text('審核說明：').css('color', '#444'),
 							t = $('<textarea>').attr({id: 'staff-audit-apply-msg',placeholder:'選填'}),
 							ok = $('<input>').attr({id: 'staff-audit-apply-ok', type: 'button',value :'通過'}).on('click', function(event) {
@@ -74,9 +77,8 @@ if (preg_match("/-/i", $companyid)) $companyid = strstr($companyid,'-',true);
 								submit_audit(false);
 							}),
 							errtext= $('<span>').attr('id', 'staff-audit-error'),
-							gbtn = $('<div>').addClass('staff-apply-gbtn').append(errtext).append(ok).append(no),
-							box = $('<div>').addClass('staff-apply-box').append(close).append(tbox).append("<hr><br>")
-							.append(span).append("<br>").append(t).append("<br>").append(gbtn).append(hidden1),
+							gbtn = $('<div>').addClass('staff-apply-gbtn').append(errtext,ok,no),
+							box = $('<div>').addClass('staff-apply-box').append(tbox,"<hr><br>",span,"<br>",t,"<br>",gbtn,hidden1),
 
 							bg = $('<div>').addClass('staff-apply-form').append(box);
 
@@ -87,6 +89,7 @@ if (preg_match("/-/i", $companyid)) $companyid = strstr($companyid,'-',true);
 				});
 
 
+                //工作各狀態要顯示的右邊區域
 				switch(work_apply_list_array[i]['check']) {
 					case 0:case 3:
 						subbox3.append(auditbtn);
@@ -98,17 +101,31 @@ if (preg_match("/-/i", $companyid)) $companyid = strstr($companyid,'-',true);
 						subbox3.append($('<div>').addClass('isnotapply').text('不錄取'));
 					break;	
 					case 4:
-					    var work_time_link = $('<a>').attr({href:"student_work_time.php?studid="+work_apply_list_array[i]['user_id'].trim()+"&workid="+work_apply_list_array[i]['work_id']+"&view=1",target:"_blank"}).text("工作日誌"),
-					        text = $('<p>').text("學生的實習分數："+work_apply_list_array[i]['score']+"分"),
-					        score = $('<input>').addClass('score').attr({type:"text",placeholder:"打分數",name:work_apply_list_array[i]['user_id'].trim()}),
-					        submit = $('<button>').attr({type:"button",name:"score_btn","no":work_apply_list_array[i]['no'],value:work_apply_list_array[i]['user_id'].trim()}).text("確定");
-						subbox3.append(work_time_link,text,score,submit);
+					$.ajax({
+		                type: 'POST',
+		                url: 'ajax_echo_name.php',
+		                async: false,
+		                data: {mode:'work-prop',workid:<?php echo (int)$_GET['workid']; ?>},
+		                success: function (data) {
+		                	if(data ==3){
+		                		var work_time_link = $('<a>').attr({href:"student_work_time.php?studid="+work_apply_list_array[i]['user_id'].trim()+"&workid="+work_apply_list_array[i]['work_id']+"&view=1",target:"_blank"}).text("工作日誌"),
+					                text = $('<p>').text("學生的實習分數："+work_apply_list_array[i]['score']+"分"),
+					                score = $('<input>').addClass('score').attr({type:"text",placeholder:"打分數",name:work_apply_list_array[i]['user_id'].trim()}),
+					                submit = $('<button>').attr({type:"button",name:"score_btn","no":work_apply_list_array[i]['no'],value:work_apply_list_array[i]['user_id'].trim()}).text("確定");
+						        subbox3.append(work_time_link,text,score,submit);
+		                	}
+		                	else if(data ==1){
+                                subbox3.append($('<a>').attr({href:"student_work_time.php?studid="+work_apply_list_array[i]['user_id'].trim()+"&workid="+work_apply_list_array[i]['work_id']+"&view=1",target:"_blank"}).text("工讀單").addClass('gondo'));
+		                	}
+
+		                }
+		            });
 					break;	
 				}	
 			var mainbox = $('<div>').addClass('work-list-box').append(subbox1).append(subbox2).append(subbox3);
 				body.append(mainbox);
     	}
-
+        
 
     	function submit_audit(boo){
 
@@ -164,7 +181,7 @@ if (preg_match("/-/i", $companyid)) $companyid = strstr($companyid,'-',true);
 <input type='text' placeholder='搜尋應徵者名稱' id='search-txt'>
 <input type="button" value="搜尋" id='search-btn'>
 </div>-->
-<h3>應徵者列表</h3>
+<h3 class="what-is-list">應徵者列表</h3>
 <div id='company-work-list-container'>
 	目前尚無人應徵！
 </div>

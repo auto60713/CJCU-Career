@@ -47,6 +47,7 @@ switch ($_SESSION['level']) {
 
 $name =  trim($_POST['name']);
 $work_type = trim($_POST['work_type_list2']);
+$recruited_date = trim($_POST['recruited_date']);
 $bg_date = trim($_POST['bg_date']);
 $ed_date = trim($_POST['ed_date']);
 if(isset($_POST['match_dep_set'])) $match_dep = trim($_POST['match_dep_set']);
@@ -73,18 +74,24 @@ if( !isset($name) || !isset($work_type) || !isset($work_prop) || !isset($isoutsi
 
     include("sqlsrv_connect.php");
 
-    $sql = "INSERT INTO work(name,publisher,company_id,work_prop_id,match_dep,work_type_id,start_date,end_date,is_outside,zone_id,address,phone,pay,[recruitment _no],detail,[check]) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-    $params = array($name,$publisher,$company_id,$work_prop,$match_dep,$work_type,$bg_date,$ed_date,$isoutside,$zone_id,$address,$phone,$pay,$recruitment_no,$detail,$check);
+    $sql = "INSERT INTO work(name,publisher,company_id,work_prop_id,match_dep,work_type_id,recruited_date,start_date,end_date,is_outside,zone_id,address,phone,pay,[recruitment _no],detail,[check]) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+    $params = array($name,$publisher,$company_id,$work_prop,$match_dep,$work_type,$recruited_date,$bg_date,$ed_date,$isoutside,$zone_id,$address,$phone,$pay,$recruitment_no,$detail,$check);
     $result = sqlsrv_query($conn, $sql, $params);
+    $echo_text = "工作新增成功!";
     if($result){
 
-        echo '<script>alert("工作新增成功! 請等待校方審核.."); document.location.href="'.$href.'_manage.php#'.$href.'-work";</script>';
-
+        //如果是公司
     if($_SESSION['level'] == 4){
         //寄信給管理員
         include_once("send_email.php"); 
         send_email("career@mail.cjcu.edu.tw","長大職涯網有新的工作「".$name."」需要審核","<h1><a href='http://210.70.167.98/cjcuweb/staff_manage.php#staff-audit0'>前往查看</a></h1>");
+    
+        $echo_text = "工作新增成功! 請等待校方審核..";
     }
+
+        echo '<script>alert("'.$echo_text.'"); document.location.href="'.$href.'_manage.php#'.$href.'-work";</script>';
+
+    
     }
     else die(print_r( sqlsrv_errors(), true));
 }

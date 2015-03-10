@@ -13,9 +13,9 @@ if(!isset($_SESSION['username']) || $_SESSION['level'] != 1) { header("Location:
 	<link rel="stylesheet" type="text/css" href="css/profile.css">
 	<link rel="stylesheet" type="text/css" href="font-awesome/css/font-awesome.css">
 	<link rel="stylesheet" href="http://code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
-	<script src="http://code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
 	<script src="js/jquery-min.js"></script>
     <script src="js/jquery-migrate-min.js"></script>
+    <script src="js/jquery-ui.js"></script>
 	<script src="js/jquery.hashchange.min.js"></script>
 	<script src="js/upload_img.js"></script>
 	<script>

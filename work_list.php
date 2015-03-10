@@ -37,11 +37,11 @@ else{echo "No permission!"; exit;
 		    			chclass="sta2 work-ch-unpass";
 		    		break;
 		    		case 4:
-		    			chtxt="實習中";
+		    			chtxt="工作中";
 		    			chclass="sta4 work-ch-pass";
 		    		break;
 		    		case 5:
-		    			chtxt="工作已結束";
+		    			chtxt="工作完成";
 		    			chclass="sta5 work-ch-pass";
 		    		break;
 		    	}
@@ -51,7 +51,7 @@ else{echo "No permission!"; exit;
 		    		profile = $('<a>').attr({'href':'work-'+work_list_array[i]['wid'],'Target':'_blank'}).text('預覽工作資料'),
 		    		tit = $('<h1>').addClass('work-tit').append(tita),
 		    		hint = $('<p>').addClass('work-hint')
-		    		.append(profile,'<br>'+ (work_list_array[i]['isout']=='0'?'校外 ':'校內 ')+ work_list_array[i]['propname'] +'<br>'+ work_list_array[i]['date']),
+		    		.append(profile,'<br>'+ (work_list_array[i]['isout']=='0'?'校外 ':'校內 ')+ work_list_array[i]['propname'] +'<br>發佈時間 '+ work_list_array[i]['date'].split(" ")[0]),
 		    		hint2 = $('<p>').append('應徵人數：'+work_list_array[i]['apply_count']+'<br>'+'通過/上限：'+ work_list_array[i]['check_count']+'/'+ work_list_array[i]['rno'] ),
 		    		
 		    		ch = $('<p>').addClass(chclass).attr('id', 'chstatus').text(chtxt),
@@ -114,8 +114,8 @@ else{echo "No permission!"; exit;
 	<option value='0' >僅顯示未審核</option>
 	<option value='1' >僅顯示應徵中</option>
 	<option value='2' >僅顯示不通過</option>
-	<option value='4' >僅顯示實習中</option>
-	<option value='5' >僅顯示已結束</option>
+	<option value='4' >僅顯示工作中</option>
+	<option value='5' >僅顯示已完成</option>
 </select>
 <input type='text' placeholder='搜尋工作名稱' id='search-txt'>
 </div>

@@ -57,8 +57,12 @@ if( !isset($name) || !isset($work_type)  || !isset($work_prop) || !isset($addres
 	$result = sqlsrv_query($conn, $sql, $params);
 
 	if($result){
+
+        if($_SESSION['level'] == 4||$_SESSION['level'] == 6) $who_page = "company";
+        else $who_page = "department";
+
 		echo '更新成功! 跳轉中，請稍候...';
-		echo '<meta http-equiv=REFRESH CONTENT=1;url=company_manage.php#work'.$workid.'-0>';
+		echo '<meta http-equiv=REFRESH CONTENT=1;url='.$who_page.'_manage.php#work'.$workid.'-0>';
 	}
 	else{
 		echo '更新失敗! 請聯絡管理員';

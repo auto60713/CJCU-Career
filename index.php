@@ -55,7 +55,7 @@
 </div>
 
 <!-- FB -->
-<div id="area1_2" class="area_box"><h1 id="area_title">職涯發展組</h1>
+<div id="area1_2" class="area_box"><h1 id="area_title">粉絲FB專區</h1>
 
 	<div id="fb-root"></div>
     <div class="fb-like-box" data-href="https://www.facebook.com/pages/%E9%95%B7%E6%A6%AE%E5%A4%A7%E5%AD%B8-%E5%AD%B8%E7%94%9F%E8%81%B7%E6%B6%AF%E7%99%BC%E5%B1%95%E6%9A%A8%E6%A0%A1%E5%8F%8B%E6%9C%8D%E5%8B%99/220146198083687" data-width="355" data-colorscheme="light" data-show-faces="true" data-header="true" data-stream="false" data-show-border="true"></div>
@@ -88,8 +88,8 @@
 </div>
 
 
-<!-- 校內新聞 -->
-<div id="area2_2" class="area_box"><h1 id="area_title">職場新聞</h1>
+<!-- 學生職涯發展最新消息 -->
+<div id="area2_2" class="area_box"><h1 id="area_title">學生職涯發展最新消息</h1>
 	<a href="http://www.pop.com.tw/prnc/epaper/main.php"><p class="link">長榮電子報</p></a>
     
 		<!-- 載入資料 4篇-->
@@ -100,9 +100,9 @@
 
 
 
-<!-- 職場高手 -->
-<div id="area3_1" class="area_box"><h1 id="area_title">職場高手</h1>
-	<a class="more-link" href="inner_5.php">更多..</a>
+<!-- 社會新鮮人專區 -->
+<div id="area3_1" class="area_box"><h1 id="area_title">社會新鮮人專區</h1>
+	<a class="more-link" href="news.php?type=1">更多..</a>
 
     <a class="area_box_link" href="">
 	    <img class="area3-img a3-1" src="">
@@ -111,9 +111,9 @@
     </a>
 </div>
 
-<!-- 職場動態 -->
-<div id="area3_2" class="area_box"><h1 id="area_title">職場動態</h1>
-	<a class="more-link" href="inner_6.php">更多..</a>
+<!-- 活動花絮 -->
+<div id="area3_2" class="area_box"><h1 id="area_title">活動花絮</h1>
+	<a class="more-link" href="http://sites.cjcu.edu.tw/career/AlbumList.html">更多..</a>
 
 	<img class="area3-img a3-2" src="">
 	<div class="workplace wp3-2">
@@ -121,9 +121,9 @@
 	</div>
 </div>
 
-<!-- 職場萬花筒 -->
-<div id="area3_3" class="area_box"><h1 id="area_title">職場萬花筒</h1>
-	<a class="more-link" href="inner_7.php">更多..</a>
+<!-- 好站連連看 -->
+<div id="area3_3" class="area_box"><h1 id="area_title">好站連連看</h1>
+	<a class="more-link" href="http://sites.cjcu.edu.tw/career/">更多..</a>
 
 	<img class="area3-img a3-3" src="">
 	<div class="workplace wp3-3">
@@ -210,7 +210,7 @@
 
 
         
-        //校內新聞
+        //學生職涯發展最新消息
         $.ajax({
 		  type: 'POST',
 		  url: 'cjcu_career/cc/index.php/news/lists/1',
@@ -222,20 +222,20 @@
             for (var i = 0; i < article_array.length; i++) { if (i==3) break;
           
             //<a href=""><div class="news"><img class="news-img" src=""><p class="news-time">2014-10-10</p><p class="news-nevin">架構</p></div>
-            //<a class="more-link" href="inner_4.php">更多..</a>
+            //<a class="more-link" href="news.php">更多..</a>
                 var nevin = $('<p>').addClass('news-nevin').html(article_array[i].content),
                     time  = $('<p>').addClass('news-time').text(article_array[i].created_date.split(" ")[0]),
                     img   = $('<img>').addClass('news-img').attr("src","cjcu_career/cc/product_img/"+article_array[i].pic),
-                    link  = $('<a>').attr("href",'inner_4.php?article_id='+article_array[0].id).append(img,time,nevin),
+                    link  = $('<a>').attr("href",'news.php?type=1&article_id='+article_array[0].id).append(img,time,nevin),
                     news  = $('<div>').addClass('news').append(link);
                     
                 $('#area2_2').append(news);
             }
-            var more  = $('<a>').addClass('more-link').attr("href",'inner_4.php').text('更多..');  
+            var more  = $('<a>').addClass('more-link').attr("href",'http://www.cjcu.edu.tw/cjcunews/news.php?mainunitid=7&newsunitid=140&subunitid=146').text('更多..');  
             $('#area2_2').append(more);
 		  }
 		});
-		//職場高手
+		//社會新鮮人專區
         $.ajax({
 		  type: 'POST',
 		  url: 'cjcu_career/cc/index.php/news/lists/2',
@@ -247,10 +247,10 @@
             $('.a3-1').attr("src","cjcu_career/cc/product_img/"+article_array[0].pic);
 		  	$('.master-title').text(article_array[0].title);  
 		    $('.master-nevin').html(article_array[0].content);  
-            $('.area_box_link').attr("href",'inner_5.php?article_id='+article_array[0].id);  
+            $('.area_box_link').attr("href",'news.php?type=2&article_id='+article_array[i].id);  
 		  }
 		});
-		//職場動態
+		//活動花絮
         $.ajax({
 		  type: 'POST',
 		  url: 'cjcu_career/cc/index.php/news/lists/3',
@@ -265,12 +265,12 @@
             
                 //<a href=""><p class="workplace-title">架構</p></a>
                 var work = $('<p>').addClass('workplace-title').text('》'+article_array[i].title),
-                    work_link = $('<a>').attr("href",'inner_6.php?article_id='+article_array[i].id).append(work);  
+                    work_link = $('<a>').attr("href",'news.php?type=3&article_id='+article_array[i].id).append(work);  
                 $('.wp3-2').append(work_link);
             }
 		  }
 		});
-		//職場萬花筒
+		//好站連連看
         $.ajax({
 		  type: 'POST',
 		  url: 'cjcu_career/cc/index.php/news/lists/4',
@@ -285,7 +285,7 @@
             
                 //<a href=""><p class="workplace-title">架構</p></a>
                 var work = $('<p>').addClass('workplace-title').text('》'+article_array[i].title),
-                    work_link = $('<a>').attr("href",'inner_7.php?article_id='+article_array[i].id).append(work);  
+                    work_link = $('<a>').attr("href",'news.php?type=4&article_id='+article_array[i].id).append(work);  
                 $('.wp3-3').append(work_link);
             }
 		  }

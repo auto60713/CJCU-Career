@@ -48,6 +48,10 @@ div.ui-datepicker,.ui-timepicker-wrapper{
 .total-hour{
     margin-right: 30px;
 }
+
+.work-time-ischeck{
+    color: #FF6060;
+}
 </style>
 <body>
     <h5 id="loading">資料載入中請稍後...</h5>
@@ -81,10 +85,12 @@ div.ui-datepicker,.ui-timepicker-wrapper{
         </table>
 
         <div>
-        <span class="total-hour">總時數：</span> <span class="total-pay">總時薪</span>
+        <span>紅色項目為校方已經查閱並批准工讀金</span><br>
+        <input type="text" val="" id="now_hour_pay" placeholder="填入時薪自動換算"/><span class="total-hour"> 總時數：</span> <span class="total-pay"></span>
         </div><br>
 
     	<input type="submit" name="button" value="新增一筆紀錄" />　　
+        <button type="button" id="clear_all_red">刪除所有紅色項目</button> 
         <input type="button" name="button" id="view" value="預覽">
         <input type="button" name="button" id="back" value="上一頁">
         </form>
@@ -93,6 +99,15 @@ div.ui-datepicker,.ui-timepicker-wrapper{
 
 <script>
 $( document ).ready(function() {
+
+    $(window).keydown(function(event){
+    if(event.keyCode == 13) {
+      $( "#now_hour_pay" ).change();
+      event.preventDefault();
+      return false;
+    }
+    });
+
     $( "#loading" ).remove();
     $( ".work_time_detail" ).fadeIn();
 
@@ -161,11 +176,14 @@ $(function(){
 
     for(var i=0;i<work_time_array.length;i++){
 
-    var work_date = $('<td>').text(work_time_array[i]['date']),
-        work_day = $('<td>').text(work_time_array[i]['day']),
-        work_time = $('<td>').text(work_time_array[i]['time']),
-        work_matter = $('<td>').text(work_time_array[i]['matter']).attr("colspan","2"),
-        work_hour = $('<td>').text(work_time_array[i]['hour']).addClass('work-hour'),
+        if(work_time_array[i]['check'] == 1) var check_class = "work-time-nocheck";
+        else if(work_time_array[i]['check'] == 2) check_class = "work-time-ischeck";
+
+    var work_date = $('<td>').addClass(check_class).text(work_time_array[i]['date']),
+        work_day = $('<td>').addClass(check_class).text(work_time_array[i]['day']),
+        work_time = $('<td>').addClass(check_class).text(work_time_array[i]['time']),
+        work_matter = $('<td>').addClass(check_class).text(work_time_array[i]['matter']).attr("colspan","2"),
+        work_hour = $('<td>').addClass(check_class).text(work_time_array[i]['hour']).addClass('work-hour'),
         delet_btn = $('<button>').attr({type:"button",name:"delet_btn",value:work_time_array[i]['no']}).text("刪除"),
         delet = $('<td>').addClass('delet-tb').append(delet_btn),
         tr = $('<tr>').addClass('detail').append(work_date,work_day,work_time,work_matter,work_hour,delet);
@@ -174,13 +192,22 @@ $(function(){
     }
 
 
-    var total_hour = 0,now_hour_pay = 120;
-    for(i=0;i<$( ".work-hour" ).length;i++){
+    
+    var total_hour = 0;
+    for(i=0;i<$( ".work-hour.work-time-nocheck" ).length;i++){
 
-        total_hour += parseInt($( ".work-hour:eq("+i+")" ).text());
+        total_hour += parseInt($( ".work-hour.work-time-nocheck:eq("+i+")" ).text());
     }
-    $( ".total-hour" ).append(total_hour+'小時'); 
-    $( ".total-pay" ).append('('+now_hour_pay+'/hr)：'+total_hour*now_hour_pay+'新台幣');
+    $( ".total-hour" ).append(total_hour+'小時'); $( ".total-pay" ).text('總時薪：??');
+
+    $( "#now_hour_pay" ).change(function() {
+        var now_hour_pay = $( "#now_hour_pay" ).val();
+        $( ".total-pay" ).text('總時薪：'+total_hour*now_hour_pay+'元');
+    });
+
+   
+
+
 
 
 

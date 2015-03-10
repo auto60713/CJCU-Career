@@ -14,7 +14,7 @@ $sql = "declare @h int;set @h = (select work_type_id from work where id=?);
 		declare @i int;set @i = (select c.parent_no from work_type c where c.id=@h);
 	  	declare @j int;set @j = (select b.parent_no from work_type b where b.id=@i);	  
 
-	    select w.name,w.date,w.company_id,w.publisher pub,one.name typeone,two.name typetwo,three.name typethree,w.start_date,w.end_date,
+	    select w.name,w.date,w.company_id,w.publisher pub,one.name typeone,two.name typetwo,three.name typethree,w.recruited_date,w.start_date,w.end_date,
 	    prop.name popname,w.is_outside,z.name zonename,w.address,w.phone,w.pay,[recruitment _no],w.detail,[check]
 	    from work w,work_type one,work_type two,work_type three,work_prop prop,zone z 
 	    where w.id=? and w.work_prop_id=prop.id and w.zone_id=z.id  and one.id=@j and two.id=@i and three.id=@h";
@@ -43,7 +43,7 @@ $sql = "declare @h int;set @h = (select work_type_id from work where id=?);
 		declare @j int;set @j = (select parent_no from work_type  where id=@i);
 
 		select w.id,w.name,[date],t1.id type1,t2.id type2,t3.id type3,
-		w.start_date,w.end_date,w.work_prop_id prop,w.is_outside,w.zone_id,w.address,w.phone,w.pay,[recruitment _no] rno,w.detail,[check],z.zone zone
+		w.recruited_date,w.start_date,w.end_date,w.work_prop_id prop,w.is_outside,w.zone_id,w.address,w.phone,w.pay,[recruitment _no] rno,w.detail,[check],z.zone zone
 		from work w , work_type t1,work_type t2,work_type t3,zone z
 		where w.id=? and t1.id=@j and t2.id=@i and t3.id=@h and z.id=w.zone_id";
 
@@ -68,7 +68,7 @@ function return_work_detail_array($work_id){
 		declare @i int;set @i = (select parent_no from work_type  where id=@h);
 		declare @j int;set @j = (select parent_no from work_type  where id=@i);
 
-		SELECT w.id,w.name,w.work_prop_id prop,[date],t1.id type1,t2.id type2,t3.id type3,
+		SELECT w.id,w.name,w.work_prop_id prop,[date],t1.id type1,t2.id type2,t3.id type3,w.recruited_date,
 		w.start_date,w.end_date,w.zone_id,w.address,w.phone,w.pay,[recruitment _no] rno,w.detail,[check],z.zone zone
 		FROM work w , work_type t1,work_type t2,work_type t3,zone z
 		WHERE w.id=? and t1.id=@j and t2.id=@i and t3.id=@h and z.id=w.zone_id";
@@ -86,7 +86,7 @@ function echo_work_time_array($work_id,$stud_id){
 
 include("sqlsrv_connect.php");
 
-$sql = "select no,date,day,time,matter,hour from work_time where work_id=? and stud_id=?";
+$sql = "select * from work_time where work_id=? and stud_id=? ORDER BY date ASC";
 
 $para = array($work_id,$stud_id);
 $stmt = sqlsrv_query($conn, $sql, $para);

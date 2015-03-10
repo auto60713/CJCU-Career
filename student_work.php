@@ -63,8 +63,8 @@ else{
 			    		case 1: check_status='已錄取!'; hint2.addClass('sta1 yescheck').text(check_status); break;
 			    case 22:case 2: check_status='應徵失敗..(點我查看原因)'; hint2.addClass('sta2 nocheck').text(check_status); break;
 			    		case 3: check_status='應徵失敗..(點我查看原因)'; hint2.addClass('sta2 nocheck').text(check_status); subbox3.append(statustxt);break;
-			    		case 4: check_status='實習中'; hint2.addClass('sta4 yescheck').text(check_status); break;
-			    		case 5: check_status='完成工作!'; hint2.addClass('sta5 yescheck').text(check_status); break;
+			    		case 4: check_status='工作中'; hint2.addClass('sta4 yescheck').text(check_status); break;
+			    		case 5: check_status='完成'; hint2.addClass('sta5 yescheck').text(check_status); break;
 		    		}
 
 		        	subbox3.append($('<br>'),teacher,score);
@@ -87,7 +87,6 @@ else{
 		    	    	var delete_lu = $('<button>').attr('luid', workid).addClass('delete-lu').text("取消應徵"),
                             pass = $('<button>').attr('workid', workid).addClass('pass-req').text("要求再審核");
 
-
                         // 工作對學生的狀態意義
 		    			switch(audit) {
 			    		
@@ -104,9 +103,8 @@ else{
 			    case 22:case 3: c_status='應徵失敗!'; check_status_box.addClass('sta2 nocheck').text(c_status); 
 			    	        	$('.student-audit-lightbox-status').append(delete_lu); break;
 
-			    		case 4: c_status='已錄取'; check_status_box.addClass('sta4 yescheck').text(c_status); break;
+			    		case 4: c_status='工作中'; check_status_box.addClass('sta4 yescheck').text(c_status); break;
 			    		case 5: c_status='完成工作'; check_status_box.addClass('sta5 yescheck').text(c_status); break;
-			    		
 			    		}
 			    	
                         //取消應徵AJAX
@@ -200,7 +198,7 @@ else{
 		  }
 
 		  //工作快速搜尋 
-		  var pass_search = {"全部":-1,"公司審核中":0,"已錄取":1,"應徵失敗":2,"實習中":4,"完成工作":5};    
+		  var pass_search = {"全部":-1,"公司審核中":0,"已錄取":1,"應徵失敗":2,"工作中":4,"工作完成":5};    
           for (var key in pass_search)
           $("#search-sel").append($("<option>").attr("value", pass_search[key]).text(key));
 
@@ -243,7 +241,7 @@ else{
 	<div class="staff-apply-form" id="student-audit-lightbox"> 
 		<div id='workedit-content-audit' class="staff-apply-box"> 
 
-			<h1 class="student-audit-title">審核訊息 <i class="fa fa-times login-exit" id="student-audit-lightbox-exit"></i> </h1>
+			<h1 class="student-audit-title"><i class="fa fa-file-text-o"></i> 審核訊息<i class="fa fa-times audit-exit" id="student-audit-lightbox-exit"></i></h1>
 			<div class="student-audit-lightbox-status">目前狀況：
 				<span id="student-audit-current-status"></span>
 				<!--<div class="pass-req">要求再審核</div>-->

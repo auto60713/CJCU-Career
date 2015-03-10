@@ -134,6 +134,12 @@ div.ui-datepicker{
 </tr>
 
 <tr>
+	<td class='td1'>應徵日期：</td>
+	<td><b style="margin-right:5px;">從發佈到</b><input type="text" id="recruited_date" name="recruited_date" placeholder="選擇時間">
+	</td>
+</tr>
+
+<tr>
 	<td class='td1'>工作日期：</td>
 	<td><input type="text" id="bg_date" name="bg_date" placeholder="選擇時間"><b style="margin:0px 5px;">到</b>
 		<input type="text" id="ed_date" name="ed_date" placeholder="選擇時間">
@@ -226,7 +232,7 @@ div.ui-datepicker{
 	echo_work_detail_edit_array($conn,$_GET['workid']);
 	}
 	//應該要做一個回傳身分的ajax
-	if( $_SESSION['level'] != 4 ) echo '$( "#btn-instead-work" ).show();';
+	if( $_SESSION['level']!=4 && $_GET['mode']!='edit' ) echo '$("#btn-instead-work").show(); $("#btn-copy-work").show();';
 
 	?> 
 	
@@ -241,7 +247,7 @@ div.ui-datepicker{
 		change_zone_list();
 
 		//日曆API
-		$('#bg_date,#ed_date').datepicker({dateFormat: 'yy-mm-dd'});
+		$('#recruited_date,#bg_date,#ed_date').datepicker({dateFormat: 'yy-mm-dd'});
 		
 		// 生成工作類型
 		for(var i=0;i<work_type.length;i++)
@@ -457,9 +463,7 @@ div.ui-datepicker{
 		   編輯模模式...................................................................
 		// .............................................................................*/
 
-		<?php  if($_GET['mode']=='edit') echo 'setInit(work_detail_array,false);';
-               else { echo '$("#btn-copy-work").show();'; }
-		 ?>
+		<?php  if($_GET['mode']=='edit') echo 'setInit(work_detail_array,false);'; ?>
 
 		function setInit(work_detail_array,is_copy_mode){
 
@@ -502,6 +506,7 @@ div.ui-datepicker{
 			
 
 			$('#work_prop').val(work_detail_array['prop']); 
+			$('#recruited_date').val(work_detail_array['recruited_date'].split(" ")[0]); 
 			$('#bg_date').val(work_detail_array['start_date'].split(" ")[0]); 
 			$('#ed_date').val(work_detail_array['end_date'].split(" ")[0]); 
 			$('input[type="radio"][value="'+work_detail_array['is_outside']+'"]').attr('checked', 'true');
