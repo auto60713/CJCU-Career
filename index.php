@@ -90,9 +90,43 @@
 
 <!-- 學生職涯發展最新消息 -->
 <div id="area2_2" class="area_box"><h1 id="area_title">學生職涯發展最新消息</h1>
-	<a href="http://www.pop.com.tw/prnc/epaper/main.php"><p class="link">長榮電子報</p></a>
+	<a href="http://www.cjcu.edu.tw/cjcunews/news.php?mainunitid=7&newsunitid=140&subunitid=146"><p class="link"><i class="fa fa-play"></i> 新聞中心</p></a>
     
-		<!-- 載入資料 4篇-->
+    <div class="news-area">
+        <p><a href="http://www.cjcu.edu.tw/cjcunews/news-detail.php?id=8001">
+	    	<span class="news-date">2015-03-10</span>2015年南區就業博覽會
+	    </a></p>
+	    <hr>
+        <p><a href="http://www.cjcu.edu.tw/cjcunews/news-detail.php?id=7988">
+	    	<span class="news-date">2015-03-06</span>【104年暑期實習】國立中正紀念堂管理處
+	    </a></p>
+	    <hr>
+	    <p><a href="http://www.cjcu.edu.tw/cjcunews/news-detail.php?id=7982">
+	    	<span class="news-date">2015-03-05</span>104年度「雙軌訓練旗艦計畫」暨「補助大專校院辦理就業學程計畫」 計畫推動說明會
+	    </a></p>
+	    <hr>
+        <p><a href="http://www.cjcu.edu.tw/cjcunews/news-detail.php?id=7980">
+	    	<span class="news-date">2015-03-05</span>104年度大專校院辦理 區域性校園徵才活動
+	    </a></p>
+	    <hr>
+	    <p><a href="http://www.cjcu.edu.tw/cjcunews/news-detail.php?id=7977">
+	    	<span class="news-date">2015-03-04</span>104年增能計畫 達人履歷競賽、面試諮詢活動
+	    </a></p>
+	    <hr>
+	    <p><a href="http://www.cjcu.edu.tw/cjcunews/news-detail.php?id=7920">
+	    	<span class="news-date">2015-02-24</span>文化部「展演設施產業職能基準」查詢平台
+	    </a></p>
+	    <hr>
+	    <p><a href="http://www.cjcu.edu.tw/cjcunews/news-detail.php?id=7917">
+	    	<span class="news-date">2015-02-24</span>臺灣港務股份有限公司職務甄選公告
+	    </a></p>
+	    <hr>
+	    <p><a href="http://www.cjcu.edu.tw/cjcunews/news-detail.php?id=7908">
+	    	<span class="news-date">2015-02-11</span>亞洲開發銀行-104年暑期實習機會 
+	    </a></p>
+	    <hr>
+
+    </div>
 </div>
 
 
@@ -113,21 +147,34 @@
 
 <!-- 活動花絮 -->
 <div id="area3_2" class="area_box"><h1 id="area_title">活動花絮</h1>
-	<a class="more-link" href="http://sites.cjcu.edu.tw/career/AlbumList.html">更多..</a>
+	<a class="more-link" href="http://sites.cjcu.edu.tw/career/AlbumList.html" target="_blank">更多..</a>
 
-	<img class="area3-img a3-2" src="">
-	<div class="workplace wp3-2">
-	    <!-- 載入資料 3篇-->
-	</div>
+    <a href="http://sites.cjcu.edu.tw/career/Album_2417.html"><div class="img-boxx">
+	<img class="a32-img1" src="http://sites.cjcu.edu.tw/wSiteFile/Album/B0406/141024142805img_1498.jpg">
+	<p class="img-alt">市府103年度『協助青少年就業活動』_牟士登 劉惠瑜董事長分享</p>
+	</div></a>
+	
+	<a href="http://sites.cjcu.edu.tw/career/Album_2602.html"><div class="img-boxx">
+	<img class="a32-img2" src="http://sites.cjcu.edu.tw/wSiteFile/Album/B0406/141212165614img_1955.jpg">
+	<p class="img-alt">第二場留遊學免費諮詢服務</p>
+	</div></a>
+
+	<a href="http://sites.cjcu.edu.tw/career/Album_2416.html"><div class="img-boxx">
+	<img class="a32-img3" src="http://sites.cjcu.edu.tw/wSiteFile/Album/B0406/141024141256img_1561.jpg">
+	<p class="img-alt">【教學增能計畫】公職證照考試專題講座</p>
+	</div></a>
 </div>
 
 <!-- 好站連連看 -->
 <div id="area3_3" class="area_box"><h1 id="area_title">好站連連看</h1>
-	<a class="more-link" href="http://sites.cjcu.edu.tw/career/">更多..</a>
+	<!--<a class="more-link" href="http://sites.cjcu.edu.tw/career/">更多..</a>-->
 
-	<img class="area3-img a3-3" src="">
+	<img class="area3-img a3-3" src="img/104.jpg">
 	<div class="workplace wp3-3">
-		<!-- 載入資料 3篇-->
+		<a href="http://www.104.com.tw/"><i class="fa fa-play"></i>104人力銀行</a><br>
+		<a href="http://www.yes123.com.tw/admin/index.asp"><i class="fa fa-play"></i>yes123求職網</a><br>
+		<a href="http://rich.yda.gov.tw/richCandidate/index.jsp"><i class="fa fa-play"></i>RICH職場體驗網</a><br>
+		<a href="http://www.taiwanjobs.gov.tw/Internet/index/index.aspx"><i class="fa fa-play"></i>台灣就業通</a><br>
     </div>
 </div>
 
@@ -163,10 +210,11 @@
 
 			work_name = $('<h1>').text(work_list_array[i].wname),
 			work_zone = $('<p>').text(work_list_array[i].zname).prepend($('<i>').addClass('fa fa-map-marker')),
+			work_date = $('<p>').text(work_list_array[i].date.split(" ")[0]).addClass('dateee'),
 			work_propn = $('<p>').text(((work_list_array[i].isout=='0')?'校外 ':'校內 ') + work_list_array[i].propname),
 			work_recr = $('<p>').addClass('num').text('需求 '+ work_list_array[i].rno +' 人');
 
-			box2.append(work_name,work_recr);
+			box2.append(work_name,work_date);
 			box3.append(work_zone);
 			box4.append(work_propn);
 
@@ -177,7 +225,7 @@
           url: 'ajax_echo_name.php',
           data:{mode:"cnd",work_pub:work_list_array[i].pub,comid:work_list_array[i].cid},
           success: function (data) { 
-              work_com = $('<p>').addClass('date').text(data);
+              work_com = $('<p>').addClass('com-name').text(data);
               box2.append(work_com);
           }
         });
@@ -207,34 +255,6 @@
     box.prepend(search_log);
     }
 
-
-
-        
-        //學生職涯發展最新消息
-        $.ajax({
-		  type: 'POST',
-		  url: 'cjcu_career/cc/index.php/news/lists/1',
-		  data:{},
-		  success: function (data) { 
-            if(data!=null||data!="false") var article_array = JSON.parse(data);
-            else var article_array = 0;
-
-            for (var i = 0; i < article_array.length; i++) { if (i==3) break;
-          
-            //<a href=""><div class="news"><img class="news-img" src=""><p class="news-time">2014-10-10</p><p class="news-nevin">架構</p></div>
-            //<a class="more-link" href="news.php">更多..</a>
-                var nevin = $('<p>').addClass('news-nevin').html(article_array[i].content),
-                    time  = $('<p>').addClass('news-time').text(article_array[i].created_date.split(" ")[0]),
-                    img   = $('<img>').addClass('news-img').attr("src","cjcu_career/cc/product_img/"+article_array[i].pic),
-                    link  = $('<a>').attr("href",'news.php?type=1&article_id='+article_array[0].id).append(img,time,nevin),
-                    news  = $('<div>').addClass('news').append(link);
-                    
-                $('#area2_2').append(news);
-            }
-            var more  = $('<a>').addClass('more-link').attr("href",'http://www.cjcu.edu.tw/cjcunews/news.php?mainunitid=7&newsunitid=140&subunitid=146').text('更多..');  
-            $('#area2_2').append(more);
-		  }
-		});
 		//社會新鮮人專區
         $.ajax({
 		  type: 'POST',
@@ -250,46 +270,7 @@
             $('.area_box_link').attr("href",'news.php?type=2&article_id='+article_array[i].id);  
 		  }
 		});
-		//活動花絮
-        $.ajax({
-		  type: 'POST',
-		  url: 'cjcu_career/cc/index.php/news/lists/3',
-		  data:{},
-		  success: function (data) { 
-            if(data!=null||data!="false") var article_array = JSON.parse(data);
-            else var article_array = 0;
-
-            $('.a3-2').attr("src","cjcu_career/cc/product_img/"+article_array[0].pic);
-
-            for (var i = 0; i < article_array.length; i++) { if (i==4) break;
-            
-                //<a href=""><p class="workplace-title">架構</p></a>
-                var work = $('<p>').addClass('workplace-title').text('》'+article_array[i].title),
-                    work_link = $('<a>').attr("href",'news.php?type=3&article_id='+article_array[i].id).append(work);  
-                $('.wp3-2').append(work_link);
-            }
-		  }
-		});
-		//好站連連看
-        $.ajax({
-		  type: 'POST',
-		  url: 'cjcu_career/cc/index.php/news/lists/4',
-		  data:{},
-		  success: function (data) { 
-            if(data!=null||data!="false") var article_array = JSON.parse(data);
-            else var article_array = 0;
-
-            $('.a3-3').attr("src","cjcu_career/cc/product_img/"+article_array[0].pic);
-
-            for (var i = 0; i < article_array.length; i++) { if (i==4) break;
-            
-                //<a href=""><p class="workplace-title">架構</p></a>
-                var work = $('<p>').addClass('workplace-title').text('》'+article_array[i].title),
-                    work_link = $('<a>').attr("href",'news.php?type=4&article_id='+article_array[i].id).append(work);  
-                $('.wp3-3').append(work_link);
-            }
-		  }
-		});
-        
+	
+		$('#area3_3 a,#area2_2 a,#area3_2 a').attr("target",'_blank');
 </script>
 </html>

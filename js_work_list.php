@@ -9,7 +9,7 @@ include("sqlsrv_connect.php");
 
 $para = array();
 
-$sql = "select TOP ".$work_length." w.company_id cid, w.id wid,w.name wname,w.publisher pub,z.name zname,w.is_outside isout,p.name propname,[recruitment _no] rno,w.date date
+$sql = "select TOP ".$work_length." w.company_id cid, w.id wid,w.name wname,w.publisher pub,z.name zname,w.is_outside isout,p.name propname,[recruitment _no] rno,w.date date,w.recruited_date 
  from work w,zone z,work_prop p 
  where w.zone_id = z.id and work_prop_id = p.id and w.[check] = 1";
 //check=1 只秀出通過審核的工作
@@ -44,7 +44,7 @@ else die(print_r( sqlsrv_errors(), true));
 
 //回傳搜尋後的訊息
 $work_length = count($work_list_array);
-if($work_length != 0) {echo "var search_log_cont = '共有 '+".$work_length."+' 項工作符合條件';";}
+if($work_length != 0) {echo "var search_log_cont = '共有 '+".$work_length."+' 項工作符合條件 灰色項目為應徵時間已結束';";}
 else {echo "var search_log_cont = '沒有工作符合搜尋條件!';";}
 
 

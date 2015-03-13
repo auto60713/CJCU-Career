@@ -229,8 +229,12 @@
 		width: 70px;
 	}
 	
-
-
+.dateee{
+	margin-right: 20px;
+}
+.isExpired{
+	background-color: #F2F2F2;
+}
 
 
 
@@ -266,58 +270,60 @@
 	bottom: 40px;
 }
 	
-/* =======================校內新聞====================== */
 
-.no_paper{
-	display: block;
-    margin: 10px;
-    margin-top: 20px;
-    color: #CE3131;
-    font-size: 40px;
+.workplace{
+	margin-top: 10px;
+}
+.master-title,.news-area p{
+    white-space: nowrap;
+    overflow: hidden;
+	text-overflow: ellipsis; 
 }
 
+/* =======================學生職涯發展最新消息====================== */
 #area2_2 .link{
-    color: #A396C3;
-    float: right;
-    margin-right: 20px;
+	color: #BA96C3;
+	font-weight: bold;
+}
+#area2_2 .link:hover{
+	color: #B088BB;
+}
+#area2_2 i{
+	font-size: 9px;
+	margin-left: 15px;
+	margin-right: 5px;
 }
 
-#area2_2 .news{
-	height: 85px;
-	width: 100%;
-	overflow: hidden;
+
+
+.news-area{
+	margin-top: 10px;
+	margin-left: 20px;
 }
-#area2_2 .news p{
-    font-size: 13px;
+.news-area hr{
+	border:0; 
+	height:1px; 
+	width: 90%;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	background-color:#d4d4d4;
 }
-#area2_2 .news .news-img{
-	float: left;
-	padding: 12px;
-	height: 60px;
-    width: 100px;
+.news-area .news-date{
+	font-size: 11px;
+	color: #991133;
+    margin-right: 10px;
 }
-#area2_2 .news .news-time{
-	padding-top: 12px;
-	color: #A396C3;
-}
-#area2_2 .news-nevin{
-	margin-right: 15px;
-	max-height: 35px;
-	overflow: hidden;
-	text-overflow: ellipsis;
+.news-area p{
+	font-size: 14px;
+	width: 250px;
 }
 
-/* 更多 */
-#area2_2 .more-link{
-	bottom: 40px;
-}
 
-/* =======================職場高手====================== */
+/* =======================社會新鮮人專區====================== */
 
 /* 更多 */
 #area3_1 .more-link,
-#area3_2 .more-link,
-#area3_3 .more-link{
+#area3_2 .more-link{
 	top: 30px;
 }
 
@@ -326,44 +332,79 @@
 	height: 20%;
 	overflow: hidden;
 }
-.area3-img{
+#area3_1 img,#area3_3 img{
     float: left;
     margin: 10px;
     height: 90px;
     width: 90px;
 }
-#area3_1 p{
-    font-size: 14px;
-}
 #area3_1 .master-title{
+    font-size: 15px;
 	margin-top: 10px;
     color: #F8C705;
     font-weight: bold;
 }
 #area3_1 .master-nevin{
-	max-height: 80px;
-	margin-right: 20px;
+	color: #646859;
+	font-size: 12px;
+	height: 75px;
+	width: 180px;
 	overflow: hidden;
+
+}
+/* =======================活動花絮====================== */
+#area3_2 .img-boxx{
+    float: left;
+    margin-top: 10px; 
+    margin-left: 14px;
+    height: 80px;
+    width: 80px;
+    opacity: 0.7;
+
+    transition: all 0.1s;
+    -o-transition: all 0.1s;
+    -moz-transition: all 0.1s;
+    -webkit-transition: all 0.1s;
+}
+#area3_2 .img-boxx:hover{
+    opacity: 1;
+
+    transition: all 0.1s;
+    -o-transition: all 0.1s;
+    -moz-transition: all 0.1s;
+    -webkit-transition: all 0.1s;
+}
+#area3_2 .img-boxx img{
+    height: 100%;
+    width: 100%;
+}
+
+#area3_2 .img-boxx .img-alt{
 	text-overflow: ellipsis;
-  
-}
-
-/* =======================職場動態====================== */
-.workplace{
-	margin-top: 10px;
-}
-.workplace-title{
-	font-size: 14px;
-	line-height: 22px;
-	max-height: 20px;
+	white-space: nowrap; 
 	overflow: hidden;
+	width: 100%; 
+
+    font-size: 9px;
+    color: #003D59;
 }
 
-/* ======================職場萬花筒===================== */
 
 
+/* ======================好站連連看===================== */
 
-
+.wp3-3 a{
+	color: #707360;
+    text-decoration: none;
+}
+.wp3-3 a:hover{
+	color: #22231D;
+    text-decoration: none;
+}
+.wp3-3 i{
+	margin-right: 5px;
+    font-size: 10px;
+}
 
 
 /* 內頁 */

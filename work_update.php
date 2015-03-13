@@ -21,6 +21,7 @@ $work_prop = (int)trim($_POST['work_prop']);
 $isoutside = (int)trim($_POST['isoutside']);
 $zone_id = (int)trim($_POST['zone_name']);
 $recruitment_no = (int)trim($_POST['recruitment_no']);
+$recruited_date = trim($_POST['recruited_date']);
 $bg_date = trim($_POST['bg_date']);
 $ed_date = trim($_POST['ed_date']);
 $address = trim($_POST['address']);
@@ -28,7 +29,7 @@ $phone = trim($_POST['phone']);
 $pay = trim($_POST['pay_data']);
 $detail = trim($_POST['detail']);
 $workid = trim($_POST['work-id']);
-// 驗證該工作是否為目前登入的公司所有,如果是才給予繼續
+/* 驗證該工作是否為目前登入的公司所有,如果是才給予繼續
 if(!isCompanyWork($conn,$_SESSION['username'],$workid)){echo '你沒有權限訪問改頁面!!'; exit();}
 function isCompanyWork($conn,$companyid,$workid){
 	$sql = "select company_id from work where id=?";
@@ -39,6 +40,7 @@ function isCompanyWork($conn,$companyid,$workid){
 	if($row[0]==$companyid) return true;
 	else return false;
 }
+*/
 if( !isset($name) || !isset($work_type)  || !isset($work_prop) || !isset($address) || !isset($isoutside) || !isset($recruitment_no) || $zone_id==0){
 	echo "Enter the details are incorrect!!!";
 	exit;
@@ -46,10 +48,10 @@ if( !isset($name) || !isset($work_type)  || !isset($work_prop) || !isset($addres
 
 
 
-	$params = array($name,$work_type,$bg_date,$ed_date,$work_prop,$isoutside,$zone_id,$address,$phone,$pay,$recruitment_no,$detail,$workid);
+	$params = array($name,$work_type,$recruited_date,$bg_date,$ed_date,$work_prop,$isoutside,$zone_id,$address,$phone,$pay,$recruitment_no,$detail,$workid);
 
 	$sql = "update work 
-			set name=?,work_type_id=?,start_date=?,end_date=?,
+			set name=?,work_type_id=?,recruited_date=?,start_date=?,end_date=?,
 			work_prop_id=?,is_outside=?,zone_id=?,address=?,phone=?,pay=?,
 			[recruitment _no]=?,detail=?
 			where id=?";
@@ -59,6 +61,7 @@ if( !isset($name) || !isset($work_type)  || !isset($work_prop) || !isset($addres
 	if($result){
 
         if($_SESSION['level'] == 4||$_SESSION['level'] == 6) $who_page = "company";
+        else if($_SESSION['level'] == 1) $who_page = "staff";
         else $who_page = "department";
 
 		echo '更新成功! 跳轉中，請稍候...';

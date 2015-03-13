@@ -125,7 +125,8 @@
 
 
 
-    var box = $('#home-work-list-box');     
+    var box = $('#home-work-list-box'),
+        now = new Date();
 
     for(var i=0;i<work_list_array.length;i++){
 
@@ -138,12 +139,17 @@
 
             work_name = $('<h1>').text(work_list_array[i].wname),
             work_zone = $('<p>').text(work_list_array[i].zname).prepend($('<i>').addClass('fa fa-map-marker')),
+            work_date = $('<p>').text('應徵截止' + work_list_array[i].recruited_date.split(" ")[0]).addClass('dateee'),
             work_propn = $('<p>').text(((work_list_array[i].isout=='0')?'校外 ':'校內 ') + work_list_array[i].propname),
             work_recr = $('<p>').addClass('num').text('需求 '+ work_list_array[i].rno +' 人');
 
-            box2.append(work_name,work_recr);
+            box2.append(work_name,work_date);
             box3.append(work_zone);
             box4.append(work_propn);
+
+        //檢查是否應徵過期 date = '2011-04-11'
+        var compare_date = new Date(work_list_array[i].recruited_date.split(" ")[0]);
+        if( compare_date < now ) div_work.addClass('isExpired');
 
         //發布公司
         $.ajax({
@@ -174,7 +180,19 @@
             box.append(a_link);
 
     }
-    
+
+    //有沒有過期
+    function myFunction(date) {
+
+        
+
+    }
+
+
+
+
+
+
     //搜尋結果的訊息 search_log_cont從php回傳
     if(typeof search_log_cont != "undefined") {
 
