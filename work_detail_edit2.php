@@ -220,8 +220,9 @@ if (preg_match("/-/i", $companyid)) $companyid = strstr($companyid,'-',true);
         });
 
         //開始工作
-		$(document).on( "click",'button#divbtn-start', function() {
-		var btn_text = $('button#divbtn-start').text();
+		$(document).off("click",'button#divbtn-start').on('click','button#divbtn-start', function() {
+
+	 	var btn_text = $('button#divbtn-start').text();
 		    if (confirm ("要停止應徵並"+btn_text+"嗎?")){
 
 		    	$.ajax({
@@ -236,9 +237,9 @@ if (preg_match("/-/i", $companyid)) $companyid = strstr($companyid,'-',true);
 		    }
 		});
 		//完成工作
-		$(document).on( "click",'button#divbtn-end', function() {
-		    btn_text = $('button#divbtn-end').text();
+		$(document).off("click",'button#divbtn-end').on('click','button#divbtn-end', function() {
 
+		    btn_text = $('button#divbtn-end').text();
 		    if (confirm ("確定要"+btn_text+"?")){
 
 		    	$.ajax({

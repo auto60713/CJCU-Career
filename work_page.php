@@ -7,7 +7,7 @@
 	<!-- 工作列表 -->
 
 	<link rel="stylesheet" type="text/css" href="css/main.css">
-	<link rel="stylesheet" type="text/css" href="css/home.css">
+	<link rel="stylesheet" type="text/css" href="css/area_div.css">
   <link rel="stylesheet" type="text/css" href="font-awesome/css/font-awesome.css">
   <script src="js/jquery-min.js"></script>
   <script src="js/jquery-migrate-min.js"></script>
@@ -41,7 +41,7 @@
 
 
 <!-- 左區塊 -->
-<div id="inner3_area_1" class="area_box2">
+<div id="left_div" class="area_box2">
 
 
 
@@ -63,7 +63,7 @@
 
 
 <!-- 右區塊 -->
-<div id="inner3_area_2" class="area_box2"><h1 id="area_title">進階搜尋</h1>
+<div id="right_div" class="area_box2"><h1 id="area_title">進階搜尋</h1>
 
     <!-- 進階搜尋 -->
     <div class="high_search-bar">
@@ -180,16 +180,6 @@
             box.append(a_link);
 
     }
-
-    //有沒有過期
-    function myFunction(date) {
-
-        
-
-    }
-
-
-
 
 
 

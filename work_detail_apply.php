@@ -100,7 +100,7 @@ if (preg_match("/-/i", $companyid)) $companyid = strstr($companyid,'-',true);
 					case 2:
 						subbox3.append($('<div>').addClass('isnotapply').text('不錄取'));
 					break;	
-					case 4:
+					case 4:case 5:
 					$.ajax({
 		                type: 'POST',
 		                url: 'ajax_echo_name.php',

@@ -5,7 +5,7 @@
 	<meta charset="UTF-8">
 	<title>長大職涯網</title>
 	<link rel="stylesheet" type="text/css" href="css/main.css">
-	<link rel="stylesheet" type="text/css" href="css/home.css">
+	<link rel="stylesheet" type="text/css" href="css/area_div.css">
 	<link rel="stylesheet" type="text/css" href="font-awesome/css/font-awesome.css">
 	<script src="js/jquery-min.js"></script>
     <script src="js/jquery-migrate-min.js"></script>
@@ -167,7 +167,7 @@
 
 <!-- 好站連連看 -->
 <div id="area3_3" class="area_box"><h1 id="area_title">好站連連看</h1>
-	<!--<a class="more-link" href="http://sites.cjcu.edu.tw/career/">更多..</a>-->
+	<a class="more-link" href="web_links.php">更多..</a>
 
 	<img class="area3-img a3-3" src="img/104.jpg">
 	<div class="workplace wp3-3">
@@ -271,6 +271,6 @@
 		  }
 		});
 	
-		$('#area3_3 a,#area2_2 a,#area3_2 a').attr("target",'_blank');
+		$('.wp3-3 a,#area2_2 a,#area3_2 a').attr("target",'_blank');
 </script>
 </html>

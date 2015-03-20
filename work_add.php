@@ -106,6 +106,9 @@ div.ui-datepicker{
 .match_dep_tag:hover{
 	background-color: #67B4B4;
 }
+.zone_echo{
+	color: #808080;
+}
 </style>
 </head>
 <body>
@@ -158,7 +161,7 @@ div.ui-datepicker{
 <tr>
 	<td class='td1'>工作類別：</td>
 	<td><input type="radio" name="isoutside" value="0" checked="true">校外工作
-	    <input type="radio" name="isoutside" value="1">校內工作
+	    <input type="radio" name="isoutside" value="1" class="in-school">校內工作
 	</td>
 </tr>
 
@@ -166,6 +169,7 @@ div.ui-datepicker{
 	<td class='td1'>工作區域：</td>
 	<td><select name="zone" id="zone"></select> 
 		<select name="zone_name" id="zone_name"></select>
+		<span class="zone_echo"></span>
 	</td>
 </tr>
 
@@ -287,6 +291,17 @@ div.ui-datepicker{
 			error: function(){alert("網路連線出現錯誤!");}
 			});
 		});
+
+        //校內工讀 直接套牢台南地區
+        $('.in-school').click(function() {
+           if($('.in-school').is(':checked')){
+
+               $('#zone_name').val(4);
+               $('.zone_echo').text("校內工作自動配對台南市");
+           }
+           else $('.zone_echo').text("");
+        });
+
 
 
         //廠商代PO

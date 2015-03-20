@@ -5,14 +5,13 @@
 	<meta charset="UTF-8">
 	<title>密碼修改</title>
 	<link rel="stylesheet" type="text/css" href="css/main.css">
-	<link rel="stylesheet" type="text/css" href="css/home.css">
-	<link href="font-awesome/css/font-awesome.min.css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="css/area_div.css">
+	<link rel="stylesheet" type="text/css" href="font-awesome/css/font-awesome.min.css">
 	<script src="js/jquery-min.js"></script>
     <script src="js/jquery-migrate-min.js"></script>
-	<script src="lib/jquery.validate.js"></script>
 	<style type="text/css">
 	    .fix-position{
-	    	margin-top: 4%;
+	    	margin-top: 8%;
 	    	padding: 30px;
 	    	margin-right: auto;
 	    	margin-left: auto;
@@ -63,11 +62,17 @@
         	font-size: 13px;
         	color: #626262;
         }
+        .container{
+            min-height: 400px;
+
+        }
 	</style>
 	<script>
 	$(function(){ 	
 
 		$('#view-header').load('public_view/header.php');
+		$("#menu").load('public_view/menu.html');
+		$("#footer").load('public_view/footer.html');
 
 
 		$( ".submit-btn" ).click(function() {
@@ -108,10 +113,14 @@
 
 
 <!-- 版頭 -->
-<div id="view-header" class="" _height="none"></div>
+<div id="view-header"></div>
+<!-- 菜單 -->
+<div id="menu"></div>
+
+
 
 <!-- content  -->
-<div class="container margin-top20"><div class="fix-position">
+<div class="container"><div class="fix-position">
 
     <div class="apply-echo success"></div><div class="apply-echo fail"></div>
     <span class="title">修改密碼</span><span class="sign">密碼長度限制20個字元以內</span>
@@ -124,6 +133,9 @@
 	<div class="submit-btn">確定修改</div>
 
 </div></div>
+
+<!-- 頁尾訊息 -->
+<div id="footer"></div>
 
 </body>
 

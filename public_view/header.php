@@ -53,7 +53,7 @@ function echo_data($user,$lev){
 		}
 		else if( $lev == $level_staff){
             echo_username($user,'dep');
-            echo '<span><a href="change_pw.php">修改自己的密碼</a></span>';
+            echo '<span><a href="change_pw.php">修改密碼</a></span>';
 			echo '<span><a href="staff_manage.php">管理</a></span>';
 			echo '<span class="username"><a href="department-'.$user.'">'.$GLOBALS['header_name'].'</a></span>';
 		}
@@ -64,14 +64,12 @@ function echo_data($user,$lev){
 			echo '<span class="username"><a href="http://eportal.cjcu.edu.tw/Syllabus/Home/Eportfolio">'.$GLOBALS['header_name'].'</a></span>';
 		}
 	}	
-	else echo '<span><a href="#" id="login-btn">登入</a></span>';
+	else echo '<span><a href="company_add.php">廠商註冊</a></span><span><a href="#" id="login-btn">登入</a></span>';
 }
 
 
 
 ?>
-
-
 
 <div id="header" class="div-align">
 <script>
@@ -187,7 +185,7 @@ function echo_data($user,$lev){
 <input type="submit" class="btn-submit-login" name="button" value="登入" />
 <a href="forgotpwd.php">忘記密碼</a> 
 
-<p class="login-hint">學生請選擇學校登入，廠商未註冊請先<a href="company_add.php" class="login-signup">註冊新帳號</a>。</p>
+<p class="login-hint">學生帳密如同學生系統，系所單位帳密請聯絡職發組開通。</p>
 </div>
 </div>
 </div>
@@ -200,6 +198,9 @@ function echo_data($user,$lev){
     top: -3px;
 	color: #808080;
 	font-size: 13px;
+}
+.btn-submit-login{
+	margin-left: 28px;
 }
 </style>
 <script type="text/javascript">

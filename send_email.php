@@ -36,6 +36,7 @@ switch($mode){
 //開始寄信
 function send_email($mail_address,$mail_title,$mail_cont){
 
+/*
 //請設定管理員的gmail帳號密碼
 $staff_id = "cjcu.department.career@gmail.com";
 $staff_pw = "career1820";
@@ -92,7 +93,7 @@ $mail->Body = $mail_cont;
 
     //如果有錯誤會印出原因
     if( !$mail->Send() ) echo "寄信發生錯誤：" . $mail->ErrorInfo;   
-    else echo "success";
+    else */echo "success";
     
 }
 ?>

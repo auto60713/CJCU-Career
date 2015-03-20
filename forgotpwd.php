@@ -5,8 +5,8 @@
 	<meta charset="UTF-8">
 	<title>求助</title>
 	<link rel="stylesheet" type="text/css" href="css/main.css">
-	<link rel="stylesheet" type="text/css" href="css/home.css">
-	<link href="font-awesome/css/font-awesome.min.css" rel="stylesheet">
+
+	<link rel="stylesheet" type="text/css" href="font-awesome/css/font-awesome.min.css">
 	<script src="js/jquery-min.js"></script>
     <script src="js/jquery-migrate-min.js"></script>
 	<script src="js/full_height.js"></script>
@@ -54,6 +54,8 @@
 	$(function(){ 	
 
 		$('#view-header').load('public_view/header.php');
+		$("#menu").load('public_view/menu.html');
+		$("#footer").load('public_view/footer.html');
 
 
 		$( ".submit-btn" ).click(function() {
@@ -90,6 +92,9 @@
 <!-- 版頭 -->
 <div id="view-header" class="" _height="none"></div>
 
+<!-- 菜單 -->
+<div id="menu"></div>
+
 <!-- content  -->
 <div _height="auto">
 <div class="container margin-top20"><div class="fix-position">
@@ -109,7 +114,8 @@
 </div></div>
 </div>
 
-
+<!-- 頁尾訊息 -->
+<div id="footer"></div>
 
 </body>
 

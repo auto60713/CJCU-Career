@@ -70,7 +70,7 @@ else{
         	margin:0px 5px;
         }
         .com-name-limit{
-            max-width: 150px;
+            width: 150px;
         }
 
 	</style>
@@ -96,7 +96,7 @@ else{
         <div class="all-list">
             <table id="work_table" class="all-list-tb">
             	<h3>工作列表(僅維護工讀,正職。實習各系所負責)</h3>
-            	<tr><th>序號</th><th>發佈廠商</th><th>工作名稱</th><th>類型</th><th>狀態</th></tr>
+            	<tr><th>序號</th><th>工作名稱</th><th>發佈廠商</th><th>類型</th><th>狀態</th></tr>
             	<tr class="space"></tr>
             </table>
         </div>
@@ -211,7 +211,7 @@ else{
                     } 
 
 		        var	check = $('<td>').text(check_name);
-		    	var	tr = $('<tr>').addClass('work-data').append(w_id,com,work,prop,check);
+		    	var	tr = $('<tr>').addClass('work-data').append(w_id,work,com,prop,check);
 
 
 		    		body.append(tr);

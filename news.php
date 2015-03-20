@@ -7,7 +7,7 @@
 	<!-- 職場高手 -->
 
 	<link rel="stylesheet" type="text/css" href="css/main.css">
-	<link rel="stylesheet" type="text/css" href="css/home.css">
+	<link rel="stylesheet" type="text/css" href="css/area_div.css">
 	<link rel="stylesheet" type="text/css" href="font-awesome/css/font-awesome.min.css">
   <script src="js/jquery-min.js"></script>
   <script src="js/jquery-migrate-min.js"></script>
@@ -41,7 +41,7 @@
 
 
 <!-- 左區塊 -->
-<div id="inner4_area_1" class="area_box2">
+<div id="left_div" class="area_box2">
 
 	<h1 class="news_title"><a class="news_time"></a></h1> 
     <hr class="begin_hr">
@@ -55,7 +55,7 @@
 </div>
 
 <!-- 右區塊 -->
-<div id="inner4_area_2" class="area_box2"><h1 id="area_title"></h1>
+<div id="right_div" class="area_box2"><h1 id="area_title"></h1>
 
     <!-- 載入五筆 -->
 
@@ -158,7 +158,7 @@ var type_id = "";
                     link  = $('<a>').attr("href",'news.php?type='+type_id+'&article_id='+article_array[i].id).append(time,title,nevin), 
                     work  = $('<div>').addClass('list_one').append(link);
 
-                $('#inner4_area_2').append(work);
+                $('#right_div').append(work);
             }
 
 

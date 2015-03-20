@@ -23,7 +23,7 @@
 }
 #menu ul li a{
     font-weight: bold;
-    font-size: 20px;
+    font-size: 19px;
     color: #F0F0F0;
 }
 #menu ul .this_html,#menu ul .this_html:hover{
@@ -34,17 +34,25 @@
 </style>
 
 <ul class="div-align" id="menu_bar">
-    <!--
+
     <li><a href="index.php">首頁</a></li>
     <li><a href="work_page.php">工作列表</a></li>
-    <li><a href="http://www.career.com.tw/exam/cjcu/online_exam_login.asp">CPAS測驗</a></li>
-    <li><a href="cjcu_career/cc/index.php">校友平台</a></li>
-    -->
+    <li><a href="http://www.cjcu.edu.tw/cjcunews/news.php?mainunitid=7&newsunitid=140&subunitid=146" target="_blank">最新消息</a></li>
+    <li><a href="news.php?type=1">新鮮人專區</a></li>
+    <li><a href="http://sites.cjcu.edu.tw/career/AlbumList.html" target="_blank">活動花絮</a></li>
+    <li><a href="web_links.php">好站連連看</a></li>
+    <li><a href="http://www.career.com.tw/exam/cjcu/online_exam_login.asp" target="_blank">CPAS測驗</a></li>
+    <li><a href="cjcu_career/cc/index.php" target="_blank">校友平台</a></li>
+    <li><a href="http://sites.cjcu.edu.tw/career/home.html" target="_blank">職涯發展組</a></li>
+
+
+
+
 </ul>
 
 <script type="text/javascript">
 
-    //後端所有文章分類
+    /*後端所有文章分類
     $.ajax({
         type: 'POST',
         url: 'cjcu_career/cc/index.php/catalog/index',
@@ -71,6 +79,8 @@
 
         }
     });
+    */
+    
 
     //分析網頁名稱
 if(location.pathname.indexOf("index.php") == -1){
