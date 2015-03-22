@@ -156,10 +156,10 @@ form[id='detail'] input[type='text']{
 	margin: 5px;
 }
 
-#status{
-
+.stu-work-time{
+	font-size: 14.5px;
+    font-weight: bold;
 }
-
 .btn-submit{
 	margin-top: -10px;
 }

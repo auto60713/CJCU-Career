@@ -17,19 +17,26 @@ else if($_GET['workid']==null) { echo "錯誤的操作!"; exit; }
 
 </head>
 <style type="text/css">
+.work_time_detail{
+    width: auto;
+}
 .column{
 	display: inline;
 }
-#work_time_list{
-	margin-bottom: 20px;
-}
 #work_time_list td{
 	min-width: 40px;
+    height: 30px;
 	text-align: center;
 	overflow: hidden;
 }
-#work_time_list td input{
+#work_time_list td .full-input{
 	width: 100%;
+}
+#work_time_list td .short-input{
+    width: 55px;
+}
+.work-time-td{
+    width: 140px;
 }
 .input{
 	color: #008ACC;
@@ -45,52 +52,114 @@ else if($_GET['workid']==null) { echo "錯誤的操作!"; exit; }
 div.ui-datepicker,.ui-timepicker-wrapper{
  font-size:10px;
 }
-.total-hour{
-    margin-right: 30px;
-}
 
-.work-time-ischeck{
-    color: #FF6060;
+.align{
+    margin-right: auto;
+    margin-left: auto;
+}
+.work_time_detail span.title{
+    display: inline-block;
+    width: 100%;
+    font-size: 22px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 3px;
+}
+.pay-type{
+    width: 590px;
+    margin-bottom: 3px;
+}
+.pay-type span{
+    margin-right: 30px;
+    margin-left: 30px;
+
+}
+.experience{
+    width: 95%;
+}
+.experience hr{
+    margin-top: 20px;
+    opacity: 0.6;
+}
+#work_time_list{
+    margin-bottom: 5px;
 }
 </style>
 <body>
     <h5 id="loading">資料載入中請稍後...</h5>
     <div class="work_time_detail" style="display:none;">
+        <span class="title is_setting">長榮大學學生服務助學時數暨表現稽核表</span>
+        <div class="pay-type align is_setting">
+            <span><input type="checkbox">服務助學(工讀)金</span>
+            <span><input type="checkbox">生活助學金</span>
+            <span><input type="checkbox">助學生服務學習</span>
+        </div>
         <form method="post" action="student_work_time_req.php">
     	<table id="work_time_list" border="2">
-            <tr>
+            <tr class="is_setting">
             	<td>系所班級</td><td class="input" id="stu_class"></td>
             	<td>姓名</td>        <td class="input" id="stu_name"></td>
             	<td>學號</td>        <td class="input" id="stu_no"></td>
+                <td>服務年/月</td>   <td class="input" id="list_time"></td>
+            </tr>
+            <tr class="is_setting">
+                <td>身分欄勾選</td>
+                    <td colspan="3"><input type="checkbox">曾接受服務助學(工讀)訓練研習</td>
+                    <td colspan="4"><input type="checkbox">曾接受志工基礎(或特殊)訓練</td>
             </tr>
             <tr>
-            	<td>工作名稱</td>    <td colspan="2" class="input" id="list_name"></td>
-            	<td>服務學年</td>   <td colspan="2" class="input" id="list_time"></td>
+                <td>工作名稱</td><td colspan="3" class="input" id="list_name"></td><td colspan="4" class="is_setting">第一次銀行帳號：______________________</td>
             </tr>
-
             <tr class="header">
-            	<td>日期</td><td>星期</td><td>開始時間</td><td colspan="2">服務內容</td><td>時數</td>
+            	<td>日期</td><td>星期</td><td>起止時間</td><td colspan="4">服務內容</td><td>時數</td>
             </tr>
             <tr class="key-in">
 
 
                 <input type="hidden" name="work_id" value="<?php echo $_GET['workid']; ?>">
-                <td><input type="text" val="" name="work_date" id="work_date" placeholder="選擇日期"/></td>
-                <td><input type="text" val="" name="work_day" id="work_day" placeholder="自動產生"/></td>
-                <td><input type="text" val="" name="work_time" id="work_time" placeholder="選擇時間"/></td>
-    <td colspan="2"><input type="text" val="" name="work_matter" placeholder="請輸入"/></td>
-                <td><input type="text" val="" name="work_hour" placeholder="0"/></td>
-
+                <td><input type="text" val="" name="work_date"    id="work_date" class="full-input"placeholder="選擇日期"/></td>
+                <td><input type="text" val="" name="work_day"     id="work_day"  class="full-input"placeholder="自動產生"/></td>
+                <td class="work-time-td">
+                    <input type="text" val="" name="work_bg_time" class="short-input"placeholder="開始時間"/>
+                    <a>~</a>
+                    <input type="text" val="" name="work_ed_time" class="short-input"placeholder="結束時間"/>
+                </td>
+    <td colspan="4"><input type="text" val="" name="work_matter" class="full-input"placeholder="請輸入"/></td>
+                <td><input type="text" val="" name="work_hour"   class="full-input"placeholder="自動產生"/></td>
+                <td class="delet-tb"><input type="submit" name="button" value="新增"/></td>
+            </tr>
+            <tr style="font-weight: bold;">
+                <td colspan="6"></td><td>助學總時數</td><td><span class="total-hour"></span></td>
             </tr>
         </table>
+    <div class="is_setting">
+        <div class="experience align">
+            <span style="font-weight: bold;">服務心得反思：</span>
+            <span style="font-size: 14px;">(約50~100個字，注意禮貌、文字工整，勿用鉛筆)</span>
+            <hr>
+            <hr>
+            <hr>
+            <hr>
+            <hr>
+        </div>
+        <table id="work_time_list" border="2" style="width:99%">
+            <tr>
+                <td style="width:20%">單位對助學生<br>服務表現評分</td><td style="width:35%"></td>
+                <td style="width:15%">服務績效</td><td style="width:30%"></td>
+            </tr>
+            <tr style="font-weight: bold;">
+                <td colspan="2">單位承辦人</td><td colspan="2">單位主官簽章</td>
+            </tr>
+            <tr style="height:40px;">
+                <td colspan="2"></td><td colspan="2"></td>
+            </tr>
+       </table> 
+    </div>
 
         <div>
-        <span>紅色項目為校方已經查閱並批准工讀金</span><br>
-        <input type="text" val="" id="now_hour_pay" placeholder="填入時薪自動換算"/><span class="total-hour"> 總時數：</span> <span class="total-pay"></span>
+        <input type="text" val="" id="now_hour_pay" placeholder="填入時薪自動換算"/> <span class="total-pay"></span>
         </div><br>
 
-    	<input type="submit" name="button" value="新增一筆紀錄" />　　
-        <button type="button" id="clear_all_red">刪除所有紅色項目</button> 
         <input type="button" name="button" id="view" value="預覽">
         <input type="button" name="button" id="back" value="上一頁">
         </form>
@@ -122,11 +191,10 @@ $(function(){
                                             echo_work_time_array($_GET['workid'],$_GET['studid']);
 	?>
 
-    $( "#work_date" ).on('focus', function(){
-        $(this).datepicker({
+    $( "#work_date" ).datepicker({
             dateFormat: 'yy-mm-dd'
-        });
     });
+    
 
     $( "#work_date" ).change(function() {
         var date = $(this).datepicker('getDate');
@@ -162,17 +230,38 @@ $(function(){
 	$('#stu_no').text(student_profile_array['sd_no']);
         
     $('#list_name').text(work_detail_array['name']);
-    $('#list_time').text(list_time);
+    $('#list_time').text(list_time+"/N");
 
    
     //時間API
-    $('#work_time').timepicker({ 
+    $('input[name="work_bg_time"]').timepicker({ 
         'timeFormat': 'H:i',
         'step': 60,
-        'minTime': '6:00',
-        'maxTime': '21:00',
+        'minTime': '8:00',
+        'maxTime': '17:00'
     });
-    
+    //開始時間牽制結束時間
+    $('input[name="work_bg_time"]').change(function() {
+        var mintime = parseInt($(this).val().split(':')[0]);
+        $('input[name="work_ed_time"]').timepicker('option', 'minTime', mintime+':00');
+        $('input[name="work_ed_time"]').timepicker('option', 'maxTime', (mintime+4)+':00');
+    });
+
+   
+    $('input[name="work_ed_time"]').timepicker({ 
+        'timeFormat': 'H:i',
+        'step': 60,
+    });
+    //結束時間決定總時數
+    $('input.short-input').change(function() {
+        var work_bg_time = parseInt($('input[name="work_bg_time"]').val().split(':')[0]),
+            work_ed_time = parseInt($('input[name="work_ed_time"]').val().split(':')[0]),
+            work_hour = work_ed_time - work_bg_time;
+        if(work_bg_time<=12 && work_ed_time>12) work_hour -= 1;
+        if(work_hour>=0) $('input[name="work_hour"]').val(work_hour);
+        else $('input[name="work_hour"]').val(0);
+    });
+
 
     for(var i=0;i<work_time_array.length;i++){
 
@@ -181,8 +270,8 @@ $(function(){
 
     var work_date = $('<td>').addClass(check_class).text(work_time_array[i]['date']),
         work_day = $('<td>').addClass(check_class).text(work_time_array[i]['day']),
-        work_time = $('<td>').addClass(check_class).text(work_time_array[i]['time']),
-        work_matter = $('<td>').addClass(check_class).text(work_time_array[i]['matter']).attr("colspan","2"),
+        work_time = $('<td>').addClass(check_class).text(work_time_array[i]['bg_time']+'~'+work_time_array[i]['ed_time']),
+        work_matter = $('<td>').addClass(check_class).text(work_time_array[i]['matter']).attr("colspan","4"),
         work_hour = $('<td>').addClass(check_class).text(work_time_array[i]['hour']).addClass('work-hour'),
         delet_btn = $('<button>').attr({type:"button",name:"delet_btn",value:work_time_array[i]['no']}).text("刪除"),
         delet = $('<td>').addClass('delet-tb').append(delet_btn),
@@ -198,7 +287,7 @@ $(function(){
 
         total_hour += parseInt($( ".work-hour.work-time-nocheck:eq("+i+")" ).text());
     }
-    $( ".total-hour" ).append(total_hour+'小時'); $( ".total-pay" ).text('總時薪：??');
+    $( ".total-hour" ).append(total_hour); $( ".total-pay" ).text('總時薪：??');
 
     $( "#now_hour_pay" ).change(function() {
         var now_hour_pay = $( "#now_hour_pay" ).val();
@@ -240,6 +329,12 @@ $(function(){
         $(".detail td:eq(3)").css( "width","200px" );
 
     }
+    else{
+        $('.is_setting').remove();
+        $('#list_name').attr('colspan','7');
+    }
+
+    $( ".work_time_detail" ).css('width',$( "#work_time_list" ).width()+10);
 });
 </script>
 

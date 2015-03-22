@@ -59,6 +59,11 @@
 	margin-top: 20px;
 	color: #585858;
 }
+.work-img-stu{
+	margin: 10px;
+	margin-top: 25px;
+	color: #585858;
+}
 .work-img-match{
 	font-size: 40px;
 	margin:10px;
@@ -75,11 +80,7 @@
 	text-decoration: none;
 	font-size: 27px;
 }
-.work-hint{
-	color: #555;
-	font-size: 13px;
-	line-height: 18px;
-}
+
 #search-box{
 	margin-bottom: 15px;
 }
@@ -137,6 +138,7 @@
 }
 .check-lightbox{
 	font-size: 14.5px;
+	font-weight: bold;
 }
 .check-lightbox:hover{
 	cursor: pointer;
@@ -219,7 +221,7 @@
 
 .staff-apply-box{
 	padding: 20px;
-	margin-top: 10%;
+	margin-top: 8%;
 	text-align: left;
 	display: inline-block;
 	width: 30%;

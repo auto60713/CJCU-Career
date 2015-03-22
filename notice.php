@@ -46,15 +46,18 @@ $usr = $_SESSION['username'];
 		// 0 與 1 用來判斷是否要再該訊息加上背景顏色加強標註
 		function appenData(array,n){
 
-			var news_bg = (n==1)? '#efe' : ' ';
+			//var news_bg = (n==1)? '#efe' : ' ';
 			
 			    for(var i=0;i<array.length;i++){
-			    	
-			       var msg = $('<a>').addClass('notice-msg').html('  '+array[i].mcontent).prepend($('<i>').addClass(array[i].icon)),
-			       	   time = $('<a>').addClass('notice-time').append(array[i].time.split(' ')[0]),
-			       	   content = $('<div>').addClass('notice-content').append(msg).append(time),
-			       	   box=$('<a>').addClass('notice-list').append(content);
-			       c.prepend(box);
+
+			    	if(array[i].icon=="fa fa-times") var icon = $('<span>').addClass('notice-icon-times').append($('<i>').addClass(array[i].icon));
+			    	else icon = $('<span>').addClass('notice-icon').append($('<i>').addClass(array[i].icon));
+			        
+			        var msg = $('<a>').addClass('notice-msg').html('  '+array[i].mcontent).prepend(icon),
+			       	    time = $('<a>').addClass('notice-time').append(array[i].time.split(' ')[0]),
+			       	    content = $('<div>').addClass('notice-content').append(msg).append(time),
+			       	    box=$('<a>').addClass('notice-list').append(content);
+			        c.prepend(box);
 			    }	
 		}
 		
@@ -77,7 +80,7 @@ $usr = $_SESSION['username'];
 			.done(function(data) {
 		    	//data= data.trim();
                	if(data=='')console.log('no any data');            	
-               	else if(data=='0')location.replace('../../../cjcuweb/login.php');               
+               	else if(data=='0')location.replace('index.php');               
                	else{
          		//var arr = JSON.parse(data);
                	appenData(data,1);

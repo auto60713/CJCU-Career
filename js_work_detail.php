@@ -91,20 +91,16 @@ $sql = "select * from work_time where work_id=? and stud_id=? ORDER BY date ASC"
 $para = array($work_id,$stud_id);
 $stmt = sqlsrv_query($conn, $sql, $para);
 
-
 if($stmt) {
-
     $work_time_array = array();
-
 	while( $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC) ) {
 		
+		array_walk($row, 'trim_value');
 		$work_time_array[] = $row;
 	}
-
 	echo "var work_time_array = ". json_encode($work_time_array) . ";";	
 }
 else die(print_r( sqlsrv_errors(), true));
-
 }
 
 
