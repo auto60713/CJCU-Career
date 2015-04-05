@@ -40,7 +40,7 @@ else{
 		    		tita = $('<a>').attr('href', 'work-'+work_list_array[i]['wid']).text(work_list_array[i]['wname']),
 		    		tit = $('<h1>').addClass('work-tit').append(tita),
 		    		hint = $('<div>').addClass('manage-company-herf').append(work_list_array[i]['zone'],'/',work_list_array[i]['prop']+'/',companyherf),
-	                wtime = $('<a>').attr('href', 'student_manage.php#work'+work_list_array[i]['wid']).text('工讀單').addClass('stu-work-time'),
+	                wtime = $('<a>').attr('href', 'student_manage.php#times'+work_list_array[i]['wid']).text('工讀單').addClass('stu-work-time'),
 
 		    		hint2 = $('<p>').attr({workid:work_list_array[i]['wid'],audit:work_list_array[i]['ch']}).addClass('check-lightbox'),
                     teacher = $('<p>').text('負責老師 '+work_list_array[i]['tea_name']),

@@ -66,7 +66,7 @@ if (preg_match("/-/i", $companyid)) $companyid = strstr($companyid,'-',true);
 
 						var hidden1 = $('<input>').attr({value: event.data.arr['user_id'], type:'hidden', id:'hidden_id'}),
 							icon = $('<i>').addClass('fa fa-pencil-square-o'),
-							close = $('<i>').addClass('fa fa-times').addClass('staff-apply-box-close'),
+							close = $('<i>').addClass('fa fa-times').addClass('stu-apply-box-close'),
 							tbox = $('<h1>').append(icon).append(' '+event.data.arr['user_id']).css('font-size', '28px').append(close),
 							span = $('<span>').text('審核說明：').css('color', '#444'),
 							t = $('<textarea>').attr({id: 'staff-audit-apply-msg',placeholder:'選填'}),
@@ -108,14 +108,14 @@ if (preg_match("/-/i", $companyid)) $companyid = strstr($companyid,'-',true);
 		                data: {mode:'work-prop',workid:<?php echo (int)$_GET['workid']; ?>},
 		                success: function (data) {
 		                	if(data ==3){
-		                		var work_time_link = $('<a>').attr({href:"student_work_time.php?studid="+work_apply_list_array[i]['user_id'].trim()+"&workid="+work_apply_list_array[i]['work_id']+"&view=1",target:"_blank"}).text("工作日誌"),
+		                		var work_time_link = $('<a>').attr({href:"student_work_time_list.php?studid="+work_apply_list_array[i]['user_id'].trim()+"&workid="+work_apply_list_array[i]['work_id'],target:"_blank"}).text("工讀單"),
 					                text = $('<p>').text("學生的實習分數："+work_apply_list_array[i]['score']+"分"),
 					                score = $('<input>').addClass('score').attr({type:"text",placeholder:"打分數",name:work_apply_list_array[i]['user_id'].trim()}),
 					                submit = $('<button>').attr({type:"button",name:"score_btn","no":work_apply_list_array[i]['no'],value:work_apply_list_array[i]['user_id'].trim()}).text("確定");
 						        subbox3.append(work_time_link,text,score,submit);
 		                	}
 		                	else if(data ==1){
-                                subbox3.append($('<a>').attr({href:"student_work_time.php?studid="+work_apply_list_array[i]['user_id'].trim()+"&workid="+work_apply_list_array[i]['work_id']+"&view=1",target:"_blank"}).text("工讀單").addClass('gondo'));
+                                subbox3.append($('<a>').attr({href:"student_work_time_list.php?studid="+work_apply_list_array[i]['user_id'].trim()+"&workid="+work_apply_list_array[i]['work_id']+"&view=1",target:"_blank"}).text("工讀單").addClass('gondo'));
 		                	}
 
 		                }

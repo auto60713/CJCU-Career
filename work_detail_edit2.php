@@ -28,6 +28,11 @@ if (preg_match("/-/i", $companyid)) $companyid = strstr($companyid,'-',true);
 <html>
 <head>
 	<meta charset="UTF-8">
+	<style type="text/css">
+        .company-audit-censored{
+            width: 70px;
+        }
+	</style>
 </head>
 <body>
 	
@@ -151,7 +156,7 @@ if (preg_match("/-/i", $companyid)) $companyid = strstr($companyid,'-',true);
 		for(var i=0;i<audit_array.length;i++){
 
 			var icontxt2 = (audit_array[i].censored==1)? 'fa fa-check': 'fa fa-times',
-				statustxt2 = (audit_array[i].censored==1)? ' 審核通過': ' 審核不通過',
+				statustxt2 = (audit_array[i].censored==1)? ' 通過': ' 不通過',
 				time = $('<span>').addClass('company-audit-time').text(audit_array[i].time.split(' ')[0]),
 				icon = $('<i>').addClass(icontxt2),
 				censored = $('<span>').addClass('company-audit-censored').append(icon,statustxt2),

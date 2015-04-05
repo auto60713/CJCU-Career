@@ -236,7 +236,8 @@ div.ui-datepicker{
 	echo_work_detail_edit_array($conn,$_GET['workid']);
 	}
 	//應該要做一個回傳身分的ajax
-	if( $_SESSION['level']!=4 && $_GET['mode']!='edit' ) echo '$("#btn-instead-work").show(); $("#btn-copy-work").show();';
+	if( $_GET['mode']!='edit' ) echo '$("#btn-copy-work").show();';
+    if( $_SESSION['level']!=4 ) echo '$("#btn-instead-work").show();';
 
 	?> 
 	

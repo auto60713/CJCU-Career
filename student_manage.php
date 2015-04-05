@@ -12,10 +12,8 @@ else{$stud_id = trim($_SESSION['username']);}
 	<link rel="stylesheet" type="text/css" href="css/work_detail_edit.css">
 	<link rel="stylesheet" type="text/css" href="css/profile.css">
 	<link rel="stylesheet" type="text/css" href="font-awesome/css/font-awesome.min.css">
-	<link rel="stylesheet" type="text/css" href="http://code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
-    <link rel="stylesheet" type="text/css" href="css/jquery.timepicker.css" />
-	<script src="js/jquery-min.js"></script>
-    <script src="js/jquery-migrate-min.js"></script>
+	<script type="text/javascript" src="js/jquery-min.js"></script>
+    <script type="text/javascript" src="js/jquery-migrate-min.js"></script>
 	<script type="text/javascript" src="js/jquery.hashchange.min.js"></script>
 	<script type="text/javascript" src="js/upload_img.js"></script>
 	<script>
@@ -33,9 +31,10 @@ else{$stud_id = trim($_SESSION['username']);}
 			case 'student-applywork':doajax(1);break;
 			case 'student-notice':doajax(2);break;
 			case 'explanation':doajax(12);break;
-
-			default:doajax(5);
 			}
+			//特殊處理
+			if(loc.indexOf("times") >= 0 ) doajax(5);
+            else if(loc.indexOf("timelist") >= 0 ) doajax(6);
 
 		});
 
@@ -66,13 +65,20 @@ else{$stud_id = trim($_SESSION['username']);}
 				url = "notice.php";	
 				break;
 
-				// 工讀單
+				// 工讀單列表
 				case 5:
 				tpe = 'get';
-				var wid = location.hash.replace( /^#work/, '' );
+				var wid = location.hash.replace( /^#times/, '' );
 				para = {studid:<?php echo "\"".$stud_id."\"" ?>,workid:wid};
+				url = "student_work_time_list.php";	
+				break;
+
+				// 工讀單
+				case 6:
+				tpe = 'get';
+				var lid = location.hash.replace( /^#timelist/, '' );
+				para = {studid:<?php echo "\"".$stud_id."\"" ?>,listid:lid};
 				url = "student_work_time.php";	
-				var goback = $('<a>').attr({href:'#student-applywork',id:'gobackbtn'}).append($('<i>').addClass('fa fa-reply').append(' '));
 				break;
 
 				case 12:
@@ -91,7 +97,7 @@ else{$stud_id = trim($_SESSION['username']);}
 		    
             if(idx==12) idx=3;
             $('#right-box-title').text($('.list:eq('+idx+')').text());
-            if(idx==5){
+            if(idx==5 || idx==6){
             	$('#right-box-title').text('工讀單');
             	idx=1;
             }

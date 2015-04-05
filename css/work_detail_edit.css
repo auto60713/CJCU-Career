@@ -228,12 +228,17 @@
 	min-width: 480px;
 	background-color: rgba(255,255,255,1);
 }
-.staff-apply-box-close{
+.stu-apply-box-close{
     position: relative;
     left: 55%; 
 	color: #AAA;
 }
-.staff-apply-box-close:hover{
+.staff-apply-box-close{
+    position: relative;
+    left: 95%; 
+	color: #AAA;
+}
+.staff-apply-box-close:hover,.stu-apply-box-close:hover{
 	color: #555;
 	cursor: pointer;
 }

@@ -7,8 +7,7 @@ if (!file_exists($filename)) $filename = 'img_company/default.png';
 <head>
 	<meta charset="UTF-8">
 	<title></title>
-	<link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
-	<link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
 	<link rel="stylesheet" type="text/css" href="css/manage.css">
 	<link rel="stylesheet" type="text/css" href="css/profile.css">
 	<script src="js/jquery-min.js"></script>
@@ -28,6 +27,7 @@ if (!file_exists($filename)) $filename = 'img_company/default.png';
 		$('title , #profile-name').text(company_detail_array['ch_name']);
 		$('#ch_name').text(company_detail_array['ch_name']);
 		$('#en_name').text(company_detail_array['en_name']);
+	    $('#uni_num').text(company_detail_array['uni_num']);
 		$('#boss').text(company_detail_array['boss_name']);
 		$('#contact').text(company_detail_array['contact']);
 		$('#stuffnum').text(company_detail_array['staff_num']);
@@ -79,6 +79,7 @@ if (!file_exists($filename)) $filename = 'img_company/default.png';
 <p><span class="profile-span-title">中文名稱</span><span id="ch_name"></span></p>
 <p><span class="profile-span-title">英文名稱</span><span id="en_name"></span></p>
 <p><span class="profile-span-title">公司類型</span><span id="cptype"></span></p>
+<p><span class="profile-span-title">統一編號</span><span id="uni_num"></span></p>
 <p><span class="profile-span-title">負責人</span><span id="boss"></span></p>
 <p><span class="profile-span-title">聯絡人</span><span id="contact"></span></p>
 <p><span class="profile-span-title">員工數</span><span id="stuffnum"></span></p>

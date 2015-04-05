@@ -127,8 +127,8 @@ else{
 			var hidden1 = $('<input>').attr({value: hidden_id, type:'hidden', id:'hidden_id'}),
 				hidden2 = $('<input>').attr({value: hidden_t, type:'hidden',id:'hidden_t'}),
 				icon = $('<i>').addClass(icontype),
-				tbox = $('<h1>').append(icon).append(' '+tit).css('font-size', '28px').attr({id:'obj-tit'}),
-				close = $('<i>').addClass('fa fa-times').addClass('staff-apply-box-close'),
+				close = $('<h1>').append( $('<i>').addClass('fa fa-times').addClass('staff-apply-box-close') ),
+				tbox = $('<h1>').append(icon,' '+tit).css('font-size', '28px').attr({id:'obj-tit'}),
 				span = $('<span>').text('審核說明：'),
 				t = $('<textarea>').attr({id: 'staff-audit-apply-msg'}).text("感謝您的參與，該項目已被審核通過。"),
 				ok = $('<input>').attr({id: 'staff-audit-apply-ok', type: 'button',value :'通過'}).on('click', function(event) {
@@ -138,9 +138,8 @@ else{
 					submit_audit(false);
 				}),
 				errtext= $('<span>').attr('id', 'staff-audit-error'),
-				gbtn = $('<div>').addClass('staff-apply-gbtn').append(errtext).append(ok).append(no),
-				box = $('<div>').addClass('staff-apply-box').append(close).append(tbox).append("<hr><br>")
-				.append(span).append("<br>").append(t).append("<br>").append(gbtn).append(hidden1).append(hidden2),
+				gbtn = $('<div>').addClass('staff-apply-gbtn').append(errtext,ok,no),
+				box = $('<div>').addClass('staff-apply-box').append(close,tbox,"<hr><br>",span,"<br>",t,"<br>",gbtn,hidden1,hidden2),
 
 				bg = $('<div>').addClass('staff-apply-form').append(box);
 

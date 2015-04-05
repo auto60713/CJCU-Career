@@ -81,14 +81,43 @@ function return_work_detail_array($work_id){
 
 
 
-//該工作的工讀單
-function echo_work_time_array($work_id,$stud_id){
+//該工作的所有工讀單
+function echo_work_time_list_array($work_id,$stud_id){
 
 include("sqlsrv_connect.php");
 
-$sql = "select * from work_time where work_id=? and stud_id=? ORDER BY date ASC";
+$sql = "select * from work_time_list where work_id=? and stud_id=?";
 
 $para = array($work_id,$stud_id);
+$stmt = sqlsrv_query($conn, $sql, $para);
+
+if($stmt) {
+    $work_time_list_array = array();
+	while( $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC) ) {
+		
+		//array_walk($row, 'trim_value');
+		$row['stud_id']=trim($row['stud_id']);
+		$row['year']   =trim($row['year']);
+		$row['month']  =trim($row['month']);
+		$work_time_list_array[] = $row;
+	}
+	echo "var work_time_list_array = ". json_encode($work_time_list_array) . ";";	
+}
+else die(print_r( sqlsrv_errors(), true));
+}
+
+
+
+
+
+//該工作的工讀單項目
+function echo_work_time_array($list_no){
+
+include("sqlsrv_connect.php");
+
+$sql = "select * from work_time where list_no=? ORDER BY date ASC";
+
+$para = array($list_no);
 $stmt = sqlsrv_query($conn, $sql, $para);
 
 if($stmt) {
@@ -101,6 +130,17 @@ if($stmt) {
 	echo "var work_time_array = ". json_encode($work_time_array) . ";";	
 }
 else die(print_r( sqlsrv_errors(), true));
+
+//抓取該工作的名字
+$sql = "select wk.name wname from work_time_list wl,work wk where wl.no=? and wk.id=wl.work_id";
+$stmt = sqlsrv_query($conn, $sql, array($list_no));
+if($stmt) {
+
+$echo_work_name = "好棒棒";
+	while( $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC) ) {$echo_work_name = $row['wname'];}
+	echo "var echo_work_name = '". $echo_work_name . "';";	
+}
+
 }
 
 
