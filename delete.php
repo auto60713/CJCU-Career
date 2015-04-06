@@ -33,6 +33,10 @@ switch($_POST['mode']){
   case 2:
       delete_work_time($_POST['no']);
   break;
+
+  case 3:
+      delete_work_time_list($_POST['no']);
+  break;
 }
 
 
@@ -118,6 +122,32 @@ include("sqlsrv_connect.php");
     if($stmt) {
         sqlsrv_free_stmt($stmt);
         echo "1";
+    }
+    else die(print_r( sqlsrv_errors(), true));
+
+
+}
+
+//取消工讀單
+function delete_work_time_list($no){
+
+include("sqlsrv_connect.php");
+
+    $sql = "DELETE FROM work_time_list WHERE no = ?";
+    $stmt = sqlsrv_query($conn, $sql, array($no));
+
+    if($stmt) {
+
+        //一起清除關聯項目
+        $sql = "DELETE FROM work_time WHERE list_no = ?";
+        $stmt = sqlsrv_query($conn, $sql, array($no));
+
+        if($stmt) {
+
+            sqlsrv_free_stmt($stmt);
+            echo "Success";
+        }
+        else die(print_r( sqlsrv_errors(), true));
     }
     else die(print_r( sqlsrv_errors(), true));
 

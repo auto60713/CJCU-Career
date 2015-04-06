@@ -1,5 +1,5 @@
 <?php session_start(); 
-header("location:student_work_time.php?studid=".trim($_SESSION['username'])."&listid=".$_POST['list_no']);
+
 
 switch($_POST['mode']){
 
@@ -70,7 +70,7 @@ else{
     }
    
 }
-
+header("location:student_work_time.php?studid=".trim($_SESSION['username'])."&listid=".$_POST['list_no']);
 }
 
 

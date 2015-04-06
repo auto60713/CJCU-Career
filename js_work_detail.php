@@ -131,15 +131,21 @@ if($stmt) {
 }
 else die(print_r( sqlsrv_errors(), true));
 
-//抓取該工作的名字
-$sql = "select wk.name wname from work_time_list wl,work wk where wl.no=? and wk.id=wl.work_id";
+
+//抓取該工作的年月,名字
+$sql = "select wl.year,wl.month,wk.name wname from work_time_list wl,work wk where wl.no=? and wk.id=wl.work_id";
 $stmt = sqlsrv_query($conn, $sql, array($list_no));
 if($stmt) {
 
-$echo_work_name = "好棒棒";
-	while( $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC) ) {$echo_work_name = $row['wname'];}
+	while( $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC) ) {
+		$echo_work_date = trim($row['year']).'/'.$row['month'];
+		$echo_work_name = $row['wname'];
+	}
+	echo "var echo_work_date = '". $echo_work_date . "';";	
 	echo "var echo_work_name = '". $echo_work_name . "';";	
 }
+
+
 
 }
 

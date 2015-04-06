@@ -238,10 +238,8 @@ $(function(){
     $('#stu_name').text(student_profile_array['sd_name']);$('title').text(student_profile_array['sd_name']+'的工讀單');
 	$('#stu_no').text(student_profile_array['sd_no']);
         
-    var what_time = parseInt(work_time_array[0]['date'].split("-")[0])-1911;
-        what_time += "/"+parseInt(work_time_array[0]['date'].split("-")[1])
     $('#list_name').text( echo_work_name );
-    $('#list_time').text( what_time );
+    $('#list_time').text( echo_work_date );
 
    
     //時間API

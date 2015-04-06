@@ -32,6 +32,15 @@ a{
     color: #A9A9A9;
     font-style: oblique;
 }
+.delete-btn{
+    position: absolute;
+    margin: 5px;
+    cursor: pointer;
+    opacity: 0.6;
+}
+.delete-btn:hover{
+    opacity: 1;
+}
 </style>
 <body>
    
@@ -58,9 +67,10 @@ if(work_time_list_array.length!=0){
     for(var i=0;i<work_time_list_array.length;i++){
 
         var icon = $('<i>').addClass('fa fa-newspaper-o'),
+            delete_btn = $('<i>').attr({'id':'ctrl_bar','listno':work_time_list_array[i]['no']}).addClass('fa fa-times').addClass('delete-btn list-name');
             a_page = $('<a>').attr('href', 'student_work_time.php?studid='+work_time_list_array[i]['stud_id']+'&listid='+work_time_list_array[i]['no']+more).addClass('list-name');
             a_page.append(icon,work_time_list_array[i]['year']+'年'+work_time_list_array[i]['month']+'月的工讀單');
-        $('#work_time_list').append(a_page,$('<br>'));
+        $('#work_time_list').append(a_page,delete_btn,$('<br>'));
     }
 }
 else $('#work_time_list').append( $('<span>').text('沒有任何工讀單').addClass('nodata-timelist') );
@@ -84,7 +94,17 @@ else $('#work_time_list').append( $('<span>').text('沒有任何工讀單').addC
         });
     });
 
+    //刪除
+    $( ".delete-btn" ).click(function() {
+        list_no = $( this ).attr('listno');
 
+        $.ajax({
+          type: 'POST',
+          url: 'delete.php',
+          data: {mode:3,no:list_no},
+          success: function (data) { if(data=='Success') location.reload(); }
+        });
+    });
 
 
 

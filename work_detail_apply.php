@@ -94,13 +94,15 @@ if (preg_match("/-/i", $companyid)) $companyid = strstr($companyid,'-',true);
 					case 0:case 3:
 						subbox3.append(auditbtn);
 					break;
+					/*
 					case 1:
 						subbox3.append($('<div>').addClass('isapply').text('已錄取'));
 					break;
+					*/
 					case 2:
 						subbox3.append($('<div>').addClass('isnotapply').text('不錄取'));
 					break;	
-					case 4:case 5:
+					case 4:case 5:case 1:
 					$.ajax({
 		                type: 'POST',
 		                url: 'ajax_echo_name.php',
