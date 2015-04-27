@@ -8,8 +8,9 @@ function echo_work_list_array($work_length){
 include("sqlsrv_connect.php");
 
 $para = array();
+if($work_length == 0) $work_length = ""; else $work_length = "TOP ".$work_length;
 
-$sql = "select TOP ".$work_length." w.company_id cid, w.id wid,w.name wname,w.publisher pub,z.name zname,w.is_outside isout,p.name propname,[recruitment _no] rno,w.date date,w.recruited_date 
+$sql = "select ".$work_length." w.company_id cid, w.id wid,w.name wname,w.publisher pub,z.name zname,w.is_outside isout,p.name propname,[recruitment _no] rno,w.date date,w.recruited_date 
  from work w,zone z,work_prop p 
  where w.zone_id = z.id and work_prop_id = p.id and w.[check] = 1";
 //check=1 只秀出通過審核的工作

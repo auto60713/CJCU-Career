@@ -7,8 +7,6 @@
 <body>
 
 <?php
-header("Content-Type:text/html; charset=utf-8");
-
 include_once("cjcuweb_lib.php");
 // 立刻驗證登入身分，防止駭客繞過登入
 if(isset ($_SESSION['username'])){

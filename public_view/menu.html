@@ -1,5 +1,5 @@
 <style type="text/css">
-/* 菜單 */
+
 #menu{
     background-color: #991133;
     min-width: 1100px;
@@ -37,16 +37,13 @@
 
     <li><a href="index.php">首頁</a></li>
     <li><a href="work_page.php">工作列表</a></li>
-    <li><a href="http://www.cjcu.edu.tw/cjcunews/news.php?mainunitid=7&newsunitid=140&subunitid=146" target="_blank">最新消息</a></li>
     <li><a href="news.php?type=1">新鮮人專區</a></li>
-    <li><a href="http://sites.cjcu.edu.tw/career/AlbumList.html" target="_blank">活動花絮</a></li>
     <li><a href="web_links.php">好站連連看</a></li>
+    <li><a href="http://www.cjcu.edu.tw/cjcunews/news.php?mainunitid=7&newsunitid=140&subunitid=146" target="_blank">最新消息</a></li>
+    <li><a href="http://sites.cjcu.edu.tw/career/AlbumList.html" target="_blank">活動花絮</a></li>
     <li><a href="http://www.career.com.tw/exam/cjcu/online_exam_login.asp" target="_blank">CPAS測驗</a></li>
     <li><a href="cjcu_career/cc/index.php" target="_blank">校友平台</a></li>
     <li><a href="http://sites.cjcu.edu.tw/career/home.html" target="_blank">職涯發展組</a></li>
-
-
-
 
 </ul>
 
@@ -86,7 +83,7 @@
 if(location.pathname.indexOf("index.php") == -1){
 
     if(location.pathname.indexOf("news.php") == -1){
-        naaaame = location.pathname.split("cjcuweb/")[1].split('?')[0];
+        naaaame = location.pathname.split("/")[2];
     }
     else{
 

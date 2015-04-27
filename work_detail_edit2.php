@@ -57,8 +57,7 @@ if (preg_match("/-/i", $companyid)) $companyid = strstr($companyid,'-',true);
 	<!-- 該工作的審核狀態 -->
 	<div id='workedit-content-audit' class="workedit-content-hide" tabtoggle='workedit2'>
 		<h1 class="company-audit-status">工作狀況：</h1>
-		<p>歷史紀錄：</p>
-		<div class="company-audit-history" id="company-audit-history">無歷史紀錄</div>
+		<div class="company-audit-history" id="company-audit-history"><p>審核歷史紀錄：</p></div>
 	</div>
 	<!-- 工作刪除 -->
 	<div id='workedit-content-set' class="workedit-content-hide" tabtoggle='workedit2'>	
@@ -152,7 +151,7 @@ if (preg_match("/-/i", $companyid)) $companyid = strstr($companyid,'-',true);
 		}
 
 		var audit_history_container = $('#company-audit-history');
-		if(audit_array.length>0) audit_history_container.html('');
+		if(audit_array.length>0) audit_history_container.html( $('<p>').text("無審核歷史紀錄") );
 		for(var i=0;i<audit_array.length;i++){
 
 			var icontxt2 = (audit_array[i].censored==1)? 'fa fa-check': 'fa fa-times',
@@ -279,7 +278,6 @@ if (preg_match("/-/i", $companyid)) $companyid = strstr($companyid,'-',true);
 			         	data:{mode:0,workid:<?php echo (int)$_POST['workid']; ?>,workname:work_name},
                         success: function (data2) { 
                         	if(data2 != 0){
-                        		alert('刪除成功');
                     	        window.location.href = data2+'_manage.php#'+data2+'-work';
                         	}
 			      	    else alert('資料驗證不正確 無法刪除');

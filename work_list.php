@@ -1,7 +1,6 @@
 <?php session_start(); 
 if(isset($_SESSION['username'])) $company_id = $_SESSION['username']; 
-else{echo "No permission!"; exit;
-} 
+else{ echo "No permission!"; exit; } 
 ?>
 
 <!doctype html>

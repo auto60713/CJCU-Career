@@ -48,15 +48,6 @@
     padding-right: 15px;
     padding-bottom: 40px;
 }
-#master_div h1{
-  margin-left: 30px;
-}
-hr{
-  width: 93%;
-  color: #808080;
-  background-color: #808080;
-  height: 1px;
-}
 </style>
 <body>
 
@@ -70,15 +61,12 @@ hr{
 <!-- 主體 -->
 <div id="back_div" class="div-align">
 
-
 <!-- 主區塊 -->
 <div id="master_div">
-    <h1>好站連連看</h1>
-    <hr class="div-align">
 
+    <div class="links-show">
 
-
-
+    </div>
 </div>
 
 </div>
@@ -106,8 +94,14 @@ hr{
 
               var links_json = JSON.parse(data);
         
-              $('#master_div').append(links_json);
+              for(var i=0;i<links_json.length;i++){
 
+                  var link = $('<a>').attr({"href":links_json[i]['href'],"target":"_blank"}).text("► "+links_json[i]['name']),
+                      adata = $('<p>').append('link');
+
+                  $('.inks-show').append(adata);
+              }
+      
           }
         });
 

@@ -31,6 +31,7 @@ switch($_POST['mode']){
   case 5://新增廠商
       add_company($_POST['comid'],$_POST['comname']);
   break;
+
 }
 
 

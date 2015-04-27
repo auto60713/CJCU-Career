@@ -1,5 +1,4 @@
-<?php
-session_start();
+<?php session_start();
 include_once("cjcuweb_lib.php");
 
 // 防止駭客繞過登入
@@ -17,26 +16,20 @@ if(isset ($_SESSION['username'])){
 	$company_address = trim($row[0]);
 	$company_phone = trim($row[1]);
 
-
-
 	// 編輯模式,檢查該工作是否為其公司,否則顯示錯誤
 	if($_GET['mode']=='edit'){
 			
 		if(!isCompanyWork($conn,$_SESSION['username'],$_GET['workid'])){
-			if($_SESSION['level']!=$level_staff&&$_SESSION['level']!=$level_department){
-			    echo 'No permission!';
-			    exit();
+			if( $_SESSION['level'] != $level_staff && $_SESSION['level'] != $level_department ){
+			    echo 'No permission!'; exit();
 			}
 		}
-
 	}
-
 
 }
 else{
 //重定向瀏覽器 且 後續代碼不會被執行 
-header("Location: index.php"); 
-exit;
+header("Location: index.php"); exit;
 }
 
 
@@ -107,6 +100,7 @@ div.ui-datepicker{
 	background-color: #67B4B4;
 }
 .zone_echo{
+	font-style: italic;
 	color: #808080;
 }
 </style>
@@ -160,7 +154,7 @@ div.ui-datepicker{
 
 <tr>
 	<td class='td1'>工作類別：</td>
-	<td><input type="radio" name="isoutside" value="0" checked="true">校外工作
+	<td><input type="radio" name="isoutside" value="0" class="out-school" checked="true">校外工作
 	    <input type="radio" name="isoutside" value="1" class="in-school">校內工作
 	</td>
 </tr>
@@ -224,18 +218,16 @@ div.ui-datepicker{
 
 <script>
 
-	
 	<?php
-	// php load some help data for js array
+
 	include_once("js_search_work_data.php"); echo_work_sub_data();
 	include_once('js_work_list.php'); echo_work_manage_list_array($_SESSION['username']);
 	include_once('js_match_list.php'); echo_com_list();
-	// if it's edit mode and load init data to js array
+
 	if($_GET['mode']=='edit'){
-	include_once('js_work_detail.php');
-	echo_work_detail_edit_array($conn,$_GET['workid']);
+	include_once('js_work_detail.php'); echo_work_detail_edit_array($conn,$_GET['workid']);
 	}
-	//應該要做一個回傳身分的ajax
+
 	if( $_GET['mode']!='edit' ) echo '$("#btn-copy-work").show();';
     if( $_SESSION['level']!=4 ) echo '$("#btn-instead-work").show();';
 
@@ -293,15 +285,31 @@ div.ui-datepicker{
 			});
 		});
 
-        //校內工讀 直接套牢台南地區
+        //重新載入國內外地區
+        $('#zone').change(function(){ change_zone_list(); });
+
+		function change_zone_list(){
+			var zone = $('#zone').val();
+			$("#zone_name option").remove();
+
+			$.ajax({
+			    type:"POST",
+			    async:false, 
+			    url:"ajax_zone_list.php",
+			    data:"zone="+zone,
+			    success:function(msg){ $('#zone_name').html(msg); }
+			});
+		}
+
+        //校內工讀 直接選擇台南地區
         $('.in-school').click(function() {
            if($('.in-school').is(':checked')){
 
                $('#zone_name').val(4);
                $('.zone_echo').text("校內工作自動配對台南市");
            }
-           else $('.zone_echo').text("");
         });
+        $('.out-school').click(function(){ $('.zone_echo').text(""); });
 
 
 
@@ -338,8 +346,6 @@ div.ui-datepicker{
 			});
 		});
 		
-
-
 
 		// 如果工作是實習 列出所有系所
 		$('#work_prop').change(function() {
@@ -393,11 +399,6 @@ div.ui-datepicker{
         });
 
 
-		// 工作地點改變時，用AJAX列出地點細目
-		$('#zone').change(function() {
-			// 清空地點細目
-			change_zone_list();
-		});
 		// 勾選了"同公司地址",自動輸入
 		$("#address_same").click( function(){
 	   		if( $(this).is(':checked') ) $('#address').val($('#hidden_address').val());
@@ -409,20 +410,6 @@ div.ui-datepicker{
 	   		else $('#phone').val('');
 		});
 
-
-		function change_zone_list(){
-			var zone = $('#zone').val();
-			$("#zone_name option").remove();
-			// 執行AJAX取得細目資料
-			$.ajax({
-			type:"POST",
-			async:false, 
-			url:"ajax_zone_list.php",
-			data:"zone="+zone,
-			success:function(msg){ $('#zone_name').html(msg);},
-			error: function(){alert("網路連線出現錯誤!");}
-			});
-		}
 
 
 
@@ -461,7 +448,6 @@ div.ui-datepicker{
 								$('#lightbox-copy-work').fadeOut(100);
 
 							});
-
 
 						});
 

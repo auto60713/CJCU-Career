@@ -48,7 +48,7 @@ else if($_GET['listid']==null) { echo "錯誤的操作!"; exit; }
     color: #008ACC;
     font-weight: bold;
 }
-.delet-tb{
+.no-border{
     border: 0px solid black;
 }
 div.ui-datepicker,.ui-timepicker-wrapper{
@@ -80,8 +80,9 @@ div.ui-datepicker,.ui-timepicker-wrapper{
     width: 95%;
 }
 .experience hr{
-    margin-top: 20px;
     opacity: 0.6;
+    margin-top: 2px; 
+    margin-bottom: 2px; 
 }
 #work_time_list{
     margin-bottom: 5px;
@@ -91,6 +92,14 @@ div.ui-datepicker,.ui-timepicker-wrapper{
     color: #A9A9A9;
     font-style: oblique;
 }
+#review{
+    margin-top: 10px; 
+    margin-bottom: 10px; 
+}
+.pass-WTL{
+    float: right;
+}
+
 </style>
 <body>
     <h5 id="loading">資料載入中請稍後...</h5>
@@ -101,7 +110,7 @@ div.ui-datepicker,.ui-timepicker-wrapper{
             <span><input type="checkbox">生活助學金</span>
             <span><input type="checkbox">助學生服務學習</span>
         </div>
-        <form method="post" action="student_work_time_req.php">
+        <form method="post" action="student_work_time_req.php" id="form_check">
         <!--隱藏資訊 表id跟模式-->
         <input type="hidden" name="list_no" value="<?php echo $_GET['listid']; ?>">
         <input type="hidden" name="mode"    value="time"/>
@@ -136,21 +145,17 @@ div.ui-datepicker,.ui-timepicker-wrapper{
                 <td colspan="4">
                     <input type="text" value="" name="work_matter" class="full-input"placeholder="請輸入"/></td>
                 <td><input type="text" value="" name="work_hour"   class="full-input"placeholder="自動產生"/></td>
-                <td class="delet-tb"><input type="submit" name="button" value="新增"/></td>
+                <td class="delet-tb no-border"><input type="submit" name="button" value="新增"/></td>
             </tr>
             <tr style="font-weight: bold;">
-                <td colspan="6"></td><td>助學總時數</td><td><span class="total-hour"></span></td>
+                <td colspan="6" class="check-bar"></td><td>助學總時數</td><td><span class="total-hour"></span></td>
             </tr>
         </table>
     <div class="is_setting">
         <div class="experience align">
             <span style="font-weight: bold;">服務心得反思：</span>
             <span style="font-size: 14px;">(約50~100個字，注意禮貌、文字工整，勿用鉛筆)</span>
-            <hr>
-            <hr>
-            <hr>
-            <hr>
-            <hr>
+            <div id="review"></div>
         </div>
         <table id="work_time_list" border="2" style="width:99%">
             <tr>
@@ -166,7 +171,8 @@ div.ui-datepicker,.ui-timepicker-wrapper{
        </table> 
     </div>
 
-        <div>
+        <div class="delet-tb">
+        <textarea rows="2" cols="60" class="review-input" placeholder="請填寫工作心得"></textarea><span class="review-echo"></span><br>
         <input type="text" value="" id="now_hour_pay" placeholder="填入時薪自動換算"/> <span class="total-pay"></span>
         </div><br>
 
@@ -179,13 +185,16 @@ div.ui-datepicker,.ui-timepicker-wrapper{
 <script>
 $( document ).ready(function() {
 
+
     $(window).keydown(function(event){
     if(event.keyCode == 13) {
-      $( "#now_hour_pay" ).change();
-      event.preventDefault();
-      return false;
+
+        $('#form_check').submit(function(ev) {
+            ev.preventDefault(); 
+        });
     }
     });
+
 
     $( "#loading" ).remove();
     $( ".work_time_detail" ).fadeIn();
@@ -241,7 +250,7 @@ $(function(){
     $('#list_name').text( echo_work_name );
     $('#list_time').text( echo_work_date );
 
-   
+
     //時間API
     $('input[name="work_bg_time"]').timepicker({ 
         'timeFormat': 'H:i',
@@ -280,7 +289,7 @@ if(work_time_array.length!=0){
         work_matter = $('<td>').text(work_time_array[i]['matter']).attr("colspan","4"),
         work_hour = $('<td>').text(work_time_array[i]['hour']).addClass('work-hour'),
         delet_btn = $('<button>').attr({type:"button",name:"delet_btn",value:work_time_array[i]['no']}).text("刪除"),
-        delet = $('<td>').addClass('delet-tb').append(delet_btn),
+        delet = $('<td>').addClass('delet-tb no-border').append(delet_btn),
         tr = $('<tr>').addClass('detail').append(work_date,work_day,work_time,work_matter,work_hour,delet);
 
         $(tr).insertBefore( '.key-in' );
@@ -305,10 +314,31 @@ else {
     });
 
    
+    //更新心得
+    $( ".review-input" ).focus(function() {
+        $(".review-echo").text("修改中..");
+    });
+    $( ".review-input" ).change(function() {
+        var review = $(".review-input").val();
+
+        $.ajax({
+          type: 'POST',
+          url: 'ajax_something.php',
+          data: {mode:1,listno:<?php echo $_GET['listid']; ?>,review:review},
+          success: function (data) { if(data=='Success') $(".review-echo").text("心得已經更新"); }
+        });
+       
+    });
 
 
-
-
+    $( ".pass-WTL" ).on( "click", function() {
+        $.ajax({
+          type: 'POST',
+          url: 'ajax_something.php',
+          data: {mode:3,listno:<?php echo $_GET['listid']; ?>},
+          success: function (data) { if(data=='Success') location.reload(); }
+        });
+    });
 
 
     $( "#view" ).click(function() {
@@ -338,10 +368,38 @@ else {
         });
         $(".detail td:eq(3)").css( "width","200px" );
 
+        $.ajax({
+          type: 'POST',
+          url:  'ajax_something.php',
+          data: {mode:22,listno:<?php echo $_GET['listid']; ?>},
+          success: function (data) { 
+
+            switch(data.split("*.*")[0]) {
+                case "1":
+                var check_echo = "審核狀態：未審核";
+                    $('.check-bar').append( $('<button>').attr("type","button").addClass('pass-WTL').text("確認審核此工讀單") )
+                break;
+                case "2":
+                    check_echo = "審核狀態：通過";
+                break;
+
+            } 
+
+            $('.check-bar').append(check_echo); 
+            $('#review').html(data.split("*.*")[1]).append($('<hr>'));
+          }
+        });
     }
     else{
         $('.is_setting').remove();
         $('#list_name').attr('colspan','7');
+
+        $.ajax({
+          type: 'POST',
+          url:  'ajax_something.php',
+          data: {mode:2,listno:<?php echo $_GET['listid']; ?>},
+          success: function (data) { $('.review-input').val(data); }
+        });
     }
 
     $( ".work_time_detail" ).css('width',$( "#work_time_list" ).width()+10);

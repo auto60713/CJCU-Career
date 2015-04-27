@@ -22,7 +22,21 @@
 	</script>
     
 </head>
+<style>
+  #page_ctrl{
+      text-align: center;
+      padding: 5px;
+  }
+  #page_ctrl a{
+      cursor: pointer;
+      margin-right: 20px;
+  }
+  .this-page{
+      color: #991133;
+      font-weight: bold;
+  }
 
+</style>
 <body>
 
 
@@ -47,7 +61,7 @@
 
     <!-- 快速搜尋 -->
     <div class="rush-search">
-        <a href="?" class="<?php if(count($_GET)==0) echo "rush-searching"; ?>">最新工作</a>
+        <a href="work_page.php" class="<?php if(count($_GET)==0) echo "rush-searching"; ?>">最新工作</a>
         <a href="work_page.php?mode=search&io=1" class="<?php if(isset($_GET['io']))if($_GET['io']=='1') echo "rush-searching"; ?>">校內工作</a>
         <a href="work_page.php?mode=search&prop=2" class="<?php if(isset($_GET['prop']))if($_GET['prop']=='2') echo "rush-searching"; ?>">正職</a>
         <a href="work_page.php?mode=search&prop=1" class="<?php if(isset($_GET['prop']))if($_GET['prop']=='1') echo "rush-searching"; ?>">工讀</a>  
@@ -56,7 +70,7 @@
 
     <!-- 列表 -->
     <div id="home-work-list-box"></div>
-
+    <div id="page_ctrl"></div>
 
 </div>
 
@@ -115,20 +129,35 @@
 
 <!--秀出工作-->
 <script>
+    var page = 0;
+    
     <?php
     //後端傳來的工作資料
-    include_once('js_work_list.php'); echo_work_list_array(20); 
-
+    include_once('js_work_list.php'); echo_work_list_array(0); 
     //後端傳來"進階搜尋項目"的資料
     include_once("js_search_work_data.php"); echo_work_sub_data();
+
+    if(isset($_GET['page'])) echo "page = ".$_GET['page']."-1;";
     ?>
 
+   
+    var page_limit = 16,
+        how_many_page = (work_list_array.length/page_limit)+1,
+        page_sel = page*page_limit;
 
+    for(var i=1; i<=how_many_page; i++){
+
+        $('#page_ctrl').append($('<a>').text(i)); 
+    }
+    $("#page_ctrl a:eq("+page+")").addClass('this-page');
 
     var box = $('#home-work-list-box'),
         now = new Date();
 
-    for(var i=0;i<work_list_array.length;i++){
+ 
+    for(i=page_sel; i<page_sel+page_limit; i++){
+
+    if(typeof work_list_array[i] === 'undefined') break;
 
         var box2 = $('<div>').addClass('work-box').addClass('box-detail'),
             box3 = $('<div>').addClass('work-box').addClass('box-loc'),
@@ -180,6 +209,17 @@
             box.append(a_link);
 
     }
+
+    $( "#page_ctrl a" ).click(function() {
+
+        var page_val = $(this).text(),
+            wl = String(window.location);
+
+        if(wl.indexOf("&page") >= 0 ) window.location = window.location.href.split('&page=')[0]+'&page='+page_val; 
+        else if(wl.indexOf("?page") >= 0 ) window.location = window.location.href.split('page=')[0]+'page='+page_val; 
+        else if(wl.indexOf("?") >= 0 ) window.location = window.location.href+'&page='+page_val; 
+        else window.location = 'work_page.php?page='+page_val; 
+    });
 
 
 
