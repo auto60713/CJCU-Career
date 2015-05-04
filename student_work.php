@@ -172,7 +172,7 @@ else{
 
  		 }//這個是工作項目FOR迴圈的下括號
 
- 		
+ 		 $('#search-box').fadeIn(300); body.fadeIn(300);
 } //這格式假如有工作的下括號
 
 		  $('#search-txt').on('input', function(event) {
@@ -248,10 +248,10 @@ else{
 	</div> 
 
 	
-<div id='search-box'>
+<div id='search-box' style="display:none;">
 <select id='search-sel'></select> 
 <input type='text' placeholder='搜尋工作名稱' id='search-txt'>
 </div>
-<div id='company-work-list-container'><div id='search-echo'></div></div>
+<div id='company-work-list-container' style="display:none;"><div id='search-echo'></div></div>
 </body>
 </html>

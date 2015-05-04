@@ -99,11 +99,23 @@ div.ui-datepicker,.ui-timepicker-wrapper{
 .pass-WTL{
     float: right;
 }
+#back{
+    margin-bottom: 20px; 
+}
+.review-echo{
+    margin: 5px;
+    font-size: 12px;
+    font-style: italic;
+    color: #565656;
+
+}
 
 </style>
 <body>
     <h5 id="loading">資料載入中請稍後...</h5>
+
     <div class="work_time_detail" style="display:none;">
+        <input type="button" name="button" id="back" value="上一頁">
         <span class="title is_setting">長榮大學學生服務助學時數暨表現稽核表</span>
         <div class="pay-type align is_setting">
             <span><input type="checkbox">服務助學(工讀)金</span>
@@ -177,7 +189,6 @@ div.ui-datepicker,.ui-timepicker-wrapper{
         </div><br>
 
         <input type="button" name="button" id="view" value="預覽">
-        <input type="button" name="button" id="back" value="上一頁">
         </form>
     </div>
 </body>
@@ -316,8 +327,10 @@ else {
    
     //更新心得
     $( ".review-input" ).focus(function() {
-        $(".review-echo").text("修改中..");
-    });
+        $(".review-echo").text("按下Tab自動更新");
+    }).focusout(function() {
+        $(".review-echo").text("");
+    })
     $( ".review-input" ).change(function() {
         var review = $(".review-input").val();
 
@@ -331,18 +344,8 @@ else {
     });
 
 
-    $( ".pass-WTL" ).on( "click", function() {
-        $.ajax({
-          type: 'POST',
-          url: 'ajax_something.php',
-          data: {mode:3,listno:<?php echo $_GET['listid']; ?>},
-          success: function (data) { if(data=='Success') location.reload(); }
-        });
-    });
-
-
     $( "#view" ).click(function() {
-        location.replace("student_work_time.php?studid="+<?php echo "\"".$_GET['studid']."\"" ?>+"&listid="+<?php echo $_GET['listid']; ?>+"&view=1");
+        window.open("student_work_time.php?studid="+<?php echo "\"".$_GET['studid']."\"" ?>+"&listid="+<?php echo $_GET['listid']; ?>+"&view=1");
     });
     $( "#back" ).click(function() {
         location.replace('student_manage.php#student-applywork');
@@ -377,7 +380,7 @@ else {
             switch(data.split("*.*")[0]) {
                 case "1":
                 var check_echo = "審核狀態：未審核";
-                    $('.check-bar').append( $('<button>').attr("type","button").addClass('pass-WTL').text("確認審核此工讀單") )
+                <?php if($_SESSION['level']!=3) echo "$('.check-bar').append( $('<button>').attr('type','button').attr('onclick','pass_WTL()').addClass('pass-WTL').text('確認審核此工讀單') );"; ?> 
                 break;
                 case "2":
                     check_echo = "審核狀態：通過";
@@ -404,6 +407,18 @@ else {
 
     $( ".work_time_detail" ).css('width',$( "#work_time_list" ).width()+10);
 });
+
+
+
+function pass_WTL() {
+    $.ajax({
+          type: 'POST',
+          url: 'ajax_something.php',
+          data: {mode:3,listno:<?php echo $_GET['listid']; ?>},
+          success: function (data) { if(data=='Success') location.reload(); }
+    });
+}
+
 </script>
 
 </html>

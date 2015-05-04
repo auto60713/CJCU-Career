@@ -145,10 +145,9 @@ function echo_student_apply_list_array($userid){
 function profile_work_list($stu_no){
 
 	include("sqlsrv_connect.php");
-	$para = array($stu_no);
 
-	$sql = "select w.name wname,c.ch_name cname from line_up l,work w,company c where l.user_id=? and l.[check]=5 and w.id=l.work_id and c.id=w.company_id";
-	$stmt = sqlsrv_query($conn, $sql, $para);
+	$sql = "select w.id wid,w.name wname,c.id cid,c.ch_name cname from line_up l,work w,company c where l.user_id=? and l.[check]=5 and w.id=l.work_id and c.id=w.company_id";
+	$stmt = sqlsrv_query($conn, $sql, array($stu_no));
 	$profile_work_list = array();
 
 	if($stmt) while( $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC) ) $profile_work_list[] = $row;

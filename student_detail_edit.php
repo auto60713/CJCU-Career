@@ -1,8 +1,7 @@
 <?php session_start(); 
 include('cjcuweb_lib.php');
 if(trim($_SESSION['username']) != $_GET['userid']) {
-	echo "<br>No permission";
- 	exit; 
+	echo "No permission"; exit; 
 }
 ?>
 
@@ -50,11 +49,11 @@ if(trim($_SESSION['username']) != $_GET['userid']) {
 		}	
 
 		$('#detail_column').html(detail_column);
-
+        $('#student_data').fadeIn(300);
 
 </script>
 
-<div id="student_data">
+<div id="student_data" style="display:none;">
 <table id="detail_column"></table><br>
 </div>
 

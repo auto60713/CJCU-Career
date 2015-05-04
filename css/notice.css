@@ -6,9 +6,6 @@
 	padding-top: 5px;
 	border-bottom: solid 1px #E9E9E9;
 }
-.notice-list:hover{
-	background-color: #efe;
-}
 .notice-sender-img{
 	width: 50px;
 	height: 50px;

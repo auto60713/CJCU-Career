@@ -8,16 +8,16 @@ $(function(){
 switch ($_POST['mode']) {
 
 	case 'stu':
-        echo "$('#page_stu').show();";
+        echo "$('#page_stu').fadeIn(300);";
     break;
     case 'com':
-        echo "$('#page_com').show();";
+        echo "$('#page_com').fadeIn(300);";
     break;
     case 'dep':
-        echo "$('#page_dep').show();";
+        echo "$('#page_dep').fadeIn(300);";
     break;
     case 'staff':
-        echo "$('#page_staff').show();";
+        echo "$('#page_staff').fadeIn(300);";
     break;
 }
 ?>

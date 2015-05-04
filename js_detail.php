@@ -76,7 +76,7 @@ if (preg_match("/-/i", $com_id)) $com_id = strstr($com_id,'-',true);
 	else die(print_r( sqlsrv_errors(), true));
 
     array_walk($row, 'trim_value');
-    
+
     $row['introduction'] = preg_replace("/\r\n|\r/", "<br>", $row['introduction']);
     echo "var company_detail_array = ". json_encode($row) . ";";
 }
@@ -212,10 +212,8 @@ else if(($pub == 2)){
 }
 
 
-
 //去空白
-function trim_value(&$value) 
-{ 
+function trim_value(&$value) { 
     $value = trim($value); 
 }
 

@@ -70,7 +70,7 @@ else{
     }
    
 }
-header("location:student_work_time.php?studid=".trim($_SESSION['username'])."&listid=".$_POST['list_no']);
+header("location:student_manage.php#timelist".$_POST['list_no']);
 }
 
 

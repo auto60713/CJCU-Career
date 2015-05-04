@@ -16,6 +16,13 @@ else if($_GET['workid']==null) { echo "錯誤的操作!"; exit; }
 <style type="text/css">
 a{
     cursor: pointer;
+
+    <?php
+    if(isset($_GET['view'])){
+        echo "text-decoration:none;";
+        echo "margin-right:10px;";
+    }
+    ?>
 }
 #work_time_list{
     padding-bottom: 20px;

@@ -1,12 +1,12 @@
 <?php session_start(); 
 include('cjcuweb_lib.php');
-if($_SESSION['level'] == $level_student){
+//個資隱私 只有校方跟廠商能看到學生資料
+if(!isset($_SESSION['level'])||$_SESSION['level'] == $level_student){
+	//但是自己可以看的到
 	if(trim($_SESSION['username']) != $_GET['userid']){
 
-    echo "<br>No permission";
- 	exit; 
-	}
-}
+        echo "No permission"; exit; 
+}}
 ?>
 <!DOCTYPE html>
 <html>
@@ -26,7 +26,7 @@ if($_SESSION['level'] == $level_student){
 	    $("#footer").load('public_view/footer.html');
 		
         
-		<?php  //load data
+		<?php
 		    include_once("js_detail.php"); echo_student_profile($_GET['userid']); 
 		    include_once("js_work_list.php"); profile_work_list($_GET['userid']); 
 		?>
@@ -45,14 +45,15 @@ if($_SESSION['level'] == $level_student){
         $('#sd_addr').text(student_profile_array['sd_addr']);
         $('#sd_phone').text(student_profile_array['sd_phone']);
 
+        //僅列出company的工作 日後需優化
         if(profile_work_list.length == 0) $('#work_list').append($('<p>').text("沒有工作紀錄"));
         else{
 		    for(var i=0;i<profile_work_list.length;i++){
 
-		    	var cname = $('<a>').text(profile_work_list[i]['cname']),
-		    	    wname = $('<a>').text(profile_work_list[i]['wname']);
+		    	var cname = $('<a>').attr('href','company-'+profile_work_list[i]['cid']).text(profile_work_list[i]['cname']),
+		    	    wname = $('<a>').attr('href','work-'+profile_work_list[i]['wid']).text(profile_work_list[i]['wname']);
 		    	
-		    		$('#work_list').append($('<p>').text(cname,'    ',wname));
+		    		$('#work_list').append( $('<p>').append(cname,' - ',wname) );
 		    }
 		}
 
