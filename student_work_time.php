@@ -103,11 +103,33 @@ div.ui-datepicker,.ui-timepicker-wrapper{
     margin-bottom: 20px; 
 }
 .review-echo{
-    margin: 5px;
+    display: inline-block;
+    height: 20px;
+    margin-left: 5px;
+    margin-top: -5px;
     font-size: 12px;
     font-style: italic;
     color: #565656;
 
+}
+#view{
+    margin-right: 10px; 
+}
+.review-title{
+    display: inline-block;
+    margin-top: 5px;
+    border-top:1px solid #ABADB3;
+    border-left:1px solid #ABADB3;
+    border-right:1px solid #ABADB3;
+    padding: 2px;
+
+}
+.review-input{
+    width: 100%;
+}
+.cawpin span{
+    display: inline-block;
+    margin-right: 5px;
 }
 
 </style>
@@ -166,29 +188,51 @@ div.ui-datepicker,.ui-timepicker-wrapper{
     <div class="is_setting">
         <div class="experience align">
             <span style="font-weight: bold;">服務心得反思：</span>
-            <span style="font-size: 14px;">(約50~100個字，注意禮貌、文字工整，勿用鉛筆)</span>
+            <span style="font-size: 14px;">(約50~100個字，注意禮貌)</span>
             <div id="review"></div>
         </div>
         <table id="work_time_list" border="2" style="width:99%">
             <tr>
-                <td style="width:20%">單位對助學生<br>服務表現評分</td><td style="width:35%"></td>
-                <td style="width:15%">服務績效</td><td style="width:30%"></td>
+                <td style="width:20%" rowspan="2">服務績效考評</td>
+                <td colspan="2" class="cawpin">
+                    <span><input type="checkbox">優良</span>
+                    <span><input type="checkbox">很好</span>
+                    <span><input type="checkbox">正常</span>
+                    <span><input type="checkbox">尚待改進</span>
+                    <span><input type="checkbox">未達標準</span>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" class="cawpin">
+                    <span>曾有</span>
+                    <span><input type="checkbox">遲到</span>
+                    <span><input type="checkbox">早退</span>
+                    <span><input type="checkbox">曠職</span>
+                    <span>等情形</span>
+                </td>
+            </tr>
+            <tr>
+                <td>評語</td>
+                <td colspan="2"></td>
             </tr>
             <tr style="font-weight: bold;">
-                <td colspan="2">單位承辦人</td><td colspan="2">單位主官簽章</td>
+                <td colspan="2">服務單位承辦人</td><td colspan="2">服務單位主管</td>
             </tr>
             <tr style="height:40px;">
                 <td colspan="2"></td><td colspan="2"></td>
             </tr>
        </table> 
+       <input type="text" value="" id="now_hour_pay" placeholder="填入時薪自動換算"/> <span class="total-pay"></span>
     </div>
 
         <div class="delet-tb">
-        <textarea rows="2" cols="60" class="review-input" placeholder="請填寫工作心得"></textarea><span class="review-echo"></span><br>
-        <input type="text" value="" id="now_hour_pay" placeholder="填入時薪自動換算"/> <span class="total-pay"></span>
-        </div><br>
+            <span class="review-title">服務心得反思</span><span class="review-echo"></span>
+            <textarea rows="2" cols="60" class="review-input" placeholder="請填寫工作心得"></textarea><br>
+            <br>
+            <input type="button" name="button" id="view" value="預覽">
+        </div>
 
-        <input type="button" name="button" id="view" value="預覽">
+        
         </form>
     </div>
 </body>
