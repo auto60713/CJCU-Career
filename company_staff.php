@@ -19,9 +19,7 @@ button{
 }
 </style>
 <script>
-	<?php
-    include_once('js_match_list.php'); echo_com_staff_list($_SESSION['username']); 
-    ?>
+	<?php include_once('js_match_list.php'); echo_com_staff_list($_SESSION['username']); ?>
 
         var body = $('.com-staff-list');
         if(com_staff_list.length == 0){body.text("無");}
@@ -38,6 +36,7 @@ button{
 		    }
 		}
 
+        $('#is_show').fadeIn(300);
 
 //新增管理員
 function add_com_staff(){
@@ -60,13 +59,11 @@ function add_com_staff(){
 			  }
 		});    	
 
-
 }
 
-
-		
 </script>
 <body>
+<div id="is_show" style="display:none;">
     <table class="input">
         <tr><td style="width:140px">新增帳號</td><td><input type="text" name="com_sid" value=""></td></tr>
         <tr><td>密碼</td><td><input type="text" name="com_spw" value=""></td></tr>
@@ -80,5 +77,6 @@ function add_com_staff(){
     <table class="com-staff-list">
         <tr><td>帳號</td><td>名稱</td><td>電話</td><td>信箱</td></tr>
     </table>
+</div>
 </body>
 </html>

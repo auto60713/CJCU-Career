@@ -17,13 +17,11 @@ else{
 	<link rel="stylesheet" type="text/css" href="css/work_detail_edit.css?v=0">
 	<script>
 	<?php include_once("js_get_all_audit.php");  
-	get_all_audit(0); 
-	get_all_audit(3); ?>
-	</script>
-	<script>
+	    get_all_audit(0); get_all_audit(3); 
+	?>
+
 	var fa;
 	$(function(){
-
 
 		var notyet = $('#staff-audit-notyet'),
             total_list = company_list_array0.length+work_list_array0.length;
@@ -33,12 +31,10 @@ else{
 		    for(var i=0;i<company_list_array0.length;i++){
 		    		notyet.append( append_data(0,company_list_array0[i],i,0) );
 		    }
-
 		    for(var i=0;i<work_list_array0.length;i++){
 		    		notyet.append( append_data(1,work_list_array0[i],i,0) );			
 		    }
         }
-
 
 		var again = $('#staff-audit-again'),
 		    total_list2 = company_list_array3.length+work_list_array3.length;
@@ -69,15 +65,14 @@ else{
 			var	href = $('<a>').attr("href", "/cjcuweb/company-"+data.comid).attr("target", "_blank"),
 				overview = href.addClass('staff-audit-overview').append("發布自 "+data.comname);
 			}
-			var 
-			icon = $('<i>').addClass(icontype),
-			wlink= $('<a>').attr({href: lintext+'-'+data.id,target: '_blank'}).text(" "+titname),
-			h1 = $('<h1>').append(icon).append(wlink),
-			left = $('<div>').addClass('staff-audit-list-left').append(h1).append(overview),
-			btn = $('<button>').attr({'type':'button','t': type, 'i':i , ch:ch}).addClass('staff-audit-btn').append(' 審核'),
-			right= $('<div>').addClass('staff-audit-list-right').append(btn),
+			var icon = $('<i>').addClass(icontype),
+			    wlink = $('<a>').attr({href: lintext+'-'+data.id,target: '_blank'}).text(" "+titname),
+			    h1 = $('<h1>').append(icon).append(wlink),
+			    left = $('<div>').addClass('staff-audit-list-left').append(h1).append(overview),
+			    btn = $('<button>').attr({'type':'button','t': type, 'i':i , ch:ch}).addClass('staff-audit-btn').append(' 審核'),
+			    right = $('<div>').addClass('staff-audit-list-right').append(btn),
 
-			all = $('<div>').attr({t:type,n:titname}).addClass('staff-audit-list').append(left).append(right);
+			    all = $('<div>').attr({t:type,n:titname}).addClass('staff-audit-list').append(left).append(right);
 			return all;
 		}
 
@@ -223,8 +218,6 @@ else{
 		});
 
 
-
-
 		function filterByName(){
 
 			ftype = $('#type-filter').val();
@@ -247,7 +240,7 @@ else{
 
 		}
 
-
+		$('#is_show').fadeIn(300);
 		//$('body').append($('<div>').addClass('staff-apply-form').append($('<div>').addClass('staff-apply-box').append('efwefwefwef')));
 
 	</script>
@@ -256,6 +249,7 @@ else{
 <body>
 
 
+<div id="is_show" style="display:none">
 
 <div class="staff-audit-filterbox">
 <select id="type-filter">
@@ -280,8 +274,6 @@ else{
 </div>
 
 
-
-
-
+</div>
 </body>
 </html>

@@ -5,7 +5,6 @@ if(!isset($_SESSION['username'])) { echo 'No permission!'; exit; }
 <!doctype html>
 <html>
 <head>
-	<script><?php include_once("js_audit_detail.php"); echo_audit_detail_array($_SESSION['username'],0); ?></script>
 	<script src="lib/jquery.validate.js"></script>
 </head>
 <style type="text/css">
@@ -31,9 +30,13 @@ label.error{
 </style>
 <body>
 <script>
+   
+
 	$(function(){
 
-		<?php  //公司的基本資料
+		<?php  
+            include_once("js_audit_detail.php"); echo_audit_detail_array($_SESSION['username'],0);
+		//公司的基本資料
 		    include_once("js_detail.php"); echo_company_detail($_SESSION['username']); 
 		?>
 
@@ -131,12 +134,15 @@ label.error{
     <?php echo_company_type_and_zone($_SESSION['username']); ?>
     $("#company_type").val(company_type);
 	$("#zone_name").val(company_zone);
+
+
+    $('#is_show').fadeIn(300);
 	
 </script>
 
 
 
-
+<div id="is_show" style="display:none;">
 	
 <div class="workedit-tabbox">
 	<div class="sub-tab tab-active" tabtoggle='workedit1'><i class="fa fa-pencil"></i> 關於公司</div>
@@ -173,22 +179,12 @@ label.error{
     </form>
 	</div>
 
-
-
 <div id='workedit-content-apply' class="workedit-content-hide" tabtoggle='workedit2'>
-	
 	<h1 class="company-audit-status">審核狀況：</h1>
-	
 	<p>歷史紀錄：</p>
-
-	<div class="company-audit-history" id="company-audit-history">
-		無歷史紀錄
-	</div>
-	
-
+	<div class="company-audit-history" id="company-audit-history">無歷史紀錄</div>
 </div>
-
-
+</div>
 
 </div>
 

@@ -15,8 +15,8 @@ switch($_POST['mode']){
       echo_WTL_review_hr($_POST['listno']);
   break;
 
-  case 3://審核通過工讀單
-      WTL_pass($_POST['listno']);
+  case 3://改變工讀單狀態
+      WTL_pass($_POST['listno'],$_POST['check']);
   break;
 
 }
@@ -33,13 +33,13 @@ function updata_WTL_review($listno,$review){
 
 }
 
-function WTL_pass($listno){
+function WTL_pass($listno,$check){
 
   include_once("sqlsrv_connect.php");
 
   $sql = "update work_time_list set [check]=(?) where no=?"; 
 
-  if( sqlsrv_query($conn, $sql, array(2,$listno)) ) echo 'Success';     
+  if( sqlsrv_query($conn, $sql, array($check,$listno)) ) echo 'Success';     
 
 }
 

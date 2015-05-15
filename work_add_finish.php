@@ -82,12 +82,12 @@ if( !isset($name) || !isset($work_type) || !isset($work_prop) || !isset($isoutsi
     if($_SESSION['level'] == 4){
         //寄信給管理員
         include_once("send_email.php"); 
-        send_email("career@mail.cjcu.edu.tw","長大職涯網有新的工作「".$name."」需要審核","<h1><a href='http://210.70.167.98/cjcuweb/staff_manage.php#staff-audit0'>前往查看</a></h1>");
+        send_email("career@mail.cjcu.edu.tw","長大職涯網有新的工作「".$name."」需要審核","<h1><a href='http://careerweb.cjcu.edu.tw/staff_manage.php#staff-audit0'>前往查看</a></h1>");
     
         $echo_text = "工作新增成功! 請等待校方審核..";
     }
-
-        echo '<script>alert("'.$echo_text.'"); document.location.href="'.$href.'_manage.php#'.$href.'-work";</script>';
+        //echo 'alert("'.$echo_text.'");';
+        echo '<script>document.location.href="'.$href.'_manage.php#'.$href.'-work";</script>';
 
     
     }

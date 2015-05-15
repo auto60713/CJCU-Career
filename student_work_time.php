@@ -222,7 +222,7 @@ div.ui-datepicker,.ui-timepicker-wrapper{
                 <td colspan="2"></td><td colspan="2"></td>
             </tr>
        </table> 
-       <input type="text" value="" id="now_hour_pay" placeholder="填入時薪自動換算"/> <span class="total-pay"></span>
+       <!--input type="text" value="" id="now_hour_pay" placeholder="填入時薪自動換算"/> <span class="total-pay"></span-->
     </div>
 
         <div class="delet-tb">
@@ -363,11 +363,12 @@ else {
     }
     $( ".total-hour" ).append(total_hour); $( ".total-pay" ).text('總時薪：??');
 
+/*
     $( "#now_hour_pay" ).change(function() {
         var now_hour_pay = $( "#now_hour_pay" ).val();
         $( ".total-pay" ).text('總時薪：'+total_hour*now_hour_pay+'元');
     });
-
+*/
    
     //更新心得
     $( ".review-input" ).focus(function() {
@@ -424,9 +425,11 @@ else {
             switch(data.split("*.*")[0]) {
                 case "1":
                 var check_echo = "審核狀態：未審核";
-                <?php if($_SESSION['level']!=3) echo "$('.check-bar').append( $('<button>').attr('type','button').attr('onclick','pass_WTL()').addClass('pass-WTL').text('確認審核此工讀單') );"; ?> 
+                <?php if($_SESSION['level']!=3) echo "$('.check-bar').append( $('<button>').attr('type','button').attr('onclick','pass_WTL(2)').addClass('pass-WTL').text('確認審核此工讀單') );"; ?> 
                 break;
                 case "2":
+                <?php if($_SESSION['level']!=3) echo "$('.check-bar').append( $('<button>').attr('type','button').attr('onclick','pass_WTL(1)').addClass('pass-WTL').text('取消審核此工讀單') );"; ?> 
+                
                     check_echo = "審核狀態：通過";
                 break;
 
@@ -454,11 +457,11 @@ else {
 
 
 
-function pass_WTL() {
+function pass_WTL(check) {
     $.ajax({
           type: 'POST',
           url: 'ajax_something.php',
-          data: {mode:3,listno:<?php echo $_GET['listid']; ?>},
+          data: {mode:3,listno:<?php echo $_GET['listid']; ?>,check:check},
           success: function (data) { if(data=='Success') location.reload(); }
     });
 }

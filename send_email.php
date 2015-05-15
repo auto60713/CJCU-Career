@@ -1,5 +1,4 @@
 <?php
-header("Content-Type:text/html; charset=utf-8");
 
 if(isset($_POST['mode'])) $mode = $_POST['mode']; else $mode = "";
 if(isset($_POST['mail_address'])) $mail_address = $_POST['mail_address']; else $mail_address = "";

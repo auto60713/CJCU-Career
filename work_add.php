@@ -62,9 +62,7 @@ if (preg_match("/-/i", $companyid)) $companyid = strstr($companyid,'-',true);
 .instead td{
 	color: #DF7000;
 }
-
 label.error{
-
 	color: #D50000;
 	font-weight: bold;
 	margin-left: 10px;
@@ -77,13 +75,11 @@ form{
 	font-weight: bolder;
     width: 110px;
     overflow: hidden;
-
     padding-top: 5px;
     padding-bottom: 5px;
 }
-
 div.ui-datepicker{
- font-size:10px;
+    font-size:10px;
 }
 .match_dep_tag{
 	cursor: pointer;
@@ -106,6 +102,7 @@ div.ui-datepicker{
 </style>
 </head>
 <body>
+<div id="is_show" style="display:none;">
 
 <button id="btn-copy-work" class="btn-copy-work hidden"><i class="fa fa-files-o"></i> 從現有工作複製</button>
 <button id="btn-instead-work" class="btn-copy-work hidden"><i class="fa fa-files-o"></i> 幫廠商代發</button>
@@ -132,7 +129,7 @@ div.ui-datepicker{
 
 <tr>
 	<td class='td1'>應徵日期：</td>
-	<td><b style="margin-right:5px;">從發佈到</b><input type="text" id="recruited_date" name="recruited_date" placeholder="選擇時間">
+	<td><b style="margin-right:5px;">到</b><input type="text" id="recruited_date" name="recruited_date" placeholder="選擇時間"><b style="margin-left:5px;">截止</b>
 	</td>
 </tr>
 
@@ -214,7 +211,7 @@ div.ui-datepicker{
 <input class="work-add-submit" type="submit" name="button" value="確定" />
 </form>
 
-
+</div>
 
 <script>
 
@@ -232,10 +229,20 @@ div.ui-datepicker{
     if( $_SESSION['level']!=4 ) echo '$("#btn-instead-work").show();';
 
 	?> 
-	
+
 	$(function(){
 
+        //廠商代PO
+        $( "#btn-instead-work" ).click(function() {
+        	if($( ".instead" ).is(":visible")) {
+        		$( ".instead" ).hide();
+                $( "#instead_com" ).val(0);
+            }
+            else $( ".instead" ).fadeIn();
+        });
 	
+	    $('#is_show').fadeIn(300);
+
 		// 生成工作位置基本資料
 		$("#zone").append($("<option></option>").attr("value", 0).text("國內"));
 		$("#zone").append($("<option></option>").attr("value", 1).text("國外"));
@@ -313,14 +320,7 @@ div.ui-datepicker{
 
 
 
-        //廠商代PO
-        $( "#btn-instead-work" ).click(function() {
-        	if($( ".instead" ).is(":visible")) {
-        		$( ".instead" ).hide();
-                $( "#instead_com" ).val(0);
-            }
-            else $( ".instead" ).fadeIn();
-        });
+        
 
         //列出所有廠商
 		for(var i=0;i<all_company.length;i++){
@@ -480,14 +480,14 @@ div.ui-datepicker{
 			$("#work_type_list1 option").remove();
 			// 執行AJAX取得細目資料
 			$.ajax({
-			type:"POST",
-			async:true, 
-			url:"ajax_work_type_list.php",
-			data:"id="+id+"&list=1",
-			success:function(msg){ $('#work_type_list1').html(msg);	
-			$('#work_type_list1').val( parseInt(work_detail_array['type2']));
-			},
-			error: function(){alert("網路連線出現錯誤!");}
+			    type:"POST",
+			    async:true, 
+			    url:"ajax_work_type_list.php",
+			    data:"id="+id+"&list=1",
+			    success:function(msg){ $('#work_type_list1').html(msg);	
+			        $('#work_type_list1').val( parseInt(work_detail_array['type2']));
+			    },
+			    error: function(){alert("網路連線出現錯誤!");}
 			});
 
 			
@@ -496,14 +496,14 @@ div.ui-datepicker{
 			$("#work_type_list1 option").remove();
 			// 執行AJAX取得細目資料
 			$.ajax({
-			type:"POST",
-			async:true, 
-			url:"ajax_work_type_list.php",
-			data:"id="+id+"&list=2",
-			success:function(msg){ $('#work_type_list2').html(msg);	
-			$('#work_type_list2').val(work_detail_array['type3']);
-			},
-			error: function(){alert("網路連線出現錯誤!");}
+			    type:"POST",
+			    async:true, 
+			    url:"ajax_work_type_list.php",
+			    data:"id="+id+"&list=2",
+			    success:function(msg){ $('#work_type_list2').html(msg);	
+			        $('#work_type_list2').val(work_detail_array['type3']);
+			    },
+			    error: function(){alert("網路連線出現錯誤!");}
 			});
 			
 
@@ -519,6 +519,9 @@ div.ui-datepicker{
 			$('#phone').val(work_detail_array['phone']);
 			$('#pay_val').val(work_detail_array['pay'].split("-")[1]);
 			$('#detail').val(work_detail_array['detail']);
+            $("#pay_way option").filter(function() {
+                return this.text == work_detail_array['pay'].split("-")[0]; 
+            }).attr('selected', true);
 		}
 
 

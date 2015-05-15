@@ -79,7 +79,7 @@ else{
 
 <body>
 
-<div class="workedit-tabbox">
+<div class="workedit-tabbox" style="display:none">
 	<div class="sub-tab tab-active" tabtoggle='workedit1'><i class="fa fa-user tab-img"></i> 工作</div>
 	<div class="sub-tab" tabtoggle='workedit1'><i class="fa fa-building-o tab-img"></i> 廠商</div>
 	<div class="sub-tab" tabtoggle='workedit1'><i class="fa fa-book tab-img"></i> 系所</div>
@@ -87,7 +87,7 @@ else{
 </div>
 
 
-<div class="workedit-content" id='workedit-content'>
+<div class="workedit-content" id='workedit-content' style="display:none">
 
     <!--工作-->
 	<div tabtoggle='workedit2' class="work_page">
@@ -213,7 +213,6 @@ else{
 		        var	check = $('<td>').text(check_name);
 		    	var	tr = $('<tr>').addClass('work-data').append(w_id,work,com,prop,check);
 
-
 		    		body.append(tr);
 		    }
 		}
@@ -244,6 +243,8 @@ else{
 		    	dep_table_append_data(body,dep2_list[i])
 		    }
 		}
+
+        $('.workedit-tabbox,.workedit-content').fadeIn(300);
 
 //動態新增一筆廠商資料(前端)
 function com_table_append_data(body,params) {

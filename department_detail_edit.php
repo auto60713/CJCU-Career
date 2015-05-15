@@ -6,7 +6,6 @@ if(!isset($_SESSION['username'])) { header("Location: index.php"); exit; }
 <html>
 <head>
 
-	<script><?php include_once("js_detail.php"); echo_department_detail($_SESSION['username']); ?></script>
 </head>
 <style type="text/css">
 form{
@@ -29,6 +28,7 @@ textarea {
 <body>
 <script>
 
+    <?php include_once("js_detail.php"); echo_department_detail($_SESSION['username']); ?>
 
 		var detail_column = "",idx = 0;
 		//column_name array必須優化成json格式 不然目前依賴index順序
@@ -52,10 +52,11 @@ textarea {
 		}	
 
 		$('#detail_column').html(detail_column);
+		$('#detail').fadeIn(300);
 </script>
 
 
-<form method="post" action="updata.php" id="detail">
+<form method="post" action="updata.php" id="detail" style="display:none">
     <table id="detail_column"></table><br>
     <input type="submit" value="資料修改">
 </form>

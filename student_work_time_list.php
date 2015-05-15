@@ -64,29 +64,35 @@ a{
 
 <script>
 $(function(){	
-var more = "",links = "#timelist";
+var go_pass = 0,links = "#timelist",more = "";
     <?php  //load data
         include_once("js_work_detail.php"); echo_work_time_list_array($_GET['workid'],$_GET['studid']);
-        if($_SESSION['level'] != 3) echo "$('#ctrl_bar').remove(); more='&view=1';";
+        if($_SESSION['level'] != 3) echo "$('#ctrl_bar').remove(); go_pass = 1;";
 	?>
 
 if(work_time_list_array.length!=0){
     for(var i=0;i<work_time_list_array.length;i++){
 
-    <?php if($_SESSION['level'] != 3) echo "links='student_work_time.php?studid='+work_time_list_array[i]['stud_id']+'&listid=';"; ?>
-
             switch(work_time_list_array[i]['check']) {
                 case 2:
-                    var check_echo = "工讀單已批准"; break;
+                    var check_echo = "工讀單已批准"; 
+                        go_pass = 1;
+                break;
                 default:
                         check_echo = "未審核";
             } 
+            if(go_pass == 1){
+                links = 'student_work_time.php?studid='+work_time_list_array[i]['stud_id']+'&listid=';
+                more  = '&view=1';
+            }
 
         var icon = $('<i>').addClass('fa fa-newspaper-o'),
             delete_btn = $('<i>').attr({'id':'ctrl_bar','listno':work_time_list_array[i]['no']}).addClass('fa fa-times').addClass('delete-btn list-name'),
             check = $('<span>').text('審核狀態：'+check_echo),
             a_page = $('<a>').attr('href', links+work_time_list_array[i]['no']+more).addClass('list-name');
             a_page.append(icon,work_time_list_array[i]['year']+'年'+work_time_list_array[i]['month']+'月的工讀單');
+            <?php if($_SESSION['level'] == 3) echo 'a_page.attr("Target","_blank");'; ?>
+
         $('#work_time_list').append(a_page,check,delete_btn,$('<br>'));
     }
 }

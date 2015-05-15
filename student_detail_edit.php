@@ -1,14 +1,12 @@
 <?php session_start(); 
 include('cjcuweb_lib.php');
-if(trim($_SESSION['username']) != $_GET['userid']) {
-	echo "No permission"; exit; 
-}
+if(trim($_SESSION['username']) != $_GET['userid']) { echo "No permission"; exit; }
 ?>
 
 <!doctype html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 </head>
 <style type="text/css">
 #detail_column{

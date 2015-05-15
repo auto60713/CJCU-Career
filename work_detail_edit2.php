@@ -35,8 +35,8 @@ if (preg_match("/-/i", $companyid)) $companyid = strstr($companyid,'-',true);
 	</style>
 </head>
 <body>
-	
-<div class="workedit-tabbox">
+
+<div class="workedit-tabbox" style="display:none;">
 	<div id="page_view" class="sub-tab"><i class="fa fa-desktop tab-img"></i> 預覽</div>
 	<div id="page-edit" class="sub-tab tab-active" tabtoggle='workedit1'><i class="fa fa-pencil tab-img"></i> 編輯</div>
 	<div id="page-apply" class="sub-tab" tabtoggle='workedit1'><i class="fa fa-user tab-img"></i> 應徵</div>
@@ -45,8 +45,7 @@ if (preg_match("/-/i", $companyid)) $companyid = strstr($companyid,'-',true);
 	<div id="page-set" class="sub-tab" tabtoggle='workedit1'><i class="fa fa-cog tab-img"></i> 刪除</div>
 </div>
 
-<div class="workedit-content" id='workedit-content'>
-
+<div class="workedit-content" id='workedit-content' style="display:none;">
 	<!-- 該工作的資料編輯，AJAX別的畫面 -->
 	<div id='workedit-content-edit' class="workedit-content-hide" tabtoggle='workedit2'></div>
 	<!-- 該工作的應徵學生列表，AJAX別的畫面 -->
@@ -63,14 +62,13 @@ if (preg_match("/-/i", $companyid)) $companyid = strstr($companyid,'-',true);
 	<div id='workedit-content-set' class="workedit-content-hide" tabtoggle='workedit2'>	
 	    <button type="button" id="divbtn-delete" class="work-divbtn">刪除工作</button> 
 	</div>
-
-
 </div>
 
 </body>
 
-<script><?php include_once("js_audit_detail.php"); echo_audit_detail_array($_POST['workid'],1); ?></script>
 <script>
+
+    <?php include_once("js_audit_detail.php"); echo_audit_detail_array($_POST['workid'],1); ?>
 
 	$(function(){
 
@@ -81,11 +79,7 @@ if (preg_match("/-/i", $companyid)) $companyid = strstr($companyid,'-',true);
 		  data:{mode:0,workid:<?php  echo (int)$_POST['workid']; ?>},
 		  success: function (data) { 
             var remove_array = JSON.parse(data);
-
-            for(var i=0;i<remove_array.length;i++){
-            $( remove_array[i][1] ).remove();
-
-		    }
+            for(var i=0;i<remove_array.length;i++) $( remove_array[i][1] ).remove();
 		  }
 		});
 
@@ -151,7 +145,7 @@ if (preg_match("/-/i", $companyid)) $companyid = strstr($companyid,'-',true);
 		}
 
 		var audit_history_container = $('#company-audit-history');
-		if(audit_array.length>0) audit_history_container.html( $('<p>').text("無審核歷史紀錄") );
+		if(audit_array.length==0) audit_history_container.html( $('<p>').text("無審核歷史紀錄") );
 		for(var i=0;i<audit_array.length;i++){
 
 			var icontxt2 = (audit_array[i].censored==1)? 'fa fa-check': 'fa fa-times',
@@ -166,9 +160,7 @@ if (preg_match("/-/i", $companyid)) $companyid = strstr($companyid,'-',true);
 				audit_history_container.append(all);
 		}
 
-		// this work's check
-		
-			var icon = icon = $('<i>').addClass(icontxt),
+		var icon = $('<i>').addClass(icontxt),
 			again_txt = $('<span>').addClass('company-audit-again-txt').text('已要求再次審核！'),
 			again_btn = $('<button >').addClass('company-audit-again').text("要求再審").on('click', function(event) {
 				
@@ -189,8 +181,6 @@ if (preg_match("/-/i", $companyid)) $companyid = strstr($companyid,'-',true);
 		$('.company-audit-status').append(icon,statustxt).css('color', color);
 		if(work_detail_array.check==2) $('.company-audit-status').append(again_btn);
 		if(work_detail_array.check==3) $('.company-audit-status').append(again_txt);
-
-
 
 		// TAB Control
 		var tabgroup = $('div[tabtoggle="workedit1"]');
@@ -222,6 +212,8 @@ if (preg_match("/-/i", $companyid)) $companyid = strstr($companyid,'-',true);
         $( "#page_view" ).click(function() {
             window.open("work-"+<?php echo (int)$_POST['workid']; ?>);
         });
+
+        $('.workedit-tabbox,.workedit-content').fadeIn(300);
 
         //開始工作
 		$(document).off("click",'button#divbtn-start').on('click','button#divbtn-start', function() {

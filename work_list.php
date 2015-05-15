@@ -64,6 +64,8 @@ else{ echo "No permission!"; exit; }
 		    }
 		}
 
+          $('#is_show').fadeIn(300);
+
 		  $('#search-typefilter').on('change', function(event) {
 		  	resort_work();
 		  });
@@ -107,6 +109,7 @@ else{ echo "No permission!"; exit; }
 </script>
 </head>
 <body>
+	<div id="is_show" style="display:none;">
 <div id='search-box'>
 <select id="search-typefilter">
 	<option value='-1' selected="selected">顯示全部</option>
@@ -119,5 +122,6 @@ else{ echo "No permission!"; exit; }
 <input type='text' placeholder='搜尋工作名稱' id='search-txt'>
 </div>
 <div id='company-work-list-container'><div id='search-echo'></div></div>
+    </div>
 </body>
 </html>
