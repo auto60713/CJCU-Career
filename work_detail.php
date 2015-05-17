@@ -68,7 +68,8 @@ if(isset($_SESSION['username'])) $user_id = $_SESSION['username'];
 	    $("#footer").load('public_view/footer.html');
 
 
-		$('title, #name').text(work_detail_array['name']);
+        document.title = work_detail_array['name'];
+		$('#name').text(work_detail_array['name']);
 		$('#date').text("發佈時間："+work_detail_array['date'].split(" ")[0]);
 		$('#prop').text( (work_detail_array['is_outside']=='0'?'校外':'校內')+' '+ work_detail_array['popname']);
 		$('#type').text(work_detail_array['typeone']+" > "+work_detail_array['typetwo']+" > "+work_detail_array['typethree']);

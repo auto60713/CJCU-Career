@@ -1,10 +1,9 @@
 <!doctype html>
 <html>
 <head>
+
 	<meta charset="UTF-8">
 	<title>長大職涯網</title>
-
-	<!-- 工作列表 -->
 
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 	<link rel="stylesheet" type="text/css" href="css/area_div.css">

@@ -64,7 +64,7 @@ a{
 
 <script>
 $(function(){	
-var go_pass = 0,links = "#timelist",more = "";
+var go_pass = 0,links,more;
     <?php  //load data
         include_once("js_work_detail.php"); echo_work_time_list_array($_GET['workid'],$_GET['studid']);
         if($_SESSION['level'] != 3) echo "$('#ctrl_bar').remove(); go_pass = 1;";
@@ -80,10 +80,14 @@ if(work_time_list_array.length!=0){
                 break;
                 default:
                         check_echo = "未審核";
+                        go_pass = 0;
             } 
             if(go_pass == 1){
                 links = 'student_work_time.php?studid='+work_time_list_array[i]['stud_id']+'&listid=';
                 more  = '&view=1';
+            }
+            else{
+                links = "#timelist"; more = "";
             }
 
         var icon = $('<i>').addClass('fa fa-newspaper-o'),
@@ -91,7 +95,7 @@ if(work_time_list_array.length!=0){
             check = $('<span>').text('審核狀態：'+check_echo),
             a_page = $('<a>').attr('href', links+work_time_list_array[i]['no']+more).addClass('list-name');
             a_page.append(icon,work_time_list_array[i]['year']+'年'+work_time_list_array[i]['month']+'月的工讀單');
-            <?php if($_SESSION['level'] == 3) echo 'a_page.attr("Target","_blank");'; ?>
+            if(go_pass == 1) a_page.attr("Target","_blank");
 
         $('#work_time_list').append(a_page,check,delete_btn,$('<br>'));
     }
@@ -113,7 +117,7 @@ else $('#work_time_list').append( $('<span>').text('沒有任何工讀單').addC
           type: 'POST',
           url: 'student_work_time_req.php',
           data: {mode:'time-list',work_id:work_id,stud_id:stud_id,year:year,month:month},
-          success: function (data) { if(data=='Success') location.reload(); }
+          success: function (data) { location.reload(); }
         });
     });
 
@@ -125,7 +129,7 @@ else $('#work_time_list').append( $('<span>').text('沒有任何工讀單').addC
           type: 'POST',
           url: 'delete.php',
           data: {mode:3,no:list_no},
-          success: function (data) { if(data=='Success') location.reload(); }
+          success: function (data) { location.reload(); }
         });
     });
 

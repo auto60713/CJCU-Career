@@ -389,6 +389,10 @@ else {
     });
 
 
+    $('input:checkbox').click(function(){
+        return false;
+    });
+
     $( "#view" ).click(function() {
         window.open("student_work_time.php?studid="+<?php echo "\"".$_GET['studid']."\"" ?>+"&listid="+<?php echo $_GET['listid']; ?>+"&view=1");
     });

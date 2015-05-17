@@ -47,45 +47,38 @@
 #area1_1 #area_title{ color: #EA4B74; }
 #area1_1{  
     background-image:url(../img/area01.jpg);
-    filter: progid:DXImageTransform.Microsoft.AlphaImageLoader( src='img/area01.jpg' , sizingMethod='scale');
 	width: 53%;  height: 340px;
 }
 #area1_2 #area_title{ color: #39518B; margin-bottom: 15px;}
 #area1_2{  
     background-image:url(../img/area02.jpg);
-    filter: progid:DXImageTransform.Microsoft.AlphaImageLoader( src='img/area02.jpg' , sizingMethod='scale');
 	width: 34%;  height: 340px;
 }
 
 #area2_1 #area_title{ color: #F39D2C; }
 #area2_1{  
     background-image:url(../img/area03.jpg);
-    filter: progid:DXImageTransform.Microsoft.AlphaImageLoader( src='img/area03.jpg' , sizingMethod='scale');
 	width: 60%;  height: 340px;
 }
 #area2_2 #area_title{ color: #A396C3; }
 #area2_2{  
     background-image:url(../img/area04.jpg);
-    filter: progid:DXImageTransform.Microsoft.AlphaImageLoader( src='img/area04.jpg' , sizingMethod='scale');
 	width: 27%;  height: 340px;
 }
 
 #area3_1 #area_title{ color: #FAD330; }
 #area3_1{  
     background-image:url(../img/area05.jpg);
-    filter: progid:DXImageTransform.Microsoft.AlphaImageLoader( src='img/area05.jpg' , sizingMethod='scale');
 	width: 27%;  height: 150px;
 }
 #area3_2 #area_title{ color: #AECC46; }
 #area3_2{  
     background-image:url(../img/area06.jpg);
-    filter: progid:DXImageTransform.Microsoft.AlphaImageLoader( src='img/area06.jpg' , sizingMethod='scale');
 	width: 27%;  height: 150px;
 }
 #area3_3 #area_title{ color: #8CCFDF; }
 #area3_3{  
     background-image:url(../img/area07.jpg);
-    filter: progid:DXImageTransform.Microsoft.AlphaImageLoader( src='img/area07.jpg' , sizingMethod='scale');
 	width: 27%;  height: 150px;
 }
 
@@ -369,7 +362,6 @@
 /* 內頁 */
 #left_div{
     background-image:url(../img/inner4_area01.jpg);
-    filter: progid:DXImageTransform.Microsoft.AlphaImageLoader( src='img/inner4_area01.jpg' , sizingMethod='scale');
 	width: 60%;  height: 1070px;
 	padding-top: 30px;
 	margin-top: 20px;
@@ -377,7 +369,6 @@
 #right_div #area_title{ color: #A296C3; }
 #right_div{  
     background-image:url(../img/inner4_area02.jpg);
-    filter: progid:DXImageTransform.Microsoft.AlphaImageLoader( src='img/inner4_area02.jpg' , sizingMethod='scale');
 	width: 28%;  height: 700px;
 	padding-top: 10px;
 	margin-top: 30px;

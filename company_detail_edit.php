@@ -62,7 +62,7 @@ label.error{
 		}
 
         var color = "";
-		switch(  parseInt( company_detail_array.censored.trim() )  ) {
+		switch(  parseInt( company_detail_array.censored )  ) {
 			case 0:
 				icontxt ='fa fa-minus-square-o';
 				statustxt = ' 未審核';

@@ -1,6 +1,6 @@
 <html>
 <head>
-  <title>錯誤^_^</title>
+  <title>長大職涯網</title>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 </head>
 <body>
@@ -56,7 +56,7 @@ include("sqlsrv_connect.php");
   $stmt = sqlsrv_query($conn, $sql, array(trim($_POST['list_no'])));
 
   if($stmt) $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC);
-  if($row['stud_id'] != $_SESSION['username']||$row['check'] != 1) {echo "No permission!"; exit();}
+  if(trim($row['stud_id']) != trim($_SESSION['username'])||intval($row['check']) != 1) {echo "No permission!"; exit();}
 
 
 $list_no   = trim($_POST['list_no']);
