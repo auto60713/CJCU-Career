@@ -26,7 +26,9 @@ if (!file_exists($filename)) $filename = 'img_department/default.png';
 		$('#view-header').load('public_view/header.php');
 		$("#menu").load('public_view/menu.html');
 	    $("#footer").load('public_view/footer.html');
-
+	    
+        //如果瀏覽器不支援JSON則載入json2.js
+		if (typeof (JSON) == 'undefined') $.getScript('js/json2.js');
 	    
 		$(window).hashchange( function(){
 

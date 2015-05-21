@@ -1,7 +1,7 @@
 <?php session_start(); 
 if(!isset($_SESSION['username']) || $_SESSION['level'] != 4) { header("Location: index.php"); exit; }
 $filename = 'img_company/'.$_SESSION['username'].'.jpg';
-if (!file_exists($filename)) $filename = 'img_company/default.png';
+if(!file_exists($filename)) $filename = 'img_company/default.png';
 ?>
 <!doctype html>
 <html>
@@ -26,8 +26,14 @@ if (!file_exists($filename)) $filename = 'img_company/default.png';
 		$('#view-header').load('public_view/header.php');
 		$("#menu").load('public_view/menu.html');
 	    $("#footer").load('public_view/footer.html');
-
 	    
+        //如果瀏覽器不支援JSON則載入json2.js
+		if (typeof (JSON) == 'undefined') $.getScript('js/json2.js');
+
+        //依照公司審核通過與否 後端傳來的資料不同
+        <?php include_once("company_manage_apply.php"); censored_check(); ?>
+
+
 		$(window).hashchange( function(){
 
 			ctu=false;
@@ -47,63 +53,61 @@ if (!file_exists($filename)) $filename = 'img_company/default.png';
 
 		$(window).hashchange();
 
-
-
 		function doajax(idx){
 
                 $('#right-box-title').html('載入中...請稍後');
+                var tpe,para,url,claaas;
 
 				switch(idx) {
-				// company info page 0
+
 				case '0-0':
 				tpe = 'get';
 				para = { companyid: <?php echo "\"".$_SESSION['username']."\"" ?> ,page:0 };
 				url = "company_detail_edit.php";
+				claaas = 'company-info-0';
 				break;
 
-				// company info page 1
 				case '0-1':
 				tpe = 'get';
 				para = { companyid: <?php echo "\"".$_SESSION['username']."\"" ?> ,page:1 };
 				url = "company_detail_edit.php";
+				claaas = 'company-info-0';
 				break;
 
-				// add work
 				case 1:
 				tpe = 'get';
 				para = {mode:'add'};
 				url = "work_add.php";
+				claaas = 'company-addwork';
 				break;
-				
-				// manage work
+
 				case 2:
 				tpe = 'get';
 				para = {};
 				url = "work_list.php";
+				claaas = 'company-work';
 				break;
 
-				// staff manage
 				case 3:
 				tpe = 'post';
 				para = {};
 				url = "company_staff.php";	
+				claaas = 'company-staff';
 				break;
 
-				// notice
 				case 4:
 				tpe = 'post';
 				para = {level: <?php echo "'".$_SESSION['level']."'"; ?>,username: <?php echo "'".$_SESSION['username']."'"; ?>};
 				url = "notice.php";	
+				claaas = 'company-notice';
 				break;
 
-				
-
-				// work-detail
 				case 5:
 				tpe = 'post';
 				var wid = location.hash.replace( /^#work/, '' ).split("-");
 				para = {workid:wid[0],page:wid[1]};
 				url = "work_detail_edit2.php";	
+				claaas = 'company-work';
 				var goback = $('<a>').attr({href:'#company-work',id:'gobackbtn'}).append($('<i>').addClass('fa fa-reply').append(' '));
 				break;
 
@@ -111,7 +115,8 @@ if (!file_exists($filename)) $filename = 'img_company/default.png';
 				case 12:
 				tpe = 'post';
 				para = {mode:'com'};
-				url = "explanation.php";	
+				url = "explanation.php";
+				claaas = 'explanation';	
 				break;
 			}
 
@@ -122,21 +127,13 @@ if (!file_exists($filename)) $filename = 'img_company/default.png';
 			  success: function (data) { $('#contailer-box').html(data) ;  }
 			});
 
-			if(idx=='0-0'||idx=='0-1') idx=0;
-			else if(idx==5) idx=2;
-			else if(idx==12) idx=5;
-			
-			$('.list').removeClass('list-active');
-			$('.list:eq('+idx+')').addClass('list-active');
 
-			$('#right-box-title').html('').append($('.list:eq('+idx+')').text());
+            $('.list').removeClass('list-active');
+            $('.'+claaas).addClass('list-active');
+			$('#right-box-title').text($('.'+claaas).text());
+
 			if(goback) $('#right-box-title').prepend(goback);
 	}
-
-
-            //依照公司審核通過與否 後端傳來的資料不同
-            <?php include_once("company_manage_apply.php"); censored_check(); ?>
-
 
 	});
 
@@ -157,7 +154,7 @@ if (!file_exists($filename)) $filename = 'img_company/default.png';
 			<img src="<?php echo $filename; ?>" class="profile-img" id="profile-img"><br>
 		</div>
 
-    	<a href="#company-info-0"><div class="list">公司資訊</div></a><hr>
+    	<a href="#company-info-0"><div class="company-info-0 list">公司資訊</div></a><hr>
     <!--由後端傳來
 		<a href="#company-addwork"><div class="list">新增工作</div></a><hr>
 		<a href="#company-work"><div class="list">管理工作</div></a><hr>

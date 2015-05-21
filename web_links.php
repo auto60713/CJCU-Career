@@ -7,15 +7,15 @@
 	<!-- 好站連連看 -->
 
 	<link rel="stylesheet" type="text/css" href="css/main.css">
-  <link rel="stylesheet" type="text/css" href="font-awesome/css/font-awesome.css">
-  <script src="js/jquery-min.js"></script>
-  <script src="js/jquery-migrate-min.js"></script>
+    <link rel="stylesheet" type="text/css" href="font-awesome/css/font-awesome.css">
+    <script src="js/jquery-min.js"></script>
+    <script src="js/jquery-migrate-min.js"></script>
 	<script>
 	$(function(){ 	
 
 		$('#view-header').load('public_view/header.php');
-    $("#menu").load('public_view/menu.html');
-    $("#footer").load('public_view/footer.html');
+        $("#menu").load('public_view/menu.html');
+        $("#footer").load('public_view/footer.html');
 
 	})
 	</script>
@@ -47,6 +47,17 @@
     padding-top: 30px;
     padding-right: 15px;
     padding-bottom: 40px;
+}
+.links-show{
+
+    margin-top: 20px;
+	margin-left: 10%;
+}
+.links-show p{
+
+    font-size: 1.3em;
+    font-weight: bold;
+    margin-bottom: 10px;
 }
 </style>
 <body>
@@ -93,15 +104,14 @@
           success: function (data) { 
 
               var links_json = JSON.parse(data);
-        
-              for(var i=0;i<links_json.length;i++){
 
-                  var link = $('<a>').attr({"href":links_json[i]['href'],"target":"_blank"}).text("► "+links_json[i]['name']),
-                      adata = $('<p>').append('link');
+              for(key in links_json) {
+	              var link = $('<a>').attr({"href":links_json[key]['href'],"target":"_blank"}).text("► "+links_json[key]['name']),
+                      adata = $('<p>').append(link);
 
-                  $('.inks-show').append(adata);
+                  $('.links-show').append(adata);
+  
               }
-      
           }
         });
 

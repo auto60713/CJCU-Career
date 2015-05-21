@@ -34,9 +34,6 @@ else{
 
 	</script>
 	<style type="text/css">
-	    th{
-	    	/*border-bottom: 2px solid #424242;*/
-	    }
 	    .all-list,#add_dep_btn{
             margin-top: 30px;
 	    }
@@ -54,7 +51,6 @@ else{
         .space{
         	height: 10px;
         }
-
         #add_dep_btn:hover{
             color: #0080C0;
             cursor: pointer;
@@ -254,7 +250,10 @@ function com_table_append_data(body,params) {
                     pw3 = $('<td>').text(params['pw']),
                     link3 = $('<a>').attr('target','_blank').attr('href', 'company-'+params['id']).text(params['name']),
                     name3 = $('<td>').html(link3),
-                    tr = $('<tr>').addClass('com-data').append(sort,id,pw3,name3);
+                    delet_btn = $('<button>').attr({'type':'button','com_id':params['id'],'com_name':params['name']}).addClass('com-delete-btn').text('停權'),
+                    delet = $('<td>').append(delet_btn),
+
+                    tr = $('<tr>').addClass('com-data').append(sort,id,pw3,name3,delet);
                     body.append(tr);
 }
 //動態新增一筆系所資料(前端)
@@ -266,10 +265,10 @@ function dep_table_append_data(body,params) {
 		    pw = $('<td>').text(params['pw']),
 		    link2 = $('<a>').attr('target','_blank').attr('href', 'department-'+params['no']).text(params['ch_name']),
 		    name2 = $('<td>').append(link2),
-		    delet_btn = $('<button>').attr({'type':'button','dep_no':params['id'],'dep_name':params['ch_name']}).addClass('dep-delete-btn').text('刪除'),
-            delet = $('<td>').append(delet_btn),
+		    delet_btn2 = $('<button>').attr({'type':'button','dep_no':params['id'],'dep_name':params['ch_name']}).addClass('dep-delete-btn').text('刪除'),
+            delet2 = $('<td>').append(delet_btn2),
 
-		    tr = $('<tr>').addClass('dep-data').append(number,no_td,pw,name2,delet);
+		    tr = $('<tr>').addClass('dep-data').append(number,no_td,pw,name2,delet2);
 		    body.append(tr);
 }
 
@@ -316,6 +315,30 @@ function dep_table_append_data(body,params) {
 
 
 		});
+
+        //公司停權
+        $( ".com-delete-btn" ).click(function() {
+
+            var com_id   = $( this ).attr('com_id'),
+                com_name = $( this ).attr('com_name');
+
+            if (confirm ("確定要停權 '"+com_name.trim()+"' ?")){
+
+                $.ajax({
+                    type:"POST",
+                    url: "ajax_maintain.php",
+                    data:{mode:6,comid:com_id},
+                      success: function (data) { 
+                        if(data == 'Success'){
+                          
+                          $( "tr:contains('"+com_name+"')" ).fadeOut();
+                        }
+                        else alert(data);
+                      }
+                });     
+
+            }
+        });
 
 
         //刪除系所

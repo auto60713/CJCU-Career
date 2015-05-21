@@ -104,18 +104,6 @@
 	color: #CC3333;
 	font-size: 16px;
 }
-.pass-req,.delete-lu{
-	font-size: 13px;
-	padding: 8px;
-	text-align: center;
-	margin-left: 10px;
-	display: inline-block;
-
-}
-.pass-req:hover,.delete-lu:hover{
-
-	cursor:pointer;
-}
 .icon{
 	 color: #444;
 	 font-size: 30px;

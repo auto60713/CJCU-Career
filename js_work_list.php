@@ -126,7 +126,7 @@ function echo_student_apply_list_array($userid){
 		$sql = "SELECT w.id wid,w.name wname,w.publisher pub,w.company_id comid,p.name prop,z.name zone,l.[check] ch,l.match_no tea_name,score 
 				FROM work w,line_up l,work_prop p,zone z 
 				WHERE l.user_id=? and w.id=l.work_id and p.id=w.work_prop_id and z.id=w.zone_id and (w.[check]IN(0,1,4,5) OR (w.[check]=24 AND l.[check]IN(1,4,5))) 
-				ORDER BY w.date ASC";
+				ORDER BY l.no ASC";
 
 		$stmt = sqlsrv_query($conn, $sql, array($userid));
 		$work_list_array = array();
@@ -146,7 +146,7 @@ function profile_work_list($stu_no){
 
 	include("sqlsrv_connect.php");
 
-	$sql = "select w.id wid,w.name wname,c.id cid,c.ch_name cname from line_up l,work w,company c where l.user_id=? and l.[check]=5 and w.id=l.work_id and c.id=w.company_id";
+	$sql = "select w.id wid,w.name wname,c.id cid,c.ch_name cname from line_up l,work w,company c where l.user_id=? and l.[check]in(1,4,5) and w.id=l.work_id and c.id=w.company_id";
 	$stmt = sqlsrv_query($conn, $sql, array($stu_no));
 	$profile_work_list = array();
 

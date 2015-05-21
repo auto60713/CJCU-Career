@@ -33,33 +33,53 @@ if (preg_match("/-/i", $companyid)) $companyid = strstr($companyid,'-',true);
 <html>
 <head>
 	<meta charset="UTF-8">
-    <script><?php include_once('js_work_detail_apply.php'); echo_work_apply_list_array($_GET['workid']);  ?>
+	<style type="text/css">
+        .isapply,.isnotapply,.unapply,.gondo{
+        	padding: 5px;
+        	font-size: 17px;
+        	font-weight: bold;
+        }
+        .isapply{
+        	color: #339933;
+        }
+        .isnotapply{
+        	color: #CC3333;
+        }
+        .staff-audit-btn2{
+        	padding: 0px 10px;
+        }
+	</style>
+    <script>
+
+    <?php include_once('js_work_detail_apply.php'); echo_work_apply_list_array($_GET['workid']);  ?>
 
     $(function(){
-    	var body = $('#company-work-list-container');
 
-    	// 如果有人應徵，清空列表區域，準備顯示
-    	if(work_apply_list_array.length>0) {
-    		body.html('');
+        //依照工作狀態 更換標題
+    	if(work_apply_list_array.length>0){
+
     		if(work_apply_list_array[0]['check'] == 5) $('.what-is-list').text("工讀學生列表");
         }
+        else{
+            $('.what-is-list').text('目前尚無人應徵！');
+        }
+
+        var body = $('#company-work-list-container');
 
     	for(var i=0;i<work_apply_list_array.length;i++){
 
+            //左邊
             var img_src='http://esrdoc.cjcu.edu.tw/esr_photo/'+work_apply_list_array[i]['sd_syear'].trim()+'/'+work_apply_list_array[i]['user_id'].trim()+'.jpg',
     		    wimg = $('<img>').attr('src', img_src).addClass('work-img-apply'),
     			tita = $('<a>').attr({'target':'_blank','href':'student-'+work_apply_list_array[i]['user_id']}).text(work_apply_list_array[i]['name']),
     			doca = $('<a>').attr({'target':'_blank','href':'department-'+work_apply_list_array[i]['depno']}).append(work_apply_list_array[i]['depname']),
 
-    		
-    			auditbtn = $('<button>').addClass('staff-audit-btn2').append(' 審核'),
-
     			subbox1 = $('<div>').addClass('sub-box').append(wimg),
-    			subbox2 = $('<div>').addClass('sub-box').append($('<h1>').addClass('work-tit').append(tita))
-    			.append($('<p>').addClass('work-hint').append(" 就讀於 ",doca)),
+    			subbox2 = $('<div>').addClass('sub-box').append($('<h1>').addClass('work-tit').append(tita)).append($('<p>').addClass('work-hint').append(" 就讀於 ",doca)),
     			subbox3 = $('<div>').addClass('sub-box2');
 
-    			auditbtn.on('click', {arr:work_apply_list_array[i]} ,function(event) {
+                var auditbtn = $('<button>').addClass('staff-audit-btn2').append(' 審核');
+                 	auditbtn.on('click', {arr:work_apply_list_array[i]} ,function(event) {
 					//event.data.arr['user_id']
 
 						$('.staff-apply-form').remove();
@@ -85,30 +105,27 @@ if (preg_match("/-/i", $companyid)) $companyid = strstr($companyid,'-',true);
 							close.click(function(event) {$('.staff-apply-form').remove();});
 
 						$('body').append(bg);
-
-				});
-
+		            });
+        
 
                 //工作各狀態要顯示的右邊區域
 				switch(work_apply_list_array[i]['check']) {
+
+					//要求再審
 					case 0:case 3:
 						subbox3.append(auditbtn);
 					break;
-					/*
-					case 1:
-						subbox3.append($('<div>').addClass('isapply').text('已錄取'));
-					break;
-					*/
-					case 2:
-						subbox3.append($('<div>').addClass('isnotapply').text('不錄取'));
+					case 2:case 22:
+						subbox3.append($('<span>').addClass('isnotapply').text('不錄取'));
 					break;	
-					case 4:case 5:case 1:
+					case 1:case 4:case 5:
 					$.ajax({
 		                type: 'POST',
 		                url: 'ajax_echo_name.php',
 		                async: false,
 		                data: {mode:'work-prop',workid:<?php echo (int)$_GET['workid']; ?>},
 		                success: function (data) {
+		                	//實習
 		                	if(data ==3){
 		                		var work_time_link = $('<a>').attr({href:"student_work_time_list.php?studid="+work_apply_list_array[i]['user_id'].trim()+"&workid="+work_apply_list_array[i]['work_id'],target:"_blank"}).text("工讀單"),
 					                text = $('<p>').text("學生的實習分數："+work_apply_list_array[i]['score']+"分"),
@@ -116,30 +133,35 @@ if (preg_match("/-/i", $companyid)) $companyid = strstr($companyid,'-',true);
 					                submit = $('<button>').attr({type:"button",name:"score_btn","no":work_apply_list_array[i]['no'],value:work_apply_list_array[i]['user_id'].trim()}).text("確定");
 						        subbox3.append(work_time_link,text,score,submit);
 		                	}
-		                	else if(data ==1){
-                                subbox3.append($('<a>').attr({href:"student_work_time_list.php?studid="+work_apply_list_array[i]['user_id'].trim()+"&workid="+work_apply_list_array[i]['work_id']+"&view=1",target:"_blank"}).text("工讀單").addClass('gondo'));
+		                	//工讀.正職
+		                	else if(data ==1||data ==2){
+		                		subbox3.append($('<span>').addClass('isapply').text('已錄取'),$('<i>').addClass('fa fa-times unapply').attr("no",work_apply_list_array[i]['no']),$('<br>'));
+                                subbox3.append($('<a>').attr({href:"student_work_time_list.php?studid="+work_apply_list_array[i]['user_id'].trim()+"&workid="+work_apply_list_array[i]['work_id']+"&view=1",target:"_blank"}).text("點我查看工讀單").addClass('gondo'));
 		                	}
 
 		                }
 		            });
 					break;	
 				}	
-			var mainbox = $('<div>').addClass('work-list-box').append(subbox1).append(subbox2).append(subbox3);
+			var mainbox = $('<div>').addClass('work-list-box').append(subbox1,subbox2,subbox3);
 				body.append(mainbox);
-    	}
-        
+
+
+    	}//for迴圈的下括號
+
+   
 
     	function submit_audit(boo){
 
-    		if(boo) txt = $('<div>').addClass('isapply').text('已錄取');
-    		else txt = $('<div>').addClass('isnotapply').text('不錄取');
+    		if(boo) txt = $('<span>').addClass('isapply').text('已錄取');
+    		else txt = $('<span>').addClass('isnotapply').text('不錄取');
 
     		var userid= $('#hidden_id').val(), chk = boo? 1:2;
     		var msg = $('#staff-audit-apply-msg').val();
     		$.ajax({
 					  type: 'post',
 					  url: 'company_work_apply_user.php',
-					  data: {check:chk, user: userid ,workid:<?php echo $_GET['workid']; ?>,msg:msg} ,
+					  data: {check:chk, user:userid ,workid:<?php echo $_GET['workid']; ?>,msg:msg},
 					  befoerSend:function(){
 					  	$('#staff-audit-apply-ok, #staff-audit-apply-no ,#staff-audit-apply-msg').attr('disabled', '');
 					  },
@@ -185,7 +207,7 @@ if (preg_match("/-/i", $companyid)) $companyid = strstr($companyid,'-',true);
 </div>-->
 <h3 class="what-is-list">應徵者列表</h3>
 <div id='company-work-list-container'>
-	目前尚無人應徵！
+
 </div>
 </body>
 </html>

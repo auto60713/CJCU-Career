@@ -64,15 +64,4 @@
 	background-color: #DD4444;
 	color: #fff;
 }
-.isapply,.isnotapply,.gondo{
-	padding: 5px;
-	font-size: 30px;
-	font-weight: bold;
-}
 
-.isapply{
-	color: #339933;
-}
-.isnotapply{
-	color: #CC3333;
-}

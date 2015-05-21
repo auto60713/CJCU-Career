@@ -9,12 +9,31 @@ else{echo "您無權訪問該頁面!"; exit;}
 <html>
 <head>
 	<meta charset="UTF-8">
-    <script><?php include_once('js_work_list.php'); echo_student_apply_list_array($userid);  ?>
+	<style type="text/css">
+    #student-audit-again{
+        display: inline-block;
+        min-width: 140px;
+    }
+    .pass-req,.delete-lu{
+	    font-size: 13px;
+	    padding: 2px 6px;
+	    text-align: center;
+	    margin-left: 10px;
+	    display: inline-block;
+
+    }
+    .pass-req:hover,.delete-lu:hover{
+
+	    cursor:pointer;
+    }
+	</style>
+    <script>
+
+    <?php include_once('js_work_list.php'); echo_student_apply_list_array($userid);  ?>
 
     $(function(){
     	
     	$('#student-audit-lightbox').hide();
-
  		 var body = $('#company-work-list-container');
 
 if(work_list_array.length == 0){body.prepend("目前沒有任何應徵");}
@@ -55,9 +74,9 @@ else{
 		    		switch(work_list_array[i]['ch']) {
 		    			//老師說要正名
 			    		case 0: check_status='審核中(點我查看)'; hint2.addClass('sta0 onecheck').text(check_status); break;
-			    		case 1: check_status='已錄取!'; hint2.addClass('sta1 yescheck').text(check_status); break;
+			    		case 1: check_status='已錄取'; hint2.addClass('sta1 yescheck').text(check_status); break;
 			    case 22:case 2: check_status='應徵失敗..(點我查看原因)'; hint2.addClass('sta2 nocheck').text(check_status); break;
-			    		case 3: check_status='應徵失敗..(點我查看原因)'; hint2.addClass('sta2 nocheck').text(check_status); subbox3.append(statustxt);break;
+			    		case 3: check_status='已要求重新再審'; hint2.addClass('sta2 nocheck').text(check_status); break;
 			    		case 4: check_status='工作中'; hint2.addClass('sta4 yescheck').text(check_status); break;
 			    		case 5: check_status='完成'; hint2.addClass('sta5 yescheck').text(check_status); break;
 		    		}
@@ -80,31 +99,35 @@ else{
 		    			var c_status ='';
                         // 取消應徵   要求再審
 		    	    	var delete_lu = $('<button>').attr('luid', workid).addClass('delete-lu').text("取消應徵"),
-                            pass = $('<button>').attr('workid', workid).addClass('pass-req').text("要求再審核");
+                            pass = $('<button>').attr('workid', workid).addClass('pass-req').text("要求再審");
 
                         // 工作對學生的狀態意義
 		    			switch(audit) {
 			    		
 			    		case 0: c_status='尚未被公司審核'; check_status_box.addClass('sta0 onecheck').text(c_status); 
-			    	            $('.student-audit-lightbox-status').append(delete_lu); break;
-
-			    		case 1: c_status='應徵成功!'; check_status_box.addClass('sta1 yescheck').text(c_status); break;
-			    		
+			    	            $('.student-audit-lightbox-status').append(delete_lu); 
+			    	        break;
+			    		case 1: c_status='應徵成功!'; check_status_box.addClass('sta1 yescheck').text(c_status); 
+			    		    break;
 			    		case 2: c_status='應徵失敗!'; check_status_box.addClass('sta2 nocheck').text(c_status); 
 			    	            $('.student-audit-lightbox-status').append(delete_lu); 
-				                $('.student-audit-lightbox-status').append(pass); break;
-
-
-			    case 22:case 3: c_status='應徵失敗!'; check_status_box.addClass('sta2 nocheck').text(c_status); 
-			    	        	$('.student-audit-lightbox-status').append(delete_lu); break;
-
-			    		case 4: c_status='工作中'; check_status_box.addClass('sta4 yescheck').text(c_status); break;
-			    		case 5: c_status='完成工作'; check_status_box.addClass('sta5 yescheck').text(c_status); break;
+				                $('.student-audit-lightbox-status').append(pass); 
+				            break;
+                        case 22:c_status='應徵失敗!'; check_status_box.addClass('sta2 nocheck').text(c_status); 
+			    	        	$('.student-audit-lightbox-status').append(delete_lu); 
+			    	        break;
+			            case 3: c_status='要求再審中'; check_status_box.addClass('sta2 nocheck').text(c_status); 
+			    	        	$('.student-audit-lightbox-status').append(delete_lu); 
+			    	        break;
+			    		case 4: c_status='工作中'; check_status_box.addClass('sta4 yescheck').text(c_status); 
+			    		    break;
+			    		case 5: c_status='完成工作'; check_status_box.addClass('sta5 yescheck').text(c_status); 
+			    		    break;
 			    		}
 			    	
                         //取消應徵AJAX
                         delete_lu.click(function(event) {
-				    		if (confirm ("確定要放棄此應徵  ?")){
+				    		if (confirm ("確定要取消此應徵? 此操作無法反悔")){
 	
 			    			    var luid = $(this).attr('luid');
 				                $.ajax({
@@ -113,8 +136,8 @@ else{
 								data: {mode:1,workid:luid},
 						    	})
 						    	.done(function (data){
-						    	
-						           alert(data);
+						    		
+						    	   alert(data);
 						           location.reload();
 						    	});
 						    }
@@ -122,7 +145,8 @@ else{
 
                         //要求重新再審AJAX
 				    	pass.click(function(event) {
-			    			work_id = $(this).attr('workid');
+			    			var work_id = $(this).attr('workid'),
+			    			    the_element = $(this);
 				            $.ajax({
 								url: 'ajax_line_up.php',
 								type: 'post',
@@ -132,7 +156,7 @@ else{
 						    	console.log(data);
 						    	if(data=='OK'){
 							    	$('#student-audit-again').text('已要求重新再審！');
-							    	$(this).remove();
+							    	the_element.remove();
 							    	th.attr('audit', '3');
 						    	}
 						    	else{

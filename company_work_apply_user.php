@@ -33,9 +33,7 @@ function isCompanyWork($conn,$companyid,$workid){
 
 
 // 將應徵紀錄的未審核0 改為 審核通過1 或 不通過2
-$sql = "update line_up
-		set [check]=?
-		where user_id=? and work_id=?";
+$sql = "update line_up set [check]=? where user_id=? and work_id=?";
 
 $params = array($check,$userid,$workid);
 $result = sqlsrv_query($conn, $sql, $params);

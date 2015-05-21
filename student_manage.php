@@ -6,7 +6,7 @@ else{$stud_id = trim($_SESSION['username']);}
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>個人頁面</title>
+	<title>長大職涯網-個人頁面</title>
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 	<link rel="stylesheet" type="text/css" href="css/manage.css">
 	<link rel="stylesheet" type="text/css" href="css/work_detail_edit.css">

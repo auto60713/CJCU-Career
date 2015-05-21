@@ -45,7 +45,7 @@ label.error{
 		}	
 		   
 		var audit_history_container = $('#company-audit-history');
-		if(audit_array.length>0) audit_history_container.html('');
+		if(audit_array.length==0) $('.history-echo').text("無歷史紀錄");
 		for(var i=0;i<audit_array.length;i++){
 
 			var icontxt = (audit_array[i].censored==1)? 'fa fa-check': 'fa fa-times',
@@ -181,8 +181,8 @@ label.error{
 
 <div id='workedit-content-apply' class="workedit-content-hide" tabtoggle='workedit2'>
 	<h1 class="company-audit-status">審核狀況：</h1>
-	<p>歷史紀錄：</p>
-	<div class="company-audit-history" id="company-audit-history">無歷史紀錄</div>
+	<p class="history-echo">歷史紀錄：</p>
+	<div class="company-audit-history" id="company-audit-history"></div>
 </div>
 </div>
 

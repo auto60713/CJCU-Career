@@ -45,10 +45,10 @@ if(!isset($_SESSION['username'])){
 			        c.prepend(box);
 			    }	
 
-			    c.fadeIn(300);
+			    
 		}
-		
-
+		c.fadeIn(300);
+/*
 		var ajax;
 
 		function getMsg_longpolling(){
@@ -86,7 +86,7 @@ if(!isset($_SESSION['username'])){
 			ctu=false;
 			ajax.abort();
 		});
-
+*/
 	});
 
 	</script>

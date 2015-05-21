@@ -14,21 +14,25 @@ function censored_check(){
     
         // 如果該公司申請通過
         if($row['censored'] == 1){
-        $hreftag = '<a href="#company-addwork"><div class="list">新增工作</div></a><hr>';
-        $hreftag.= '<a href="#company-work"><div class="list">管理工作</div></a><hr>';
-        $hreftag.= '<a href="#company-staff"><div class="list">工作負責人</div></a><hr>';
-        $hreftag.= '<a href="#company-notice"><div class="list">系統紀錄</div></a><hr>';
-        $hreftag.= '<a href="#explanation"><div class="list">操作說明</div></a><hr>';
+        $hreftag = '<a href="#company-addwork"><div class="company-addwork list">新增工作</div></a><hr>';
+        $hreftag.= '<a href="#company-work"><div class="company-work list">管理工作</div></a><hr>';
+        $hreftag.= '<a href="#company-staff"><div class="company-staff list">工作負責人</div></a><hr>';
+        $hreftag.= '<a href="#company-notice"><div class="company-notice list">系統紀錄</div></a><hr>';
+        $hreftag.= '<a href="#explanation"><div class="explanation list">操作說明</div></a><hr>';
         echo "$('.left-box').append('".$hreftag."');\n";
         }
         // 工作負責人
         else if($row['censored'] == 5){
-        $hreftag = '<a href="#company-work"><div class="list">管理工作</div></a><hr>';
+        $hreftag = '<a href="#company-work"><div class="company-work list">管理工作</div></a><hr>';
+        $hreftag.= '<a href="#company-notice"><div class="company-notice list">系統紀錄</div></a><hr>';
+        $hreftag.= '<a href="#explanation"><div class="explanation list">操作說明</div></a><hr>';
         echo "$('.left-box').append('".$hreftag."');\n";
         }
         // 沒通過
-        else if($row['censored'] == 3){
-    
+        else if($row['censored'] == 3 ||$row['censored'] == 0){
+        $hreftag = '<a href="#company-notice"><div class="company-notice list">系統紀錄</div></a><hr>';
+        $hreftag.= '<a href="#explanation"><div class="explanation list">操作說明</div></a><hr>';
+        echo "$('.left-box').append('".$hreftag."');\n";
         }
 }
 

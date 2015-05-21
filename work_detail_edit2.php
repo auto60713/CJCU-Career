@@ -79,7 +79,7 @@ if (preg_match("/-/i", $companyid)) $companyid = strstr($companyid,'-',true);
 		  data:{mode:0,workid:<?php  echo (int)$_POST['workid']; ?>},
 		  success: function (data) { 
             var remove_array = JSON.parse(data);
-            for(var i=0;i<remove_array.length;i++) $( remove_array[i][1] ).remove();
+            for(var i=0;i<remove_array.length;i++) $( remove_array[i] ).remove();
 		  }
 		});
 
@@ -106,12 +106,16 @@ if (preg_match("/-/i", $companyid)) $companyid = strstr($companyid,'-',true);
 		  url: 'ajax_work_edit.php',
 		  data:{mode:3,workid:<?php  echo (int)$_POST['workid']; ?>},
 		  success: function (data) { 
-            var work_divbtn_array = JSON.parse(data);
-            //幾個array:幾個按鈕 , divbtn_id:按鈕的ID , divbtn_text:按鈕的內容
-            for(var i=0;i<work_divbtn_array.length;i++){
-            var work_divbtn = $('<button>').attr('id',work_divbtn_array[i].divbtn_id).addClass('work-divbtn').text(work_divbtn_array[i].divbtn_text),
-		  	    divbtn_explain = $('<span>').addClass('divbtn-explain').text(work_divbtn_array[i].divbtn_explain);
-		  	$('#workedit-content-start').append(work_divbtn,divbtn_explain,$('<br>'));  
+
+		  	if(data == 0) $('#workedit-content-start').append('沒有可執行的指令');
+		  	else{
+                var work_divbtn_array = JSON.parse(data);
+                //幾個array:幾個按鈕 , divbtn_id:按鈕的ID , divbtn_text:按鈕的內容
+                for(var i=0;i<work_divbtn_array.length;i++){
+                    var work_divbtn = $('<button>').attr('id',work_divbtn_array[i].divbtn_id).addClass('work-divbtn').text(work_divbtn_array[i].divbtn_text),
+		  	            divbtn_explain = $('<span>').addClass('divbtn-explain').text(work_divbtn_array[i].divbtn_explain);
+		  	        $('#workedit-content-start').append(work_divbtn,divbtn_explain,$('<br>'));  
+		        }
 		    }
 		  }
 		});
@@ -124,7 +128,7 @@ if (preg_match("/-/i", $companyid)) $companyid = strstr($companyid,'-',true);
 				break;
 			case 1:
 				icontxt ='fa fa-check';
-				statustxt = ' 應徵中';
+				statustxt = ' 招募中';
 				color = '#339933';
 				break;
 			case 2 : case 3:
@@ -132,15 +136,10 @@ if (preg_match("/-/i", $companyid)) $companyid = strstr($companyid,'-',true);
 				statustxt = ' 校方審核不通過';
 				color = '#CC3333';
 				break;
-			case 4:
-				icontxt ='fa fa-check';
-				statustxt = ' 實習中';
-				color = '#339933';
-				break;
-			case 5:
-				icontxt ='fa fa-check';
-				statustxt = ' 結束應徵(完成實習)';
-				color = '#339933';
+			case 4:case 5:
+				icontxt ='fa fa-minus-square-o';
+				statustxt = ' 停止招募';
+				color = '#6F9B6F';
 				break;
 		}
 
@@ -215,11 +214,42 @@ if (preg_match("/-/i", $companyid)) $companyid = strstr($companyid,'-',true);
 
         $('.workedit-tabbox,.workedit-content').fadeIn(300);
 
-        //開始工作
+
+        //執行某個動作
+		$(document).off("click",'button.work-divbtn').on('click','button.work-divbtn', function() {
+
+	 	var btn_text = $(this).text(),
+	 	    btn_id = $(this).attr('id');
+
+	 	    if (confirm ("確定要"+btn_text+"?")){
+
+	 	        switch(btn_id){
+				    case 'divbtn-stop':
+				        var check = 4;
+				    break;
+				    case 'divbtn-restart':
+				        var check = 1;
+				    break;
+				    case 'divbtn-end':
+				        var check = 5;
+				    break;
+			    }
+		    	$.ajax({
+			     	type:"POST",
+			     	url: "ajax_work_edit.php",
+			     	data:{mode:1,workid:<?php echo (int)$_POST['workid']; ?>,check:check},
+                    success: function (data) { 
+                    	location.reload();
+			        }
+			    });
+		    }    
+		});
+
+
+        /*停止應徵
 		$(document).off("click",'button#divbtn-start').on('click','button#divbtn-start', function() {
 
-	 	var btn_text = $('button#divbtn-start').text();
-		    if (confirm ("要停止應徵並"+btn_text+"嗎?")){
+	 	var btn_text = $('button#divbtn-stop').text();
 
 		    	$.ajax({
 			     	type:"POST",
@@ -227,10 +257,9 @@ if (preg_match("/-/i", $companyid)) $companyid = strstr($companyid,'-',true);
 			     	data:{mode:1,workid:<?php echo (int)$_POST['workid']; ?>,check:4},
                     success: function (data) { 
           
-                    	$('#workedit-content-start').text(data);
+                    	alert(data); location.reload();
 			        }
 			    });
-		    }
 		});
 		//完成工作
 		$(document).off("click",'button#divbtn-end').on('click','button#divbtn-end', function() {
@@ -249,6 +278,7 @@ if (preg_match("/-/i", $companyid)) $companyid = strstr($companyid,'-',true);
 			    });
 		    }
 		});
+*/
         //刪除工作
         var work_delete = $('button#divbtn-delete');
 		work_delete.click(function(event) {

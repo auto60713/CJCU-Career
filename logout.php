@@ -1,6 +1,11 @@
-<?php session_start();
-header('Content-Type: text/html; charset=utf8');
+<html>
+<head>
+	<title>登出</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<body>
 
+<?php session_start();
 
 if(isset($_GET["mode"])) $mode = $_GET["mode"];
 else $mode = 0;
@@ -12,3 +17,6 @@ else echo "登出中..<meta http-equiv=REFRESH CONTENT=1;url=index.php>";
 
 session_destroy();
 ?>
+</body>
+</html>
+

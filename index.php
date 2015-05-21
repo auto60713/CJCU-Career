@@ -16,14 +16,13 @@
 		$("#menu").load('public_view/menu.html');
 		$("#footer").load('public_view/footer.html');
 
+        //如果瀏覽器不支援JSON則載入json2.js
+		if (typeof (JSON) == 'undefined') $.getScript('js/json2.js');
+		
     })
 	</script>
-
-
     <script src="slider/sliderengine/initslider-1.js"></script>
     <script src="slider/sliderengine/amazingslider.js"></script>
-
-    
 </head>
 
 <body>
@@ -191,10 +190,7 @@
 
 
 <script>
-    <?php
-    //後端傳來的工作資料
-    include_once('js_work_list.php'); echo_work_list_array(3); 
-    ?>
+    <?php include_once('js_work_list.php'); echo_work_list_array(3); ?>
 
     //工作列表
 	var box = $('#home-work-list-box');	    

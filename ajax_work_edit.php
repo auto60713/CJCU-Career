@@ -44,9 +44,6 @@ switch($_POST['mode']){
 
 
 
-
-
-
 //移除不該檢視的頁面
 function remove_page($workid){
   include_once("sqlsrv_connect.php");
@@ -60,16 +57,10 @@ function remove_page($workid){
 
   switch($row['check']){
 
-  case 0: case 2: case 3: //第一階段
-      echo json_encode(array(array('#workedit-content-apply','#page-apply'),array('#workedit-content-start','#page-start')));
+  case 0: case 2: case 3: //該工作沒通過審核
+      echo json_encode( array('#page-apply','#page-start') );
   break;
-  case 1: case 4://第二階段
-      echo json_encode(array());
-  break;
-  case 5: //第三階段
-      echo json_encode(array(array('#workedit-content-start','#page-start')));
-  break;
-
+  default: echo json_encode(0);
   }
 }
 
@@ -87,20 +78,14 @@ function echo_work_divbtn_array($workid){
   else die(print_r( sqlsrv_errors(), true));
 
   //幾個array:幾個按鈕 , divbtn_id:按鈕的ID , divbtn_text:按鈕的內容 , divbtn_explain:按鈕的說明
-
-  switch($row['work_prop_id']){
-
-      case 3:  $work_prop = "實習";   
-      break;
-      default: $work_prop = "工作";
-  }
+  //if $row['work_prop_id']==3 是實習
   switch($row['check']){
 
-    case 1:  //應徵中 > 工作中
-        echo json_encode(array(array('divbtn_id'=>'divbtn-start','divbtn_text'=>'開始'.$work_prop,'divbtn_explain'=>'接下來的階段您可以管理應徵者的工作日誌或直接完成工作')));
+    case 1:  //招募狀態
+        echo json_encode(array(array('divbtn_id'=>'divbtn-stop','divbtn_text'=>"停止招募",'divbtn_explain'=>'停止應徵後工作招募將不會在首頁出現')));
     break;
-    case 4:  //工作中 > 完成工作
-        echo json_encode(array(array('divbtn_id'=>'divbtn-end','divbtn_text'=>'完成'.$work_prop,'divbtn_explain'=>'')));
+    case 4:case 5:  //停止招募狀態
+        echo json_encode(array(array('divbtn_id'=>'divbtn-restart','divbtn_text'=>'繼續招募','divbtn_explain'=>'工作上架,且當前的應徵者狀態不會改變')));
     break;
 
     default: echo json_encode(0);
@@ -109,66 +94,29 @@ function echo_work_divbtn_array($workid){
 }
 
 
+//(0未審核,1通過(應徵中),2未通過,3要求再審,4停止應徵(工作中),5=工作完成,22=不錄取且不能重新再審(工作已被關閉),24=假性刪除)
+
+
 //改變工作的狀態
 function work_state_change($workid,$check){
 	include_once("sqlsrv_connect.php");
 
-  $sql = "select work_prop_id,[check] from work where id =?"; 
-  $stmt = sqlsrv_query($conn, $sql, array($workid));
-
-  if($stmt) $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC);
-
-    switch($check){
-
-          case 4: 
-             
-              switch($row['work_prop_id']){
-
-              case 3:  //實習
-                  $text = '結束應徵並開始實習!';
-              break;
-                      
-              default:
-                  $text = '結束應徵並實行工讀!';
-              }
-
-          break;
-
-          case 5:  
-              switch($row['work_prop_id']){
-
-              case 3:  //實習
-                  $text = '完成實習!';
-              break;
-                      
-              default:
-                  $text = '結束應徵!';
-              }
-             
-          break;
-    }
-		
 //改變工作狀態
-	$sql  = "update work set [check]=(?) where id =?"; 
-//改變應徵狀態
-//只改變該工作有錄取(以上)的
-  $sql2  = "update line_up set [check]=(?) where work_id =? and [check] IN (1,4)"; 
-//沒錄取的通通變成不通過
-  $sql3  = "update line_up set [check]=22 where work_id =? and [check] <4"; 
+    	$sql = "update work set [check]=(?) where id =?"; 
+      if( !sqlsrv_query($conn, $sql, array($check,$workid)) ) echo '更新工作狀態失敗';
 
-  
+//如果結束應徵 沒錄取的通通變成不通過且不能再審
+  if($check==4){
 
-        if( sqlsrv_query($conn, $sql, array($check,$workid)) ){
-          if( sqlsrv_query($conn, $sql2, array($check,$workid)) ){
-            if( sqlsrv_query($conn, $sql3, array($workid)) ){
+      $sql = "update line_up set [check]=22 where work_id =? and [check] in (0,2,3)"; 
+      if( !sqlsrv_query($conn, $sql, array($workid)) ) echo '錯誤! 沒錄取的學生依然可以要求再審';
+  }
+//如果重新應徵 讓大家可以要求再審
+  if($check==1){
 
-                echo $text;
-
-            }else echo '操作失敗!狀況三';
-          }else echo '操作失敗!狀況二';
-        }else echo '操作失敗!狀況一';
-
-
+      $sql = "update line_up set [check]=3 where work_id =? and [check] = 22"; 
+      if( !sqlsrv_query($conn, $sql, array($workid)) ) echo '錯誤! 不能要求再審的學生無法應徵';
+  }
 }
 
 

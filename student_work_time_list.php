@@ -67,7 +67,6 @@ $(function(){
 var go_pass = 0,links,more;
     <?php  //load data
         include_once("js_work_detail.php"); echo_work_time_list_array($_GET['workid'],$_GET['studid']);
-        if($_SESSION['level'] != 3) echo "$('#ctrl_bar').remove(); go_pass = 1;";
 	?>
 
 if(work_time_list_array.length!=0){
@@ -82,6 +81,11 @@ if(work_time_list_array.length!=0){
                         check_echo = "未審核";
                         go_pass = 0;
             } 
+
+            <?php //只有學生能夠修改工讀單 
+                if($_SESSION['level'] != 3) echo "$('#ctrl_bar').remove(); go_pass = 1;"; 
+            ?>
+
             if(go_pass == 1){
                 links = 'student_work_time.php?studid='+work_time_list_array[i]['stud_id']+'&listid=';
                 more  = '&view=1';

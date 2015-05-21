@@ -32,6 +32,10 @@ switch($_POST['mode']){
       add_company($_POST['comid'],$_POST['comname']);
   break;
 
+  case 6://停權廠商
+      ban_company($_POST['comid']);
+  break;
+
 }
 
 
@@ -106,6 +110,16 @@ function dep_no_updata($id,$no){
   if( sqlsrv_query($conn, $sql, array($no,$id)) ) echo '已經儲存修改';     
 
 }
-    
+
+function ban_company($id){
+
+  include_once("sqlsrv_connect.php");
+
+  $sql = "update company set censored=(?) where id=?"; 
+
+  if( sqlsrv_query($conn, $sql, array(3,$id)) ) echo 'Success';     
+
+}
+
 
 ?>
