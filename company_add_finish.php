@@ -54,7 +54,7 @@ else{
         die( print_r( sqlsrv_errors(), true));
     }
     else{
-        //新增通知系統
+        /*新增通知系統
         $sql = "INSERT INTO notify (user_no,user_level,isnews) VALUES (?, ?, ?)";
         $params = array($id, 1 , 0);
         $stmt = sqlsrv_query( $conn, $sql, $params);
@@ -62,7 +62,7 @@ else{
 
         echo '註冊失敗...錯誤類型:"通知系統"';
         }
-        else{
+        */
 
         $_SESSION['username'] = $id;
         $_SESSION['level'] = 4;
@@ -73,10 +73,8 @@ else{
         echo '</script>';
 
         //寄信給管理員
-        include_once("send_email.php"); 
-        send_email("career@mail.cjcu.edu.tw","長大職涯網有新的廠商註冊「".$ch_name."」需要審核","<h1><a href='http://210.70.167.98/cjcuweb/staff_manage.php#staff-audit0'>前往查看</a></h1>");
-    
-        }
+        include_once("send_email.php"); mode(2,$ch_name);
+        
     
     }
 

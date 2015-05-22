@@ -3,6 +3,7 @@
 <head>
 
 	<meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title>長大職涯網</title>
 
 	<link rel="stylesheet" type="text/css" href="css/main.css">

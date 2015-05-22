@@ -3,7 +3,7 @@
 if(isset($_POST['mode'])) $mode = $_POST['mode']; else $mode = "";
 if(isset($_POST['mail_address'])) $mail_address = $_POST['mail_address']; else $mail_address = "";
 
-//需要into的內容{被寄者email,信件標題,內容}
+//ajax啟動
 switch($mode){
 
     case 1://忘記密碼
@@ -21,19 +21,43 @@ switch($mode){
         send_email($row['email'],"請妥善保管您的帳號密碼","<h2>帳號：".$row['id']."</h2><h2>密碼：".$row['pw']."</h2>");
     break;
 
+}
+
+
+//include啟動
+function mode($mode,$com_name){
+switch($mode){
+
     case 2://新廠商申請需要審核
-        //send_email("komicabot@gmail.com","長大職涯網 有新的廠商註冊需要審核","<h1><a href='http://localhost/cjcuweb/staff_manage.php#staff-audit0'>前往查看</a></h1>");
-        //function寫在company_add_finish.php那邊
+        $msg = "<h2><a href='http://careerweb.cjcu.edu.tw/staff_manage.php#staff-audit0' style='text-decoration:none;'>前往查看</a></h2>";
+        send_email("komicabot@gmail.com","有新的廠商註冊「".$com_name."」需要審核",$msg);
+        //"career@mail.cjcu.edu.tw"
+        //called by company_add_finish.php
     break;
 
 
 }
+}
 
 
-
-
-//開始寄信
+//開始寄信{被寄者email,信件標題,內容}
 function send_email($mail_address,$mail_title,$mail_cont){
+
+$to = $mail_address;
+$by = '長大職涯網';
+$title = $mail_title;
+//設定 MIME 版本和 Content-type header 內容.
+$sCharset = 'big5';
+$sHeaders = "MIME-Version: 1.0\r\n".
+            "Content-type: text/html; charset=$sCharset\r\n".
+            "From: $by\r\n";
+
+$msg = $mail_cont;
+
+if(mail($to, $title, $msg, $sHeaders)):echo "success";
+else:echo "信件發送失敗..";
+endif;
+
 
 /*
 //請設定管理員的gmail帳號密碼
@@ -92,7 +116,8 @@ $mail->Body = $mail_cont;
 
     //如果有錯誤會印出原因
     if( !$mail->Send() ) echo "寄信發生錯誤：" . $mail->ErrorInfo;   
-    else */echo "success";
+    else echo "success";
+*/
     
 }
 ?>

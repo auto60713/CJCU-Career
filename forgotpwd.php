@@ -3,9 +3,9 @@
 <html>
 <head>
 	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title>求助</title>
 	<link rel="stylesheet" type="text/css" href="css/main.css">
-
 	<link rel="stylesheet" type="text/css" href="font-awesome/css/font-awesome.min.css">
 	<script src="js/jquery-min.js"></script>
     <script src="js/jquery-migrate-min.js"></script>

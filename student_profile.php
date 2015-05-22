@@ -12,6 +12,7 @@ if(!isset($_SESSION['level'])||$_SESSION['level'] == $level_student){
 <html>
 <head>
 	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title></title>
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 	<link rel="stylesheet" type="text/css" href="css/manage.css">
@@ -33,7 +34,8 @@ if(!isset($_SESSION['level'])||$_SESSION['level'] == $level_student){
 
         $(".profile-pic-img").attr("src",'http://esrdoc.cjcu.edu.tw/esr_photo/'+student_profile_array['sd_syear'].trim()+'/'+student_profile_array['sd_no'].trim()+'.jpg');
 
-		$('title,#sd_name').text(student_profile_array['sd_name']);
+        document.title = student_profile_array['sd_name'];
+		$('#sd_name').text(student_profile_array['sd_name']);
 		$('#sd_no').text(student_profile_array['sd_no']);
 		$('#sd_birthday').text(student_profile_array['sd_birthday']);
 

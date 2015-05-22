@@ -6,6 +6,7 @@ if (!file_exists($filename)) $filename = 'img_company/default.png';
 <html>
 <head>
 	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title></title>
     <link rel="stylesheet" type="text/css" href="css/main.css">
 	<link rel="stylesheet" type="text/css" href="css/manage.css">
@@ -24,8 +25,8 @@ if (!file_exists($filename)) $filename = 'img_company/default.png';
 		
 		$('.profile-pic-change, #profile-btn-edit').hide();
 
-		// load into container company_detail_array
-		$('title , #profile-name').text(company_detail_array['ch_name']);
+		document.title = company_detail_array['ch_name'];
+		$('#profile-name').text(company_detail_array['ch_name']);
 		$('#ch_name').text(company_detail_array['ch_name']);
 		$('#en_name').text(company_detail_array['en_name']);
 	    $('#uni_num').text(company_detail_array['uni_num']);

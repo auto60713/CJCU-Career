@@ -7,7 +7,8 @@ if (!file_exists($filename)) $filename = 'img_department/default.png';
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>職涯網-帳號管理</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>長大職涯網-帳號管理</title>
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 	<link rel="stylesheet" type="text/css" href="css/manage.css">
 	<link rel="stylesheet" type="text/css" href="css/work_detail_edit.css">
