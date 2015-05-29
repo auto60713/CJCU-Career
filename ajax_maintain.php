@@ -29,7 +29,7 @@ switch($_POST['mode']){
   break;
 
   case 5://新增廠商
-      add_company($_POST['comid'],$_POST['comname']);
+      add_company();
   break;
 
   case 6://停權廠商
@@ -91,13 +91,13 @@ function add_department2($dep2_no,$dep2_name){
 
 
 //新增廠商
-function add_company($com_id,$com_name){
+function add_company(){
 
   include_once("sqlsrv_connect.php");
 
-  $sql = "INSERT INTO company (id,pw,ch_name,censored) VALUES (?, ?, ?, ?)";
+  $sql = "INSERT INTO company (id,pw,ch_name,address,phone,,zone,censored) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
-  if( sqlsrv_query($conn, $sql, array($com_id,1234,$com_name,1)) ) echo 'Success';     
+  if( sqlsrv_query($conn, $sql, array($_POST['id'],1234,$_POST['name'],$_POST['address'],$_POST['phone'],4,1)) ) echo 'Success';     
 
 }
 

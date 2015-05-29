@@ -37,15 +37,17 @@ else{
 	    .all-list,#add_dep_btn{
             margin-top: 30px;
 	    }
+        .all-list-tb{
+            width: 100%;
+        }
         .all-list-tb th,.all-list-tb td{
+            padding-right: 10px;
 
             text-overflow: ellipsis;
             white-space: nowrap;
 
         	text-align: left;
         	font-weight: normal;
-            padding-right: 30px;
-            max-width: 240px;
             overflow: hidden;
         }
         .space{
@@ -59,14 +61,8 @@ else{
         	font-size: 9px;
         	color: #808080;
         }
-        .dep-id{
-        	width: 70px;
-        }
         .search_sign{
         	margin:0px 5px;
-        }
-        .com-name-limit{
-            width: 150px;
         }
 
 	</style>
@@ -91,7 +87,7 @@ else{
         <a>搜尋工作名稱</a><input type="text" name="search_work_name" value="" class="search_sign"><a class="ps">(打完後字按下tab即搜尋)</a>
         <div class="all-list">
             <table id="work_table" class="all-list-tb">
-            	<h3>工作列表(僅維護工讀,正職。實習各系所負責)</h3>
+            	<h3>工作列表</h3>
             	<tr><th>序號</th><th>工作名稱</th><th>發佈廠商</th><th>類型</th><th>狀態</th></tr>
             	<tr class="space"></tr>
             </table>
@@ -111,6 +107,8 @@ else{
             <tr><td style="width:140px">請輸入廠商帳號</td><td><input type="text" name="com_id" value=""></td></tr>
             <tr><td>廠商中文名稱</td><td><input type="text" name="com_name" value=""></td></tr>
             <tr><td>密碼預設</td><td><input type="text" name="com_pw" value="1234" disabled></td></tr>
+            <tr><td>地址</td><td><input type="text" name="com_address" value=""></td></tr>
+            <tr><td>連絡電話</td><td><input type="text" name="com_phone" value=""></td></tr>
         </table>
         <button type="button" onclick="add_company()">新增</button>
         </div>
@@ -191,7 +189,7 @@ else{
 		    	    w_link = $('<a>').attr('href', '#work'+staff_maintain_work[i]['id']+'-0').text(staff_maintain_work[i]['name']),
 		        	work = $('<td>').html(w_link),
 		        	com_link = $('<a>').attr('target','_blank').attr('href', 'company-'+staff_maintain_work[i]['com_id']).text(staff_maintain_work[i]['com_name']),
-		        	com = $('<td>').addClass('com-name-limit').html(com_link),
+		        	com = $('<td>').html(com_link),
 		        	prop = $('<td>').text(staff_maintain_work[i]['prop']);
 
                     switch(staff_maintain_work[i]['check']) {
@@ -260,7 +258,7 @@ function com_table_append_data(body,params) {
 function dep_table_append_data(body,params) {
 
 		var number = $('<td>').text(i+1),
-		    no = $('<input>').attr({'type':'text','name':'dep'+params['id'],'value':params['no'].trim()}).addClass('dep-id'),
+		    no = $('<input>').attr({'type':'text','name':'dep'+params['id'],'value':params['no'].trim()}),
 		    no_td = $('<td>').append(no),
 		    pw = $('<td>').text(params['pw']),
 		    link2 = $('<a>').attr('target','_blank').attr('href', 'department-'+params['no']).text(params['ch_name']),
@@ -368,13 +366,15 @@ function dep_table_append_data(body,params) {
 //新增廠商
 function add_company() {
 
-    var com_id = $('input:text[name=com_id]').val();
-    var com_name = $('input:text[name=com_name]').val();
+    var com_id = $('input:text[name=com_id]').val(),
+        com_name = $('input:text[name=com_name]').val(),
+        com_address = $('input:text[name=com_address]').val(),
+        com_phone = $('input:text[name=com_phone]').val();
 
         $.ajax({
             type:"POST",
             url: "ajax_maintain.php",
-            data:{mode:5,comid:com_id,comname:com_name},
+            data:{mode:5,id:com_id,name:com_name,address:com_address,phone:com_phone},
               success: function (data) { 
                 if(data == 'Success'){
 

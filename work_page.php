@@ -3,9 +3,8 @@
 <head>
 
 	<meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<title>長大職涯網</title>
-
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 	<link rel="stylesheet" type="text/css" href="css/area_div.css">
   <link rel="stylesheet" type="text/css" href="font-awesome/css/font-awesome.css">

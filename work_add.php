@@ -528,7 +528,7 @@ div.ui-datepicker{
 	});
 
 
-//欄位限制
+/*欄位限制
 $(document).ready(function() { 
 
         $("#work_edit_form").validate({ 
@@ -552,7 +552,7 @@ $(document).ready(function() {
 
       
 });
-
+*/
 
 </script>
 

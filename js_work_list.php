@@ -22,7 +22,7 @@ if(isset($_GET['prop'])) $sql.= " and w.work_prop_id = ".$_GET['prop'];
 if(isset($_GET['io'])) $sql.= " and w.is_outside = ".$_GET['io'];
 if(isset($_GET['zone'])) $sql.= " and w.zone_id = ".$_GET['zone'];
 //==================================
-$sql.= " ORDER BY w.id DESC";
+$sql.= " ORDER BY up_data DESC";
 //最新的在前面
 
 $stmt = sqlsrv_query($conn, $sql, $para);
@@ -65,7 +65,7 @@ function echo_work_manage_list_array($companyid){
 
 	$sql = "select w.id wid,w.name wname,z.name zname,w.is_outside isout,p.name propname,[recruitment _no] rno,w.date date,t.name,w.[check] ch
 	 from work w,zone z,work_prop p,work_type t
-	 where w.zone_id = z.id and work_prop_id = p.id and w.company_id=? and w.work_type_id=t.id and [check]<>24 ORDER BY w.id DESC;";
+	 where w.zone_id = z.id and work_prop_id = p.id and w.company_id=? and w.work_type_id=t.id and [check]<>24 ORDER BY up_data DESC;";
 
 	$stmt = sqlsrv_query($conn, $sql, $para);
 	$work_list_array = array();
@@ -163,7 +163,8 @@ function staff_maintain_work(){
 	include("sqlsrv_connect.php");
 	$para = array();
 
-	$sql = "select w.id,w.name,c.id com_id,c.ch_name com_name,wp.name prop,w.[check] from work w,company c,work_prop wp where w.publisher=1 and w.work_prop_id IN (1,2) and w.[check] IN (1,4,5) and c.id=w.company_id and wp.id=w.work_prop_id";
+	//$sql = "select w.id,w.name,c.id com_id,c.ch_name com_name,wp.name prop,w.[check] from work w,company c,work_prop wp where w.publisher=1 and w.work_prop_id IN (1,2) and w.[check] IN (1,4,5) and c.id=w.company_id and wp.id=w.work_prop_id";
+	$sql = "select w.id,w.name,c.id com_id,c.ch_name com_name,wp.name prop,w.[check] from work w,company c,work_prop wp where w.[check] IN (1,4,5) and c.id=w.company_id and wp.id=w.work_prop_id";
 	$stmt = sqlsrv_query($conn, $sql, $para);
 	$staff_maintain_work = array();
 

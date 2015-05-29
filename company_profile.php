@@ -38,7 +38,7 @@ if (!file_exists($filename)) $filename = 'img_company/default.png';
 		$('#phone').text(company_detail_array['phone']);
 		$('#email').text(company_detail_array['email']);
 		$('#fax').text(company_detail_array['fax']);
-		$('#address').text(company_detail_array['zone_name']+" "+company_detail_array['address']);
+		$('#address').text(company_detail_array['address']);
 		$('#cptype').text(company_detail_array['typename']);
 		$('#cpurl').append($('<a>').attr({'target':'_blank','href':company_detail_array['url']}).text(company_detail_array['url']));
 		$('#introduction').html(company_detail_array['introduction']);

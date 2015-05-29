@@ -60,9 +60,11 @@ if(isset($_POST['pay_data']))$pay = trim($_POST['pay_data']);
 else $pay = "";
 if(isset($_POST['detail']))$detail = trim($_POST['detail']);
 else $detail = "";
+$up_data = date ("Y-m-d H:i:s");
+
 
 //廠商代PO
-if( $_POST['instead_com']!=0 ) { $company_id = trim($_POST['instead_com']); $publisher = 1; }
+if( $_POST['instead_com']!="0" ) { $company_id = trim($_POST['instead_com']); $publisher = 1; }
 
 if( !isset($name) || !isset($work_type) || !isset($work_prop) || !isset($isoutside) || !isset($zone_id) || !isset($address) || !isset($recruitment_no) || $zone_id==0){
     echo "Enter the details are incorrect!!";
@@ -72,8 +74,8 @@ if( !isset($name) || !isset($work_type) || !isset($work_prop) || !isset($isoutsi
 
     include("sqlsrv_connect.php");
 
-    $sql = "INSERT INTO work(name,publisher,company_id,work_prop_id,match_dep,work_type_id,recruited_date,start_date,end_date,is_outside,zone_id,address,phone,pay,[recruitment _no],detail,[check]) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-    $params = array($name,$publisher,$company_id,$work_prop,$match_dep,$work_type,$recruited_date,$bg_date,$ed_date,$isoutside,$zone_id,$address,$phone,$pay,$recruitment_no,$detail,$check);
+    $sql = "INSERT INTO work(name,publisher,company_id,work_prop_id,match_dep,work_type_id,recruited_date,start_date,end_date,is_outside,zone_id,address,phone,pay,[recruitment _no],detail,[check],up_data) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+    $params = array($name,$publisher,$company_id,$work_prop,$match_dep,$work_type,$recruited_date,$bg_date,$ed_date,$isoutside,$zone_id,$address,$phone,$pay,$recruitment_no,$detail,$check,$up_data);
     $result = sqlsrv_query($conn, $sql, $params);
     $echo_text = "工作新增成功!";
     if($result){
@@ -86,10 +88,8 @@ if( !isset($name) || !isset($work_type) || !isset($work_prop) || !isset($isoutsi
     
         $echo_text = "工作新增成功! 請等待校方審核..";
     }
-        //echo 'alert("'.$echo_text.'");';
-        echo '<script>document.location.href="'.$href.'_manage.php#'.$href.'-work";</script>';
 
-    
+        echo '<script>document.location.href="'.$href.'_manage.php#'.$href.'-work";</script>';
     }
     else die(print_r( sqlsrv_errors(), true));
 }

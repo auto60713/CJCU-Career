@@ -29,6 +29,7 @@ $phone = trim($_POST['phone']);
 $pay = trim($_POST['pay_data']);
 $detail = trim($_POST['detail']);
 $workid = trim($_POST['work-id']);
+$up_data = date ("Y-m-d H:i:s");
 /* 驗證該工作是否為目前登入的公司所有,如果是才給予繼續
 if(!isCompanyWork($conn,$_SESSION['username'],$workid)){echo '你沒有權限訪問改頁面!!'; exit();}
 function isCompanyWork($conn,$companyid,$workid){
@@ -48,12 +49,12 @@ if( !isset($name) || !isset($work_type)  || !isset($work_prop) || !isset($addres
 
 
 
-	$params = array($name,$work_type,$recruited_date,$bg_date,$ed_date,$work_prop,$isoutside,$zone_id,$address,$phone,$pay,$recruitment_no,$detail,$workid);
+	$params = array($name,$work_type,$recruited_date,$bg_date,$ed_date,$work_prop,$isoutside,$zone_id,$address,$phone,$pay,$recruitment_no,$detail,$up_data,$workid);
 
 	$sql = "update work 
 			set name=?,work_type_id=?,recruited_date=?,start_date=?,end_date=?,
 			work_prop_id=?,is_outside=?,zone_id=?,address=?,phone=?,pay=?,
-			[recruitment _no]=?,detail=?
+			[recruitment _no]=?,detail=?,up_data=?
 			where id=?";
 
 	$result = sqlsrv_query($conn, $sql, $params);

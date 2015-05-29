@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <html>
 <head>
 	<title>登出</title>
@@ -5,7 +6,7 @@
 </head>
 <body>
 
-<?php session_start();
+<?php
 
 if(isset($_GET["mode"])) $mode = $_GET["mode"];
 else $mode = 0;

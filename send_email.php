@@ -28,11 +28,10 @@ switch($mode){
 function mode($mode,$com_name){
 switch($mode){
 
-    case 2://新廠商申請需要審核
+    case 2:/*新廠商申請需要審核
         $msg = "<h2><a href='http://careerweb.cjcu.edu.tw/staff_manage.php#staff-audit0' style='text-decoration:none;'>前往查看</a></h2>";
-        send_email("komicabot@gmail.com","有新的廠商註冊「".$com_name."」需要審核",$msg);
-        //"career@mail.cjcu.edu.tw"
-        //called by company_add_finish.php
+        send_email("career@mail.cjcu.edu.tw","有新的廠商註冊「".$com_name."」需要審核",$msg);
+        //called by company_add_finish.php*/
     break;
 
 

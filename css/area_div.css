@@ -188,6 +188,10 @@
 }
 .isExpired{
 	background-color: #F2F2F2;
+	opacity: 0.5;
+	filter:alpha(opacity=50);
+    -moz-opacity:0.5;
+    -khtml-opacity: 0.5;
 }
 
 

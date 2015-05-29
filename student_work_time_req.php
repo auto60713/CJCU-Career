@@ -1,3 +1,4 @@
+<?php session_start();  ?>
 <html>
 <head>
   <title>長大職涯網</title>
@@ -5,7 +6,7 @@
 </head>
 <body>
 
-<?php session_start(); 
+<?php 
 
 switch($_POST['mode']){
 
@@ -84,7 +85,7 @@ else{
     }
    
 }
-header("location:student_manage.php#timelist".$_POST['list_no']);
+echo '<script>document.location.href="student_manage.php#timelist'.$_POST['list_no'].'";</script>';
 }
 
 ?>
