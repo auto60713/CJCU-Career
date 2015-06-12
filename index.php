@@ -207,8 +207,8 @@
 
 			work_name = $('<h1>').text(work_list_array[i].wname),
 			work_zone = $('<p>').text(work_list_array[i].zname).prepend($('<i>').addClass('fa fa-map-marker')),
-			work_date = $('<p>').text(work_list_array[i].date.split(" ")[0]).addClass('dateee'),
-			work_propn = $('<p>').text(((work_list_array[i].isout=='0')?'校外 ':'校內 ') + work_list_array[i].propname),
+			work_date = $('<p>').text('職缺更新日期' + work_list_array[i].up_data.split(" ")[0]).addClass('dateee'),
+            work_propn = $('<p>').text(((work_list_array[i].isout=='0')?'校外 ':'校內 ') + work_list_array[i].propname),
 			work_recr = $('<p>').addClass('num').text('需求 '+ work_list_array[i].rno +' 人');
 
 			box2.append(work_name,work_date);

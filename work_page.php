@@ -167,7 +167,7 @@
 
             work_name = $('<h1>').text(work_list_array[i].wname),
             work_zone = $('<p>').text(work_list_array[i].zname).prepend($('<i>').addClass('fa fa-map-marker')),
-            work_date = $('<p>').text('應徵截止' + work_list_array[i].recruited_date.split(" ")[0]).addClass('dateee'),
+            work_date = $('<p>').text('職缺更新日期' + work_list_array[i].up_data.split(" ")[0]).addClass('dateee'),
             work_propn = $('<p>').text(((work_list_array[i].isout=='0')?'校外 ':'校內 ') + work_list_array[i].propname),
             work_recr = $('<p>').addClass('num').text('需求 '+ work_list_array[i].rno +' 人');
 
@@ -175,7 +175,7 @@
             box3.append(work_zone);
             box4.append(work_propn);
 
-        //檢查是否應徵過期 date = '2011-04-11'
+        //檢查是否應徵過期 date = '2015-01-01'
         var compare_date = new Date(work_list_array[i].recruited_date.split(" ")[0]);
         if( compare_date < now ) div_work.addClass('isExpired');
 

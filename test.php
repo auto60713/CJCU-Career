@@ -1,24 +1,23 @@
 <?php
-header("Content-Type:text/html; charset=utf-8");
+session_start();
+session_register("username");
+session_commit();
 
 
-$to = 'komicabot@gmail.com';
-$by = '長大職涯網';
-$title = "長大職涯網-測試信件";
-//設定 MIME 版本和 Content-type header 內容.
-$sCharset = 'big5';
-$sHeaders = "MIME-Version: 1.0\r\n".
-            "Content-type: text/html; charset=$sCharset\r\n".
-            "From: $by\r\n";
+//session記錄檔異動時間在300秒以內，都計算為在線人數
+echo onLine(300);
 
-$msg = "
-<h1>信件內容: 這是一封 HTML 格式的 email</h1>
-這裡可以用任何 <strong>HTML 語法</strong>
-";
-
-if(mail($to, $title, $msg, $sHeaders)):echo "信件已經發送成功。";
-else:echo "信件發送失敗！";
-endif;
-
+function onLine($second)
+{
+ $qty = 0;
+ //讀取sess_開頭的檔案，如有自定session檔前綴字元的，請自行變更
+ foreach (glob(session_save_path()."/sess_*") as $sess_file){
+  //session異動時間在300秒以內的，就納入在線人數
+  if (filemtime($sess_file)+$second >= time()){
+   ++$qty;
+  }
+ }
+ return $qty;
+}
 ?>
 

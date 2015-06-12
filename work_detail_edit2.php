@@ -40,7 +40,7 @@ if (preg_match("/-/i", $companyid)) $companyid = strstr($companyid,'-',true);
 	<div id="page_view" class="sub-tab"><i class="fa fa-desktop tab-img"></i> 預覽</div>
 	<div id="page-edit" class="sub-tab tab-active" tabtoggle='workedit1'><i class="fa fa-pencil tab-img"></i> 編輯</div>
 	<div id="page-apply" class="sub-tab" tabtoggle='workedit1'><i class="fa fa-user tab-img"></i> 應徵</div>
-	<div id="page-start" class="sub-tab" tabtoggle='workedit1'><i class="fa fa-bullhorn tab-img"></i> 執行</div>
+	<div id="page-start" class="sub-tab" tabtoggle='workedit1'><i class="fa fa-bullhorn tab-img"></i> 發佈</div>
 	<div id="page-audit" class="sub-tab" tabtoggle='workedit1'><i class="fa fa-check tab-img"></i> 狀態</div>
 	<div id="page-set" class="sub-tab" tabtoggle='workedit1'><i class="fa fa-cog tab-img"></i> 刪除</div>
 </div>

@@ -16,7 +16,7 @@ jQuery(document).ready(function(){
                 //<li><a href="新聞頁面1"><img src="cjcu_career/cc/product_img/新聞照1" alt="新聞標題1" /></a></li>
                 //<li><img src="slider/images/chicago_illinois-wallpaper-1920x1080-tn.jpg" /></li>
                 var img = $('<img>').attr({"alt":article_array[i].title,"src":"cjcu_career/cc/product_img/"+article_array[i].pic}),
-                    link = $('<a>').attr("href",'inner_2.php?article_id='+article_array[i].id).append(img),
+                    link = $('<a>').attr("href",'news.php?type=1&article_id='+article_array[i].id).append(img),
                     li = $('<li>').append(link);
 
                 var img2 = $('<img>').attr("src","cjcu_career/cc/product_img/"+article_array[i].pic),

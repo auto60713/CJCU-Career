@@ -131,7 +131,9 @@ div.ui-datepicker,.ui-timepicker-wrapper{
     display: inline-block;
     margin-right: 5px;
 }
-
+#list_name{
+    width: 100px;
+}
 </style>
 <body>
     <h5 id="loading">資料載入中請稍後...</h5>
@@ -143,6 +145,7 @@ div.ui-datepicker,.ui-timepicker-wrapper{
             <span><input type="checkbox">服務助學(工讀)金</span>
             <span><input type="checkbox">生活助學金</span>
             <span><input type="checkbox">助學生服務學習</span>
+            <span><input type="checkbox">專案計畫工讀金</span>
         </div>
         <form method="post" action="student_work_time_req.php" id="form_check">
         <!--隱藏資訊 表id跟模式-->
@@ -182,7 +185,7 @@ div.ui-datepicker,.ui-timepicker-wrapper{
                 <td class="delet-tb no-border"><input type="submit" name="button" value="新增"/></td>
             </tr>
             <tr style="font-weight: bold;">
-                <td colspan="6" class="check-bar"></td><td>助學總時數</td><td><span class="total-hour"></span></td>
+                <td colspan="6" class="check-bar"></td><td>總時數</td><td><span class="total-hour"></span></td>
             </tr>
         </table>
     <div class="is_setting">
