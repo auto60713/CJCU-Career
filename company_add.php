@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>長大職涯網-廠商註冊</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link href="img/ico.ico" rel="SHORTCUT ICON">
+    <title>長大職涯網-廠商註冊</title>
 	<script src="js/jquery-min.js"></script>
     <script src="js/jquery-migrate-min.js"></script>
     <script src="lib/jquery.validate.js"></script>

@@ -13,6 +13,7 @@ if(!isset($_SESSION['level'])||$_SESSION['level'] == $level_student){
 <head>
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<link href="img/ico.ico" rel="SHORTCUT ICON">
 	<title></title>
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 	<link rel="stylesheet" type="text/css" href="css/manage.css">

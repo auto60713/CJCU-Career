@@ -7,6 +7,7 @@ if (!file_exists($filename)) $filename = 'img_department/default.png';
 <head>
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<link href="img/ico.ico" rel="SHORTCUT ICON">
 	<title></title>
 	<link rel="stylesheet" type="text/css" href="font-awesome/css/font-awesome.css">
 	<link rel="stylesheet" type="text/css" href="css/main.css">

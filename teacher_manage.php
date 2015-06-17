@@ -6,6 +6,7 @@ if(!isset($_SESSION['username']) || $_SESSION['level'] != 2) { header("Location:
 <head>
 	<meta charset="UTF-8">
 	<title>帳戶管理</title>
+	<link href="img/ico.ico" rel="SHORTCUT ICON">
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 	<link rel="stylesheet" type="text/css" href="css/manage.css">
 	<link rel="stylesheet" type="text/css" href="css/work_detail_edit.css">

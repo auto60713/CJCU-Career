@@ -303,7 +303,7 @@
 #area3_1 .master-nevin{
 	color: #646859;
 	font-size: 12px;
-	height: 72px;
+	height: 5.8em;
 	width: 180px;
 	overflow: hidden;
 
@@ -444,13 +444,20 @@ margin-top: 10px;
 }
 
 #right_div .list_title{ 
-    font-size: 14px;
+	white-space: nowrap; 
+    width: 17em; 
+    overflow: hidden;
+    text-overflow: ellipsis; 
+
+    font-size: 16px;
 	font-weight: bold;
 	color: #3C3C3C; 
 }
-
+#right_div .list_title:hover{ 
+	color: #658697; 
+}
 #right_div .list_cont{
-    max-height: 47px;
+    height: 1em;
     overflow:hidden;
 }
 #right_div .list_cont p{
@@ -459,6 +466,8 @@ margin-top: 10px;
 }
 
 #right_div .page_ctrl{
+	width: 90%;
+	overflow-x: scroll;
     position: absolute;
     left: 5%;
     bottom: 40px;

@@ -28,6 +28,13 @@ a:hover{
 	margin-right: auto;
 }
 
+.profile-span-left,.box-detail h1{
+	white-space: nowrap; 
+    width: 12em; 
+    overflow: hidden;
+    text-overflow: ellipsis; 
+}
+
 /* 版頭 */
 #view-header{
 	text-align: center;

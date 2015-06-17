@@ -2,6 +2,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
+  <link href="img/ico.ico" rel="SHORTCUT ICON">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title>長大職涯網</title>
 	<link rel="stylesheet" type="text/css" href="css/main.css">

@@ -3,6 +3,7 @@
 <head>
 	<meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link href="img/ico.ico" rel="SHORTCUT ICON">
 	<title>長大職涯網</title>
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 	<link rel="stylesheet" type="text/css" href="css/area_div.css">
@@ -141,7 +142,7 @@ var type_id = "";
     });
 
 
-            var page_num=1+Math.floor(article_array.length/5);
+            var page_num=1+Math.floor(article_array.length/10);
             for (var i = 1; i <= page_num; i++) {
                 page = $('<a>').addClass('point'+i).attr("href",'news.php?type='+type_id+'&page='+i).text(i);
                 $('.page_ctrl').append(page);

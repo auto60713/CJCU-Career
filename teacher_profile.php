@@ -7,6 +7,7 @@ if (!file_exists($filename)) $filename = 'img_company/default.png';
 <head>
 	<meta charset="UTF-8">
 	<title></title>
+	<link href="img/ico.ico" rel="SHORTCUT ICON">
 	<link rel="stylesheet" type="text/css" href="../css/main.css">
 	<link rel="stylesheet" type="text/css" href="../css/manage.css">
 	<link rel="stylesheet" type="text/css" href="../css/profile.css">

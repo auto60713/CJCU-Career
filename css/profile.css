@@ -99,13 +99,7 @@ max-height: 150px;
 	overflow: hidden;
 
 }
-.profile-span-left{
-	display: inline-block;
-	max-width: 70%;
-	overflow: hidden;
-	white-space:nowrap;
-	overflow: hidden;
-}
+
 .profile-span-box{
 	border-bottom: solid 1px #DDD;
 	margin-top: 1%;

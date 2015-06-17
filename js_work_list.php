@@ -12,7 +12,7 @@ if($work_length == 0) $work_length = ""; else $work_length = "TOP ".$work_length
 
 $sql = "select ".$work_length." w.company_id cid, w.id wid,w.name wname,w.publisher pub,z.name zname,w.is_outside isout,p.name propname,[recruitment _no] rno,w.date date,w.recruited_date,w.up_data 
  from work w,zone z,work_prop p 
- where w.zone_id = z.id and work_prop_id = p.id and w.[check] = 1";
+ where w.zone_id = z.id and work_prop_id = p.id and w.[check] = 1 and recruited_date > GETDATE()";
 //check=1 只秀出通過審核的工作
 
 //搜尋功能開啟======================
@@ -45,7 +45,7 @@ else die(print_r( sqlsrv_errors(), true));
 
 //回傳搜尋後的訊息
 $work_length = count($work_list_array);
-if($work_length != 0) {echo "var search_log_cont = '共有 '+".$work_length."+' 項工作符合條件 灰色項目為應徵時間已結束';";}
+if($work_length != 0) {echo "var search_log_cont = '共有 '+".$work_length."+' 項工作符合條件 應徵時間過期的工作不會顯示';";}
 else {echo "var search_log_cont = '沒有工作符合搜尋條件!';";}
 
 

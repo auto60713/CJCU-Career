@@ -26,6 +26,9 @@ if(isset($_SESSION['username'])) $user_id = $_SESSION['username'];
 		font-size: 12px;
 		color: #555;
 	}
+	.profile-span-left{
+		display: inline-block;
+	}
 	#btn-apply{
 		width: 100px;
 		height: 40px;

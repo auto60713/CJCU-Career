@@ -4,6 +4,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<link href="img/ico.ico" rel="SHORTCUT ICON">
 	<title>長大職涯網</title>
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 	<link rel="stylesheet" type="text/css" href="css/area_div.css">
@@ -135,7 +136,7 @@
 
 
 <!-- 社會新鮮人專區 -->
-<div id="area3_1" class="area_box"><h1 id="area_title">社會新鮮人專區</h1>
+<div id="area3_1" class="area_box"><h1 id="area_title">新聞專區</h1>
 	<a class="more-link" href="news.php?type=1">更多..</a>
 
     <a class="area_box_link" href="">
@@ -166,18 +167,39 @@
 </div>
 
 <!-- 好站連連看 -->
-<div id="area3_3" class="area_box"><h1 id="area_title">好站連連看</h1>
+<div id="area3_3" class="area_box"><h1 id="area_title">好讚連連</h1>
 	<a class="more-link" href="web_links.php">更多..</a>
 
-	<img class="area3-img a3-3" src="img/104.jpg">
+	<img class="area3-img a3-3" src="img/links.jpg" style="opacity:0.7">
 	<div class="workplace wp3-3">
-		<a href="http://www.104.com.tw/"><i class="fa fa-play"></i>104人力銀行</a><br>
+		<!--a href="http://www.104.com.tw/"><i class="fa fa-play"></i>104人力銀行</a><br>
 		<a href="http://www.yes123.com.tw/admin/index.asp"><i class="fa fa-play"></i>yes123求職網</a><br>
 		<a href="http://rich.yda.gov.tw/richCandidate/index.jsp"><i class="fa fa-play"></i>RICH職場體驗網</a><br>
-		<a href="http://www.taiwanjobs.gov.tw/Internet/index/index.aspx"><i class="fa fa-play"></i>台灣就業通</a><br>
+		<a href="http://www.taiwanjobs.gov.tw/Internet/index/index.aspx"><i class="fa fa-play"></i>台灣就業通</a><br-->
     </div>
 </div>
+<script type="text/javascript">
+        $.ajax({
+          type: 'POST',
+          async: false,
+          url: 'cjcu_career/cc/index.php/links',
+          data:{},
+          success: function (data) { 
 
+              var links_json = JSON.parse(data);
+              var i=0;
+
+              for(key in links_json) {
+              	if(i==4) break;
+	              var link = $('<a>').attr({"href":links_json[key]['href'],"target":"_blank"}).text("► "+links_json[key]['name']),
+                      adata = $('<p>').append(link);
+
+                  $('.links-show').append(adata);
+                i++;
+              }
+          }
+        });
+</script>
 
 
 </div>
