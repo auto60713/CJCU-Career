@@ -8,12 +8,33 @@ function echo_work_list_array($work_length){
 include("sqlsrv_connect.php");
 
 $para = array();
+$work_list_array = array();
 if($work_length == 0) $work_length = ""; else $work_length = "TOP ".$work_length;
 
+
+//過期工作=========================
 $sql = "select ".$work_length." w.company_id cid, w.id wid,w.name wname,w.publisher pub,z.name zname,w.is_outside isout,p.name propname,[recruitment _no] rno,w.date date,w.recruited_date,w.up_data 
  from work w,zone z,work_prop p 
  where w.zone_id = z.id and work_prop_id = p.id and w.[check] = 1 and recruited_date > GETDATE()";
-//check=1 只秀出通過審核的工作
+if(isset($_GET['search'])) $sql.= " and w.name like '%".$_GET['search']."%'";
+if(isset($_GET['type'])) $sql.= " and w.work_type_id = ".$_GET['type'];
+if(isset($_GET['prop'])) $sql.= " and w.work_prop_id = ".$_GET['prop'];
+if(isset($_GET['io'])) $sql.= " and w.is_outside = ".$_GET['io'];
+if(isset($_GET['zone'])) $sql.= " and w.zone_id = ".$_GET['zone'];
+$sql.= " ORDER BY up_data DESC";
+$stmt = sqlsrv_query($conn, $sql, $para);
+while( $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC) ){
+
+    	if(!isset($row['up_data'])) $row['up_data'] = "2015-01-01 00:00:00.000";
+		$work_list_array[] = $row;
+}
+//=================================
+
+
+$sql = "select ".$work_length." w.company_id cid, w.id wid,w.name wname,w.publisher pub,z.name zname,w.is_outside isout,p.name propname,[recruitment _no] rno,w.date date,w.recruited_date,w.up_data 
+ from work w,zone z,work_prop p 
+ where w.zone_id = z.id and work_prop_id = p.id and w.[check] = 1 and recruited_date <= GETDATE()";
+//check=1 只秀出通過審核的工作  and recruited_date > GETDATE()
 
 //搜尋功能開啟======================
 if(isset($_GET['search'])) $sql.= " and w.name like '%".$_GET['search']."%'";
@@ -28,7 +49,7 @@ $sql.= " ORDER BY up_data DESC";
 $stmt = sqlsrv_query($conn, $sql, $para);
 
 
-$work_list_array = array();
+
 
 if($stmt) {
 
@@ -43,9 +64,11 @@ if($stmt) {
 else die(print_r( sqlsrv_errors(), true));
 
 
+
+
 //回傳搜尋後的訊息
 $work_length = count($work_list_array);
-if($work_length != 0) {echo "var search_log_cont = '共有 '+".$work_length."+' 項工作符合條件 應徵時間過期的工作不會顯示';";}
+if($work_length != 0) {echo "var search_log_cont = '共有 '+".$work_length."+' 項工作符合條件 灰色項目為應徵時間過期';";}
 else {echo "var search_log_cont = '沒有工作符合搜尋條件!';";}
 
 

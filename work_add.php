@@ -99,6 +99,10 @@ div.ui-datepicker{
 	font-style: italic;
 	color: #808080;
 }
+.name-bar{
+	color: #EE4444;
+	font-style: italic;
+}
 </style>
 </head>
 <body>
@@ -117,6 +121,7 @@ div.ui-datepicker{
 <tr>
 	<td class='td1'>工作名稱：</td>
 	<td><input type="text" name="name" id="name"/></td>
+	<td class='name-bar'></td>
 </tr>
 
 <tr>
@@ -383,6 +388,16 @@ div.ui-datepicker{
         });
         //submit時TAG轉成字串
         $( "#work_edit_form" ).submit(function( event ) {
+
+            if($( "#name" ).val()==""){
+            	$( ".name-bar" ).append('請填入工作名稱');
+            	event.preventDefault();
+            }
+        	else if($( "#name" ).val().length>12){
+                $( ".name-bar" ).append('字數不能超過12個字');
+        	    event.preventDefault();
+        	}
+        	
 
             var pay_way = $("#pay_way option:selected").text(),
                 pay_val = $("#pay_val").val();

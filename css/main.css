@@ -28,7 +28,7 @@ a:hover{
 	margin-right: auto;
 }
 
-.profile-span-left,.box-detail h1{
+.profile-span-left,.box-detail h1,.work-tit{
 	white-space: nowrap; 
     width: 12em; 
     overflow: hidden;
