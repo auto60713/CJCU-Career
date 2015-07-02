@@ -9,11 +9,11 @@ include("sqlsrv_connect.php");
 
 $para = array();
 $work_list_array = array();
-if($work_length == 0) $work_length = ""; else $work_length = "TOP ".$work_length;
+if($work_length == 0) $work_length2 = ""; else $work_length2 = "TOP 0";
 
 
 //過期工作=========================
-$sql = "select ".$work_length." w.company_id cid, w.id wid,w.name wname,w.publisher pub,z.name zname,w.is_outside isout,p.name propname,[recruitment _no] rno,w.date date,w.recruited_date,w.up_data 
+$sql = "select ".$work_length2." w.company_id cid, w.id wid,w.name wname,w.publisher pub,z.name zname,w.is_outside isout,p.name propname,[recruitment _no] rno,w.date date,w.recruited_date,w.up_data 
  from work w,zone z,work_prop p 
  where w.zone_id = z.id and work_prop_id = p.id and w.[check] = 1 and recruited_date > GETDATE()";
 if(isset($_GET['search'])) $sql.= " and w.name like '%".$_GET['search']."%'";
@@ -29,9 +29,9 @@ while( $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC) ){
 		$work_list_array[] = $row;
 }
 //=================================
+if($work_length == 0) $work_length2 = ""; else $work_length2 = "TOP ".$work_length;
 
-
-$sql = "select ".$work_length." w.company_id cid, w.id wid,w.name wname,w.publisher pub,z.name zname,w.is_outside isout,p.name propname,[recruitment _no] rno,w.date date,w.recruited_date,w.up_data 
+$sql = "select ".$work_length2." w.company_id cid, w.id wid,w.name wname,w.publisher pub,z.name zname,w.is_outside isout,p.name propname,[recruitment _no] rno,w.date date,w.recruited_date,w.up_data 
  from work w,zone z,work_prop p 
  where w.zone_id = z.id and work_prop_id = p.id and w.[check] = 1 and recruited_date <= GETDATE()";
 //check=1 只秀出通過審核的工作  and recruited_date > GETDATE()

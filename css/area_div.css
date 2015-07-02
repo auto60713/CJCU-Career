@@ -303,7 +303,7 @@
 #area3_1 .master-nevin{
 	color: #646859;
 	font-size: 12px;
-	height: 5.8em;
+	height: 6.1em;
 	width: 180px;
 	overflow: hidden;
 
@@ -457,10 +457,10 @@ margin-top: 10px;
 	color: #658697; 
 }
 #right_div .list_cont{
-    height: 1em;
+    height: 1.2em;
     overflow:hidden;
 }
-#right_div .list_cont p{
+#right_div .list_cont p,.list_cont{
     color: #808080;
     font-size: 11px;
 }

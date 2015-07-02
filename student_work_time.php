@@ -9,6 +9,7 @@ else if($_GET['listid']==null) { echo "錯誤的操作!"; exit; }
 <head>
     <title>工讀單</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link href="img/ico.ico" rel="SHORTCUT ICON">
     <link type="text/css" rel="stylesheet" href="http://code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
     <link type="text/css" rel="stylesheet" href="css/jquery.timepicker.css" />
     <script>
@@ -68,13 +69,12 @@ div.ui-datepicker,.ui-timepicker-wrapper{
     margin-bottom: 3px;
 }
 .pay-type{
-    width: 590px;
+    width: 100%;
+    text-align: center;
     margin-bottom: 3px;
 }
 .pay-type span{
-    margin-right: 30px;
-    margin-left: 30px;
-
+    margin: 0px 8px;
 }
 .experience{
     width: 95%;

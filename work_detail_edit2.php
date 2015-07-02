@@ -35,7 +35,11 @@ if (preg_match("/-/i", $companyid)) $companyid = strstr($companyid,'-',true);
 	</style>
 </head>
 <body>
-
+<style type="text/css">
+.work-divbtn-d{
+    font-size: 16px;
+}
+</style>
 <div class="workedit-tabbox" style="display:none;">
 	<div id="page_view" class="sub-tab"><i class="fa fa-desktop tab-img"></i> 預覽</div>
 	<div id="page-edit" class="sub-tab tab-active" tabtoggle='workedit1'><i class="fa fa-pencil tab-img"></i> 編輯</div>
@@ -60,7 +64,7 @@ if (preg_match("/-/i", $companyid)) $companyid = strstr($companyid,'-',true);
 	</div>
 	<!-- 工作刪除 -->
 	<div id='workedit-content-set' class="workedit-content-hide" tabtoggle='workedit2'>	
-	    <button type="button" id="divbtn-delete" class="work-divbtn">刪除工作</button> 
+	    <button type="button" id="divbtn-delete" class="work-divbtn-d">刪除工作</button> 
 	</div>
 </div>
 

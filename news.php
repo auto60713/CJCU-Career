@@ -99,7 +99,7 @@ var type_id = "";
         });
 
 
-            var this_page=1,min=0,max=5;
+            var this_page=1,min=0,max=8;
             <?php if(isset($_GET['page'])) echo "this_page=".$_GET['page'].";min=(".$_GET['page']."-1)*5;max=((".$_GET['page']."-1)*5)+5;"; ?>
            
             
@@ -142,7 +142,7 @@ var type_id = "";
     });
 
 
-            var page_num=1+Math.floor(article_array.length/10);
+            var page_num=1+Math.floor(article_array.length/max);
             for (var i = 1; i <= page_num; i++) {
                 page = $('<a>').addClass('point'+i).attr("href",'news.php?type='+type_id+'&page='+i).text(i);
                 $('.page_ctrl').append(page);

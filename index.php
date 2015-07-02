@@ -170,7 +170,7 @@
 <div id="area3_3" class="area_box"><h1 id="area_title">好讚連連</h1>
 	<a class="more-link" href="web_links.php">更多..</a>
 
-	<img class="area3-img a3-3" src="img/links.jpg" style="opacity:0.7">
+	<img class="area3-img a3-3" src="img/links.jpg" style="display:none;">
 	<div class="workplace wp3-3">
 		<!--a href="http://www.104.com.tw/"><i class="fa fa-play"></i>104人力銀行</a><br>
 		<a href="http://www.yes123.com.tw/admin/index.asp"><i class="fa fa-play"></i>yes123求職網</a><br>
@@ -194,13 +194,22 @@
 	              var link = $('<a>').attr({"href":links_json[key]['href'],"target":"_blank"}).text("► "+links_json[key]['name']),
                       adata = $('<p>').append(link);
 
-                  $('.links-show').append(adata);
+                  $('.wp3-3').append(adata);
                 i++;
               }
           }
         });
 </script>
+<style type="text/css">
+.wp3-3 a{display: block;
+        white-space: nowrap; 
+        width: 12em;
+        overflow: hidden;
+            overflow: hidden;
+    text-overflow: ellipsis; 
 
+}
+</style>
 
 </div>
 

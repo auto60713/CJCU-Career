@@ -11,8 +11,6 @@
     color: #efefef;
     font-size: 12px;
 }
-
-
 </style>
 
 
@@ -20,5 +18,11 @@
         
         本平台使用者端電腦環境瀏覽器請務必使用FireFox,Chrome,IE8(以上),如新版IE瀏覽器無法正常顯示 請按F12 把文件模式:改成標準(網頁預設值)<br>
         始能正常瀏覽使用，請將螢幕解析度設定為1024x768將可得到最佳效果<br>
-        Copyright © 2014 長榮大學職涯發展組 保留一切權利
+        Copyright © 2014 長榮大學職涯發展組 保留一切權利<br>
+        瀏覽人數：
 </div>
+<script type="text/javascript">
+$.get( "public_view/echo_view.php", function( data ) {
+  $( ".footer_text" ).append( data );
+});
+</script>
