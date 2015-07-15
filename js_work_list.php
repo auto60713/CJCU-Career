@@ -169,7 +169,7 @@ function profile_work_list($stu_no){
 
 	include("sqlsrv_connect.php");
 
-	$sql = "select w.id wid,w.name wname,c.id cid,c.ch_name cname from line_up l,work w,company c where l.user_id=? and l.[check]in(1,4,5) and w.id=l.work_id and c.id=w.company_id";
+	$sql = "select w.id wid,w.name wname,w.publisher pub,w.company_id cid from line_up l,work w where l.user_id=? and l.[check]in(1,4,5) and w.id=l.work_id";
 	$stmt = sqlsrv_query($conn, $sql, array($stu_no));
 	$profile_work_list = array();
 

@@ -53,7 +53,26 @@ if(!isset($_SESSION['level'])||$_SESSION['level'] == $level_student){
         else{
 		    for(var i=0;i<profile_work_list.length;i++){
 
-		    	var cname = $('<a>').attr('href','company-'+profile_work_list[i]['cid']).text(profile_work_list[i]['cname']),
+		    	if(profile_work_list[i]['pub']=="1"){
+                    var mode = "com",linksto="company-";
+		    	}
+		    	else{
+                        mode = "dep",linksto="department-";
+		    	}
+
+		    	var comnameee = "";
+		    	
+		    	$.ajax({
+						url:  'ajax_echo_name.php',
+						type: 'post',
+						async: false,
+						data: {mode:mode,comid:profile_work_list[i]['cid'],depno:profile_work_list[i]['cid']},
+                    success: function (data) {
+					    comnameee = data;
+					}
+				});
+
+		    	var cname = $('<a>').attr('href',linksto+profile_work_list[i]['cid']).text(comnameee),
 		    	    wname = $('<a>').attr('href','work-'+profile_work_list[i]['wid']).text(profile_work_list[i]['wname']);
 		    	
 		    		$('#work_list').append( $('<p>').append(cname,' - ',wname) );

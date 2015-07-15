@@ -52,7 +52,7 @@ include("sqlsrv_connect.php");
 	$stmt = sqlsrv_query($conn, $sql, array($workid));
 	$row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC );
 
-	if($_SESSION['username'] == $row['company_id']){
+	if(trim($_SESSION['username']) == trim($row['company_id'])){
 
         //廠商留紀錄
         $sql = "INSERT INTO msg(recv,mcontent,icon) values(?,?,?)";
