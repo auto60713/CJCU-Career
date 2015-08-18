@@ -385,7 +385,7 @@ else {
         $.ajax({
           type: 'POST',
           url: 'ajax_something.php',
-          data: {mode:1,listno:<?php echo $_GET['listid']; ?>,review:review},
+          data: {mode:1,listno:<?php echo '"'.$_GET['listid'].'"'; ?>,review:review},
           success: function (data) { if(data=='Success') $(".review-echo").text("心得已經更新"); }
         });
        
@@ -426,7 +426,7 @@ else {
         $.ajax({
           type: 'POST',
           url:  'ajax_something.php',
-          data: {mode:22,listno:<?php echo $_GET['listid']; ?>},
+          data: {mode:22,listno:<?php echo '"'.$_GET['listid'].'"'; ?>},
           success: function (data) { 
 
             switch(data.split("*.*")[0]) {
@@ -454,7 +454,7 @@ else {
         $.ajax({
           type: 'POST',
           url:  'ajax_something.php',
-          data: {mode:2,listno:<?php echo $_GET['listid']; ?>},
+          data: {mode:2,listno:<?php echo '"'.$_GET['listid'].'"'; ?>},
           success: function (data) { $('.review-input').val(data); }
         });
     }
@@ -468,7 +468,7 @@ function pass_WTL(check) {
     $.ajax({
           type: 'POST',
           url: 'ajax_something.php',
-          data: {mode:3,listno:<?php echo $_GET['listid']; ?>,check:check},
+          data: {mode:3,listno:<?php echo '"'.$_GET['listid'].'"'; ?>,check:check},
           success: function (data) { if(data=='Success') location.reload(); }
     });
 }

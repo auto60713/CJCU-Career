@@ -174,7 +174,7 @@ function echo_data($user,$lev){
 <select name ="sel" class="login-select">
   <option value="school" selected="selected">學生登入</option>
   <option value="company">公司廠商</option>
-  <option value="department">系所單位</option>
+  <option value="department">校內單位</option>
   <option value="teacher">老師登入</option>
 </select><br>
 

@@ -59,7 +59,7 @@ function echo_WTL_review_hr($listno){
 
   include_once("sqlsrv_connect.php");
 
-  $sql = "select [check],review from work_time_list where no=?"; 
+  $sql = "select [check],review from work_time_list where no IN (".$listno.")"; 
   $stmt = sqlsrv_query($conn, $sql, array($listno));
 
   if($stmt) $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC);

@@ -74,8 +74,8 @@ else{
 <div class="workedit-tabbox" style="display:none">
 	<div class="sub-tab tab-active" tabtoggle='workedit1'><i class="fa fa-user tab-img"></i> 工作</div>
 	<div class="sub-tab" tabtoggle='workedit1'><i class="fa fa-building-o tab-img"></i> 廠商</div>
-	<div class="sub-tab" tabtoggle='workedit1'><i class="fa fa-book tab-img"></i> 系所</div>
-    <div class="sub-tab" tabtoggle='workedit1'><i class="fa fa-book tab-img"></i> 單位</div>
+	<div class="sub-tab" tabtoggle='workedit1'><i class="fa fa-book tab-img"></i> 教學單位</div>
+    <div class="sub-tab" tabtoggle='workedit1'><i class="fa fa-book tab-img"></i> 行政單位</div>
 </div>
 
 

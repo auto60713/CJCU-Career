@@ -115,8 +115,7 @@ function echo_work_time_array($list_no){
 
 include("sqlsrv_connect.php");
 
-$sql = "select * from work_time where list_no=? ORDER BY date ASC";
-
+$sql = "select * from work_time where list_no IN (".$list_no.") ORDER BY date ASC";
 $para = array($list_no);
 $stmt = sqlsrv_query($conn, $sql, $para);
 
@@ -133,7 +132,7 @@ else die(print_r( sqlsrv_errors(), true));
 
 
 //抓取該工作的年月,名字
-$sql = "select wl.year,wl.month,wk.name wname from work_time_list wl,work wk where wl.no=? and wk.id=wl.work_id";
+$sql = "select wl.year,wl.month,wk.name wname from work_time_list wl,work wk where wl.no IN (".$list_no.") and wk.id=wl.work_id";
 $stmt = sqlsrv_query($conn, $sql, array($list_no));
 if($stmt) {
 
