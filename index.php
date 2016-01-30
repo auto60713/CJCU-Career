@@ -94,43 +94,35 @@
 	<a href="http://www.cjcu.edu.tw/cjcunews/news.php?mainunitid=7&newsunitid=140&subunitid=146"><p class="link"><i class="fa fa-play"></i> 新聞中心</p></a>
     
     <div class="news-area">
-        <p><a href="http://www.cjcu.edu.tw/cjcunews/news-detail.php?id=8001">
+        <!--p><a href="http://www.cjcu.edu.tw/cjcunews/news-detail.php?id=8001">
 	    	<span class="news-date">2015-03-10</span>2015年南區就業博覽會
 	    </a></p>
-	    <hr>
-        <p><a href="http://www.cjcu.edu.tw/cjcunews/news-detail.php?id=7988">
-	    	<span class="news-date">2015-03-06</span>【104年暑期實習】國立中正紀念堂管理處
-	    </a></p>
-	    <hr>
-	    <p><a href="http://www.cjcu.edu.tw/cjcunews/news-detail.php?id=7982">
-	    	<span class="news-date">2015-03-05</span>104年度「雙軌訓練旗艦計畫」暨「補助大專校院辦理就業學程計畫」 計畫推動說明會
-	    </a></p>
-	    <hr>
-        <p><a href="http://www.cjcu.edu.tw/cjcunews/news-detail.php?id=7980">
-	    	<span class="news-date">2015-03-05</span>104年度大專校院辦理 區域性校園徵才活動
-	    </a></p>
-	    <hr>
-	    <p><a href="http://www.cjcu.edu.tw/cjcunews/news-detail.php?id=7977">
-	    	<span class="news-date">2015-03-04</span>104年增能計畫 達人履歷競賽、面試諮詢活動
-	    </a></p>
-	    <hr>
-	    <p><a href="http://www.cjcu.edu.tw/cjcunews/news-detail.php?id=7920">
-	    	<span class="news-date">2015-02-24</span>文化部「展演設施產業職能基準」查詢平台
-	    </a></p>
-	    <hr>
-	    <p><a href="http://www.cjcu.edu.tw/cjcunews/news-detail.php?id=7917">
-	    	<span class="news-date">2015-02-24</span>臺灣港務股份有限公司職務甄選公告
-	    </a></p>
-	    <hr>
-	    <p><a href="http://www.cjcu.edu.tw/cjcunews/news-detail.php?id=7908">
-	    	<span class="news-date">2015-02-11</span>亞洲開發銀行-104年暑期實習機會 
-	    </a></p>
-	    <hr>
+	    <hr-->
+
 
     </div>
 </div>
+<script type="text/javascript">
+        $.ajax({
+          type: 'POST',
+          url: 'cjcu_career/cc/index.php/news/lists/1',
+          data:{},
+          success: function (data) { 
 
+            if(data=='false') $('.news-area').append($('<a>').addClass('no_paper').text('目前沒有文章'));
+            else article_array = JSON.parse(data);
+          },
+          async: false
+        });
+        for (var i = 0; i < 7; i++) { 
+            
+                var time  = $('<span>').addClass('news-date').text(article_array[i].created_date.split(" ")[0]),
+                    link  = $('<a>').attr("href",'news.php?type=1&article_id='+article_array[i].id).append(time,article_array[i].title), 
+                    work  = $('<p>').append(link);
 
+                $('.news-area').append(work,$('<hr>'));
+            }
+</script>
 
 
 

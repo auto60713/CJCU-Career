@@ -141,7 +141,7 @@ if (!file_exists($filename)) $filename = 'img_department/default.png';
 			<img src="<?php echo $filename; ?>" class="profile-img" id="profile-img">
 		</div>
 
-		<a href="#department-info"><div class="list">系所資訊</div></a><hr>
+		<a href="#department-info"><div class="list">基本資料</div></a><hr>
 		<a href="#department-addwork"><div class="list">新增工作</div></a><hr>
 		<a href="#department-work"><div class="list">我發佈的工作</div></a><hr>
 		<a href="#department-match"><div class="list">實習管理</div></a><hr>

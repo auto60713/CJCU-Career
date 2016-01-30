@@ -136,11 +136,14 @@ $sql = "select wl.year,wl.month,wk.name wname from work_time_list wl,work wk whe
 $stmt = sqlsrv_query($conn, $sql, array($list_no));
 if($stmt) {
 
+    $echo_month = "";
 	while( $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC) ) {
-		$echo_work_date = trim($row['year']).'/'.$row['month'];
+		$echo_work_date = trim($row['year']);
 		$echo_work_name = $row['wname'];
+		if($echo_month=="") $echo_month .= " / ".trim($row['month']);
+		else $echo_month .= ",".trim($row['month']);
 	}
-	echo "var echo_work_date = '". $echo_work_date . "';";	
+	echo "var echo_work_date = '". $echo_work_date .$echo_month. "';";	
 	echo "var echo_work_name = '". $echo_work_name . "';";	
 }
 
