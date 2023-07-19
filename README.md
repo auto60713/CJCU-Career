@@ -13,5 +13,3 @@
  中原大學人力網
  http://job.cycu.edu.tw/index.do
  
- 中原大學人力網
- http://job.cycu.edu.tw/index.do
